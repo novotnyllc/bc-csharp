@@ -43,4 +43,13 @@
     <PackageReference Include="NerdBank.GitVersioning" Version="2.1.23" PrivateAssets="All" />
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.0" PrivateAssets="All" />
   </ItemGroup>
+  
+  <Target Name="SetBuildVer" AfterTargets="GetBuildVersion" BeforeTargets="SetCloudBuildVersionVars;SetCloudBuildNumberWithVersion">
+    <PropertyGroup>
+      <CloudBuildNumber>$(BuildVersion)</CloudBuildNumber>
+      <Version>$(BuildVersion)</Version>
+      <PackageVersion>$(BuildVersion)</PackageVersion>
+      <NuGetPackageVersion>$(BuildVersion)</NuGetPackageVersion>
+    </PropertyGroup>
+  </Target>
 </Project>
