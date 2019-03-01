@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Asn1.X9;
@@ -131,8 +131,11 @@ namespace Org.BouncyCastle.Math.EC.Tests
         private IList GetTestCurves()
         {
             var x9s = new ArrayList();
-            var names = new HashSet(ECNamedCurveTable.Names);
-            names.AddAll(CustomNamedCurves.Names);
+            var names = new HashSet<string>(ECNamedCurveTable.Names);
+            foreach(var name in CustomNamedCurves.Names)
+            {
+                names.Add(name);
+            }
 
             foreach (string name in names)
             {

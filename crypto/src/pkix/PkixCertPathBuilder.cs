@@ -15,6 +15,7 @@ using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Store;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Org.BouncyCastle.Pkix
 {
@@ -46,10 +47,13 @@ namespace Org.BouncyCastle.Pkix
 					+ Platform.GetTypeName(this) + " class.");
 			}
 
-		 var targets = new HashSet();
+		 var targets = new HashSet<X509ExtensionBase>();
 			try
 			{
-				targets.AddAll(PkixCertPathValidatorUtilities.FindCertificates((X509CertStoreSelector)certSelect, pkixParams.GetStores()));
+				foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates((X509CertStoreSelector)certSelect, pkixParams.GetStores()))
+                {
+                    targets.Add(certificate);
+                }
 				// TODO Should this include an entry for pkixParams.GetAdditionalStores() too?
 			}
 			catch (Exception e)
@@ -58,7 +62,7 @@ namespace Org.BouncyCastle.Pkix
 					"Error finding target certificate.", e);
 			}
 
-			if (targets.IsEmpty)
+			if (!targets.Any())
 				throw new PkixCertPathBuilderException("No certificate found matching targetContraints.");
 
 			PkixCertPathBuilderResult result = null;
@@ -166,10 +170,13 @@ namespace Org.BouncyCastle.Pkix
 					}
 
 					// try to get the issuer certificate from one of the stores
-					HashSet issuers = new HashSet();
+					var issuers = new HashSet<X509ExtensionBase>();
 					try
 					{
-						issuers.AddAll(PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams));
+						foreach(var certificate in PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams))
+                        {
+                            issuers.Add(certificate);
+                        }
 					}
 					catch (Exception e)
 					{
@@ -178,7 +185,7 @@ namespace Org.BouncyCastle.Pkix
 							e);
 					}
 
-					if (issuers.IsEmpty)
+					if (!issuers.Any())
 						throw new Exception("No issuer certificate for certificate in certification path found.");
 
 					foreach (X509Certificate issuer in issuers)

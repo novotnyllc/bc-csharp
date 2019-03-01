@@ -18,7 +18,7 @@ namespace Org.BouncyCastle.Cmp
         private static readonly DefaultSignatureAlgorithmIdentifierFinder sigAlgFinder = new DefaultSignatureAlgorithmIdentifierFinder();
 
         private readonly DefaultDigestAlgorithmIdentifierFinder digestAlgFinder;
-        private readonly IList<X509Certificate> acceptedCerts = Platform.CreateArrayList< X509Certificate>();
+        private readonly IList<X509Certificate> acceptedCerts = Platform.CreateArrayList<X509Certificate>();
         private readonly IList<BigInteger> acceptedReqIds = Platform.CreateArrayList<BigInteger>();
 
         public CertificateConfirmationContentBuilder()

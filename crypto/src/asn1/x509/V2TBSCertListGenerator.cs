@@ -86,7 +86,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		{
 			if (crlEntries == null)
 			{
-				crlEntries = Platform.CreateArrayList< Asn1Sequence>();
+				crlEntries = Platform.CreateArrayList<Asn1Sequence>();
 			}
 
 			crlEntries.Add(crlEntry);
@@ -106,7 +106,7 @@ namespace Org.BouncyCastle.Asn1.X509
 			DerGeneralizedTime invalidityDate)
 		{
             var extOids = Platform.CreateArrayList<DerObjectIdentifier>();
-            var extValues = Platform.CreateArrayList< X509Extension>();
+            var extValues = Platform.CreateArrayList<X509Extension>();
 
 			if (reason != 0)
 			{

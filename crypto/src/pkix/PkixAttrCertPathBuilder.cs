@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Security.Certificates;
 using Org.BouncyCastle.Utilities;
@@ -57,14 +58,16 @@ namespace Org.BouncyCastle.Pkix
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
 				X509Name[] principals = cert.Issuer.GetPrincipals();
-			 var issuers = new HashSet();
+			 var issuers = new HashSet<X509ExtensionBase>();
 				for (int i = 0; i < principals.Length; i++)
 				{
 					try
 					{
 						selector.Subject = principals[i];
-
-						issuers.AddAll(PkixCertPathValidatorUtilities.FindCertificates(selector, pkixParams.GetStores()));
+                        foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates(selector, pkixParams.GetStores()))
+                        {
+                            issuers.Add(certificate);
+                        }
 					}
 					catch (Exception e)
 					{
@@ -74,7 +77,7 @@ namespace Org.BouncyCastle.Pkix
 					}
 				}
 
-				if (issuers.IsEmpty)
+				if (!issuers.Any())
 					throw new PkixCertPathBuilderException("Public key certificate for attribute certificate cannot be found.");
 
                 var certPathList = Platform.CreateArrayList<X509Certificate>();
@@ -173,17 +176,20 @@ namespace Org.BouncyCastle.Pkix
 					}
 
 					// try to get the issuer certificate from one of the stores
-				 var issuers = new HashSet();
+				 var issuers = new HashSet<X509ExtensionBase>();
 					try
 					{
-						issuers.AddAll(PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams));
+						foreach(var certificate in PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams))
+                        {
+                            issuers.Add(certificate);
+                        }
 					}
 					catch (Exception e)
 					{
 						throw new Exception("Cannot find issuer certificate for certificate in certification path.", e);
 					}
 
-					if (issuers.IsEmpty)
+					if (!issuers.Any())
 						throw new Exception("No issuer certificate for certificate in certification path found.");
 
 					foreach (X509Certificate issuer in issuers)

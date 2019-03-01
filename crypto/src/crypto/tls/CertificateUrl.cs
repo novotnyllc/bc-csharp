@@ -91,7 +91,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             MemoryStream buf = new MemoryStream(urlAndHashListData, false);
 
-            var url_and_hash_list = Platform.CreateArrayList< UrlAndHash>();
+            var url_and_hash_list = Platform.CreateArrayList<UrlAndHash>();
             while (buf.Position < buf.Length)
             {
                 UrlAndHash url_and_hash = UrlAndHash.Parse(context, buf);

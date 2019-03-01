@@ -93,7 +93,7 @@ namespace Org.BouncyCastle.Asn1
 
 		private IList<DerOctetString> GenerateOcts()
         {
-            var vec = Platform.CreateArrayList< DerOctetString>();
+            var vec = Platform.CreateArrayList<DerOctetString>();
 			for (int i = 0; i < str.Length; i += MaxLength)
 			{
 				int end = System.Math.Min(str.Length, i + MaxLength);

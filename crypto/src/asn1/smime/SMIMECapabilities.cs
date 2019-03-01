@@ -79,7 +79,7 @@ namespace Org.BouncyCastle.Asn1.Smime
         public IList<SmimeCapability> GetCapabilitiesForOid(
             DerObjectIdentifier capability)
         {
-            var list = Platform.CreateArrayList< SmimeCapability>();
+            var list = Platform.CreateArrayList<SmimeCapability>();
             DoGetCapabilitiesForOid(capability, list);
 			return list;
         }

@@ -27,7 +27,7 @@ namespace Org.BouncyCastle.Pkix
 		 *         <code>PkixAttrCertChecker</code>, or <code>null</code> if no
 		 *         extensions are supported
 		 */
-		public abstract ISet GetSupportedExtensions();
+		public abstract ISet<object> GetSupportedExtensions();
 
 		/**
 		* Performs checks on the specified attribute certificate. Every handled

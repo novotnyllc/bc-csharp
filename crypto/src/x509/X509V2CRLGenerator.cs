@@ -111,7 +111,7 @@ namespace Org.BouncyCastle.X509
 			if (other == null)
 				throw new ArgumentNullException("other");
 
-			ISet revocations = other.GetRevokedCertificates();
+			var revocations = other.GetRevokedCertificates();
 
 			if (revocations != null)
 			{

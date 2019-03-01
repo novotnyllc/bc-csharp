@@ -452,7 +452,7 @@ namespace Org.BouncyCastle.Pkix
 						if (ANY_POLICY.Equals(p_node.ValidPolicy))
 						{
 							PkixPolicyNode c_node = new PkixPolicyNode(
-                                Platform.CreateArrayList< PkixPolicyNode>(), i,
+                                Platform.CreateArrayList<PkixPolicyNode>(), i,
 								m_idp[id_p],
 								p_node, pq, id_p, ci);
 							p_node.AddChild(c_node);

@@ -13,7 +13,7 @@ namespace Org.BouncyCastle.Crypto.Tls
     {
         public static readonly int DefaultMinimumPrimeBits = 2048;
 
-        protected static readonly IList<DHParameters> DefaultGroups = Platform.CreateArrayList< DHParameters>();
+        protected static readonly IList<DHParameters> DefaultGroups = Platform.CreateArrayList<DHParameters>();
 
         private static void AddDefaultGroup(DHParameters dhParameters)
         {

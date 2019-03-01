@@ -2165,7 +2165,7 @@ namespace Org.BouncyCastle.Pkix
 					}
 					else
 					{
-					 var _validPolicyNodeSet = new HashSet();
+					 var _validPolicyNodeSet = new HashSet<PkixPolicyNode>();
 
 						for (int j = 0; j < policyNodes.Length; j++)
 						{
@@ -2177,7 +2177,7 @@ namespace Org.BouncyCastle.Pkix
 
 								if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(_node.ValidPolicy))
 								{
-									foreach (object o in _node.Children)
+									foreach (var o in _node.Children)
 									{
 										_validPolicyNodeSet.Add(o);
 									}
@@ -2234,7 +2234,7 @@ namespace Org.BouncyCastle.Pkix
 				//
 				// (g) (iii) 1
 				//
-			 var _validPolicyNodeSet = new HashSet();
+			 var _validPolicyNodeSet = new HashSet<PkixPolicyNode>();
 
 				for (int j = 0; j < policyNodes.Length; j++)
 				{

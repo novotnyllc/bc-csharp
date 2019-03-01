@@ -354,7 +354,7 @@ namespace Org.BouncyCastle.Pkix
 		{
 			PkixCertPathBuilderResult result = null;
 			// find holder PKCs
-		 var holderPKCs = new HashSet();
+		 var holderPKCs = new HashSet<X509ExtensionBase>();
 			if (attrCert.Holder.GetIssuer() != null)
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
@@ -368,8 +368,11 @@ namespace Org.BouncyCastle.Pkix
 						{
 							selector.Issuer = principals[i];
 						}
-						holderPKCs.AddAll(PkixCertPathValidatorUtilities
-							.FindCertificates(selector, pkixParams.GetStores()));
+						foreach(var certificate in PkixCertPathValidatorUtilities
+							.FindCertificates(selector, pkixParams.GetStores()))
+                        {
+                            holderPKCs.Add(certificate);
+                        }
 					}
 					catch (Exception e)
 					{
@@ -378,7 +381,7 @@ namespace Org.BouncyCastle.Pkix
 							e);
 					}
 				}
-				if (holderPKCs.IsEmpty)
+				if (!holderPKCs.Any())
 				{
 					throw new PkixCertPathValidatorException(
 						"Public key certificate specified in base certificate ID for attribute certificate cannot be found.");
@@ -396,8 +399,11 @@ namespace Org.BouncyCastle.Pkix
 						{
 							selector.Issuer = principals[i];
 						}
-						holderPKCs.AddAll(PkixCertPathValidatorUtilities
-							.FindCertificates(selector, pkixParams.GetStores()));
+						foreach(var certificate in PkixCertPathValidatorUtilities
+							.FindCertificates(selector, pkixParams.GetStores()))
+                        {
+                            holderPKCs.Add(certificate);
+                        }
 					}
 					catch (Exception e)
 					{
@@ -406,7 +412,7 @@ namespace Org.BouncyCastle.Pkix
 							e);
 					}
 				}
-				if (holderPKCs.IsEmpty)
+				if (!holderPKCs.Any())
 				{
 					throw new PkixCertPathValidatorException(
 						"Public key certificate specified in entity name for attribute certificate cannot be found.");

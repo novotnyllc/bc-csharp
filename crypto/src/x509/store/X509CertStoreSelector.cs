@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Math;
@@ -20,11 +20,11 @@ namespace Org.BouncyCastle.X509.Store
 		private int basicConstraints = -1;
 		private X509Certificate certificate;
 		private DateTimeObject certificateValid;
-		private ISet extendedKeyUsage;
+		private ISet<DerObjectIdentifier> extendedKeyUsage;
         private bool ignoreX509NameOrdering;
 		private X509Name issuer;
 		private bool[] keyUsage;
-		private ISet policy;
+		private ISet<DerObjectIdentifier> policy;
 		private DateTimeObject privateKeyValid;
 		private BigInteger serialNumber;
 		private X509Name subject;
@@ -91,7 +91,7 @@ namespace Org.BouncyCastle.X509.Store
 			set { certificateValid = value; }
 		}
 
-		public ISet ExtendedKeyUsage
+		public ISet<DerObjectIdentifier> ExtendedKeyUsage
 		{
 			get { return CopySet(extendedKeyUsage); }
 			set { extendedKeyUsage = CopySet(value); }
@@ -124,7 +124,7 @@ namespace Org.BouncyCastle.X509.Store
 		/// <summary>
 		/// An <code>ISet</code> of <code>DerObjectIdentifier</code> objects.
 		/// </summary>
-		public ISet Policy
+		public ISet<DerObjectIdentifier> Policy
 		{
 			get { return CopySet(policy); }
 			set { policy = CopySet(value); }
@@ -315,10 +315,10 @@ namespace Org.BouncyCastle.X509.Store
 			return b == null ? null : (bool[]) b.Clone();
 		}
 
-		private static ISet CopySet(
-			ISet s)
+		private static ISet<T> CopySet<T>(
+			ISet<T> s)
 		{
-			return s == null ? null : new HashSet(s);
+			return s == null ? null : new HashSet<T>(s);
 		}
 
 		private static SubjectPublicKeyInfo GetSubjectPublicKey(

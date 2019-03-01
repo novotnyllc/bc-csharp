@@ -15,6 +15,7 @@ using Org.BouncyCastle.Utilities.Date;
 using Org.BouncyCastle.Utilities.Encoders;
 using Org.BouncyCastle.X509.Extension;
 using Org.BouncyCastle.Crypto.Operators;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.X509
 {
@@ -148,9 +149,9 @@ namespace Org.BouncyCastle.X509
 			}
 		}
 
-		private ISet LoadCrlEntries()
+		private ISet<X509CrlEntry> LoadCrlEntries()
 		{
-		 var entrySet = new HashSet();
+		 var entrySet = new HashSet<X509CrlEntry>();
 			IEnumerable certs = c.GetRevokedCertificateEnumeration();
 
 			X509Name previousCertificateIssuer = IssuerDN;
@@ -185,9 +186,9 @@ namespace Org.BouncyCastle.X509
 			return null;
 		}
 
-		public virtual ISet GetRevokedCertificates()
+		public virtual ISet<X509CrlEntry> GetRevokedCertificates()
 		{
-			ISet entrySet = LoadCrlEntries();
+			ISet<X509CrlEntry> entrySet = LoadCrlEntries();
 
 			if (entrySet.Count > 0)
 			{
@@ -348,7 +349,7 @@ namespace Org.BouncyCastle.X509
 				while (e.MoveNext());
 			}
 
-			ISet certSet = GetRevokedCertificates();
+			var certSet = GetRevokedCertificates();
 			if (certSet != null)
 			{
 				foreach (X509CrlEntry entry in certSet)

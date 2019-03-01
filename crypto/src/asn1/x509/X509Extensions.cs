@@ -209,7 +209,7 @@ namespace Org.BouncyCastle.Asn1.X509
         private X509Extensions(
             Asn1Sequence seq)
         {
-            this.ordering = Platform.CreateArrayList< DerObjectIdentifier>();
+            this.ordering = Platform.CreateArrayList<DerObjectIdentifier>();
 
 			foreach (Asn1Encodable ae in seq)
 			{

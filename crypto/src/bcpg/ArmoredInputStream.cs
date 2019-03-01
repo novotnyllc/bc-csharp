@@ -98,7 +98,7 @@ namespace Org.BouncyCastle.Bcpg
         bool        newLineFound = false;
         bool        clearText = false;
         bool        restart = false;
-        IList<string>       headerList= Platform.CreateArrayList< string>();
+        IList<string>       headerList= Platform.CreateArrayList<string>();
         int         lastC = 0;
 		bool		isEndOfStream;
 
