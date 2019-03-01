@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
@@ -120,7 +121,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             byte[] certificateTypes = new byte[]{ ClientCertificateType.rsa_sign,
                 ClientCertificateType.dss_sign, ClientCertificateType.ecdsa_sign };
 
-            IList serverSigAlgs = null;
+            IList<SignatureAndHashAlgorithm> serverSigAlgs = null;
             if (TlsUtilities.IsSignatureAlgorithmsExtensionAllowed(mServerVersion))
             {
                 serverSigAlgs = mConfig.serverCertReqSigAlgs;
@@ -130,7 +131,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
                 }
             }
 
-            IList certificateAuthorities = new ArrayList();
+            var certificateAuthorities = new List<Asn1Encodable>();
             certificateAuthorities.Add(TlsTestUtilities.LoadCertificateResource("x509-ca.pem").Subject);
 
             return new CertificateRequest(certificateTypes, serverSigAlgs, certificateAuthorities);
@@ -172,11 +173,11 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             }
         }
 
-        protected virtual IList GetSupportedSignatureAlgorithms()
+        protected virtual IList<SignatureAndHashAlgorithm> GetSupportedSignatureAlgorithms()
         {
             if (TlsUtilities.IsTlsV12(mContext) && mConfig.serverAuthSigAlg != null)
             {
-                IList signatureAlgorithms = new ArrayList(1);
+                var signatureAlgorithms = new List<SignatureAndHashAlgorithm>(1);
                 signatureAlgorithms.Add(mConfig.serverAuthSigAlg);
                 return signatureAlgorithms;
             }

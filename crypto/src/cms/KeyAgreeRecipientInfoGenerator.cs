@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -22,7 +23,7 @@ namespace Org.BouncyCastle.Cms
 
 		private DerObjectIdentifier			keyAgreementOID;
 		private DerObjectIdentifier			keyEncryptionOID;
-		private IList					    recipientCerts;
+		private IList<X509Certificate> recipientCerts;
 		private AsymmetricCipherKeyPair		senderKeyPair;
 
 		internal KeyAgreeRecipientInfoGenerator()
@@ -39,7 +40,7 @@ namespace Org.BouncyCastle.Cms
 			set { this.keyEncryptionOID = value; }
 		}
 
-		internal ICollection RecipientCerts
+		internal ICollection<X509Certificate> RecipientCerts
 		{
 			set { this.recipientCerts = Platform.CreateArrayList(value); }
 		}

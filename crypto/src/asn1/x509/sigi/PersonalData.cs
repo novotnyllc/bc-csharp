@@ -75,7 +75,7 @@ namespace Org.BouncyCastle.Asn1.X509.SigI
 			if (seq.Count < 1)
 				throw new ArgumentException("Bad sequence size: " + seq.Count);
 
-			IEnumerator e = seq.GetEnumerator();
+			var e = seq.GetEnumerator();
 			e.MoveNext();
 
 			nameOrPseudonym = NameOrPseudonym.GetInstance(e.Current);

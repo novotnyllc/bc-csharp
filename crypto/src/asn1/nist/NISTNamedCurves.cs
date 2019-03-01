@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Sec;
 using Org.BouncyCastle.Asn1.X9;
@@ -18,8 +18,8 @@ namespace Org.BouncyCastle.Asn1.Nist
         {
         }
 
-        private static readonly IDictionary objIds = Platform.CreateHashtable();
-        private static readonly IDictionary names = Platform.CreateHashtable();
+        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateHashtable<DerObjectIdentifier, string>();
 
         private static void DefineCurveAlias(
             string				name,
@@ -94,9 +94,9 @@ namespace Org.BouncyCastle.Asn1.Nist
         * returns an enumeration containing the name strings for curves
         * contained in this structure.
         */
-        public static IEnumerable Names
+        public static IEnumerable<string> Names
         {
-            get { return new EnumerableProxy(names.Values); }
+            get { return new EnumerableProxy<string>(names.Values); }
         }
     }
 }

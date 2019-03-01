@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.GM;
 using Org.BouncyCastle.Asn1.Sec;
@@ -769,12 +769,11 @@ namespace Org.BouncyCastle.Crypto.EC
             }
         }
 
-
-        private static readonly IDictionary nameToCurve = Platform.CreateHashtable();
-        private static readonly IDictionary nameToOid = Platform.CreateHashtable();
-        private static readonly IDictionary oidToCurve = Platform.CreateHashtable();
-        private static readonly IDictionary oidToName = Platform.CreateHashtable();
-        private static readonly IList names = Platform.CreateArrayList();
+        private static readonly IDictionary<string, X9ECParametersHolder> nameToCurve = Platform.CreateHashtable<string, X9ECParametersHolder>();
+        private static readonly IDictionary<string, DerObjectIdentifier> nameToOid = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, X9ECParametersHolder> oidToCurve = Platform.CreateHashtable<DerObjectIdentifier, X9ECParametersHolder>();
+        private static readonly IDictionary<DerObjectIdentifier, string> oidToName = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        private static readonly IList<string> names = Platform.CreateArrayList<string>();
 
         private static void DefineCurve(string name, X9ECParametersHolder holder)
         {
@@ -795,7 +794,7 @@ namespace Org.BouncyCastle.Crypto.EC
 
         private static void DefineCurveAlias(string name, DerObjectIdentifier oid)
         {
-            object curve = oidToCurve[oid];
+            var curve = oidToCurve[oid];
             if (curve == null)
                 throw new InvalidOperationException();
 
@@ -905,9 +904,9 @@ namespace Org.BouncyCastle.Crypto.EC
          * returns an enumeration containing the name strings for curves
          * contained in this structure.
          */
-        public static IEnumerable Names
+        public static IEnumerable<string> Names
         {
-            get { return new EnumerableProxy(names); }
+            get { return new EnumerableProxy<string>(names); }
         }
     }
 }

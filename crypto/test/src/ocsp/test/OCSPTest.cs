@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using NUnit.Framework;
@@ -316,9 +317,9 @@ namespace Org.BouncyCastle.Ocsp.Tests
 
 			gen = new OcspReqGenerator();
 
-			IList oids = new ArrayList();
-			IList values = new ArrayList();
-			byte[] sampleNonce = new byte[16];
+            var oids = new List<DerObjectIdentifier>();
+            var values = new List<X509Extension>();
+            byte[] sampleNonce = new byte[16];
 			Random rand = new Random();
 
 			rand.NextBytes(sampleNonce);
@@ -349,7 +350,7 @@ namespace Org.BouncyCastle.Ocsp.Tests
 			//
 			// extension check.
 			//
-			ISet extOids = req.GetCriticalExtensionOids();
+			var extOids = req.GetCriticalExtensionOids();
 
 			if (extOids.Count != 0)
 			{
@@ -504,8 +505,8 @@ namespace Org.BouncyCastle.Ocsp.Tests
 
 			gen = new OcspReqGenerator();
 
-			IList oids = new ArrayList();
-			IList values = new ArrayList();
+			var oids = new List<DerObjectIdentifier>();
+			var values = new List<X509Extension>();
 			byte[] sampleNonce = new byte[16];
 			Random rand = new Random();
 
@@ -538,7 +539,7 @@ namespace Org.BouncyCastle.Ocsp.Tests
 			//
 			// extension check.
 			//
-			ISet extOids = req.GetCriticalExtensionOids();
+			var extOids = req.GetCriticalExtensionOids();
 
 			if (extOids.Count != 0)
 			{
@@ -706,8 +707,8 @@ namespace Org.BouncyCastle.Ocsp.Tests
 
 			gen = new OcspReqGenerator();
 
-			IList oids = new ArrayList();
-			IList values = new ArrayList();
+			var oids = new List<DerObjectIdentifier>();
+			var values = new List<X509Extension>();
 			byte[] sampleNonce = new byte[16];
 			Random rand = new Random();
 
@@ -740,7 +741,7 @@ namespace Org.BouncyCastle.Ocsp.Tests
 			//
 			// extension check.
 			//
-			ISet extOids = req.GetCriticalExtensionOids();
+			var extOids = req.GetCriticalExtensionOids();
 
 			if (extOids.Count != 0)
 			{

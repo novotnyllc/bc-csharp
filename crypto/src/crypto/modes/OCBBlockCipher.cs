@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Utilities;
 
@@ -38,7 +38,7 @@ namespace Org.BouncyCastle.Crypto.Modes
          * KEY-DEPENDENT
          */
         // NOTE: elements are lazily calculated
-        private IList L;
+        private IList<byte[]> L;
         private byte[] L_Asterisk, L_Dollar;
 
         /*
@@ -161,7 +161,7 @@ namespace Org.BouncyCastle.Crypto.Modes
 
             this.L_Dollar = OCB_double(L_Asterisk);
 
-            this.L = Platform.CreateArrayList();
+            this.L = Platform.CreateArrayList<byte[]>();
             this.L.Add(OCB_double(L_Dollar));
 
             /*

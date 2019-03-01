@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -20,9 +21,9 @@ namespace Org.BouncyCastle.X509
 {
 	internal class X509Utilities
 	{
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
-        private static readonly IDictionary exParams = Platform.CreateHashtable();
-		private static readonly ISet        noParams = new HashSet();
+        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<string, Asn1Encodable> exParams = Platform.CreateHashtable<string, Asn1Encodable>();
+		private static readonly ISet<DerObjectIdentifier> noParams = new HashSet<DerObjectIdentifier>();
 
 		static X509Utilities()
 		{
@@ -125,7 +126,7 @@ namespace Org.BouncyCastle.X509
 		{
 			algorithmName = Platform.ToUpperInvariant(algorithmName);
 
-            if (algorithms.Contains(algorithmName))
+            if (algorithms.ContainsKey(algorithmName))
 			{
 				return (DerObjectIdentifier) algorithms[algorithmName];
 			}
@@ -144,7 +145,7 @@ namespace Org.BouncyCastle.X509
 
             algorithmName = Platform.ToUpperInvariant(algorithmName);
 
-			if (exParams.Contains(algorithmName))
+			if (exParams.ContainsKey(algorithmName))
 			{
 				return new AlgorithmIdentifier(sigOid, (Asn1Encodable) exParams[algorithmName]);
 			}
@@ -154,7 +155,7 @@ namespace Org.BouncyCastle.X509
 
 		internal static IEnumerable GetAlgNames()
 		{
-			return new EnumerableProxy(algorithms.Keys);
+			return new EnumerableProxy<string>(algorithms.Keys);
 		}
 
 		internal static byte[] GetSignatureForObject(

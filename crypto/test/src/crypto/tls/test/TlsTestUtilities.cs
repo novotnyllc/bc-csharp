@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -90,7 +91,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             return new DefaultTlsSignerCredentials(context, certificate, privateKey, signatureAndHashAlgorithm);
         }
 
-        internal static TlsSignerCredentials LoadSignerCredentials(TlsContext context, IList supportedSignatureAlgorithms,
+        internal static TlsSignerCredentials LoadSignerCredentials(TlsContext context, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms,
             byte signatureAlgorithm, string certResource, string keyResource)
         {
             /*

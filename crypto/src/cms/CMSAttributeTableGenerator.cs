@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.Cms;
 
 namespace Org.BouncyCastle.Cms
@@ -20,6 +20,6 @@ namespace Org.BouncyCastle.Cms
 
 	public interface CmsAttributeTableGenerator
 	{
-		AttributeTable GetAttributes(IDictionary parameters);
+		AttributeTable GetAttributes(IDictionary<CmsAttributeTableParameter, object> parameters);
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.X509;
@@ -64,9 +65,9 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
         //        });
         //}
 
-        public override IDictionary GetClientExtensions()
+        public override IDictionary<int, byte[]> GetClientExtensions()
         {
-            IDictionary clientExtensions = TlsExtensionsUtilities.EnsureExtensionsInitialised(base.GetClientExtensions());
+            var clientExtensions = TlsExtensionsUtilities.EnsureExtensionsInitialised(base.GetClientExtensions());
             TlsExtensionsUtilities.AddEncryptThenMacExtension(clientExtensions);
             {
                 /*

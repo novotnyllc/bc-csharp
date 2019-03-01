@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
@@ -25,7 +26,7 @@ namespace Org.BouncyCastle.Pkix
 			// AA Controls
 			// Attribute encryption
 			// Proxy
-			ISet critExtOids = attrCert.GetCriticalExtensionOids();
+			var critExtOids = attrCert.GetCriticalExtensionOids();
 
 			// 7.1
 			// process extensions
@@ -49,7 +50,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				checker.Check(attrCert, certPath, holderCertPath, critExtOids);
 			}
-			if (!critExtOids.IsEmpty)
+			if (critExtOids.Any())
 			{
 				throw new PkixCertPathValidatorException(
 					"Attribute certificate contains unsupported critical extensions: "
@@ -77,7 +78,7 @@ namespace Org.BouncyCastle.Pkix
 			PkixParameters				paramsPKIX,
 			X509Certificate				issuerCert,
 			DateTime					validDate,
-			IList						certPathCerts)
+			IList<X509Certificate>                       certPathCerts)
 		{
 			if (paramsPKIX.IsRevocationEnabled)
 			{
@@ -277,11 +278,11 @@ namespace Org.BouncyCastle.Pkix
 			X509Certificate	acIssuerCert,
 			PkixParameters	pkixParams)
 		{
-			ISet set = pkixParams.GetTrustedACIssuers();
+			var set = pkixParams.GetTrustedACIssuers();
 			bool trusted = false;
 			foreach (TrustAnchor anchor in set)
 			{
-                IDictionary symbols = X509Name.RFC2253Symbols;
+                var symbols = X509Name.RFC2253Symbols;
                 if (acIssuerCert.SubjectDN.ToString(false, symbols).Equals(anchor.CAName)
 					|| acIssuerCert.Equals(anchor.TrustedCert))
 				{
@@ -353,7 +354,7 @@ namespace Org.BouncyCastle.Pkix
 		{
 			PkixCertPathBuilderResult result = null;
 			// find holder PKCs
-			ISet holderPKCs = new HashSet();
+		 var holderPKCs = new HashSet();
 			if (attrCert.Holder.GetIssuer() != null)
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
@@ -468,7 +469,7 @@ namespace Org.BouncyCastle.Pkix
 			X509Certificate				issuerCert,
 			CertStatus					certStatus,
 			ReasonsMask					reasonMask,
-			IList						certPathCerts)
+			IList<X509Certificate>                       certPathCerts)
 		{
 			/*
 			* 4.3.6 No Revocation Available
@@ -495,12 +496,12 @@ namespace Org.BouncyCastle.Pkix
 			* CRLs must be enabled in the ExtendedPkixParameters and are in
 			* getAdditionalStore()
 			*/
-			ISet crls = PkixCertPathValidatorUtilities.GetCompleteCrls(dp, attrCert,
+			var crls = PkixCertPathValidatorUtilities.GetCompleteCrls(dp, attrCert,
 				currentDate, paramsPKIX);
 			bool validCrlFound = false;
 			Exception lastException = null;
 
-			IEnumerator crl_iter = crls.GetEnumerator();
+			var crl_iter = crls.GetEnumerator();
 
 			while (crl_iter.MoveNext()
 				&& certStatus.Status == CertStatus.Unrevoked
@@ -525,7 +526,7 @@ namespace Org.BouncyCastle.Pkix
 					}
 
 					// (f)
-					ISet keys = Rfc3280CertPathUtilities.ProcessCrlF(crl, attrCert,
+					var keys = Rfc3280CertPathUtilities.ProcessCrlF(crl, attrCert,
 						null, null, paramsPKIX, certPathCerts);
 					// (g)
 					AsymmetricKeyParameter pubKey = Rfc3280CertPathUtilities.ProcessCrlG(crl, keys);
@@ -535,7 +536,7 @@ namespace Org.BouncyCastle.Pkix
 					if (paramsPKIX.IsUseDeltasEnabled)
 					{
 						// get delta CRLs
-						ISet deltaCRLs = PkixCertPathValidatorUtilities.GetDeltaCrls(
+						var deltaCRLs = PkixCertPathValidatorUtilities.GetDeltaCrls(
 							currentDate, paramsPKIX, crl);
 						// we only want one valid delta CRL
 						// (h)

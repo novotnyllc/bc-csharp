@@ -15,8 +15,8 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
         {
             this.mtu = mtu;
 
-            IList clientQueue = new ArrayList();
-            IList serverQueue = new ArrayList();
+            var clientQueue = new ArrayList();
+            var serverQueue = new ArrayList();
 
             this.client = new MockDatagramTransport(this, clientQueue, serverQueue);
             this.server = new MockDatagramTransport(this, serverQueue, clientQueue);

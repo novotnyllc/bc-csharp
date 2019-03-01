@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
@@ -74,14 +74,14 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public OtherSigningCertificate(
-			IEnumerable certs)
+			IEnumerable<Asn1Encodable> certs)
 			: this(certs, null)
 		{
 		}
 
 		public OtherSigningCertificate(
-			IEnumerable	certs,
-			IEnumerable	policies)
+			IEnumerable<Asn1Encodable> certs,
+			IEnumerable<Asn1Encodable> policies)
 		{
 			if (certs == null)
 				throw new ArgumentNullException("certs");

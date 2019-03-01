@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Utilities.IO;
 
 namespace Org.BouncyCastle.Asn1
@@ -98,7 +98,7 @@ namespace Org.BouncyCastle.Asn1
                         //
                         // yes, people actually do this...
                         //
-                        return new BerOctetString(BuildDerEncodableVector(defIn));
+                        return new BerOctetString(BuildDerEncodableVector(defIn).Cast<DerOctetString>());
                     case Asn1Tags.Sequence:
                         return CreateDerSequence(defIn);
                     case Asn1Tags.Set:

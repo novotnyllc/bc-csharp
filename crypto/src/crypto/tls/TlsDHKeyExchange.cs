@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.X509;
@@ -23,12 +24,12 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected DHPublicKeyParameters mDHAgreePublicKey;
 
         [Obsolete("Use constructor that takes a TlsDHVerifier")]
-        public TlsDHKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, DHParameters dhParameters)
+        public TlsDHKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, DHParameters dhParameters)
             :   this(keyExchange, supportedSignatureAlgorithms, new DefaultTlsDHVerifier(), dhParameters)
         {
         }
 
-        public TlsDHKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, TlsDHVerifier dhVerifier, DHParameters dhParameters)
+        public TlsDHKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, TlsDHVerifier dhVerifier, DHParameters dhParameters)
             :   base(keyExchange, supportedSignatureAlgorithms)
         {
             switch (keyExchange)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -17,7 +18,7 @@ namespace Org.BouncyCastle.X509.Extension
 			return Asn1Object.FromByteArray(extensionValue.GetOctets());
 		}
 
-		public static ICollection GetIssuerAlternativeNames(
+		public static ICollection<IList<object>> GetIssuerAlternativeNames(
 			X509Certificate cert)
 		{
 			Asn1OctetString extVal = cert.GetExtensionValue(X509Extensions.IssuerAlternativeName);
@@ -25,7 +26,7 @@ namespace Org.BouncyCastle.X509.Extension
 			return GetAlternativeName(extVal);
 		}
 
-		public static ICollection GetSubjectAlternativeNames(
+		public static ICollection<IList<object>> GetSubjectAlternativeNames(
 			X509Certificate cert)
 		{
 			Asn1OctetString extVal = cert.GetExtensionValue(X509Extensions.SubjectAlternativeName);
@@ -33,10 +34,10 @@ namespace Org.BouncyCastle.X509.Extension
 			return GetAlternativeName(extVal);
 		}
 
-		private static ICollection GetAlternativeName(
+		private static ICollection<IList<object>> GetAlternativeName(
 			Asn1OctetString extVal)
 		{
-			IList temp = Platform.CreateArrayList();
+			var temp = Platform.CreateArrayList<IList<object>>();
 
 			if (extVal != null)
 			{
@@ -46,7 +47,7 @@ namespace Org.BouncyCastle.X509.Extension
 
 					foreach (Asn1Encodable primName in seq)
 					{
-                        IList list = Platform.CreateArrayList();
+                        var list = Platform.CreateArrayList<object>();
                         GeneralName genName = GeneralName.GetInstance(primName);
 
 						list.Add(genName.TagNo);

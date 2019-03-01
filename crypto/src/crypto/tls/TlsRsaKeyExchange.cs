@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -24,7 +25,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         protected byte[] mPremasterSecret;
 
-        public TlsRsaKeyExchange(IList supportedSignatureAlgorithms)
+        public TlsRsaKeyExchange(IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms)
             :   base(KeyExchangeAlgorithm.RSA, supportedSignatureAlgorithms)
         {
         }

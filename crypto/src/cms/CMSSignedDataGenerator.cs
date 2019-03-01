@@ -12,6 +12,7 @@ using Org.BouncyCastle.Security.Certificates;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.Crypto.Operators;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Cms
 {
@@ -38,7 +39,7 @@ namespace Org.BouncyCastle.Cms
     {
 		private static readonly CmsSignedHelper Helper = CmsSignedHelper.Instance;
 
-		private readonly IList signerInfs = Platform.CreateArrayList();
+		private readonly IList<SignerInf> signerInfs = Platform.CreateArrayList<SignerInf>();
 
 		private class SignerInf
         {
@@ -120,7 +121,7 @@ namespace Org.BouncyCastle.Cms
 				string signatureName = digestName + "with" + Helper.GetEncryptionAlgName(encOID);
 				
                 byte[] hash;
-                if (outer._digests.Contains(digestOID))
+                if (outer._digests.ContainsKey(digestOID))
                 {
                     hash = (byte[])outer._digests[digestOID];
                 }
@@ -132,7 +133,7 @@ namespace Org.BouncyCastle.Cms
                         content.Write(new DigestSink(dig));
                     }
                     hash = DigestUtilities.DoFinal(dig);
-                    outer._digests.Add(digestOID, hash.Clone());
+                    outer._digests.Add(digestOID, (byte[])hash.Clone());
                 }
 
                 IStreamCalculator calculator = sigCalc.CreateCalculator();
@@ -146,7 +147,7 @@ namespace Org.BouncyCastle.Cms
 				Asn1Set signedAttr = null;
 				if (sAttr != null)
 				{
-					IDictionary parameters = outer.GetBaseParameters(contentType, digAlgId, hash);
+				 var parameters = outer.GetBaseParameters(contentType, digAlgId, hash);
 
 //					Asn1.Cms.AttributeTable signed = sAttr.GetAttributes(Collections.unmodifiableMap(parameters));
 					Asn1.Cms.AttributeTable signed = sAttr.GetAttributes(parameters);
@@ -155,7 +156,7 @@ namespace Org.BouncyCastle.Cms
                     {
                         if (signed != null && signed[CmsAttributes.ContentType] != null)
                         {
-                            IDictionary tmpSigned = signed.ToDictionary();
+                            var tmpSigned = signed.ToDictionary();
                             tmpSigned.Remove(CmsAttributes.ContentType);
                             signed = new Asn1.Cms.AttributeTable(tmpSigned);
                         }
@@ -180,7 +181,7 @@ namespace Org.BouncyCastle.Cms
 				Asn1Set unsignedAttr = null;
 				if (unsAttr != null)
 				{
-					IDictionary baseParameters = outer.GetBaseParameters(contentType, digAlgId, hash);
+				 var baseParameters = outer.GetBaseParameters(contentType, digAlgId, hash);
 					baseParameters[CmsAttributeTableParameter.Signature] = sigBytes.Clone();
 
 //					Asn1.Cms.AttributeTable unsigned = unsAttr.GetAttributes(Collections.unmodifiableMap(baseParameters));

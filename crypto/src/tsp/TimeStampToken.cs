@@ -43,7 +43,7 @@ namespace Org.BouncyCastle.Tsp
 				throw new TspValidationException("ContentInfo object not for a time stamp.");
 			}
 
-			ICollection signers = tsToken.GetSignerInfos().GetSigners();
+			var signers = tsToken.GetSignerInfos().GetSigners();
 
 			if (signers.Count != 1)
 			{
@@ -53,7 +53,7 @@ namespace Org.BouncyCastle.Tsp
 			}
 
 
-			IEnumerator signerEnum = signers.GetEnumerator();
+			var signerEnum = signers.GetEnumerator();
 
 			signerEnum.MoveNext();
 			tsaSignerInfo = (SignerInformation) signerEnum.Current;
@@ -127,19 +127,19 @@ namespace Org.BouncyCastle.Tsp
 			get { return tsaSignerInfo.UnsignedAttributes; }
 		}
 
-		public IX509Store GetCertificates(
+		public IX509Store<X509Certificate> GetCertificates(
 			string type)
 		{
 			return tsToken.GetCertificates(type);
 		}
 
-		public IX509Store GetCrls(
+		public IX509Store<X509Crl> GetCrls(
 			string type)
 		{
 			return tsToken.GetCrls(type);
 		}
 
-	    public IX509Store GetAttributeCertificates(
+	    public IX509Store<IX509AttributeCertificate> GetAttributeCertificates(
 			string type)
 	    {
 	        return tsToken.GetAttributeCertificates(type);

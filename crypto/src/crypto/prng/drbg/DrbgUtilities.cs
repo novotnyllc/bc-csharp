@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Crypto.Prng.Drbg
 {
 	internal class DrbgUtilities
 	{
-		private static readonly IDictionary maxSecurityStrengths = Platform.CreateHashtable();
+		private static readonly IDictionary<string, int> maxSecurityStrengths = Platform.CreateHashtable<string, int>();
 
         static DrbgUtilities()
 	    {

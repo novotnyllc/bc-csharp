@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -22,11 +23,11 @@ namespace Org.BouncyCastle.Tsp
 {
 	public class TspUtil
 	{
-		private static ISet EmptySet = CollectionUtilities.ReadOnly(new HashSet());
-		private static IList EmptyList = CollectionUtilities.ReadOnly(Platform.CreateArrayList());
+		private static ISet<DerObjectIdentifier> EmptySet = CollectionUtilities.ReadOnly(new HashSet<DerObjectIdentifier>());
+		private static IList<DerObjectIdentifier> EmptyList = CollectionUtilities.ReadOnly(Platform.CreateArrayList< DerObjectIdentifier>());
 
-		private static readonly IDictionary digestLengths = Platform.CreateHashtable();
-        private static readonly IDictionary digestNames = Platform.CreateHashtable();
+		private static readonly IDictionary<string, int> digestLengths = new Dictionary<string, int>();
+        private static readonly IDictionary<string, string> digestNames = new Dictionary<string, string>();
 
 		static TspUtil()
 		{
@@ -78,10 +79,10 @@ namespace Org.BouncyCastle.Tsp
 	     * @return a collection of TimeStampToken objects
 	     * @throws TSPValidationException
 	     */
-		public static ICollection GetSignatureTimestamps(
+		public static ICollection<TimeStampToken> GetSignatureTimestamps(
 			SignerInformation signerInfo)
 		{
-			IList timestamps = Platform.CreateArrayList();
+			var timestamps = Platform.CreateArrayList<TimeStampToken>();
 
 			Asn1.Cms.AttributeTable unsignedAttrs = signerInfo.UnsignedAttributes;
 			if (unsignedAttrs != null)
@@ -172,7 +173,7 @@ namespace Org.BouncyCastle.Tsp
 		internal static int GetDigestLength(
 			string digestAlgOID)
 		{
-			if (!digestLengths.Contains(digestAlgOID))
+			if (!digestLengths.ContainsKey(digestAlgOID))
 				throw new TspException("digest algorithm cannot be found.");
 
 			return (int)digestLengths[digestAlgOID];
@@ -186,24 +187,24 @@ namespace Org.BouncyCastle.Tsp
 			return DigestUtilities.GetDigest(digestName);
 		}
 
-		internal static ISet GetCriticalExtensionOids(X509Extensions extensions)
+		internal static ISet<DerObjectIdentifier> GetCriticalExtensionOids(X509Extensions extensions)
 		{
 			if (extensions == null)
 				return EmptySet;
 
-			return CollectionUtilities.ReadOnly(new HashSet(extensions.GetCriticalExtensionOids()));
+			return CollectionUtilities.ReadOnly<DerObjectIdentifier>(new HashSet<DerObjectIdentifier>(extensions.GetCriticalExtensionOids()));
 		}
 
-		internal static ISet GetNonCriticalExtensionOids(X509Extensions extensions)
+		internal static ISet<DerObjectIdentifier> GetNonCriticalExtensionOids(X509Extensions extensions)
 		{
 			if (extensions == null)
 				return EmptySet;
 
 			// TODO: should probably produce a set that imposes correct ordering
-			return CollectionUtilities.ReadOnly(new HashSet(extensions.GetNonCriticalExtensionOids()));
+			return CollectionUtilities.ReadOnly(new HashSet<DerObjectIdentifier>(extensions.GetNonCriticalExtensionOids()));
 		}
 		
-		internal static IList GetExtensionOids(X509Extensions extensions)
+		internal static IList<DerObjectIdentifier> GetExtensionOids(X509Extensions extensions)
 		{
 			if (extensions == null)
 				return EmptyList;

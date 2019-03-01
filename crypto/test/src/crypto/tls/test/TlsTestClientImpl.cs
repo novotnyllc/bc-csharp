@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -57,9 +58,9 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
 	        }
         }
 
-        public override IDictionary GetClientExtensions()
+        public override IDictionary<int, byte[]> GetClientExtensions()
         {
-            IDictionary clientExtensions = base.GetClientExtensions();
+            var clientExtensions = base.GetClientExtensions();
             if (clientExtensions != null && !mConfig.clientSendSignatureAlgorithms)
             {
                 clientExtensions.Remove(ExtensionType.signature_algorithms);
@@ -213,10 +214,10 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
                     return null;
                 }
 
-                IList supportedSigAlgs = certificateRequest.SupportedSignatureAlgorithms;
+                var supportedSigAlgs = certificateRequest.SupportedSignatureAlgorithms;
                 if (supportedSigAlgs != null && mOuter.mConfig.clientAuthSigAlg != null)
                 {
-                    supportedSigAlgs = new ArrayList(1);
+                    supportedSigAlgs = new List<SignatureAndHashAlgorithm>(1);
                     supportedSigAlgs.Add(mOuter.mConfig.clientAuthSigAlg);
                 }
 

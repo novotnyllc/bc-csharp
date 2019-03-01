@@ -1,17 +1,17 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Asn1
 {
     public class Asn1EncodableVector
-		: IEnumerable
+		: IEnumerable<Asn1Encodable>
     {
-        private IList v = Platform.CreateArrayList();
+        private IList<Asn1Encodable> v = Platform.CreateArrayList< Asn1Encodable>();
 
 		public static Asn1EncodableVector FromEnumerable(
-			IEnumerable e)
+			IEnumerable<Asn1Encodable> e)
 		{
 			Asn1EncodableVector v = new Asn1EncodableVector();
 			foreach (Asn1Encodable obj in e)
@@ -85,9 +85,14 @@ namespace Org.BouncyCastle.Asn1
 			get { return v.Count; }
 		}
 
-		public IEnumerator GetEnumerator()
+		public IEnumerator<Asn1Encodable> GetEnumerator()
 		{
 			return v.GetEnumerator();
 		}
-	}
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
 }

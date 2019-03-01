@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Crypto.Tls.Tests
 {
@@ -94,7 +95,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
          * If TLS 1.2 or higher is negotiated, configures the set of supported signature algorithms in the
          * CertificateRequest (if one is sent). If null, uses a default set.
          */
-        public IList serverCertReqSigAlgs = null;
+        public IList<SignatureAndHashAlgorithm> serverCertReqSigAlgs = null;
 
         /**
          * Configures the maximum protocol version the server will accept. If null, uses the library's default.

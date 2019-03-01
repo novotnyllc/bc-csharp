@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -18,8 +19,8 @@ namespace Org.BouncyCastle.Cms
 	{
 		internal static readonly CmsEnvelopedHelper Instance = new CmsEnvelopedHelper();
 
-		private static readonly IDictionary KeySizes = Platform.CreateHashtable();
-		private static readonly IDictionary BaseCipherNames = Platform.CreateHashtable();
+		private static readonly IDictionary<string, int> KeySizes = Platform.CreateHashtable<string, int>();
+		private static readonly IDictionary<string, string> BaseCipherNames = Platform.CreateHashtable<string, string>();
 
 		static CmsEnvelopedHelper()
 		{
@@ -93,7 +94,7 @@ namespace Org.BouncyCastle.Cms
 		internal int GetKeySize(
 			string oid)
 		{
-			if (!KeySizes.Contains(oid))
+			if (!KeySizes.ContainsKey(oid))
 			{
 				throw new ArgumentException("no keysize for " + oid, "oid");
 			}
@@ -104,7 +105,7 @@ namespace Org.BouncyCastle.Cms
 		internal static RecipientInformationStore BuildRecipientInformationStore(
 			Asn1Set recipientInfos, CmsSecureReadable secureReadable)
 		{
-			IList infos = Platform.CreateArrayList();
+			var infos = Platform.CreateArrayList<RecipientInformation>();
 			for (int i = 0; i != recipientInfos.Count; i++)
 			{
 				RecipientInfo info = RecipientInfo.GetInstance(recipientInfos[i]);
@@ -115,7 +116,7 @@ namespace Org.BouncyCastle.Cms
 		}
 
 		private static void ReadRecipientInfo(
-			IList infos, RecipientInfo info, CmsSecureReadable secureReadable)
+			IList<RecipientInformation> infos, RecipientInfo info, CmsSecureReadable secureReadable)
 		{
 			Asn1Encodable recipInfo = info.Info;
 			if (recipInfo is KeyTransRecipientInfo)

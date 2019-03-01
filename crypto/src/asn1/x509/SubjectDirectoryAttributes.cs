@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -28,7 +28,7 @@ namespace Org.BouncyCastle.Asn1.X509
 	public class SubjectDirectoryAttributes
 		: Asn1Encodable
 	{
-		private readonly IList attributes;
+		private readonly IList<AttributeX509> attributes;
 
 		public static SubjectDirectoryAttributes GetInstance(
 			object obj)
@@ -70,22 +70,13 @@ namespace Org.BouncyCastle.Asn1.X509
 		private SubjectDirectoryAttributes(
 			Asn1Sequence seq)
 		{
-            this.attributes = Platform.CreateArrayList();
+            this.attributes = Platform.CreateArrayList<AttributeX509>();
             foreach (object o in seq)
 			{
 				Asn1Sequence s = Asn1Sequence.GetInstance(o);
 				attributes.Add(AttributeX509.GetInstance(s));
 			}
 		}
-
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete]
-        public SubjectDirectoryAttributes(
-            ArrayList attributes)
-            : this((IList)attributes)
-        {
-        }
-#endif
 
         /**
 		 * Constructor from an ArrayList of attributes.
@@ -96,9 +87,9 @@ namespace Org.BouncyCastle.Asn1.X509
 		 *
 		 */
 		public SubjectDirectoryAttributes(
-			IList attributes)
+			IList<AttributeX509> attributes)
 		{
-            this.attributes = Platform.CreateArrayList(attributes);
+            this.attributes = Platform.CreateArrayList<AttributeX509>(attributes);
         }
 
 		/**
@@ -134,9 +125,9 @@ namespace Org.BouncyCastle.Asn1.X509
         /**
 		 * @return Returns the attributes.
 		 */
-		public IEnumerable Attributes
+		public IEnumerable<AttributeX509> Attributes
 		{
-			get { return new EnumerableProxy(attributes); }
+			get { return new EnumerableProxy<AttributeX509>(attributes); }
 		}
 	}
 }

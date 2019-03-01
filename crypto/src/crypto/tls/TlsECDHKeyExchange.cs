@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.X509;
@@ -22,7 +23,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected ECPrivateKeyParameters mECAgreePrivateKey;
         protected ECPublicKeyParameters mECAgreePublicKey;
 
-        public TlsECDHKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, int[] namedCurves,
+        public TlsECDHKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, int[] namedCurves,
             byte[] clientECPointFormats, byte[] serverECPointFormats)
             :   base(keyExchange, supportedSignatureAlgorithms)
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -13,12 +14,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 	/// </remarks>
     public class PgpPublicKeyRingBundle
     {
-        private readonly IDictionary pubRings;
-        private readonly IList order;
+        private readonly IDictionary<long, PgpPublicKeyRing> pubRings;
+        private readonly IList<long> order;
 
 		private PgpPublicKeyRingBundle(
-            IDictionary	pubRings,
-            IList       order)
+            IDictionary<long, PgpPublicKeyRing> pubRings,
+            IList<long>       order)
         {
             this.pubRings = pubRings;
             this.order = order;
@@ -43,8 +44,8 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		public PgpPublicKeyRingBundle(
             IEnumerable e)
         {
-			this.pubRings = Platform.CreateHashtable();
-			this.order = Platform.CreateArrayList();
+			this.pubRings = Platform.CreateHashtable<long, PgpPublicKeyRing>();
+			this.order = Platform.CreateArrayList<long>();
 
 			foreach (object obj in e)
             {
@@ -76,7 +77,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// <summary>Allow enumeration of the public key rings making up this collection.</summary>
         public IEnumerable GetKeyRings()
         {
-			return new EnumerableProxy(pubRings.Values);
+			return new EnumerableProxy<PgpPublicKeyRing>(pubRings.Values);
         }
 
 		/// <summary>Allow enumeration of the key rings associated with the passed in userId.</summary>
@@ -109,7 +110,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			bool	matchPartial,
 			bool	ignoreCase)
 		{
-			IList rings = Platform.CreateArrayList();
+			var rings = new List<PgpPublicKeyRing>();
 
 			if (ignoreCase)
 			{
@@ -143,7 +144,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 				}
 			}
 
-			return new EnumerableProxy(rings);
+			return new EnumerableProxy<PgpPublicKeyRing>(rings);
 		}
 
 		/// <summary>Return the PGP public key associated with the given key id.</summary>
@@ -169,7 +170,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         public PgpPublicKeyRing GetPublicKeyRing(
             long keyId)
         {
-            if (pubRings.Contains(keyId))
+            if (pubRings.ContainsKey(keyId))
             {
                 return (PgpPublicKeyRing)pubRings[keyId];
             }
@@ -233,13 +234,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
             long key = publicKeyRing.GetPublicKey().KeyId;
 
-			if (bundle.pubRings.Contains(key))
+			if (bundle.pubRings.ContainsKey(key))
             {
                 throw new ArgumentException("Bundle already contains a key with a keyId for the passed in ring.");
             }
 
-			IDictionary newPubRings = Platform.CreateHashtable(bundle.pubRings);
-            IList newOrder = Platform.CreateArrayList(bundle.order);
+			IDictionary<long, PgpPublicKeyRing> newPubRings = Platform.CreateHashtable<long, PgpPublicKeyRing>(bundle.pubRings);
+            var newOrder = Platform.CreateArrayList(bundle.order);
 
 			newPubRings[key] = publicKeyRing;
 
@@ -262,13 +263,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
             long key = publicKeyRing.GetPublicKey().KeyId;
 
-			if (!bundle.pubRings.Contains(key))
+			if (!bundle.pubRings.ContainsKey(key))
             {
                 throw new ArgumentException("Bundle does not contain a key with a keyId for the passed in ring.");
             }
 
-			IDictionary newPubRings = Platform.CreateHashtable(bundle.pubRings);
-            IList newOrder = Platform.CreateArrayList(bundle.order);
+			IDictionary<long, PgpPublicKeyRing> newPubRings = Platform.CreateHashtable(bundle.pubRings);
+            var newOrder = Platform.CreateArrayList(bundle.order);
 
 			newPubRings.Remove(key);
 			newOrder.Remove(key);

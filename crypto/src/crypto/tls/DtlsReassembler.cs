@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Crypto.Tls
@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         private readonly byte mMsgType;
         private readonly byte[] mBody;
 
-        private readonly IList mMissing = Platform.CreateArrayList();
+        private readonly IList<Range> mMissing = Platform.CreateArrayList<Range>();
 
         internal DtlsReassembler(byte msg_type, int length)
         {

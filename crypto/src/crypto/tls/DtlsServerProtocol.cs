@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.X509;
@@ -684,7 +685,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected virtual void ProcessClientSupplementalData(ServerHandshakeState state, byte[] body)
         {
             MemoryStream buf = new MemoryStream(body, false);
-            IList clientSupplementalData = TlsProtocol.ReadSupplementalDataMessage(buf);
+            var clientSupplementalData = TlsProtocol.ReadSupplementalDataMessage(buf);
             state.server.ProcessClientSupplementalData(clientSupplementalData);
         }
 
@@ -702,8 +703,8 @@ namespace Org.BouncyCastle.Crypto.Tls
             internal SessionParameters.Builder sessionParametersBuilder = null;
             internal int[] offeredCipherSuites = null;
             internal byte[] offeredCompressionMethods = null;
-            internal IDictionary clientExtensions = null;
-            internal IDictionary serverExtensions = null;
+            internal IDictionary<int, byte[]> clientExtensions = null;
+            internal IDictionary<int, byte[]> serverExtensions = null;
             internal bool resumedSession = false;
             internal bool secure_renegotiation = false;
             internal bool allowCertificateStatus = false;

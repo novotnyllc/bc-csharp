@@ -16,6 +16,7 @@ using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.Crypto.Operators;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Pkcs
 {
@@ -47,11 +48,11 @@ namespace Org.BouncyCastle.Pkcs
 	public class Pkcs10CertificationRequest
 		: CertificationRequest
 	{
-		protected static readonly IDictionary algorithms = Platform.CreateHashtable();
-        protected static readonly IDictionary exParams = Platform.CreateHashtable();
-        protected static readonly IDictionary keyAlgorithms = Platform.CreateHashtable();
-        protected static readonly IDictionary oids = Platform.CreateHashtable();
-		protected static readonly ISet noParams = new HashSet();
+		protected static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        protected static readonly IDictionary<string, RsassaPssParameters> exParams = Platform.CreateHashtable<string, RsassaPssParameters>();
+        protected static readonly IDictionary<DerObjectIdentifier, string> keyAlgorithms = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        protected static readonly IDictionary<DerObjectIdentifier, string> oids = Platform.CreateHashtable<DerObjectIdentifier, string>();
+		protected static readonly ISet<DerObjectIdentifier> noParams = new HashSet<DerObjectIdentifier>();
 
 		static Pkcs10CertificationRequest()
 		{

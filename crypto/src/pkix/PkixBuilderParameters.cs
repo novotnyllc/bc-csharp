@@ -5,6 +5,7 @@ using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509.Store;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Pkix
 {
@@ -40,7 +41,7 @@ namespace Org.BouncyCastle.Pkix
 		}
 
 		public PkixBuilderParameters(
-			ISet			trustAnchors,
+			ISet<TrustAnchor>			trustAnchors,
 			IX509Selector	targetConstraints)
 			: base(trustAnchors)
 		{

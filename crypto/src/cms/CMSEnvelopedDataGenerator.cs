@@ -124,7 +124,7 @@ namespace Org.BouncyCastle.Cms
 			Asn1Set unprotectedAttrSet = null;
             if (unprotectedAttributeGenerator != null)
             {
-                Asn1.Cms.AttributeTable attrTable = unprotectedAttributeGenerator.GetAttributes(Platform.CreateHashtable());
+                Asn1.Cms.AttributeTable attrTable = unprotectedAttributeGenerator.GetAttributes(Platform.CreateHashtable<CmsAttributeTableParameter, object>());
 
                 unprotectedAttrSet = new BerSet(attrTable.ToAsn1EncodableVector());
             }
@@ -212,7 +212,7 @@ namespace Org.BouncyCastle.Cms
             Asn1Set unprotectedAttrSet = null;
             if (unprotectedAttributeGenerator != null)
             {
-                Asn1.Cms.AttributeTable attrTable = unprotectedAttributeGenerator.GetAttributes(Platform.CreateHashtable());
+                Asn1.Cms.AttributeTable attrTable = unprotectedAttributeGenerator.GetAttributes(Platform.CreateHashtable<CmsAttributeTableParameter, object>());
 
                 unprotectedAttrSet = new BerSet(attrTable.ToAsn1EncodableVector());
             }

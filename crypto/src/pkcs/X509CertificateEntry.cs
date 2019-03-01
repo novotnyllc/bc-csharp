@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
+using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
 
@@ -13,25 +14,14 @@ namespace Org.BouncyCastle.Pkcs
 
 		public X509CertificateEntry(
             X509Certificate cert)
-			: base(Platform.CreateHashtable())
+			: base(new Dictionary<string, Asn1Encodable>())
         {
             this.cert = cert;
         }
 
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete]
         public X509CertificateEntry(
             X509Certificate	cert,
-            Hashtable		attributes)
-			: base(attributes)
-        {
-            this.cert = cert;
-        }
-#endif
-
-        public X509CertificateEntry(
-            X509Certificate cert,
-            IDictionary     attributes)
+            IDictionary<string, Asn1Encodable> attributes)
 			: base(attributes)
         {
             this.cert = cert;

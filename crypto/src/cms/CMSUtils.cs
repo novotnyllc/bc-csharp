@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -82,12 +83,12 @@ namespace Org.BouncyCastle.Cms
 			return Streams.ReadAllLimited(inStream, limit);
         }
 
-		public static IList GetCertificatesFromStore(
-			IX509Store certStore)
+		public static IList<Asn1Encodable> GetCertificatesFromStore(
+			IX509Store<X509Certificate> certStore)
 		{
 			try
 			{
-				IList certs = Platform.CreateArrayList();
+				var certs = Platform.CreateArrayList<Asn1Encodable>();
 
 				if (certStore != null)
 				{
@@ -111,12 +112,12 @@ namespace Org.BouncyCastle.Cms
 			}
 		}
 
-		public static IList GetCrlsFromStore(
-			IX509Store crlStore)
+		public static IList<CertificateList> GetCrlsFromStore(
+			IX509Store<X509Crl> crlStore)
 		{
 			try
 			{
-                IList crls = Platform.CreateArrayList();
+                var crls = Platform.CreateArrayList<CertificateList>();
 
 				if (crlStore != null)
 				{
@@ -141,7 +142,7 @@ namespace Org.BouncyCastle.Cms
 		}
 
 		public static Asn1Set CreateBerSetFromList(
-			IList berObjects)
+			IEnumerable<Asn1Encodable> berObjects)
 		{
 			Asn1EncodableVector v = new Asn1EncodableVector();
 
@@ -154,7 +155,7 @@ namespace Org.BouncyCastle.Cms
 		}
 
 		public static Asn1Set CreateDerSetFromList(
-			IList derObjects)
+			IEnumerable<Asn1Encodable> derObjects)
 		{
 			Asn1EncodableVector v = new Asn1EncodableVector();
 

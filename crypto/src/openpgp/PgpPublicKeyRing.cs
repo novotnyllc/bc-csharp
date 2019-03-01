@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -17,7 +18,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
     public class PgpPublicKeyRing
         : PgpKeyRing
     {
-        private readonly IList keys;
+        private readonly IList<PgpPublicKey> keys;
 
         public PgpPublicKeyRing(
             byte[] encoding)
@@ -26,7 +27,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         }
 
         internal PgpPublicKeyRing(
-            IList pubKeys)
+            IList<PgpPublicKey> pubKeys)
         {
             this.keys = pubKeys;
         }
@@ -34,7 +35,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         public PgpPublicKeyRing(
             Stream inputStream)
         {
-            this.keys = Platform.CreateArrayList();
+            this.keys = Platform.CreateArrayList<PgpPublicKey>();
 
             BcpgInputStream bcpgInput = BcpgInputStream.Wrap(inputStream);
 
@@ -49,9 +50,11 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             TrustPacket trustPk = ReadOptionalTrustPacket(bcpgInput);
 
             // direct signatures and revocations
-            IList keySigs = ReadSignaturesAndTrust(bcpgInput);
+            var keySigs = ReadSignaturesAndTrust(bcpgInput);
 
-            IList ids, idTrusts, idSigs;
+            IList<object> ids;
+			IList<ContainedPacket> idTrusts;
+			IList<IList<PgpSignature>> idSigs;
             ReadUserIDs(bcpgInput, out ids, out idTrusts, out idSigs);
 
             keys.Add(new PgpPublicKey(pubPk, trustPk, keySigs, ids, idTrusts, idSigs));
@@ -87,9 +90,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         /// <summary>Allows enumeration of all the public keys.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>PgpPublicKey</c> objects.</returns>
-        public virtual IEnumerable GetPublicKeys()
+        public virtual IEnumerable<PgpPublicKey> GetPublicKeys()
         {
-            return new EnumerableProxy(keys);
+            return new EnumerableProxy<PgpPublicKey>(keys);
         }
 
         public virtual byte[] GetEncoded()
@@ -124,7 +127,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpPublicKeyRing	pubRing,
             PgpPublicKey		pubKey)
         {
-            IList keys = Platform.CreateArrayList(pubRing.keys);
+            var keys = Platform.CreateArrayList(pubRing.keys);
             bool found = false;
             bool masterFound = false;
 
@@ -169,7 +172,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpPublicKeyRing	pubRing,
             PgpPublicKey		pubKey)
         {
-            IList keys = Platform.CreateArrayList(pubRing.keys);
+            var keys = Platform.CreateArrayList(pubRing.keys);
             bool found = false;
 
             for (int i = 0; i < keys.Count; i++)
@@ -192,7 +195,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             TrustPacket kTrust = ReadOptionalTrustPacket(bcpgInput);
 
             // PGP 8 actually leaves out the signature.
-            IList sigList = ReadSignaturesAndTrust(bcpgInput);
+            var sigList = ReadSignaturesAndTrust(bcpgInput);
 
             return new PgpPublicKey(pk, kTrust, sigList);
         }

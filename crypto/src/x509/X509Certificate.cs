@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -299,7 +300,7 @@ namespace Org.BouncyCastle.X509
 		}
 
 		// TODO Replace with something that returns a list of DerObjectIdentifier
-		public virtual IList GetExtendedKeyUsage()
+		public virtual IList<string> GetExtendedKeyUsage()
 		{
 			Asn1OctetString str = this.GetExtensionValue(new DerObjectIdentifier("2.5.29.37"));
 
@@ -311,7 +312,7 @@ namespace Org.BouncyCastle.X509
 				Asn1Sequence seq = Asn1Sequence.GetInstance(
 					X509ExtensionUtilities.FromExtensionValue(str));
 
-                IList list = Platform.CreateArrayList();
+                var list = Platform.CreateArrayList<string>();
 
 				foreach (DerObjectIdentifier oid in seq)
 				{
@@ -341,17 +342,17 @@ namespace Org.BouncyCastle.X509
 			return -1;
 		}
 
-		public virtual ICollection GetSubjectAlternativeNames()
+		public virtual ICollection<IList<object>> GetSubjectAlternativeNames()
 		{
 			return GetAlternativeNames("2.5.29.17");
 		}
 
-		public virtual ICollection GetIssuerAlternativeNames()
+		public virtual ICollection<IList<object>> GetIssuerAlternativeNames()
 		{
 			return GetAlternativeNames("2.5.29.18");
 		}
 
-		protected virtual ICollection GetAlternativeNames(
+		protected virtual ICollection<IList<object>> GetAlternativeNames(
 			string oid)
 		{
 			Asn1OctetString altNames = GetExtensionValue(new DerObjectIdentifier(oid));
@@ -363,10 +364,10 @@ namespace Org.BouncyCastle.X509
 
 			GeneralNames gns = GeneralNames.GetInstance(asn1Object);
 
-            IList result = Platform.CreateArrayList();
+            var result = Platform.CreateArrayList<IList<object>>();
 			foreach (GeneralName gn in gns.GetNames())
 			{
-                IList entry = Platform.CreateArrayList();
+                var entry = Platform.CreateArrayList<object>();
 				entry.Add(gn.TagNo);
 				entry.Add(gn.Name.ToString());
 				result.Add(entry);

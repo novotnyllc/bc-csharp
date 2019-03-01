@@ -14,6 +14,7 @@ using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Store;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Pkix
 {
@@ -45,7 +46,7 @@ namespace Org.BouncyCastle.Pkix
 					+ Platform.GetTypeName(this) + " class.");
 			}
 
-			ISet targets = new HashSet();
+		 var targets = new HashSet();
 			try
 			{
 				targets.AddAll(PkixCertPathValidatorUtilities.FindCertificates((X509CertStoreSelector)certSelect, pkixParams.GetStores()));
@@ -61,7 +62,7 @@ namespace Org.BouncyCastle.Pkix
 				throw new PkixCertPathBuilderException("No certificate found matching targetContraints.");
 
 			PkixCertPathBuilderResult result = null;
-			IList certPathList = Platform.CreateArrayList();
+			var certPathList = Platform.CreateArrayList<X509Certificate>();
 
 			// check all potential target certificates
 			foreach (X509Certificate cert in targets)
@@ -90,7 +91,7 @@ namespace Org.BouncyCastle.Pkix
 		protected virtual PkixCertPathBuilderResult Build(
 			X509Certificate			tbvCert,
 			PkixBuilderParameters	pkixParams,
-			IList					tbvPath)
+			IList<X509Certificate>                   tbvPath)
 		{
 			// If tbvCert is readily present in tbvPath, it indicates having run
 			// into a cycle in the PKI graph.

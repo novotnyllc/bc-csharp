@@ -23,7 +23,7 @@ namespace Org.BouncyCastle.Asn1.X9
 		public KeySpecificInfo(
             Asn1Sequence seq)
         {
-            IEnumerator e = seq.GetEnumerator();
+            var e = seq.GetEnumerator();
 
 			e.MoveNext();
             algorithm = (DerObjectIdentifier)e.Current;

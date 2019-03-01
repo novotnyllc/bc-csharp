@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Asn1.Cmp;
@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Tsp.Tests
 	{
 		private static AsymmetricKeyParameter privateKey;
 		private static X509Certificate cert;
-		private static IX509Store certs;
+		private static IX509Store<X509Certificate> certs;
 
 		static TspTest()
 		{
@@ -34,13 +34,13 @@ namespace Org.BouncyCastle.Tsp.Tests
 
 			cert = TspTestUtil.MakeCertificate(origKP, origDN, signKP, signDN);
 
-			IList certList = new ArrayList();
+			var certList = new List<X509Certificate>();
 			certList.Add(cert);
 			certList.Add(signCert);
 
 			certs = X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters(certList));
+				new X509CollectionStoreParameters<X509Certificate>(certList));
 		}
 
 		[Test]
@@ -325,9 +325,9 @@ namespace Org.BouncyCastle.Tsp.Tests
 				Assert.Fail("certReq(false) verification of token failed.");
 			}
 
-			IX509Store respCerts = tsToken.GetCertificates("Collection");
+			var respCerts = tsToken.GetCertificates("Collection");
 
-			ICollection certsColl = respCerts.GetMatches(null);
+			var certsColl = respCerts.GetMatches(null);
 
 			if (certsColl.Count != 0)
 			{
@@ -411,9 +411,9 @@ namespace Org.BouncyCastle.Tsp.Tests
 			//
 			// test certReq
 			//
-			IX509Store store = tsToken.GetCertificates("Collection");
+			var store = tsToken.GetCertificates("Collection");
 
-			ICollection certificates = store.GetMatches(null);
+			var certificates = store.GetMatches(null);
 
 			Assert.AreEqual(0, certificates.Count);
 		}
@@ -480,9 +480,9 @@ namespace Org.BouncyCastle.Tsp.Tests
 			//
 			// test certReq
 			//
-			IX509Store store = tsToken.GetCertificates("Collection");
+			var store = tsToken.GetCertificates("Collection");
 
-			ICollection certificates = store.GetMatches(null);
+			var certificates = store.GetMatches(null);
 
 			Assert.AreEqual(2, certificates.Count);
 		}
@@ -538,9 +538,9 @@ namespace Org.BouncyCastle.Tsp.Tests
 			//
 			// test certReq
 			//
-			IX509Store store = tsToken.GetCertificates("Collection");
+			var store = tsToken.GetCertificates("Collection");
 
-			ICollection certificates = store.GetMatches(null);
+			var certificates = store.GetMatches(null);
 
 			Assert.AreEqual(0, certificates.Count);
 		}

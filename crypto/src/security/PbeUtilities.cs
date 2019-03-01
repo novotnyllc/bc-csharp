@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.BC;
 using Org.BouncyCastle.Asn1.Nist;
@@ -34,9 +34,9 @@ namespace Org.BouncyCastle.Security
         const string Pkcs12 = "Pkcs12";
         const string OpenSsl = "OpenSsl";
 
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
-        private static readonly IDictionary algorithmType = Platform.CreateHashtable();
-        private static readonly IDictionary oids = Platform.CreateHashtable();
+        private static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, string> algorithmType = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, DerObjectIdentifier> oids = Platform.CreateHashtable<string, DerObjectIdentifier>();
 
         static PbeUtilities()
         {
@@ -252,7 +252,7 @@ namespace Org.BouncyCastle.Security
             return null;
         }
 
-        public static ICollection Algorithms
+        public static ICollection<string> Algorithms
         {
             get { return oids.Keys; }
         }

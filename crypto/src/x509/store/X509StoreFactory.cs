@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.X509.Store
@@ -11,9 +11,9 @@ namespace Org.BouncyCastle.X509.Store
 		{
 		}
 
-		public static IX509Store Create(
+		public static IX509Store<T> Create<T>(
 			string					type,
-			IX509StoreParameters	parameters)
+			IX509StoreParameters<T>	parameters)
 		{
 			if (type == null)
 				throw new ArgumentNullException("type");
@@ -26,8 +26,8 @@ namespace Org.BouncyCastle.X509.Store
 			if (parts[1] != "COLLECTION")
 				throw new NoSuchStoreException("X.509 store type '" + type + "' not available.");
 
-			X509CollectionStoreParameters p = (X509CollectionStoreParameters) parameters;
-			ICollection coll = p.GetCollection();
+			var p = (X509CollectionStoreParameters<T>) parameters;
+			var coll = p.GetCollection();
 
 			switch (parts[0])
 			{
@@ -47,12 +47,12 @@ namespace Org.BouncyCastle.X509.Store
 					throw new NoSuchStoreException("X.509 store type '" + type + "' not available.");
 			}
 
-			return new X509CollectionStore(coll);
+			return new X509CollectionStore<T>(coll);
 		}
 
-		private static void checkCorrectType(ICollection coll, Type t)
+		private static void checkCorrectType<T>(ICollection<T> coll, Type t)
 		{
-			foreach (object o in coll)
+			foreach (var o in coll)
 			{
 				if (!t.IsInstanceOfType(o))
 					throw new InvalidCastException("Can't cast object to type: " + t.FullName);

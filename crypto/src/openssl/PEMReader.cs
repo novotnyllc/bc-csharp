@@ -34,8 +34,6 @@ namespace Org.BouncyCastle.OpenSsl
     public class PemReader
         : Org.BouncyCastle.Utilities.IO.Pem.PemReader
     {
-//		private static readonly IDictionary parsers = new Hashtable();
-
         static PemReader()
         {
 //			parsers.Add("CERTIFICATE REQUEST", new PKCS10CertificationRequestParser());
@@ -238,7 +236,7 @@ namespace Org.BouncyCastle.OpenSsl
             string type = pemObject.Type.Substring(0, pemObject.Type.Length - "PRIVATE KEY".Length).Trim();
             byte[] keyBytes = pemObject.Content;
 
-            IDictionary fields = Platform.CreateHashtable();
+            var fields = Platform.CreateHashtable<string, string>();
             foreach (PemHeader header in pemObject.Headers)
             {
                 fields[header.Name] = header.Value;

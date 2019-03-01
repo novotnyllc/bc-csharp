@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -15,7 +16,7 @@ namespace Org.BouncyCastle.Crypto.Tls
      */
     public class OcspStatusRequest
     {
-        protected readonly IList mResponderIDList;
+        protected readonly IList<ResponderID> mResponderIDList;
         protected readonly X509Extensions mRequestExtensions;
 
         /**
@@ -26,7 +27,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          * @param requestExtensions
          *            OCSP request extensions. A null value means that there are no extensions.
          */
-        public OcspStatusRequest(IList responderIDList, X509Extensions requestExtensions)
+        public OcspStatusRequest(IList<ResponderID> responderIDList, X509Extensions requestExtensions)
         {
             this.mResponderIDList = responderIDList;
             this.mRequestExtensions = requestExtensions;
@@ -35,7 +36,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /**
          * @return an {@link IList} of {@link ResponderID}
          */
-        public virtual IList ResponderIDList
+        public virtual IList<ResponderID> ResponderIDList
         {
             get { return mResponderIDList; }
         }
@@ -98,7 +99,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          */
         public static OcspStatusRequest Parse(Stream input)
         {
-            IList responderIDList = Platform.CreateArrayList();
+            var responderIDList = Platform.CreateArrayList< ResponderID>();
             {
                 int length = TlsUtilities.ReadUint16(input);
                 if (length > 0)

@@ -50,7 +50,7 @@ namespace Org.BouncyCastle.Asn1.Icao
 			if (seq == null || seq.Count == 0)
 				throw new ArgumentException("null or empty sequence passed.");
 
-			IEnumerator e = seq.GetEnumerator();
+			var e = seq.GetEnumerator();
 
 			// version
 			e.MoveNext();

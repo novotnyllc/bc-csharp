@@ -92,7 +92,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 			if (seq.Count < 1 || seq.Count > 3)
 				throw new ArgumentException("Bad sequence size: " + seq.Count);
 
-			IEnumerator e = seq.GetEnumerator();
+			var e = seq.GetEnumerator();
 
 			while (e.MoveNext())
 			{

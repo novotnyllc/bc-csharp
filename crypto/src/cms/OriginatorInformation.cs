@@ -24,13 +24,13 @@ namespace Org.BouncyCastle.Cms
 		*
 		* @return a Store of X509CertificateHolder objects.
 		*/
-		public virtual IX509Store GetCertificates()
+		public virtual IX509Store<X509Certificate> GetCertificates()
 		{
 			Asn1Set certSet = originatorInfo.Certificates;
 
 			if (certSet != null)
 			{
-				IList certList = Platform.CreateArrayList(certSet.Count);
+				var certList = Platform.CreateArrayList<X509Certificate>(certSet.Count);
 
 				foreach (Asn1Encodable enc in certSet)
 				{
@@ -43,12 +43,12 @@ namespace Org.BouncyCastle.Cms
 
 				return X509StoreFactory.Create(
 					"Certificate/Collection",
-					new X509CollectionStoreParameters(certList));
+					new X509CollectionStoreParameters<X509Certificate>(certList));
 			}
 
 			return X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters(Platform.CreateArrayList()));
+				new X509CollectionStoreParameters<X509Certificate>(Platform.CreateArrayList<X509Certificate>()));
 		}
 
 		/**
@@ -56,13 +56,13 @@ namespace Org.BouncyCastle.Cms
 		*
 		* @return a Store of X509CRLHolder objects.
 		*/
-		public virtual IX509Store GetCrls()
+		public virtual IX509Store<X509Crl> GetCrls()
 		{
 			Asn1Set crlSet = originatorInfo.Certificates;
 
 			if (crlSet != null)
 			{
-                IList crlList = Platform.CreateArrayList(crlSet.Count);
+                var crlList = Platform.CreateArrayList<X509Crl>(crlSet.Count);
 
 				foreach (Asn1Encodable enc in crlSet)
 				{
@@ -75,12 +75,12 @@ namespace Org.BouncyCastle.Cms
 
 				return X509StoreFactory.Create(
 					"CRL/Collection",
-					new X509CollectionStoreParameters(crlList));
+					new X509CollectionStoreParameters<X509Crl>(crlList));
 			}
 
 			return X509StoreFactory.Create(
 				"CRL/Collection",
-                new X509CollectionStoreParameters(Platform.CreateArrayList()));
+                new X509CollectionStoreParameters<X509Crl>(Platform.CreateArrayList<X509Crl>()));
 		}
 
 		/**

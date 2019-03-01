@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Kisa;
 using Org.BouncyCastle.Asn1.Nist;
@@ -24,7 +24,7 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
+        private static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
         //private static readonly IDictionary oids = Platform.CreateHashtable();
 
         static WrapperUtilities()

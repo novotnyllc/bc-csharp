@@ -16,7 +16,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
 
         public static IEnumerable Suite()
         {
-            IList testSuite = new ArrayList();
+            var testSuite = new ArrayList();
 
             AddFallbackTests(testSuite);
             AddVersionTests(testSuite, ProtocolVersion.DTLSv10);
@@ -25,7 +25,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             return testSuite;
         }
 
-        private static void AddFallbackTests(IList testSuite)
+        private static void AddFallbackTests(ArrayList testSuite)
         {
             {
                 TlsTestConfig c = CreateDtlsTestConfig(ProtocolVersion.DTLSv12);
@@ -59,7 +59,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             }
         }
 
-        private static void AddVersionTests(IList testSuite, ProtocolVersion version)
+        private static void AddVersionTests(ArrayList testSuite, ProtocolVersion version)
         {
             string prefix = version.ToString()
                 .Replace(" ", "")
@@ -201,7 +201,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             }
         }
 
-        private static void AddTestCase(IList testSuite, TlsTestConfig config, String name)
+        private static void AddTestCase(ArrayList testSuite, TlsTestConfig config, String name)
         {
             testSuite.Add(new TestCaseData(config).SetName(name));
         }

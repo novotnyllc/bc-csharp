@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -606,9 +607,9 @@ namespace Org.BouncyCastle.Crypto.Tls
             buf[offset + 1] = (byte)version.MinorVersion;
         }
 
-        public static IList GetAllSignatureAlgorithms()
+        public static IList<byte> GetAllSignatureAlgorithms()
         {
-            IList v = Platform.CreateArrayList(4);
+            var v = Platform.CreateArrayList<byte>(4);
             v.Add(SignatureAlgorithm.anonymous);
             v.Add(SignatureAlgorithm.rsa);
             v.Add(SignatureAlgorithm.dsa);
@@ -616,34 +617,34 @@ namespace Org.BouncyCastle.Crypto.Tls
             return v;
         }
 
-        public static IList GetDefaultDssSignatureAlgorithms()
+        public static IList<SignatureAndHashAlgorithm> GetDefaultDssSignatureAlgorithms()
         {
             return VectorOfOne(new SignatureAndHashAlgorithm(HashAlgorithm.sha1, SignatureAlgorithm.dsa));
         }
 
-        public static IList GetDefaultECDsaSignatureAlgorithms()
+        public static IList<SignatureAndHashAlgorithm> GetDefaultECDsaSignatureAlgorithms()
         {
             return VectorOfOne(new SignatureAndHashAlgorithm(HashAlgorithm.sha1, SignatureAlgorithm.ecdsa));
         }
 
-        public static IList GetDefaultRsaSignatureAlgorithms()
+        public static IList<SignatureAndHashAlgorithm> GetDefaultRsaSignatureAlgorithms()
         {
             return VectorOfOne(new SignatureAndHashAlgorithm(HashAlgorithm.sha1, SignatureAlgorithm.rsa));
         }
 
-        public static byte[] GetExtensionData(IDictionary extensions, int extensionType)
+        public static byte[] GetExtensionData(IDictionary<int, byte[]> extensions, int extensionType)
         {
             return extensions == null ? null : (byte[])extensions[extensionType];
         }
 
-        public static IList GetDefaultSupportedSignatureAlgorithms()
+        public static IList<SignatureAndHashAlgorithm> GetDefaultSupportedSignatureAlgorithms()
         {
             byte[] hashAlgorithms = new byte[]{ HashAlgorithm.sha1, HashAlgorithm.sha224, HashAlgorithm.sha256,
                 HashAlgorithm.sha384, HashAlgorithm.sha512 };
             byte[] signatureAlgorithms = new byte[]{ SignatureAlgorithm.rsa, SignatureAlgorithm.dsa,
                 SignatureAlgorithm.ecdsa };
 
-            IList result = Platform.CreateArrayList();
+            var result = Platform.CreateArrayList<SignatureAndHashAlgorithm>();
             for (int i = 0; i < signatureAlgorithms.Length; ++i)
             {
                 for (int j = 0; j < hashAlgorithms.Length; ++j)
@@ -667,7 +668,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return signatureAndHashAlgorithm;
         }
 
-        public static bool HasExpectedEmptyExtensionData(IDictionary extensions, int extensionType,
+        public static bool HasExpectedEmptyExtensionData(IDictionary<int, byte[]> extensions, int extensionType,
             byte alertDescription)
         {
             byte[] extension_data = GetExtensionData(extensions, extensionType);
@@ -695,7 +696,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          * @param supportedSignatureAlgorithms {@link Vector} containing at least 1 {@link SignatureAndHashAlgorithm}.
          * @throws IOException
          */
-        public static void AddSignatureAlgorithmsExtension(IDictionary extensions, IList supportedSignatureAlgorithms)
+        public static void AddSignatureAlgorithmsExtension(IDictionary<int, byte[]> extensions, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms)
         {
             extensions[ExtensionType.signature_algorithms] = CreateSignatureAlgorithmsExtension(supportedSignatureAlgorithms);
         }
@@ -707,7 +708,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          * @return A {@link Vector} containing at least 1 {@link SignatureAndHashAlgorithm}, or null.
          * @throws IOException
          */
-        public static IList GetSignatureAlgorithmsExtension(IDictionary extensions)
+        public static IList<SignatureAndHashAlgorithm> GetSignatureAlgorithmsExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = GetExtensionData(extensions, ExtensionType.signature_algorithms);
             return extensionData == null ? null : ReadSignatureAlgorithmsExtension(extensionData);
@@ -720,7 +721,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          * @return A byte array suitable for use as an extension value.
          * @throws IOException
          */
-        public static byte[] CreateSignatureAlgorithmsExtension(IList supportedSignatureAlgorithms)
+        public static byte[] CreateSignatureAlgorithmsExtension(IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms)
         {
             MemoryStream buf = new MemoryStream();
 
@@ -737,7 +738,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          * @return A {@link Vector} containing at least 1 {@link SignatureAndHashAlgorithm}.
          * @throws IOException
          */
-        public static IList ReadSignatureAlgorithmsExtension(byte[] extensionData)
+        public static IList<SignatureAndHashAlgorithm> ReadSignatureAlgorithmsExtension(byte[] extensionData)
         {
             if (extensionData == null)
                 throw new ArgumentNullException("extensionData");
@@ -745,14 +746,14 @@ namespace Org.BouncyCastle.Crypto.Tls
             MemoryStream buf = new MemoryStream(extensionData, false);
 
             // supported_signature_algorithms
-            IList supported_signature_algorithms = ParseSupportedSignatureAlgorithms(false, buf);
+            var supported_signature_algorithms = ParseSupportedSignatureAlgorithms(false, buf);
 
             TlsProtocol.AssertEmpty(buf);
 
             return supported_signature_algorithms;
         }
 
-        public static void EncodeSupportedSignatureAlgorithms(IList supportedSignatureAlgorithms, bool allowAnonymous,
+        public static void EncodeSupportedSignatureAlgorithms(IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, bool allowAnonymous,
             Stream output)
         {
             if (supportedSignatureAlgorithms == null)
@@ -780,14 +781,14 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
         }
 
-        public static IList ParseSupportedSignatureAlgorithms(bool allowAnonymous, Stream input)
+        public static IList<SignatureAndHashAlgorithm> ParseSupportedSignatureAlgorithms(bool allowAnonymous, Stream input)
         {
             // supported_signature_algorithms
             int length = ReadUint16(input);
             if (length < 2 || (length & 1) != 0)
                 throw new TlsFatalAlert(AlertDescription.decode_error);
             int count = length / 2;
-            IList supportedSignatureAlgorithms = Platform.CreateArrayList(count);
+            var supportedSignatureAlgorithms = Platform.CreateArrayList<SignatureAndHashAlgorithm>(count);
             for (int i = 0; i < count; ++i)
             {
                 SignatureAndHashAlgorithm entry = SignatureAndHashAlgorithm.Parse(input);
@@ -804,7 +805,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return supportedSignatureAlgorithms;
         }
 
-        public static void VerifySupportedSignatureAlgorithm(IList supportedSignatureAlgorithms, SignatureAndHashAlgorithm signatureAlgorithm)
+        public static void VerifySupportedSignatureAlgorithm(IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, SignatureAndHashAlgorithm signatureAlgorithm)
         {
             if (supportedSignatureAlgorithms == null)
                 throw new ArgumentNullException("supportedSignatureAlgorithms");
@@ -1191,7 +1192,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
         }
 
-        internal static void TrackHashAlgorithms(TlsHandshakeHash handshakeHash, IList supportedSignatureAlgorithms)
+        internal static void TrackHashAlgorithms(TlsHandshakeHash handshakeHash, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms)
         {
             if (supportedSignatureAlgorithms != null)
             {
@@ -1258,9 +1259,9 @@ namespace Org.BouncyCastle.Crypto.Tls
             return arr;
         }
 
-        private static IList VectorOfOne(object obj)
+        private static IList<T> VectorOfOne<T>(T obj)
         {
-            IList v = Platform.CreateArrayList(1);
+            IList<T> v = Platform.CreateArrayList<T>(1);
             v.Add(obj);
             return v;
         }
@@ -2334,7 +2335,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return CipherType.stream == GetCipherType(ciphersuite);
         }
 
-        public static bool IsValidCipherSuiteForSignatureAlgorithms(int cipherSuite, IList sigAlgs)
+        public static bool IsValidCipherSuiteForSignatureAlgorithms(int cipherSuite, IList<byte> sigAlgs)
         {
             int keyExchangeAlgorithm;
             try
@@ -2377,12 +2378,12 @@ namespace Org.BouncyCastle.Crypto.Tls
             return GetMinimumVersion(cipherSuite).IsEqualOrEarlierVersionOf(serverVersion.GetEquivalentTLSVersion());
         }
 
-        public static IList GetUsableSignatureAlgorithms(IList sigHashAlgs)
+        public static IList<byte> GetUsableSignatureAlgorithms(IList<SignatureAndHashAlgorithm> sigHashAlgs)
         {
             if (sigHashAlgs == null)
                 return GetAllSignatureAlgorithms();
 
-            IList v = Platform.CreateArrayList(4);
+            var v = Platform.CreateArrayList<byte>(4);
             v.Add(SignatureAlgorithm.anonymous);
             foreach (SignatureAndHashAlgorithm sigHashAlg in sigHashAlgs)
             {

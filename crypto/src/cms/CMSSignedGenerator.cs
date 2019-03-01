@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -28,13 +29,11 @@ namespace Org.BouncyCastle.Cms
 {
     public class DefaultSignatureAlgorithmIdentifierFinder
     {
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
-        private static readonly ISet noParams = new HashSet();
-        private static readonly IDictionary _params = Platform.CreateHashtable();
-        private static readonly ISet pkcs15RsaEncryption = new HashSet();
-        private static readonly IDictionary digestOids = Platform.CreateHashtable();
-
-        private static readonly IDictionary digestBuilders = Platform.CreateHashtable();
+        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly ISet<object> noParams = new HashSet<object>();
+        private static readonly IDictionary<string, RsassaPssParameters> _params = Platform.CreateHashtable<string, RsassaPssParameters>();
+        private static readonly ISet<object> pkcs15RsaEncryption = new HashSet<object>();
+        private static readonly IDictionary<DerObjectIdentifier, DerObjectIdentifier> digestOids = Platform.CreateHashtable<DerObjectIdentifier, DerObjectIdentifier>();
 
         private static readonly DerObjectIdentifier ENCRYPTION_RSA = PkcsObjectIdentifiers.RsaEncryption;
         private static readonly DerObjectIdentifier ENCRYPTION_DSA = X9ObjectIdentifiers.IdDsaWithSha1;
@@ -304,7 +303,7 @@ namespace Org.BouncyCastle.Cms
             {
                 sigAlgId = new AlgorithmIdentifier(sigOID);
             }
-            else if (_params.Contains(algorithmName))
+            else if (_params.ContainsKey(algorithmName))
             {
                 sigAlgId = new AlgorithmIdentifier(sigOID, (Asn1Encodable)_params[algorithmName]);
             }
@@ -351,8 +350,8 @@ namespace Org.BouncyCastle.Cms
 
     public class DefaultDigestAlgorithmIdentifierFinder
     {
-        private static readonly IDictionary digestOids = Platform.CreateHashtable();
-        private static readonly IDictionary digestNameToOids = Platform.CreateHashtable();
+        private static readonly IDictionary<DerObjectIdentifier, DerObjectIdentifier> digestOids = Platform.CreateHashtable<DerObjectIdentifier, DerObjectIdentifier>();
+        private static readonly IDictionary<string, DerObjectIdentifier> digestNameToOids = Platform.CreateHashtable<string, DerObjectIdentifier>();
 
         static DefaultDigestAlgorithmIdentifierFinder()
         {
@@ -471,10 +470,10 @@ namespace Org.BouncyCastle.Cms
         public static readonly string EncryptionGost3410 = CryptoProObjectIdentifiers.GostR3410x94.Id;
         public static readonly string EncryptionECGost3410 = CryptoProObjectIdentifiers.GostR3410x2001.Id;
 
-        internal IList _certs = Platform.CreateArrayList();
-        internal IList _crls = Platform.CreateArrayList();
-        internal IList _signers = Platform.CreateArrayList();
-        internal IDictionary _digests = Platform.CreateHashtable();
+        internal IList<Asn1Encodable> _certs = Platform.CreateArrayList<Asn1Encodable>();
+        internal IList<Asn1Encodable> _crls = Platform.CreateArrayList<Asn1Encodable>();
+        internal IList<SignerInformation> _signers = Platform.CreateArrayList<SignerInformation>();
+        internal IDictionary<string, byte[]> _digests = Platform.CreateHashtable<string, byte[]>();
         internal bool _useDerForCerts = false;
         internal bool _useDerForCrls = false;
 
@@ -493,12 +492,12 @@ namespace Org.BouncyCastle.Cms
             this.rand = rand;
         }
 
-        internal protected virtual IDictionary GetBaseParameters(
+        internal protected virtual IDictionary<CmsAttributeTableParameter, object> GetBaseParameters(
             DerObjectIdentifier contentType,
             AlgorithmIdentifier digAlgId,
             byte[] hash)
         {
-            IDictionary param = Platform.CreateHashtable();
+            var param = Platform.CreateHashtable<CmsAttributeTableParameter, object>();
 
             if (contentType != null)
             {
@@ -520,13 +519,13 @@ namespace Org.BouncyCastle.Cms
         }
 
         public void AddCertificates(
-            IX509Store certStore)
+            IX509Store<X509Certificate> certStore)
         {
             CollectionUtilities.AddRange(_certs, CmsUtilities.GetCertificatesFromStore(certStore));
         }
 
         public void AddCrls(
-            IX509Store crlStore)
+            IX509Store<X509Crl> crlStore)
         {
             CollectionUtilities.AddRange(_crls, CmsUtilities.GetCrlsFromStore(crlStore));
         }
@@ -539,7 +538,7 @@ namespace Org.BouncyCastle.Cms
 		* @throws CmsException if an error occurse processing the store.
 		*/
         public void AddAttributeCertificates(
-            IX509Store store)
+            IX509Store<IX509AttributeCertificate> store)
         {
             try
             {
@@ -576,7 +575,7 @@ namespace Org.BouncyCastle.Cms
 		 *
 		 * @return a map of oids (as string objects) and byte[] representing digests.
 		 */
-        public IDictionary GetGeneratedDigests()
+        public IDictionary<string, byte[]> GetGeneratedDigests()
         {
             return Platform.CreateHashtable(_digests);
         }

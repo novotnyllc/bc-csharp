@@ -203,7 +203,7 @@ namespace Org.BouncyCastle.OpenSsl
 
             byte[] encData = PemUtilities.Crypt(true, keyData, password, dekAlgName, iv);
 
-            IList headers = Platform.CreateArrayList(2);
+            var headers = Platform.CreateArrayList< PemHeader>(2);
 
             headers.Add(new PemHeader("Proc-Type", "4,ENCRYPTED"));
             headers.Add(new PemHeader("DEK-Info", dekAlgName + "," + Hex.ToHexString(iv)));

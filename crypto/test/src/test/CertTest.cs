@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -1135,14 +1136,14 @@ namespace Org.BouncyCastle.Tests
             //
             // distinguished name table.
             //
-            IList ord = new ArrayList();
+            var ord = new List<DerObjectIdentifier>();
             ord.Add(X509Name.C);
             ord.Add(X509Name.O);
             ord.Add(X509Name.L);
             ord.Add(X509Name.ST);
             ord.Add(X509Name.E);
 
-            IList values = new ArrayList();
+            var values = new List<string>();
             values.Add("AU");
             values.Add("The Legion of the Bouncy Castle");
             values.Add("Melbourne");
@@ -1172,7 +1173,7 @@ namespace Org.BouncyCastle.Tests
 
             cert.Verify(pubKey);
 
-            ISet dummySet = cert.GetNonCriticalExtensionOids();
+            var dummySet = cert.GetNonCriticalExtensionOids();
             if (dummySet != null)
             {
                 Fail("non-critical oid set should be null");
@@ -1215,13 +1216,13 @@ namespace Org.BouncyCastle.Tests
                 Fail("error generating cert - key usage wrong.");
             }
 
-            IList l = cert.GetExtendedKeyUsage();
+            var l = cert.GetExtendedKeyUsage();
             if (!l[0].Equals(KeyPurposeID.AnyExtendedKeyUsage.Id))
             {
                 Fail("failed extended key usage test");
             }
 
-            foreach (IList gn in cert.GetSubjectAlternativeNames())
+            foreach (var gn in cert.GetSubjectAlternativeNames())
             {
                 if (!gn[1].Equals("test@test.test"))
                 {
@@ -1293,14 +1294,14 @@ namespace Org.BouncyCastle.Tests
             //
             // distinguished name table.
             //
-            IList ord = new ArrayList();
+            var ord = new List<DerObjectIdentifier>();
             ord.Add(X509Name.C);
             ord.Add(X509Name.O);
             ord.Add(X509Name.L);
             ord.Add(X509Name.ST);
             ord.Add(X509Name.E);
 
-            IList values = new ArrayList();
+            var values = new List<string>();
             values.Add("AU");
             values.Add("The Legion of the Bouncy Castle");
             values.Add("Melbourne");
@@ -1427,8 +1428,8 @@ namespace Org.BouncyCastle.Tests
             //
             // distinguished name table.
             //
-            IDictionary attrs = new Hashtable();
-            IList order = new ArrayList();
+            var attrs = new Dictionary<DerObjectIdentifier, string>();
+            var order = new List<DerObjectIdentifier>();
 
             attrs.Add(X509Name.C, "AU");
             attrs.Add(X509Name.O, "The Legion of the Bouncy Castle");
@@ -1557,8 +1558,8 @@ namespace Org.BouncyCastle.Tests
             //
             // distinguished name table.
             //
-            IDictionary attrs = new Hashtable();
-            IList order = new ArrayList();
+            var attrs = new Dictionary<DerObjectIdentifier, string>();
+            var order = new List<DerObjectIdentifier>();
 
             attrs.Add(X509Name.C, "AU");
             attrs.Add(X509Name.O, "The Legion of the Bouncy Castle");
@@ -1747,8 +1748,8 @@ namespace Org.BouncyCastle.Tests
             crlGen.SetNextUpdate(now.AddSeconds(100));
             crlGen.SetSignatureAlgorithm("SHA256WithRSAEncryption");
 
-            IList extOids = new ArrayList();
-            IList extValues = new ArrayList();
+            var extOids = new List<DerObjectIdentifier>();
+            var extValues = new List<X509Extension>();
 
             CrlReason crlReason = new CrlReason(CrlReason.PrivilegeWithdrawn);
 
@@ -1835,8 +1836,8 @@ namespace Org.BouncyCastle.Tests
             crlGen.SetNextUpdate(now.AddSeconds(100));
             crlGen.SetSignatureAlgorithm("SHA256WithRSAEncryption");
 
-            IList extOids = new ArrayList();
-            IList extValues = new ArrayList();
+            var extOids = new List<DerObjectIdentifier>();
+            var extValues = new List<X509Extension>();
 
             CrlReason crlReason = new CrlReason(CrlReason.PrivilegeWithdrawn);
 
@@ -1963,8 +1964,8 @@ namespace Org.BouncyCastle.Tests
                 Fail("crl not returned!");
             }
 
-//			ICollection col = cFact.generateCRLs(new ByteArrayInputStream(newCrl.getEncoded()));
-            ICollection col = new X509CrlParser().ReadCrls(newCrl.GetEncoded());
+//			var col = cFact.generateCRLs(new ByteArrayInputStream(newCrl.getEncoded()));
+            var col = new X509CrlParser().ReadCrls(newCrl.GetEncoded());
 
             if (col.Count != 1)
             {
@@ -1999,14 +2000,14 @@ namespace Org.BouncyCastle.Tests
             //
             // distinguished name table.
             //
-            IDictionary attrs = new Hashtable();
+            var attrs = new Dictionary<DerObjectIdentifier, string>();
             attrs.Add(X509Name.C, "AU");
             attrs.Add(X509Name.O, "The Legion of the Bouncy Castle");
             attrs.Add(X509Name.L, "Melbourne");
             attrs.Add(X509Name.ST, "Victoria");
             attrs.Add(X509Name.E, "feedback-crypto@bouncycastle.org");
 
-            IList order = new ArrayList();
+            var order = new List<DerObjectIdentifier>();
             order.Add(X509Name.C);
             order.Add(X509Name.O);
             order.Add(X509Name.L);
@@ -2087,14 +2088,14 @@ namespace Org.BouncyCastle.Tests
             //
             // distinguished name table.
             //
-            IList ord = new ArrayList();
+            var ord = new List<DerObjectIdentifier>();
             ord.Add(X509Name.C);
             ord.Add(X509Name.O);
             ord.Add(X509Name.L);
             ord.Add(X509Name.ST);
             ord.Add(X509Name.E);
 
-            IList values = new ArrayList();
+            var values = new List<string>();
             values.Add("AU");
             values.Add("The Legion of the Bouncy Castle");
             values.Add("Melbourne");
@@ -2228,15 +2229,15 @@ namespace Org.BouncyCastle.Tests
             {
                 Fail("PEM crl not read");
             }
-            ArrayList col = new ArrayList(
+            var col1 = new List<X509Certificate>(
                 new X509CertificateParser().ReadCertificates(Encoding.ASCII.GetBytes(PemData.CERTIFICATE_2)));
-            if (col.Count != 1 || !col.Contains(cert))
+            if (col1.Count != 1 || !col1.Contains(cert))
             {
                 Fail("PEM cert collection not right");
             }
-            col = new ArrayList(
+            var col2 = new List<X509Crl>(
                 new X509CrlParser().ReadCrls(Encoding.ASCII.GetBytes(PemData.CRL_2)));
-            if (col.Count != 1 || !col.Contains(crl))
+            if (col2.Count != 1 || !col2.Contains(crl))
             {
                 Fail("PEM crl collection not right");
             }
@@ -2277,13 +2278,13 @@ namespace Org.BouncyCastle.Tests
             {
                 Fail("PKCS7 crl not read");
             }
-            ArrayList col = new ArrayList(certParser.ReadCertificates(info.GetEncoded()));
-            if (col.Count != 1 || !col.Contains(cert))
+            var col1 = new List<X509Certificate>(certParser.ReadCertificates(info.GetEncoded()));
+            if (col1.Count != 1 || !col1.Contains(cert))
             {
                 Fail("PKCS7 cert collection not right");
             }
-            col = new ArrayList(crlParser.ReadCrls(info.GetEncoded()));
-            if (col.Count != 1 || !col.Contains(crl))
+            var col2 = new List<X509Crl>(crlParser.ReadCrls(info.GetEncoded()));
+            if (col2.Count != 1 || !col2.Contains(crl))
             {
                 Fail("PKCS7 crl collection not right");
             }
@@ -2325,8 +2326,8 @@ namespace Org.BouncyCastle.Tests
             //
             // sample message
             //
-            ICollection certCol = certParser.ReadCertificates(pkcs7CrlProblem);
-            ICollection crlCol = crlParser.ReadCrls(pkcs7CrlProblem);
+            var certCol = certParser.ReadCertificates(pkcs7CrlProblem);
+            var crlCol = crlParser.ReadCrls(pkcs7CrlProblem);
 
             if (crlCol.Count != 0)
             {
@@ -2350,14 +2351,14 @@ namespace Org.BouncyCastle.Tests
             //
             // distinguished name table.
             //
-            IList ord = new ArrayList();
+            var ord = new List<DerObjectIdentifier>();
             ord.Add(X509Name.C);
             ord.Add(X509Name.O);
             ord.Add(X509Name.L);
             ord.Add(X509Name.ST);
             ord.Add(X509Name.E);
 
-            IList values = new ArrayList();
+            var values = new List<string>();
             values.Add("AU");
             values.Add("The Legion of the Bouncy Castle");
             values.Add("Melbourne");
@@ -2474,12 +2475,12 @@ namespace Org.BouncyCastle.Tests
         {
             X509CertificateParser fact = new X509CertificateParser();
 
-            ICollection certs1 = fact.ReadCertificates(GetTestDataAsStream("cert_chain.data"));
+            var certs1 = fact.ReadCertificates(GetTestDataAsStream("cert_chain.data"));
             IsTrue("certs wrong <cr><nl>", 2 == certs1.Count);
 
             MemoryStream input = new MemoryStream(Streams.ReadAll(GetTestDataAsStream("cert_chain.data")), false);
 
-            ISet certs2 = new HashSet();
+            var certs2 = new HashSet();
             while (input.Position < input.Length)
             {
                 X509Certificate c = fact.ReadCertificate(input);
@@ -2501,7 +2502,7 @@ namespace Org.BouncyCastle.Tests
         {
             X509CrlParser crlParser = new X509CrlParser();
 
-            ICollection crls = crlParser.ReadCrls(GetTestDataAsStream("cert_chain.data"));
+            var crls = crlParser.ReadCrls(GetTestDataAsStream("cert_chain.data"));
             IsTrue("multi crl", crls.Count == 0);
 
             X509Crl crl = crlParser.ReadCrl(GetTestDataAsStream("cert_chain.data"));
@@ -2512,12 +2513,12 @@ namespace Org.BouncyCastle.Tests
         {
             X509CertificateParser fact = new X509CertificateParser();
 
-            ICollection certs1 = fact.ReadCertificates(GetTestDataAsStream("cert_chain_nl.data"));
+            var certs1 = fact.ReadCertificates(GetTestDataAsStream("cert_chain_nl.data"));
             IsTrue("certs wrong <nl>", 2 == certs1.Count);
 
             MemoryStream input = new MemoryStream(Streams.ReadAll(GetTestDataAsStream("cert_chain_nl.data")), false);
 
-            ISet certs2 = new HashSet();
+            var certs2 = new HashSet();
             while (input.Position < input.Length)
             {
                 X509Certificate c = fact.ReadCertificate(input);

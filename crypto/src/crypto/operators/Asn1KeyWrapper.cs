@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Nist;
 using Org.BouncyCastle.Asn1.Oiw;
@@ -42,7 +42,7 @@ namespace Org.BouncyCastle.Crypto.Operators
         //
         // Provider 
         //
-        private static readonly IDictionary providerMap = Platform.CreateHashtable();
+        private static readonly IDictionary<string, RsaOaepWrapperProvider> providerMap = Platform.CreateHashtable<string, RsaOaepWrapperProvider>();
 
         static KeyWrapperUtil()
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 using NUnit.Framework;
@@ -175,13 +176,13 @@ namespace Org.BouncyCastle.Math.EC.Tests
         [Test]
         public void TestMultiply()
         {
-            ArrayList nameList = new ArrayList();
+            var nameList = new List<string>();
             CollectionUtilities.AddRange(nameList, ECNamedCurveTable.Names);
             CollectionUtilities.AddRange(nameList, CustomNamedCurves.Names);
 
-            string[] names = (string[])nameList.ToArray(typeof(string));
+            string[] names = (string[])nameList.ToArray();
             Array.Sort(names);
-            ISet oids = new HashSet();
+            var oids = new HashSet();
             foreach (string name in names)
             {
                 DerObjectIdentifier oid = ECNamedCurveTable.GetOid(name);

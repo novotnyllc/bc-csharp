@@ -18,6 +18,7 @@ using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.Encoders;
 using Org.BouncyCastle.Utilities.Test;
 using Org.BouncyCastle.X509;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Cmp.Tests
 {
@@ -319,9 +320,9 @@ namespace Org.BouncyCastle.Cmp.Tests
 
     public class TestCertBuilder
     {
-        IDictionary attrs = new Hashtable();
-        IList ord = new ArrayList();
-        IList values = new ArrayList();
+        IDictionary<DerObjectIdentifier, string> attrs = new Dictionary<DerObjectIdentifier, string>();
+        IList<DerObjectIdentifier> ord = new List<DerObjectIdentifier>();
+        IList<string> values = new List<string>();
 
         private DateTime notBefore, notAfter;
         private AsymmetricKeyParameter publicKey;
@@ -364,7 +365,7 @@ namespace Org.BouncyCastle.Cmp.Tests
             set { this.subject = value; }
         }
 
-        public TestCertBuilder AddAttribute(DerObjectIdentifier name, Object value)
+        public TestCertBuilder AddAttribute(DerObjectIdentifier name, string value)
         {
             attrs[name] = value;
             ord.Add(name);

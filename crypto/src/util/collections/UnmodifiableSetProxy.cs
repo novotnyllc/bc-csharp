@@ -1,24 +1,25 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
-	public class UnmodifiableSetProxy
-		: UnmodifiableSet
-	{
-		private readonly ISet s;
+	public class UnmodifiableSetProxy<T>
+        : UnmodifiableSet<T>
+    {
+		private readonly ISet<T> s;
 
-		public UnmodifiableSetProxy (ISet s)
+		public UnmodifiableSetProxy (ISet<T> s)
 		{
 			this.s = s;
 		}
 
-		public override bool Contains(object o)
+		public override bool Contains(T o)
 		{
 			return s.Contains(o);
 		}
 
-		public override void CopyTo(Array array, int index)
+		public override void CopyTo(T[] array, int index)
 		{
 			s.CopyTo(array, index);
 		}
@@ -28,29 +29,39 @@ namespace Org.BouncyCastle.Utilities.Collections
 			get { return s.Count; }
 		}
 
-		public override IEnumerator GetEnumerator()
+		public override IEnumerator<T> GetEnumerator()
 		{
 			return s.GetEnumerator();
 		}
 
-		public override bool IsEmpty
-		{
-			get { return s.IsEmpty; }
-		}
+        public override bool IsProperSubsetOf(IEnumerable<T> other)
+        {
+            return s.IsProperSubsetOf(other);
+        }
 
-		public override bool IsFixedSize
-		{
-			get { return s.IsFixedSize; }
-		}
+        public override bool IsProperSupersetOf(IEnumerable<T> other)
+        {
+            return s.IsProperSupersetOf(other);
+        }
 
-		public override bool IsSynchronized
-		{
-			get { return s.IsSynchronized; }
-		}
+        public override bool IsSubsetOf(IEnumerable<T> other)
+        {
+            return s.IsSubsetOf(other);
+        }
 
-		public override object SyncRoot
-		{
-			get { return s.SyncRoot; }
-		}
-	}
+        public override bool IsSupersetOf(IEnumerable<T> other)
+        {
+            return s.IsSupersetOf(other);
+        }
+
+        public override bool Overlaps(IEnumerable<T> other)
+        {
+            return s.Overlaps(other);
+        }
+
+        public override bool SetEquals(IEnumerable<T> other)
+        {
+            return s.SetEquals(other);
+        }
+    }
 }

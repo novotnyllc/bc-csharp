@@ -12,6 +12,7 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Bcpg.OpenPgp
 {
@@ -212,7 +213,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
         }
 
-		private readonly IList methods = Platform.CreateArrayList();
+		private readonly IList<EncMethod> methods = Platform.CreateArrayList<EncMethod>();
         private readonly SymmetricKeyAlgorithmTag defAlgorithm;
         private readonly SecureRandom rand;
 

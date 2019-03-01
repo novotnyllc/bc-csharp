@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Crypto.Agreement;
@@ -182,13 +183,13 @@ namespace Org.BouncyCastle.Crypto.Tls
             extensions[ExtensionType.negotiated_ff_dhe_groups] = CreateNegotiatedDheGroupsServerExtension(dheGroup);
         }
 
-        public static byte[] GetNegotiatedDheGroupsClientExtension(IDictionary extensions)
+        public static byte[] GetNegotiatedDheGroupsClientExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.negotiated_ff_dhe_groups);
             return extensionData == null ? null : ReadNegotiatedDheGroupsClientExtension(extensionData);
         }
 
-        public static short GetNegotiatedDheGroupsServerExtension(IDictionary extensions)
+        public static short GetNegotiatedDheGroupsServerExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.negotiated_ff_dhe_groups);
             return extensionData == null ? (short)-1 : (short)ReadNegotiatedDheGroupsServerExtension(extensionData);

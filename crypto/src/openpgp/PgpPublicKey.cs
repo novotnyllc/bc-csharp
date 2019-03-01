@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.Sec;
@@ -81,11 +82,11 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         internal PublicKeyPacket	publicPk;
         internal TrustPacket		trustPk;
-        internal IList			    keySigs = Platform.CreateArrayList();
-        internal IList			    ids = Platform.CreateArrayList();
-        internal IList              idTrusts = Platform.CreateArrayList();
-        internal IList              idSigs = Platform.CreateArrayList();
-        internal IList			    subSigs;
+        internal IList<PgpSignature>             keySigs = Platform.CreateArrayList<PgpSignature>();
+        internal IList<object>			    ids = Platform.CreateArrayList<object>();
+        internal IList<ContainedPacket>              idTrusts = Platform.CreateArrayList<ContainedPacket>();
+        internal IList<IList<PgpSignature>>              idSigs = Platform.CreateArrayList<IList<PgpSignature>>();
+        internal IList<PgpSignature>             subSigs;
 
         private void Init()
         {
@@ -194,8 +195,8 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
 
             this.publicPk = new PublicKeyPacket(algorithm, time, bcpgKey);
-            this.ids = Platform.CreateArrayList();
-            this.idSigs = Platform.CreateArrayList();
+            this.ids = Platform.CreateArrayList<object>();
+            this.idSigs = Platform.CreateArrayList<IList<PgpSignature>>();
 
             try
             {
@@ -208,7 +209,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         }
 
         public PgpPublicKey(PublicKeyPacket publicPk)
-            : this(publicPk, Platform.CreateArrayList(), Platform.CreateArrayList())
+            : this(publicPk, Platform.CreateArrayList<object>(), Platform.CreateArrayList<IList<PgpSignature>>())
         {
         }
 
@@ -216,7 +217,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         internal PgpPublicKey(
             PublicKeyPacket	publicPk,
             TrustPacket		trustPk,
-            IList           sigs)
+            IList<PgpSignature>           sigs)
         {
             this.publicPk = publicPk;
             this.trustPk = trustPk;
@@ -228,7 +229,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         internal PgpPublicKey(
             PgpPublicKey	key,
             TrustPacket		trust,
-            IList           subSigs)
+            IList<PgpSignature>           subSigs)
         {
             this.publicPk = key.publicPk;
             this.trustPk = trust;
@@ -249,15 +250,15 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             this.keySigs = Platform.CreateArrayList(pubKey.keySigs);
             this.ids = Platform.CreateArrayList(pubKey.ids);
             this.idTrusts = Platform.CreateArrayList(pubKey.idTrusts);
-            this.idSigs = Platform.CreateArrayList(pubKey.idSigs.Count);
+            this.idSigs = Platform.CreateArrayList<IList<PgpSignature>>(pubKey.idSigs.Count);
             for (int i = 0; i != pubKey.idSigs.Count; i++)
             {
-                this.idSigs.Add(Platform.CreateArrayList((IList)pubKey.idSigs[i]));
+                this.idSigs.Add(Platform.CreateArrayList<PgpSignature>(pubKey.idSigs[i]));
             }
 
             if (pubKey.subSigs != null)
             {
-                this.subSigs = Platform.CreateArrayList(pubKey.subSigs.Count);
+                this.subSigs = Platform.CreateArrayList<PgpSignature>(pubKey.subSigs.Count);
                 for (int i = 0; i != pubKey.subSigs.Count; i++)
                 {
                     this.subSigs.Add(pubKey.subSigs[i]);
@@ -272,10 +273,10 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         internal PgpPublicKey(
             PublicKeyPacket	publicPk,
             TrustPacket		trustPk,
-            IList		    keySigs,
-            IList		    ids,
-            IList           idTrusts,
-            IList           idSigs)
+            IList<PgpSignature>		    keySigs,
+            IList<object>		    ids,
+            IList<ContainedPacket>           idTrusts,
+            IList<IList<PgpSignature>> idSigs)
         {
             this.publicPk = publicPk;
             this.trustPk = trustPk;
@@ -289,8 +290,8 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         internal PgpPublicKey(
             PublicKeyPacket	publicPk,
-            IList           ids,
-            IList           idSigs)
+            IList<object> ids,
+            IList<IList<PgpSignature>> idSigs)
         {
             this.publicPk = publicPk;
             this.ids = ids;
@@ -514,9 +515,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         /// <summary>Allows enumeration of any user IDs associated with the key.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>string</c> objects.</returns>
-        public IEnumerable GetUserIds()
+        public IEnumerable<object> GetUserIds()
         {
-            IList temp = Platform.CreateArrayList();
+            var temp = Platform.CreateArrayList<object>();
 
             foreach (object o in ids)
             {
@@ -526,14 +527,14 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 }
             }
 
-            return new EnumerableProxy(temp);
+            return new EnumerableProxy<object>(temp);
         }
 
         /// <summary>Allows enumeration of any user attribute vectors associated with the key.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>PgpUserAttributeSubpacketVector</c> objects.</returns>
-        public IEnumerable GetUserAttributes()
+        public IEnumerable<object> GetUserAttributes()
         {
-            IList temp = Platform.CreateArrayList();
+            var temp = Platform.CreateArrayList<object>();
 
             foreach (object o in ids)
             {
@@ -543,13 +544,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 }
             }
 
-            return new EnumerableProxy(temp);
+            return new EnumerableProxy<object>(temp);
         }
 
         /// <summary>Allows enumeration of any signatures associated with the passed in id.</summary>
         /// <param name="id">The ID to be matched.</param>
         /// <returns>An <c>IEnumerable</c> of <c>PgpSignature</c> objects.</returns>
-        public IEnumerable GetSignaturesForId(
+        public IEnumerable<PgpSignature> GetSignaturesForId(
             string id)
         {
             if (id == null)
@@ -559,7 +560,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             {
                 if (id.Equals(ids[i]))
                 {
-                    return new EnumerableProxy((IList)idSigs[i]);
+                    return new EnumerableProxy<PgpSignature>(idSigs[i]);
                 }
             }
 
@@ -569,14 +570,14 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         /// <summary>Allows enumeration of signatures associated with the passed in user attributes.</summary>
         /// <param name="userAttributes">The vector of user attributes to be matched.</param>
         /// <returns>An <c>IEnumerable</c> of <c>PgpSignature</c> objects.</returns>
-        public IEnumerable GetSignaturesForUserAttribute(
+        public IEnumerable<PgpSignature> GetSignaturesForUserAttribute(
             PgpUserAttributeSubpacketVector userAttributes)
         {
             for (int i = 0; i != ids.Count; i++)
             {
                 if (userAttributes.Equals(ids[i]))
                 {
-                    return new EnumerableProxy((IList) idSigs[i]);
+                    return new EnumerableProxy<PgpSignature>(idSigs[i]);
                 }
             }
 
@@ -586,10 +587,10 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         /// <summary>Allows enumeration of signatures of the passed in type that are on this key.</summary>
         /// <param name="signatureType">The type of the signature to be returned.</param>
         /// <returns>An <c>IEnumerable</c> of <c>PgpSignature</c> objects.</returns>
-        public IEnumerable GetSignaturesOfType(
+        public IEnumerable<PgpSignature> GetSignaturesOfType(
             int signatureType)
         {
-            IList temp = Platform.CreateArrayList();
+            var temp = Platform.CreateArrayList<PgpSignature>();
 
             foreach (PgpSignature sig in GetSignatures())
             {
@@ -599,25 +600,25 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 }
             }
 
-            return new EnumerableProxy(temp);
+            return new EnumerableProxy<PgpSignature>(temp);
         }
 
         /// <summary>Allows enumeration of all signatures/certifications associated with this key.</summary>
         /// <returns>An <c>IEnumerable</c> with all signatures/certifications.</returns>
-        public IEnumerable GetSignatures()
+        public IEnumerable<PgpSignature> GetSignatures()
         {
-            IList sigs = subSigs;
+            var sigs = subSigs;
             if (sigs == null)
             {
                 sigs = Platform.CreateArrayList(keySigs);
 
-                foreach (ICollection extraSigs in idSigs)
+                foreach (var extraSigs in idSigs)
                 {
                     CollectionUtilities.AddRange(sigs, extraSigs);
                 }
             }
 
-            return new EnumerableProxy(sigs);
+            return new EnumerableProxy<PgpSignature>(sigs);
         }
 
         /**
@@ -625,14 +626,14 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
          *
          * @return an iterator (possibly empty) with all signatures/certifications.
          */
-        public IEnumerable GetKeySignatures()
+        public IEnumerable<PgpSignature> GetKeySignatures()
         {
-            IList sigs = subSigs;
+            var sigs = subSigs;
             if (sigs == null)
             {
                 sigs = Platform.CreateArrayList(keySigs);
             }
-            return new EnumerableProxy(sigs);
+            return new EnumerableProxy<PgpSignature>(sigs);
         }
 
         public PublicKeyPacket PublicKeyPacket
@@ -760,13 +761,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpSignature	certification)
         {
             PgpPublicKey returnKey = new PgpPublicKey(key);
-            IList sigList = null;
+            IList<PgpSignature> sigList = null;
 
             for (int i = 0; i != returnKey.ids.Count; i++)
             {
                 if (id.Equals(returnKey.ids[i]))
                 {
-                    sigList = (IList) returnKey.idSigs[i];
+                    sigList = returnKey.idSigs[i];
                 }
             }
 
@@ -776,7 +777,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
             else
             {
-                sigList = Platform.CreateArrayList();
+                sigList = Platform.CreateArrayList<PgpSignature>();
                 sigList.Add(certification);
                 returnKey.ids.Add(id);
                 returnKey.idTrusts.Add(null);
@@ -930,7 +931,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpSignature	certification)
         {
             PgpPublicKey returnKey = new PgpPublicKey(key);
-            IList sigs = returnKey.subSigs != null
+            var sigs = returnKey.subSigs != null
                 ?	returnKey.subSigs
                 :	returnKey.keySigs;
 

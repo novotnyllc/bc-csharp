@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Agreement;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
@@ -13,7 +13,7 @@ namespace Org.BouncyCastle.Crypto.Tls
     {
         public static readonly int DefaultMinimumPrimeBits = 2048;
 
-        protected static readonly IList DefaultGroups = Platform.CreateArrayList();
+        protected static readonly IList<DHParameters> DefaultGroups = Platform.CreateArrayList< DHParameters>();
 
         private static void AddDefaultGroup(DHParameters dhParameters)
         {
@@ -37,7 +37,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
 
         // IList is (DHParameters)
-        protected readonly IList mGroups;
+        protected readonly IList<DHParameters> mGroups;
         protected readonly int mMinimumPrimeBits;
 
         /// <summary>Accept various standard DH groups with 'P' at least <c>DefaultMinimumPrimeBits</c> bits.</summary>
@@ -55,7 +55,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /// <summary>Accept a custom set of group parameters, subject to a minimum bitlength for 'P'.</summary>
         /// <param name="groups">An <c>IList</c> of acceptable <c>DHParameters</c>.</param>
         /// <param name="minimumPrimeBits">The minimum acceptable bitlength of the 'P' parameter.</param>
-        public DefaultTlsDHVerifier(IList groups, int minimumPrimeBits)
+        public DefaultTlsDHVerifier(IList<DHParameters> groups, int minimumPrimeBits)
         {
             this.mGroups = groups;
             this.mMinimumPrimeBits = minimumPrimeBits;

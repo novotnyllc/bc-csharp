@@ -19,6 +19,7 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Signers;
 using Org.BouncyCastle.Utilities;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Security
 {
@@ -31,8 +32,8 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        internal static readonly IDictionary algorithms = Platform.CreateHashtable();
-        internal static readonly IDictionary oids = Platform.CreateHashtable();
+        internal static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
+        internal static readonly IDictionary<string, DerObjectIdentifier> oids = Platform.CreateHashtable<string, DerObjectIdentifier>();
 
         static SignerUtilities()
         {
@@ -415,7 +416,7 @@ namespace Org.BouncyCastle.Security
             return (DerObjectIdentifier) oids[mechanism];
         }
 
-        public static ICollection Algorithms
+        public static ICollection<string> Algorithms
         {
             get { return oids.Keys; }
         }

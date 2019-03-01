@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
@@ -52,7 +52,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 			SecureRandom rand = param.Random;
 			int certainty = param.Certainty;
 
-			IList smallPrimes = findFirstPrimes(param.CountSmallPrimes);
+			IList<BigInteger> smallPrimes = findFirstPrimes(param.CountSmallPrimes);
 
 			smallPrimes = permuteList(smallPrimes, rand);
 
@@ -135,7 +135,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 			for (;;)
 			{
 				// TODO After the first loop, just regenerate one randomly-selected gPart each time?
-				IList gParts = Platform.CreateArrayList();
+			    var gParts = Platform.CreateArrayList< BigInteger>();
 				for (int ind = 0; ind != smallPrimes.Count; ind++)
 				{
 					BigInteger i = (BigInteger)smallPrimes[ind];
@@ -227,15 +227,15 @@ namespace Org.BouncyCastle.Crypto.Generators
 		 *            the source of Randomness for permutation
 		 * @return a new IList with the permuted elements.
 		 */
-		private static IList permuteList(
-			IList           arr,
+		private static IList<BigInteger> permuteList(
+			IList<BigInteger>           arr,
 			SecureRandom    rand)
 		{
             // TODO Create a utility method for generating permutation of first 'n' integers
 
-            IList retval = Platform.CreateArrayList(arr.Count);
+            var retval = Platform.CreateArrayList<BigInteger>(arr.Count);
 
-			foreach (object element in arr)
+			foreach (var element in arr)
 			{
 				int index = rand.Next(retval.Count + 1);
 				retval.Insert(index, element);
@@ -251,10 +251,10 @@ namespace Org.BouncyCastle.Crypto.Generators
 		 *            the number of primes to find
 		 * @return a vector containing the found primes as Integer
 		 */
-		private static IList findFirstPrimes(
+		private static IList<BigInteger> findFirstPrimes(
 			int count)
 		{
-			IList primes = Platform.CreateArrayList(count);
+		    var primes = Platform.CreateArrayList< BigInteger>(count);
 
 			for (int i = 0; i != count; i++)
 			{

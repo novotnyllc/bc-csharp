@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -63,15 +64,15 @@ namespace Org.BouncyCastle.Cms
 		private SignedDataParser        _signedData;
 		private DerObjectIdentifier		_signedContentType;
 		private CmsTypedStream          _signedContent;
-		private IDictionary				_digests;
-		private ISet					_digestOids;
+		private IDictionary<string, IDigest>             _digests;
+		private ISet<string>					_digestOids;
 
 		private SignerInformationStore  _signerInfoStore;
 		private Asn1Set                 _certSet, _crlSet;
 		private bool					_isCertCrlParsed;
-		private IX509Store				_attributeStore;
-		private IX509Store				_certificateStore;
-		private IX509Store				_crlStore;
+		private IX509Store<IX509AttributeCertificate>                _attributeStore;
+		private IX509Store<X509Certificate>                _certificateStore;
+		private IX509Store<X509Crl> _crlStore;
 
 		public CmsSignedDataParser(
 			byte[] sigBlock)
@@ -110,8 +111,8 @@ namespace Org.BouncyCastle.Cms
 			{
 				this._signedContent = signedContent;
 				this._signedData = SignedDataParser.GetInstance(this.contentInfo.GetContent(Asn1Tags.Sequence));
-				this._digests = Platform.CreateHashtable();
-				this._digestOids = new HashSet();
+				this._digests = Platform.CreateHashtable<string, IDigest>();
+				this._digestOids = new HashSet<string>();
 
 				Asn1SetParser digAlgs = _signedData.GetDigestAlgorithms();
 				IAsn1Convertible o;
@@ -125,7 +126,7 @@ namespace Org.BouncyCastle.Cms
                         string digestOid = id.Algorithm.Id;
 						string digestName = Helper.GetDigestAlgName(digestOid);
 
-						if (!this._digests.Contains(digestName))
+						if (!this._digests.ContainsKey(digestName))
 						{
 							this._digests[digestName] = Helper.GetDigestInstance(digestName);
 							this._digestOids.Add(digestOid);
@@ -182,9 +183,9 @@ namespace Org.BouncyCastle.Cms
 			get { return _signedData.Version.Value.IntValue; }
 		}
 
-		public ISet DigestOids
+		public ISet<string> DigestOids
 		{
-			get { return new HashSet(_digestOids); }
+			get { return new HashSet<string>(_digestOids); }
 		}
 
 		/**
@@ -198,10 +199,10 @@ namespace Org.BouncyCastle.Cms
 			{
 				PopulateCertCrlSets();
 
-                IList signerInfos = Platform.CreateArrayList();
-                IDictionary hashes = Platform.CreateHashtable();
+                var signerInfos = Platform.CreateArrayList<SignerInformation>();
+                var hashes = Platform.CreateHashtable<object, byte[]>();
 
-				foreach (object digestKey in _digests.Keys)
+				foreach (var digestKey in _digests.Keys)
 				{
 					hashes[digestKey] = DigestUtilities.DoFinal(
 						(IDigest)_digests[digestKey]);
@@ -243,7 +244,7 @@ namespace Org.BouncyCastle.Cms
 		 * @exception org.bouncycastle.x509.NoSuchStoreException if the store type isn't available.
 		 * @exception CmsException if a general exception prevents creation of the X509Store
 		 */
-		public IX509Store GetAttributeCertificates(
+		public IX509Store<IX509AttributeCertificate> GetAttributeCertificates(
 			string type)
 		{
 			if (_attributeStore == null)
@@ -265,7 +266,7 @@ namespace Org.BouncyCastle.Cms
 		* @exception NoSuchStoreException if the store type isn't available.
 		* @exception CmsException if a general exception prevents creation of the X509Store
 		*/
-		public IX509Store GetCertificates(
+		public IX509Store<X509Certificate> GetCertificates(
 			string type)
 		{
 			if (_certificateStore == null)
@@ -287,7 +288,7 @@ namespace Org.BouncyCastle.Cms
 		* @exception NoSuchStoreException if the store type isn't available.
 		* @exception CmsException if a general exception prevents creation of the X509Store
 		*/
-		public IX509Store GetCrls(
+		public IX509Store<X509Crl> GetCrls(
 			string type)
 		{
 			if (_crlStore == null)
@@ -403,9 +404,9 @@ namespace Org.BouncyCastle.Cms
 		 */
 		public static Stream ReplaceCertificatesAndCrls(
 			Stream			original,
-			IX509Store		x509Certs,
-			IX509Store		x509Crls,
-			IX509Store		x509AttrCerts,
+			IX509Store<X509Certificate>		x509Certs,
+			IX509Store<X509Crl>		x509Crls,
+			IX509Store<IX509AttributeCertificate>		x509AttrCerts,
 			Stream			outStr)
 		{
 			// NB: SecureRandom would be ignored since using existing signatures only

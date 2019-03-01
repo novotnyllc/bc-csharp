@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Crypto.Prng;
@@ -68,8 +69,8 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         protected int[] mOfferedCipherSuites = null;
         protected byte[] mOfferedCompressionMethods = null;
-        protected IDictionary mClientExtensions = null;
-        protected IDictionary mServerExtensions = null;
+        protected IDictionary<int, byte[]> mClientExtensions = null;
+        protected IDictionary<int, byte[]> mServerExtensions = null;
 
         protected short mConnectionState = CS_START;
         protected bool mResumedSession = false;
@@ -1026,7 +1027,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             get { return mClosed; }
         }
 
-        protected virtual short ProcessMaxFragmentLengthExtension(IDictionary clientExtensions, IDictionary serverExtensions,
+        protected virtual short ProcessMaxFragmentLengthExtension(IDictionary<int, byte[]> clientExtensions, IDictionary<int, byte[]> serverExtensions,
             byte alertDescription)
         {
             short maxFragmentLength = TlsExtensionsUtilities.GetMaxFragmentLengthExtension(serverExtensions);
@@ -1121,7 +1122,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return DigestUtilities.DoFinal(d);
         }
 
-        protected internal static IDictionary ReadExtensions(MemoryStream input)
+        protected internal static IDictionary<int, byte[]> ReadExtensions(MemoryStream input)
         {
             if (input.Position >= input.Length)
                 return null;
@@ -1133,7 +1134,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             MemoryStream buf = new MemoryStream(extBytes, false);
 
             // Integer -> byte[]
-            IDictionary extensions = Platform.CreateHashtable();
+            var extensions = Platform.CreateHashtable<int, byte[]>();
 
             while (buf.Position < buf.Length)
             {
@@ -1143,7 +1144,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 /*
                  * RFC 3546 2.3 There MUST NOT be more than one extension of the same type.
                  */
-                if (extensions.Contains(extension_type))
+                if (extensions.ContainsKey(extension_type))
                     throw new TlsFatalAlert(AlertDescription.illegal_parameter);
 
                 extensions.Add(extension_type, extension_data);
@@ -1152,7 +1153,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return extensions;
         }
 
-        protected internal static IList ReadSupplementalDataMessage(MemoryStream input)
+        protected internal static IList<SupplementalDataEntry> ReadSupplementalDataMessage(MemoryStream input)
         {
             byte[] supp_data = TlsUtilities.ReadOpaque24(input);
 
@@ -1160,7 +1161,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             MemoryStream buf = new MemoryStream(supp_data, false);
 
-            IList supplementalData = Platform.CreateArrayList();
+            var supplementalData = Platform.CreateArrayList<SupplementalDataEntry>();
 
             while (buf.Position < buf.Length)
             {
@@ -1173,7 +1174,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return supplementalData;
         }
 
-        protected internal static void WriteExtensions(Stream output, IDictionary extensions)
+        protected internal static void WriteExtensions(Stream output, IDictionary<int, byte[]> extensions)
         {
             MemoryStream buf = new MemoryStream();
 
@@ -1189,7 +1190,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             TlsUtilities.WriteOpaque16(extBytes, output);
         }
 
-        protected internal static void WriteSelectedExtensions(Stream output, IDictionary extensions, bool selectEmpty)
+        protected internal static void WriteSelectedExtensions(Stream output, IDictionary<int, byte[]> extensions, bool selectEmpty)
         {
             foreach (int extension_type in extensions.Keys)
             {

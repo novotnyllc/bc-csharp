@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -96,7 +97,7 @@ namespace Org.BouncyCastle.X509
 		/// Create loading data from byte array.
 		/// </summary>
 		/// <param name="input"></param>
-		public ICollection ReadCertificates(
+		public ICollection<X509Certificate> ReadCertificates(
 			byte[] input)
 		{
 			return ReadCertificates(new MemoryStream(input, false));
@@ -166,11 +167,11 @@ namespace Org.BouncyCastle.X509
 		 * Returns a (possibly empty) collection view of the certificates
 		 * read from the given input stream inStream.
 		 */
-		public ICollection ReadCertificates(
+		public ICollection<X509Certificate> ReadCertificates(
 			Stream inStream)
 		{
 			X509Certificate cert;
-            IList certs = Platform.CreateArrayList();
+            var certs = Platform.CreateArrayList<X509Certificate>();
 
 			while ((cert = ReadCertificate(inStream)) != null)
 			{

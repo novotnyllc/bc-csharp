@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -105,20 +106,20 @@ namespace Org.BouncyCastle.Bcpg
 
         private static readonly string Version = "BCPG C# v" + AssemblyInfo.Version;
 
-        private readonly IDictionary headers;
+        private readonly IDictionary<string, string> headers;
 
         public ArmoredOutputStream(Stream outStream)
         {
             this.outStream = outStream;
-            this.headers = Platform.CreateHashtable(1);
+            this.headers = Platform.CreateHashtable<string, string>(1);
             this.headers.Add(HeaderVersion, Version);
         }
 
-        public ArmoredOutputStream(Stream outStream, IDictionary headers)
+        public ArmoredOutputStream(Stream outStream, IDictionary<string, string> headers)
         {
             this.outStream = outStream;
-            this.headers = Platform.CreateHashtable(headers);
-            if (!this.headers.Contains(HeaderVersion))
+            this.headers = Platform.CreateHashtable<string, string>(headers);
+            if (!this.headers.ContainsKey(HeaderVersion))
             {
                 this.headers.Add(HeaderVersion, Version);
             }
@@ -264,12 +265,12 @@ namespace Org.BouncyCastle.Bcpg
                 }
 
                 DoWrite(headerStart + type + headerTail + nl);
-                if (headers.Contains(HeaderVersion))
+                if (headers.ContainsKey(HeaderVersion))
                 {
                     WriteHeaderEntry(HeaderVersion, (string)headers[HeaderVersion]);
                 }
 
-                foreach (DictionaryEntry de in headers)
+                foreach (var de in headers)
                 {
                     string k = (string)de.Key;
                     if (k != HeaderVersion)

@@ -15,6 +15,7 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Utilities.Test;
 using Org.BouncyCastle.Security;
+using System.Collections.Generic;
 
 #endregion
 
@@ -39,7 +40,7 @@ namespace Org.BouncyCastle.Pkcs.Tests
 
             AsymmetricCipherKeyPair pair = pGen.GenerateKeyPair();
 
-            IDictionary attrs = new Hashtable();
+            var attrs = new Dictionary<DerObjectIdentifier, string>();
 
             attrs.Add(X509Name.C, "AU");
             attrs.Add(X509Name.O, "The Legion of the Bouncy Castle");
@@ -47,7 +48,7 @@ namespace Org.BouncyCastle.Pkcs.Tests
             attrs.Add(X509Name.ST, "Victoria");
             attrs.Add(X509Name.EmailAddress, "feedback-crypto@bouncycastle.org");
 
-            X509Name subject = new X509Name(new ArrayList(attrs.Keys), attrs);
+            X509Name subject = new X509Name(new List<DerObjectIdentifier>(attrs.Keys), attrs);
 
             Pkcs10CertificationRequest req1 = new Pkcs10CertificationRequest(
 				"SHA1withRSA",

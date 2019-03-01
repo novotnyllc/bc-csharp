@@ -254,10 +254,10 @@ namespace Org.BouncyCastle.Cms
 			Asn1.Cms.AttributeTable unsignedAttributeTable = UnsignedAttributes;
 			if (unsignedAttributeTable == null)
 			{
-                return new SignerInformationStore(Platform.CreateArrayList(0));
+                return new SignerInformationStore(Platform.CreateArrayList<SignerInformation>(0));
 			}
 
-            IList counterSignatures = Platform.CreateArrayList();
+            var counterSignatures = Platform.CreateArrayList<SignerInformation>();
 
 			/*
 			The UnsignedAttributes syntax is defined as a SET OF Attributes.  The

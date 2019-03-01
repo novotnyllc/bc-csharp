@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
@@ -21,9 +21,9 @@ namespace Org.BouncyCastle.Crypto.Signers
         public const int TRAILER_SHA512_224  = 0x39CC;
         public const int TRAILER_SHA512_256  = 0x40CC;
 
-        private static IDictionary CreateTrailerMap()
+        private static IDictionary<string, int> CreateTrailerMap()
         {
-            IDictionary trailers = Platform.CreateHashtable();
+            IDictionary<string, int> trailers = Platform.CreateHashtable<string, int>();
 
             trailers.Add("RIPEMD128", TRAILER_RIPEMD128);
             trailers.Add("RIPEMD160", TRAILER_RIPEMD160);
@@ -42,7 +42,7 @@ namespace Org.BouncyCastle.Crypto.Signers
         }
 
         // IDictionary is (string -> Int32)
-        private static readonly IDictionary trailerMap = CreateTrailerMap();
+        private static readonly IDictionary<string, int> trailerMap = CreateTrailerMap();
 
         public static int GetTrailer(IDigest digest)
         {
@@ -51,7 +51,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 
         public static bool NoTrailerAvailable(IDigest digest)
         {
-            return !trailerMap.Contains(digest.AlgorithmName);
+            return !trailerMap.ContainsKey(digest.AlgorithmName);
         }
     }
 }

@@ -13,12 +13,13 @@ using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Operators;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Operators
 {
     public class CmsContentEncryptorBuilder
     {
-        private static readonly IDictionary KeySizes = Platform.CreateHashtable();
+        private static readonly IDictionary<DerObjectIdentifier, int> KeySizes = Platform.CreateHashtable<DerObjectIdentifier, int>();
 
         static CmsContentEncryptorBuilder()
         {
@@ -33,7 +34,7 @@ namespace Org.BouncyCastle.Operators
 
         private static int GetKeySize(DerObjectIdentifier oid)
         {
-            if (KeySizes.Contains(oid))
+            if (KeySizes.ContainsKey(oid))
             {
                 return (int)KeySizes[oid];
             }

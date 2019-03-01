@@ -15,6 +15,7 @@ using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Signers;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Crypto.Signers
 {
@@ -26,7 +27,7 @@ namespace Org.BouncyCastle.Crypto.Signers
         private readonly IDigest digest;
         private bool forSigning;
 
-        private static readonly IDictionary oidMap = Platform.CreateHashtable();
+        private static readonly IDictionary<string, DerObjectIdentifier> oidMap = Platform.CreateHashtable<string, DerObjectIdentifier>();
 
         /// <summary>
         /// Load oid table.

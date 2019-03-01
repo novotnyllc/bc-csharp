@@ -20,6 +20,7 @@ using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Store;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Utilities.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Cms
 {
@@ -33,12 +34,12 @@ namespace Org.BouncyCastle.Cms
         private static readonly string EncryptionECDsaWithSha384 = X9ObjectIdentifiers.ECDsaWithSha384.Id;
         private static readonly string EncryptionECDsaWithSha512 = X9ObjectIdentifiers.ECDsaWithSha512.Id;
 
-        private static readonly IDictionary encryptionAlgs = Platform.CreateHashtable();
-        private static readonly IDictionary digestAlgs = Platform.CreateHashtable();
-        private static readonly IDictionary digestAliases = Platform.CreateHashtable();
+        private static readonly IDictionary<string, string> encryptionAlgs = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, string> digestAlgs = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, string[]> digestAliases = Platform.CreateHashtable<string, string[]>();
 
-        private static readonly ISet noParams = new HashSet();
-        private static readonly IDictionary ecAlgorithms = Platform.CreateHashtable();
+        private static readonly ISet<string> noParams = new HashSet<string>();
+        private static readonly IDictionary<string, string> ecAlgorithms = Platform.CreateHashtable<string, string>();
 
         private static void AddEntries(DerObjectIdentifier oid, string digest, string encryption)
 		{
@@ -84,7 +85,7 @@ namespace Org.BouncyCastle.Cms
 
 			encryptionAlgs.Add(X9ObjectIdentifiers.IdDsa.Id, "DSA");
 			encryptionAlgs.Add(PkcsObjectIdentifiers.RsaEncryption.Id, "RSA");
-			encryptionAlgs.Add(TeleTrusTObjectIdentifiers.TeleTrusTRsaSignatureAlgorithm, "RSA");
+			encryptionAlgs.Add(TeleTrusTObjectIdentifiers.TeleTrusTRsaSignatureAlgorithm.Id, "RSA");
 			encryptionAlgs.Add(X509ObjectIdentifiers.IdEARsa.Id, "RSA");
 			encryptionAlgs.Add(CmsSignedGenerator.EncryptionRsaPss, "RSAandMGF1");
 			encryptionAlgs.Add(CryptoProObjectIdentifiers.GostR3410x94.Id, "GOST3410");
@@ -208,15 +209,15 @@ namespace Org.BouncyCastle.Cms
 			return SignerUtilities.GetSigner(algorithm);
 		}
 
-		internal IX509Store CreateAttributeStore(
+		internal IX509Store<IX509AttributeCertificate> CreateAttributeStore(
 			string	type,
 			Asn1Set	certSet)
 		{
-			IList certs = Platform.CreateArrayList();
+			var certs = Platform.CreateArrayList<IX509AttributeCertificate>();
 
 			if (certSet != null)
 			{
-				foreach (Asn1Encodable ae in certSet)
+				foreach (var ae in certSet)
 				{
 					try
 					{
@@ -245,7 +246,7 @@ namespace Org.BouncyCastle.Cms
 			{
 				return X509StoreFactory.Create(
 					"AttributeCertificate/" + type,
-					new X509CollectionStoreParameters(certs));
+					new X509CollectionStoreParameters<IX509AttributeCertificate>(certs));
 			}
 			catch (ArgumentException e)
 			{
@@ -253,11 +254,11 @@ namespace Org.BouncyCastle.Cms
 			}
 		}
 
-		internal IX509Store CreateCertificateStore(
+		internal IX509Store<X509Certificate> CreateCertificateStore(
 			string	type,
 			Asn1Set	certSet)
 		{
-			IList certs = Platform.CreateArrayList();
+			var certs = Platform.CreateArrayList<X509Certificate>();
 
 			if (certSet != null)
 			{
@@ -268,7 +269,7 @@ namespace Org.BouncyCastle.Cms
 			{
 				return X509StoreFactory.Create(
 					"Certificate/" + type,
-					new X509CollectionStoreParameters(certs));
+					new X509CollectionStoreParameters<X509Certificate>(certs));
 			}
 			catch (ArgumentException e)
 			{
@@ -276,11 +277,11 @@ namespace Org.BouncyCastle.Cms
 			}
 		}
 
-		internal IX509Store CreateCrlStore(
+		internal IX509Store<X509Crl> CreateCrlStore(
 			string	type,
 			Asn1Set	crlSet)
 		{
-			IList crls = Platform.CreateArrayList();
+			var crls = Platform.CreateArrayList<X509Crl>();
 
 			if (crlSet != null)
 			{
@@ -291,7 +292,7 @@ namespace Org.BouncyCastle.Cms
 			{
 				return X509StoreFactory.Create(
 					"CRL/" + type,
-					new X509CollectionStoreParameters(crls));
+					new X509CollectionStoreParameters<X509Crl>(crls));
 			}
 			catch (ArgumentException e)
 			{
@@ -300,7 +301,7 @@ namespace Org.BouncyCastle.Cms
 		}
 
 		private void AddCertsFromSet(
-			IList	certs,
+			IList<X509Certificate>   certs,
 			Asn1Set	certSet)
 		{
 			X509CertificateParser cf = new X509CertificateParser();
@@ -325,7 +326,7 @@ namespace Org.BouncyCastle.Cms
 		}
 
 		private void AddCrlsFromSet(
-			IList	crls,
+			IList<X509Crl>   crls,
 			Asn1Set	crlSet)
 		{
 			X509CrlParser cf = new X509CrlParser();

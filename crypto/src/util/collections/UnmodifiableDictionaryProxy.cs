@@ -1,24 +1,25 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
-	public class UnmodifiableDictionaryProxy
-		: UnmodifiableDictionary
-	{
-		private readonly IDictionary d;
+	public class UnmodifiableDictionaryProxy<TKey, TValue>
+        : UnmodifiableDictionary<TKey, TValue>
+    {
+		private readonly IDictionary<TKey, TValue> d;
 
-		public UnmodifiableDictionaryProxy(IDictionary d)
+		public UnmodifiableDictionaryProxy(IDictionary<TKey, TValue> d)
 		{
 			this.d = d;
 		}
 
-		public override bool Contains(object k)
+		public override bool ContainsKey(TKey k)
 		{
-			return d.Contains(k);
+			return d.ContainsKey(k);
 		}
 
-		public override void CopyTo(Array array, int index)
+		public override void CopyTo(KeyValuePair<TKey, TValue>[] array, int index)
 		{
 			d.CopyTo(array, index);
 		}
@@ -28,39 +29,36 @@ namespace Org.BouncyCastle.Utilities.Collections
 			get { return d.Count; }
 		}
 
-		public override IDictionaryEnumerator GetEnumerator()
-		{
-			return d.GetEnumerator();
-		}
-
-		public override bool IsFixedSize
-		{
-			get { return d.IsFixedSize; }
-		}
-
-		public override bool IsSynchronized
-		{
-			get { return d.IsSynchronized; }
-		}
-
-		public override object SyncRoot
-		{
-			get { return d.SyncRoot; }
-		}
-
-		public override ICollection Keys
+		public override ICollection<TKey> Keys
 		{
 			get { return d.Keys; }
 		}
 
-		public override ICollection Values
+		public override ICollection<TValue> Values
 		{
 			get { return d.Values; }
 		}
 
-		protected override object GetValue(object k)
+        public override bool IsFixedSize => throw new NotImplementedException();
+
+        protected override TValue GetValue(TKey k)
 		{
 			return d[k];
 		}
-	}
+
+        public override bool TryGetValue(TKey key, out TValue value)
+        {
+            return d.TryGetValue(key, out value);
+        }
+
+        public override bool Contains(KeyValuePair<TKey, TValue> item)
+        {
+            return d.Contains(item);
+        }
+
+        public override IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            return d.GetEnumerator();
+        }
+    }
 }

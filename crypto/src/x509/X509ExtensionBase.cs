@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities.Collections;
@@ -11,13 +11,13 @@ namespace Org.BouncyCastle.X509
 	{
 		protected abstract X509Extensions GetX509Extensions();
 
-		protected virtual ISet GetExtensionOids(
+		protected virtual ISet<string> GetExtensionOids(
 			bool critical)
 		{
 			X509Extensions extensions = GetX509Extensions();
 			if (extensions != null)
 			{
-				HashSet set = new HashSet();
+				var set = new HashSet<string>();
 				foreach (DerObjectIdentifier oid in extensions.ExtensionOids)
 				{
 					X509Extension ext = extensions.GetExtension(oid);
@@ -37,7 +37,7 @@ namespace Org.BouncyCastle.X509
 		/// Get non critical extensions.
 		/// </summary>
 		/// <returns>A set of non critical extension oids.</returns>
-		public virtual ISet GetNonCriticalExtensionOids()
+		public virtual ISet<string> GetNonCriticalExtensionOids()
 		{
 			return GetExtensionOids(false);
 		}
@@ -46,7 +46,7 @@ namespace Org.BouncyCastle.X509
 		/// Get any critical extensions.
 		/// </summary>
 		/// <returns>A sorted list of critical entension.</returns>
-		public virtual ISet GetCriticalExtensionOids()
+		public virtual ISet<string> GetCriticalExtensionOids()
 		{
 			return GetExtensionOids(true);
 		}

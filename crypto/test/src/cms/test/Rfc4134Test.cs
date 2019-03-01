@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Asn1;
@@ -159,8 +159,8 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(envelopedData.EncryptionAlgOid, symAlgorithmOID);
 
-			ArrayList c = new ArrayList(recipients.GetRecipients());
-			Assert.LessOrEqual(1, c.Count);
+			var c = new List<RecipientInformation>(recipients.GetRecipients());
+            Assert.LessOrEqual(1, c.Count);
 			Assert.GreaterOrEqual(2, c.Count);
 
 			VerifyRecipient((RecipientInformation)c[0], privKey);
@@ -184,7 +184,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(envelopedParser.EncryptionAlgOid, symAlgorithmOID);
 
-			ArrayList c = new ArrayList(recipients.GetRecipients());
+			var c = new List<RecipientInformation>(recipients.GetRecipients());
 			Assert.LessOrEqual(1, c.Count);
 			Assert.GreaterOrEqual(2, c.Count);
 
@@ -249,13 +249,13 @@ namespace Org.BouncyCastle.Cms.Tests
 
 		private void VerifySignatures(CmsSignedData s, byte[] contentDigest)
 		{
-			IX509Store x509Certs = s.GetCertificates("Collection");
-			IX509Store x509Crls = s.GetCrls("Collection");
+			var x509Certs = s.GetCertificates("Collection");
+			var x509Crls = s.GetCrls("Collection");
 			SignerInformationStore signers = s.GetSignerInfos();
 
 			foreach (SignerInformation signer in signers.GetSigners())
 			{
-				ICollection certCollection = x509Certs.GetMatches(signer.SignerID);
+				var certCollection = x509Certs.GetMatches(signer.SignerID);
 
 				IEnumerator certEnum = certCollection.GetEnumerator();
 
@@ -270,8 +270,8 @@ namespace Org.BouncyCastle.Cms.Tests
 				}
 			}
 
-			ICollection certColl = x509Certs.GetMatches(null);
-			ICollection crlColl = x509Crls.GetMatches(null);
+			var certColl = x509Certs.GetMatches(null);
+			var crlColl = x509Crls.GetMatches(null);
 
 			Assert.AreEqual(certColl.Count, s.GetCertificates("Collection").GetMatches(null).Count);
 			Assert.AreEqual(crlColl.Count, s.GetCrls("Collection").GetMatches(null).Count);
@@ -290,12 +290,12 @@ namespace Org.BouncyCastle.Cms.Tests
 	            sc.Drain();
 	        }
 			
-			IX509Store x509Certs = sp.GetCertificates("Collection");
+			var x509Certs = sp.GetCertificates("Collection");
 			SignerInformationStore signers = sp.GetSignerInfos();
 
 			foreach (SignerInformation signer in signers.GetSigners())
 			{
-				ICollection certCollection = x509Certs.GetMatches(signer.SignerID);
+				var certCollection = x509Certs.GetMatches(signer.SignerID);
 
 				IEnumerator certEnum = certCollection.GetEnumerator();
 				certEnum.MoveNext();

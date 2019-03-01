@@ -130,8 +130,8 @@ namespace Org.BouncyCastle.Math.EC.Tests
 
         private IList GetTestCurves()
         {
-            ArrayList x9s = new ArrayList();
-            ISet names = new HashSet(ECNamedCurveTable.Names);
+            var x9s = new ArrayList();
+            var names = new HashSet(ECNamedCurveTable.Names);
             names.AddAll(CustomNamedCurves.Names);
 
             foreach (string name in names)

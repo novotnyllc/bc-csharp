@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -32,8 +32,8 @@ namespace Org.BouncyCastle.Tsp
 		private string					digestOID;
 		private Asn1.Cms.AttributeTable	signedAttr;
 		private Asn1.Cms.AttributeTable	unsignedAttr;
-		private IX509Store				x509Certs;
-		private IX509Store				x509Crls;
+		private IX509Store<X509Certificate> x509Certs;
+		private IX509Store<X509Crl> x509Crls;
 
 		/**
 		 * basic creation - only the default attributes will be included here.
@@ -69,14 +69,14 @@ namespace Org.BouncyCastle.Tsp
 			//
 			// Add the ESSCertID attribute
 			//
-			IDictionary signedAttrs;
+			IDictionary<DerObjectIdentifier, object> signedAttrs;
 			if (signedAttr != null)
 			{
 				signedAttrs = signedAttr.ToDictionary();
 			}
 			else
 			{
-				signedAttrs = Platform.CreateHashtable();
+				signedAttrs = Platform.CreateHashtable<DerObjectIdentifier, object>();
 			}
 
 			try
@@ -104,13 +104,13 @@ namespace Org.BouncyCastle.Tsp
 		}
 
 		public void SetCertificates(
-			IX509Store certificates)
+			IX509Store<X509Certificate> certificates)
 		{
 			this.x509Certs = certificates;
 		}
 
 		public void SetCrls(
-			IX509Store crls)
+			IX509Store<X509Crl> crls)
 		{
 			this.x509Crls = crls;
 		}

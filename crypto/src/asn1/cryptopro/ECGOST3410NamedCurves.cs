@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.Rosstandart;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
@@ -19,9 +19,9 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         {
         }
 
-        internal static readonly IDictionary objIds = Platform.CreateHashtable();
-        internal static readonly IDictionary parameters = Platform.CreateHashtable();
-        internal static readonly IDictionary names = Platform.CreateHashtable();
+        internal static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        internal static readonly IDictionary<DerObjectIdentifier, ECDomainParameters> parameters = Platform.CreateHashtable<DerObjectIdentifier, ECDomainParameters>();
+        internal static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateHashtable<DerObjectIdentifier, string>();
 
         static ECGost3410NamedCurves()
         {
@@ -220,9 +220,9 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
          * returns an enumeration containing the name strings for curves
          * contained in this structure.
          */
-        public static IEnumerable Names
+        public static IEnumerable<string> Names
         {
-            get { return new EnumerableProxy(names.Values); }
+            get { return new EnumerableProxy<string>(names.Values); }
         }
 
         public static ECDomainParameters GetByName(

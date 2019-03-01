@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
@@ -57,7 +57,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public CertificateValues(
-			IEnumerable certificates)
+			IEnumerable<Asn1Encodable> certificates)
 		{
 			if (certificates == null)
 				throw new ArgumentNullException("certificates");

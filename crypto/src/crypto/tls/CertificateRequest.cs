@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -24,15 +25,15 @@ namespace Org.BouncyCastle.Crypto.Tls
     public class CertificateRequest
     {
         protected readonly byte[] mCertificateTypes;
-        protected readonly IList mSupportedSignatureAlgorithms;
-        protected readonly IList mCertificateAuthorities;
+        protected readonly IList<SignatureAndHashAlgorithm> mSupportedSignatureAlgorithms;
+        protected readonly IList<Asn1Encodable> mCertificateAuthorities;
 
         /**
          * @param certificateTypes       see {@link ClientCertificateType} for valid constants.
          * @param certificateAuthorities an {@link IList} of {@link X509Name}.
          */
-        public CertificateRequest(byte[] certificateTypes, IList supportedSignatureAlgorithms,
-            IList certificateAuthorities)
+        public CertificateRequest(byte[] certificateTypes, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms,
+            IList<Asn1Encodable> certificateAuthorities)
         {
             this.mCertificateTypes = certificateTypes;
             this.mSupportedSignatureAlgorithms = supportedSignatureAlgorithms;
@@ -51,7 +52,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /**
          * @return an {@link IList} of {@link SignatureAndHashAlgorithm} (or null before TLS 1.2).
          */
-        public virtual IList SupportedSignatureAlgorithms
+        public virtual IList<SignatureAndHashAlgorithm> SupportedSignatureAlgorithms
         {
             get { return mSupportedSignatureAlgorithms; }
         }
@@ -59,7 +60,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /**
          * @return an {@link IList} of {@link X509Name}
          */
-        public virtual IList CertificateAuthorities
+        public virtual IList<Asn1Encodable> CertificateAuthorities
         {
             get { return mCertificateAuthorities; }
         }
@@ -93,7 +94,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
             else
             {
-                IList derEncodings = Platform.CreateArrayList(mCertificateAuthorities.Count);
+                var derEncodings = Platform.CreateArrayList<byte[]>(mCertificateAuthorities.Count);
 
                 int totalLength = 0;
                 foreach (Asn1Encodable certificateAuthority in mCertificateAuthorities)
@@ -132,14 +133,14 @@ namespace Org.BouncyCastle.Crypto.Tls
                 certificateTypes[i] = TlsUtilities.ReadUint8(input);
             }
 
-            IList supportedSignatureAlgorithms = null;
+            IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms = null;
             if (TlsUtilities.IsTlsV12(context))
             {
                 // TODO Check whether SignatureAlgorithm.anonymous is allowed here
                 supportedSignatureAlgorithms = TlsUtilities.ParseSupportedSignatureAlgorithms(false, input);
             }
 
-            IList certificateAuthorities = Platform.CreateArrayList();
+            var certificateAuthorities = Platform.CreateArrayList<Asn1Encodable>();
             byte[] certAuthData = TlsUtilities.ReadOpaque16(input);
             MemoryStream bis = new MemoryStream(certAuthData, false);
             while (bis.Position < bis.Length)

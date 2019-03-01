@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -15,9 +16,9 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         private TlsHandshakeHash mHandshakeHash;
 
-        private IDictionary mCurrentInboundFlight = Platform.CreateHashtable();
-        private IDictionary mPreviousInboundFlight = null;
-        private IList mOutboundFlight = Platform.CreateArrayList();
+        private IDictionary<int, DtlsReassembler> mCurrentInboundFlight = Platform.CreateHashtable<int, DtlsReassembler>();
+        private IDictionary<int, DtlsReassembler> mPreviousInboundFlight = null;
+        private IList<Message> mOutboundFlight = Platform.CreateArrayList<Message>();
         private bool mSending = true;
 
         private int mMessageSeq = 0, mNextReceiveSeq = 0;
@@ -79,7 +80,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             if (mSending)
             {
                 mSending = false;
-                PrepareInboundFlight(Platform.CreateHashtable());
+                PrepareInboundFlight(Platform.CreateHashtable<int, DtlsReassembler>());
             }
 
             byte[] buf = null;
@@ -193,7 +194,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return null;
         }
 
-        private void PrepareInboundFlight(IDictionary nextFlight)
+        private void PrepareInboundFlight(IDictionary<int, DtlsReassembler> nextFlight)
         {
             ResetAll(mCurrentInboundFlight);
             mPreviousInboundFlight = mCurrentInboundFlight;
@@ -343,7 +344,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             fragment.SendToRecordLayer(mRecordLayer);
         }
 
-        private static bool CheckAll(IDictionary inboundFlight)
+        private static bool CheckAll(IDictionary<int, DtlsReassembler> inboundFlight)
         {
             foreach (DtlsReassembler r in inboundFlight.Values)
             {
@@ -355,7 +356,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return true;
         }
 
-        private static void ResetAll(IDictionary inboundFlight)
+        private static void ResetAll(IDictionary<int, DtlsReassembler> inboundFlight)
         {
             foreach (DtlsReassembler r in inboundFlight.Values)
             {

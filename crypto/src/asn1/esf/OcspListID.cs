@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -60,7 +60,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public OcspListID(
-			IEnumerable ocspResponses)
+			IEnumerable<Asn1Encodable> ocspResponses)
 		{
 			if (ocspResponses == null)
 				throw new ArgumentNullException("ocspResponses");

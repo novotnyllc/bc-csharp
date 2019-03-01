@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Nist;
 using Org.BouncyCastle.Asn1.Pkcs;
@@ -71,31 +71,20 @@ namespace Org.BouncyCastle.Asn1.Smime
             capabilities = seq;
         }
 
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete("Use 'GetCapabilitiesForOid' instead")]
-        public ArrayList GetCapabilities(
-            DerObjectIdentifier capability)
-        {
-            ArrayList list = new ArrayList();
-            DoGetCapabilitiesForOid(capability, list);
-			return list;
-        }
-#endif
-
         /**
          * returns an ArrayList with 0 or more objects of all the capabilities
          * matching the passed in capability Oid. If the Oid passed is null the
          * entire set is returned.
          */
-        public IList GetCapabilitiesForOid(
+        public IList<SmimeCapability> GetCapabilitiesForOid(
             DerObjectIdentifier capability)
         {
-            IList list = Platform.CreateArrayList();
+            var list = Platform.CreateArrayList< SmimeCapability>();
             DoGetCapabilitiesForOid(capability, list);
 			return list;
         }
 
-        private void DoGetCapabilitiesForOid(DerObjectIdentifier capability, IList list)
+        private void DoGetCapabilitiesForOid(DerObjectIdentifier capability, IList<SmimeCapability> list)
         {
 			if (capability == null)
             {

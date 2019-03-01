@@ -207,7 +207,7 @@ namespace Org.BouncyCastle.X509.Store
 
 			if (extendedKeyUsage != null)
 			{
-				IList eku = c.GetExtendedKeyUsage();
+				var eku = c.GetExtendedKeyUsage();
 
 				// Note: if no extended key usage set, all key purposes are implicitly allowed
 

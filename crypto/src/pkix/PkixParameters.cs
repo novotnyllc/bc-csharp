@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.Utilities.Date;
@@ -39,25 +40,25 @@ namespace Org.BouncyCastle.Pkix
 		*/
 		public const int ChainValidityModel = 1;
 
-		private ISet trustAnchors;
+		private ISet<TrustAnchor> trustAnchors;
 		private DateTimeObject date;
-		private IList certPathCheckers;
+		private IList<PkixCertPathChecker> certPathCheckers;
 		private bool revocationEnabled = true;
-		private ISet initialPolicies;
+		private ISet<string> initialPolicies;
 		//private bool checkOnlyEECertificateCrl = false;
 		private bool explicitPolicyRequired = false;
 		private bool anyPolicyInhibited = false;
 		private bool policyMappingInhibited = false;
 		private bool policyQualifiersRejected = true;
 		private IX509Selector certSelector;
-		private IList stores;
+		private IList<IX509Store<object>> stores;
 		private IX509Selector selector;
 		private bool additionalLocationsEnabled;
-		private IList additionalStores;
-		private ISet trustedACIssuers;
-		private ISet necessaryACAttributes;
-		private ISet prohibitedACAttributes;
-		private ISet attrCertCheckers;
+		private IList<IX509Store<object>> additionalStores;
+		private ISet<TrustAnchor> trustedACIssuers;
+		private ISet<string> necessaryACAttributes;
+		private ISet<string> prohibitedACAttributes;
+		private ISet<PkixAttrCertChecker> attrCertCheckers;
 		private int validityModel = PkixValidityModel;
 		private bool useDeltas = false;
 
@@ -80,18 +81,18 @@ namespace Org.BouncyCastle.Pkix
 		 *                <code>java.security.cert.TrustAnchor</code>
 		 */
 		public PkixParameters(
-			ISet trustAnchors)
+			ISet<TrustAnchor> trustAnchors)
 		{
 			SetTrustAnchors(trustAnchors);
 
-			this.initialPolicies = new HashSet();
-			this.certPathCheckers = Platform.CreateArrayList();
-            this.stores = Platform.CreateArrayList();
-			this.additionalStores = Platform.CreateArrayList();
-			this.trustedACIssuers = new HashSet();
-			this.necessaryACAttributes = new HashSet();
-			this.prohibitedACAttributes = new HashSet();
-			this.attrCertCheckers = new HashSet();
+			this.initialPolicies = new HashSet<string>();
+			this.certPathCheckers = Platform.CreateArrayList<PkixCertPathChecker>();
+            this.stores = Platform.CreateArrayList<IX509Store<object>>();
+			this.additionalStores = Platform.CreateArrayList<IX509Store<object>>();
+			this.trustedACIssuers = new HashSet<TrustAnchor>();
+			this.necessaryACAttributes = new HashSet<string>();
+			this.prohibitedACAttributes = new HashSet<string>();
+			this.attrCertCheckers = new HashSet<PkixAttrCertChecker>();
 		}
 
 //		// TODO implement for other keystores (see Java build)?
@@ -115,7 +116,7 @@ namespace Org.BouncyCastle.Pkix
 //		{
 //			if (keystore == null)
 //				throw new ArgumentNullException("keystore");
-//			ISet trustAnchors = new HashSet();
+//		 var trustAnchors = new HashSet();
 //			foreach (string alias in keystore.Aliases)
 //			{
 //				if (keystore.IsCertificateEntry(alias))
@@ -179,23 +180,23 @@ namespace Org.BouncyCastle.Pkix
 		}
 
 		// Returns a Set of the most-trusted CAs.
-		public virtual ISet GetTrustAnchors()
+		public virtual ISet<TrustAnchor> GetTrustAnchors()
 		{
-			return new HashSet(this.trustAnchors);
+			return new HashSet<TrustAnchor>(this.trustAnchors);
 		}
 
 		// Sets the set of most-trusted CAs.
 		// Set is copied to protect against subsequent modifications.
 		public virtual void SetTrustAnchors(
-			ISet tas)
+			ISet<TrustAnchor> tas)
 		{
 			if (tas == null)
 				throw new ArgumentNullException("value");
-			if (tas.IsEmpty)
+			if (!tas.Any())
 				throw new ArgumentException("non-empty set required", "value");
 
 			// Explicit copy to enforce type-safety
-			this.trustAnchors = new HashSet();
+			this.trustAnchors = new HashSet<TrustAnchor>();
 			foreach (TrustAnchor ta in tas)
 			{
 				if (ta != null)
@@ -268,17 +269,17 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @see #setInitialPolicies(java.util.Set)
 		*/
-		public virtual ISet GetInitialPolicies()
+		public virtual ISet<string> GetInitialPolicies()
 		{
-			ISet returnSet = initialPolicies;
+			ISet<string> returnSet = initialPolicies;
 
 			// TODO Can it really be null?
 			if (initialPolicies == null)
 			{
-				returnSet = new HashSet();
+				returnSet = new HashSet<string>();
 			}
 
-			return new HashSet(returnSet);
+			return new HashSet<string>(returnSet);
 		}
 
 		/**
@@ -303,9 +304,9 @@ namespace Org.BouncyCastle.Pkix
 		* @see #getInitialPolicies()
 		*/
 		public virtual void SetInitialPolicies(
-			ISet initialPolicies)
+			ISet<string> initialPolicies)
 		{
-			this.initialPolicies = new HashSet();
+			this.initialPolicies = new HashSet<string>();
 			if (initialPolicies != null)
 			{
 				foreach (string obj in initialPolicies)
@@ -353,14 +354,14 @@ namespace Org.BouncyCastle.Pkix
 		*                <code>java.security.cert.PKIXCertPathChecker</code>
 		* @see #getCertPathCheckers()
 		*/
-		public virtual void SetCertPathCheckers(IList checkers)
+		public virtual void SetCertPathCheckers(IList<PkixCertPathChecker> checkers)
 		{
-            certPathCheckers = Platform.CreateArrayList();
+            certPathCheckers = Platform.CreateArrayList<PkixCertPathChecker>();
 			if (checkers != null)
 			{
 				foreach (PkixCertPathChecker obj in checkers)
 				{
-					certPathCheckers.Add(obj.Clone());
+					certPathCheckers.Add((PkixCertPathChecker)obj.Clone());
 				}
 			}
 		}
@@ -374,12 +375,12 @@ namespace Org.BouncyCastle.Pkix
 		 *
 		 * @see #setCertPathCheckers(java.util.List)
 		 */
-		public virtual IList GetCertPathCheckers()
+		public virtual IList<PkixCertPathChecker> GetCertPathCheckers()
 		{
-			IList checkers = Platform.CreateArrayList();
+			var checkers = Platform.CreateArrayList<PkixCertPathChecker>();
 			foreach (PkixCertPathChecker obj in certPathCheckers)
 			{
-				checkers.Add(obj.Clone());
+				checkers.Add((PkixCertPathChecker)obj.Clone());
 			}
 			return checkers;
 		}
@@ -400,7 +401,7 @@ namespace Org.BouncyCastle.Pkix
 		{
 			if (checker != null)
 			{
-				certPathCheckers.Add(checker.Clone());
+				certPathCheckers.Add((PkixCertPathChecker)checker.Clone());
 			}
 		}
 
@@ -468,10 +469,10 @@ namespace Org.BouncyCastle.Pkix
 				: (IX509Selector) parameters.selector.Clone();
 			stores = Platform.CreateArrayList(parameters.stores);
             additionalStores = Platform.CreateArrayList(parameters.additionalStores);
-			trustedACIssuers = new HashSet(parameters.trustedACIssuers);
-			prohibitedACAttributes = new HashSet(parameters.prohibitedACAttributes);
-			necessaryACAttributes = new HashSet(parameters.necessaryACAttributes);
-			attrCertCheckers = new HashSet(parameters.attrCertCheckers);
+			trustedACIssuers = new HashSet<TrustAnchor>(parameters.trustedACIssuers);
+			prohibitedACAttributes = new HashSet<string>(parameters.prohibitedACAttributes);
+			necessaryACAttributes = new HashSet<string>(parameters.necessaryACAttributes);
+			attrCertCheckers = new HashSet<PkixAttrCertChecker>(parameters.attrCertCheckers);
 		}
 
 		/**
@@ -508,20 +509,20 @@ namespace Org.BouncyCastle.Pkix
 		*             a {@link Store}.
 		*/
 		public virtual void SetStores(
-			IList stores)
+			IList<IX509Store<object>> stores)
 		{
 			if (stores == null)
 			{
-                this.stores = Platform.CreateArrayList();
+                this.stores = Platform.CreateArrayList<IX509Store<object>>();
 			}
 			else
 			{
-				foreach (object obj in stores)
+				foreach (var obj in stores)
 				{
-					if (!(obj is IX509Store))
+					if (!(obj is IX509Store<object>))
 					{
 						throw new InvalidCastException(
-							"All elements of list must be of type " + typeof(IX509Store).FullName);
+							"All elements of list must be of type " + typeof(IX509Store<object>).FullName);
 					}
 				}
                 this.stores = Platform.CreateArrayList(stores);
@@ -544,7 +545,7 @@ namespace Org.BouncyCastle.Pkix
 		* @see #getStores
 		*/
 		public virtual void AddStore(
-			IX509Store store)
+			IX509Store<object> store)
 		{
 			if (store != null)
 			{
@@ -568,7 +569,7 @@ namespace Org.BouncyCastle.Pkix
 		* @see #getStores()
 		*/
 		public virtual void AddAdditionalStore(
-			IX509Store store)
+			IX509Store<object> store)
 		{
 			if (store != null)
 			{
@@ -586,7 +587,7 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @see #addAddionalStore(Store)
 		*/
-		public virtual IList GetAdditionalStores()
+		public virtual IList<IX509Store<object>> GetAdditionalStores()
 		{
             return Platform.CreateArrayList(additionalStores);
 		}
@@ -601,7 +602,7 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @see #setStores(IList)
 		*/
-		public virtual IList GetStores()
+		public virtual IList<IX509Store<object>> GetStores()
 		{
             return Platform.CreateArrayList(stores);
 		}
@@ -703,9 +704,9 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @return Returns an immutable set of the trusted AC issuers.
 		*/
-		public virtual ISet GetTrustedACIssuers()
+		public virtual ISet<TrustAnchor> GetTrustedACIssuers()
 		{
-			return new HashSet(trustedACIssuers);
+			return new HashSet<TrustAnchor>(trustedACIssuers);
 		}
 
 		/**
@@ -724,11 +725,11 @@ namespace Org.BouncyCastle.Pkix
 		*             a <code>TrustAnchor</code>.
 		*/
 		public virtual void SetTrustedACIssuers(
-			ISet trustedACIssuers)
+			ISet<TrustAnchor> trustedACIssuers)
 		{
 			if (trustedACIssuers == null)
 			{
-				this.trustedACIssuers = new HashSet();
+				this.trustedACIssuers = new HashSet<TrustAnchor>();
 			}
 			else
 			{
@@ -740,7 +741,7 @@ namespace Org.BouncyCastle.Pkix
 							+ "of type " + typeof(TrustAnchor).FullName + ".");
 					}
 				}
-				this.trustedACIssuers = new HashSet(trustedACIssuers);
+				this.trustedACIssuers = new HashSet<TrustAnchor>(trustedACIssuers);
 			}
 		}
 
@@ -754,9 +755,9 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @return Returns the necessary AC attributes.
 		*/
-		public virtual ISet GetNecessaryACAttributes()
+		public virtual ISet<string> GetNecessaryACAttributes()
 		{
-			return new HashSet(necessaryACAttributes);
+			return new HashSet<string>(necessaryACAttributes);
 		}
 
 		/**
@@ -774,11 +775,11 @@ namespace Org.BouncyCastle.Pkix
 		*             <code>String</code>.
 		*/
 		public virtual void SetNecessaryACAttributes(
-			ISet necessaryACAttributes)
+			ISet<string> necessaryACAttributes)
 		{
 			if (necessaryACAttributes == null)
 			{
-				this.necessaryACAttributes = new HashSet();
+				this.necessaryACAttributes = new HashSet<string>();
 			}
 			else
 			{
@@ -790,7 +791,7 @@ namespace Org.BouncyCastle.Pkix
 							+ "of type string.");
 					}
 				}
-				this.necessaryACAttributes = new HashSet(necessaryACAttributes);
+				this.necessaryACAttributes = new HashSet<string>(necessaryACAttributes);
 			}
 		}
 
@@ -803,9 +804,9 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @return Returns the prohibited AC attributes. Is never <code>null</code>.
 		*/
-		public virtual ISet GetProhibitedACAttributes()
+		public virtual ISet<string> GetProhibitedACAttributes()
 		{
-			return new HashSet(prohibitedACAttributes);
+			return new HashSet<string>(prohibitedACAttributes);
 		}
 
 		/**
@@ -823,11 +824,11 @@ namespace Org.BouncyCastle.Pkix
 		*             <code>String</code>.
 		*/
 		public virtual void SetProhibitedACAttributes(
-			ISet prohibitedACAttributes)
+			ISet<string> prohibitedACAttributes)
 		{
 			if (prohibitedACAttributes == null)
 			{
-				this.prohibitedACAttributes = new HashSet();
+				this.prohibitedACAttributes = new HashSet<string>();
 			}
 			else
 			{
@@ -839,7 +840,7 @@ namespace Org.BouncyCastle.Pkix
 							+ "of type string.");
 					}
 				}
-				this.prohibitedACAttributes = new HashSet(prohibitedACAttributes);
+				this.prohibitedACAttributes = new HashSet<string>(prohibitedACAttributes);
 			}
 		}
 
@@ -850,9 +851,9 @@ namespace Org.BouncyCastle.Pkix
 		* @return Returns the attribute certificate checker. Is never
 		*         <code>null</code>.
 		*/
-		public virtual ISet GetAttrCertCheckers()
+		public virtual ISet<PkixAttrCertChecker> GetAttrCertCheckers()
 		{
-			return new HashSet(attrCertCheckers);
+			return new HashSet<PkixAttrCertChecker>(attrCertCheckers);
 		}
 
 		/**
@@ -870,11 +871,11 @@ namespace Org.BouncyCastle.Pkix
 		*             is not a <code>PKIXAttrCertChecker</code>.
 		*/
 		public virtual void SetAttrCertCheckers(
-			ISet attrCertCheckers)
+			ISet<PkixAttrCertChecker> attrCertCheckers)
 		{
 			if (attrCertCheckers == null)
 			{
-				this.attrCertCheckers = new HashSet();
+				this.attrCertCheckers = new HashSet<PkixAttrCertChecker>();
 			}
 			else
 			{
@@ -886,7 +887,7 @@ namespace Org.BouncyCastle.Pkix
 							+ "of type " + typeof(PkixAttrCertChecker).FullName + ".");
 					}
 				}
-				this.attrCertCheckers = new HashSet(attrCertCheckers);
+				this.attrCertCheckers = new HashSet<PkixAttrCertChecker>(attrCertCheckers);
 			}
 		}
 	}

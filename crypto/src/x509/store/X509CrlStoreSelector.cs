@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Math;
@@ -18,7 +18,7 @@ namespace Org.BouncyCastle.X509.Store
 
 		private X509Certificate certificateChecking;
 		private DateTimeObject dateAndTime;
-		private ICollection issuers;
+		private ICollection<X509Name> issuers;
 		private BigInteger maxCrlNumber;
 		private BigInteger minCrlNumber;
 
@@ -70,7 +70,7 @@ namespace Org.BouncyCastle.X509.Store
 		/// <summary>
 		/// An <code>ICollection</code> of <code>X509Name</code> objects
 		/// </summary>
-		public ICollection Issuers
+		public ICollection<X509Name> Issuers
 		{
 			get { return Platform.CreateArrayList(issuers); }
             set { issuers = Platform.CreateArrayList(value); }

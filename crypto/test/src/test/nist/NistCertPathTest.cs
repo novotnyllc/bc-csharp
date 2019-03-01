@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -35,15 +36,15 @@ namespace Org.BouncyCastle.Tests.Nist
 		private static readonly string NIST_TEST_POLICY_2 = "2.16.840.1.101.3.2.1.48.2";
 		private static readonly string NIST_TEST_POLICY_3 = "2.16.840.1.101.3.2.1.48.3";
 
-		private static IDictionary certs = new Hashtable();
-		private static IDictionary crls = new Hashtable();
+		private static IDictionary<string, X509Certificate> certs = new Dictionary<string, X509Certificate>();
+		private static IDictionary<string, X509Crl> crls = new Dictionary<string, X509Crl>();
 
-		private static ISet noPolicies = new HashSet();
-		private static ISet anyPolicy = new HashSet();
-		private static ISet nistTestPolicy1 = new HashSet();
-		private static ISet nistTestPolicy2 = new HashSet();
-		private static ISet nistTestPolicy3 = new HashSet();
-		private static ISet nistTestPolicy1And2 = new HashSet();
+		private static ISet<string> noPolicies = new HashSet<string>();
+		private static ISet<string> anyPolicy = new HashSet<string>();
+		private static ISet<string> nistTestPolicy1 = new HashSet<string>();
+		private static ISet<string> nistTestPolicy2 = new HashSet<string>();
+		private static ISet<string> nistTestPolicy3 = new HashSet<string>();
+		private static ISet<string> nistTestPolicy1And2 = new HashSet<string>();
 
 		static NistCertPathTest()
 		{
@@ -593,7 +594,7 @@ namespace Org.BouncyCastle.Tests.Nist
 			string		trustAnchor,
 			string[]	certs,
 			string[]	crls,
-			ISet		policies,
+			ISet<string>		policies,
 			int			index,
 			string		message)
 		{
@@ -643,13 +644,13 @@ namespace Org.BouncyCastle.Tests.Nist
 			string trustAnchor,
 			string[] certs,
 			string[] crls,
-			ISet policies)
+			ISet<string> policies)
 		{
-			ISet trustedSet = new HashSet();
+			var trustedSet = new HashSet<TrustAnchor>();
 			trustedSet.Add(GetTrustAnchor(trustAnchor));
 
-			IList x509Certs = new ArrayList();
-			IList x509Crls = new ArrayList();
+			var x509Certs = new List<X509Certificate>();
+			var x509Crls = new List<X509Crl>();
 			X509Certificate endCert = LoadCert(certs[certs.Length - 1]);
 
 			for (int i = 0; i != certs.Length - 1; i++)
@@ -666,19 +667,19 @@ namespace Org.BouncyCastle.Tests.Nist
 				x509Crls.Add(LoadCrl(crls[i]));
 			}
 
-			IX509Store x509CertStore = X509StoreFactory.Create(
+		    var x509CertStore = X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters(x509Certs));
-			IX509Store x509CrlStore = X509StoreFactory.Create(
+				new X509CollectionStoreParameters<X509Certificate>(x509Certs));
+		    var x509CrlStore = X509StoreFactory.Create(
 				"CRL/Collection",
-				new X509CollectionStoreParameters(x509Crls));
+				new X509CollectionStoreParameters<X509Crl>(x509Crls));
 
 //			CertPathValidator validator = CertPathValidator.GetInstance("PKIX");
 			PkixCertPathValidator validator = new PkixCertPathValidator();
 			PkixParameters parameters = new PkixParameters(trustedSet);
 
-			parameters.AddStore(x509CertStore);
-			parameters.AddStore(x509CrlStore);
+			parameters.AddStore((IX509Store<object>)x509CertStore);
+			parameters.AddStore((IX509Store<object>)x509CrlStore);
 			parameters.IsRevocationEnabled = true;
 
 			if (policies != null)
@@ -697,15 +698,15 @@ namespace Org.BouncyCastle.Tests.Nist
 			string		trustAnchor,
 			string[]	certs,
 			string[]	crls,
-			ISet		initialPolicies,
+			ISet<string>		initialPolicies,
 			bool		policyMappingInhibited,
 			bool		anyPolicyInhibited)
 		{
-			ISet trustedSet = new HashSet();
+			var trustedSet = new HashSet<TrustAnchor>();
 			trustedSet.Add(GetTrustAnchor(trustAnchor));
 
-			IList x509Certs = new ArrayList();
-			IList x509Crls = new ArrayList();
+			var x509Certs = new List<X509Certificate>();
+			var x509Crls = new List<X509Crl>();
 			X509Certificate endCert = LoadCert(certs[certs.Length - 1]);
 
 			for (int i = 0; i != certs.Length - 1; i++)
@@ -720,12 +721,12 @@ namespace Org.BouncyCastle.Tests.Nist
 				x509Crls.Add(LoadCrl(crls[i]));
 			}
 
-			IX509Store x509CertStore = X509StoreFactory.Create(
+		    var x509CertStore = X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters(x509Certs));
-			IX509Store x509CrlStore = X509StoreFactory.Create(
+				new X509CollectionStoreParameters<X509Certificate>(x509Certs));
+		    var x509CrlStore = X509StoreFactory.Create(
 				"CRL/Collection",
-				new X509CollectionStoreParameters(x509Crls));
+				new X509CollectionStoreParameters<X509Crl>(x509Crls));
 
 //			CertPathBuilder builder = CertPathBuilder.GetInstance("PKIX");   
 			PkixCertPathBuilder builder = new PkixCertPathBuilder();
@@ -750,8 +751,8 @@ namespace Org.BouncyCastle.Tests.Nist
 				builderParams.IsAnyPolicyInhibited = anyPolicyInhibited;
 			}
 
-			builderParams.AddStore(x509CertStore);
-			builderParams.AddStore(x509CrlStore);
+			builderParams.AddStore((IX509Store<object>)x509CertStore);
+			builderParams.AddStore((IX509Store<object>)x509CrlStore);
 
 			// Perform validation as of this date since test certs expired
 			builderParams.Date = new DateTimeObject(DateTime.Parse("1/1/2011"));
@@ -802,7 +803,7 @@ namespace Org.BouncyCastle.Tests.Nist
 			string crlName)
 			//throws Exception
 		{
-			X509Crl crl = (X509Crl)certs[crlName];
+			X509Crl crl = (X509Crl)crls[crlName];
         
 			if (crl != null)
 			{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -74,7 +75,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 return this;
             }
 
-            public Builder SetServerExtensions(IDictionary serverExtensions)
+            public Builder SetServerExtensions(IDictionary<int, byte[]> serverExtensions)
             {
                 if (serverExtensions == null)
                 {
@@ -168,7 +169,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             get { return mSrpIdentity; }
         }
 
-        public IDictionary ReadServerExtensions()
+        public IDictionary<int, byte[]> ReadServerExtensions()
         {
             if (mEncodedServerExtensions == null)
                 return null;

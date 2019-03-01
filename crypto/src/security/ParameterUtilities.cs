@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.CryptoPro;
 using Org.BouncyCastle.Asn1.Kisa;
@@ -21,8 +21,8 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
-        private static readonly IDictionary basicIVSizes = Platform.CreateHashtable();
+        private static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, int> basicIVSizes = Platform.CreateHashtable<string, int>();
 
         static ParameterUtilities()
         {
@@ -327,7 +327,7 @@ namespace Org.BouncyCastle.Security
         private static int FindBasicIVSize(
             string canonicalName)
         {
-            if (!basicIVSizes.Contains(canonicalName))
+            if (!basicIVSizes.ContainsKey(canonicalName))
                 return -1;
 
             return (int)basicIVSizes[canonicalName];

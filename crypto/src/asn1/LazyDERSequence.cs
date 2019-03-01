@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Org.BouncyCastle.Asn1
@@ -44,7 +45,7 @@ namespace Org.BouncyCastle.Asn1
 			}
 		}
 
-		public override IEnumerator GetEnumerator()
+		public override IEnumerator<Asn1Encodable> GetEnumerator()
 		{
 			Parse();
 

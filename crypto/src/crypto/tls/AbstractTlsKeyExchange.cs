@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Org.BouncyCastle.Crypto.Tls
@@ -8,11 +9,11 @@ namespace Org.BouncyCastle.Crypto.Tls
         :   TlsKeyExchange
     {
         protected readonly int mKeyExchange;
-        protected IList mSupportedSignatureAlgorithms;
+        protected IList<SignatureAndHashAlgorithm> mSupportedSignatureAlgorithms;
 
         protected TlsContext mContext;
 
-        protected AbstractTlsKeyExchange(int keyExchange, IList supportedSignatureAlgorithms)
+        protected AbstractTlsKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms)
         {
             this.mKeyExchange = keyExchange;
             this.mSupportedSignatureAlgorithms = supportedSignatureAlgorithms;

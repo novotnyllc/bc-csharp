@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Crmf;
 using Org.BouncyCastle.Asn1.X509;
@@ -16,7 +16,7 @@ namespace Org.BouncyCastle.Crmf
         private readonly BigInteger _certReqId;
         private X509ExtensionsGenerator _extGenerator;
         private CertTemplateBuilder _templateBuilder;
-        private IList _controls = Platform.CreateArrayList();
+        private IList<IControl> _controls = Platform.CreateArrayList< IControl>();
         private ISignatureFactory _popSigner;
         private PKMacBuilder _pkMacBuilder;
         private char[] _password;

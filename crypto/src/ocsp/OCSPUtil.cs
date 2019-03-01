@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.CryptoPro;
 using Org.BouncyCastle.Asn1.Nist;
@@ -16,9 +16,9 @@ namespace Org.BouncyCastle.Ocsp
 {
 	class OcspUtilities
 	{
-		private static readonly IDictionary algorithms = Platform.CreateHashtable();
-        private static readonly IDictionary oids = Platform.CreateHashtable();
-		private static readonly ISet noParams = new HashSet();
+		private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, string> oids = Platform.CreateHashtable<DerObjectIdentifier, string>();
+		private static readonly ISet<DerObjectIdentifier> noParams = new HashSet<DerObjectIdentifier>();
 
 		static OcspUtilities()
 		{
@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Ocsp
 		{
 			algorithmName = Platform.ToUpperInvariant(algorithmName);
 
-            if (algorithms.Contains(algorithmName))
+            if (algorithms.ContainsKey(algorithmName))
 			{
 				return (DerObjectIdentifier)algorithms[algorithmName];
 			}
@@ -109,7 +109,7 @@ namespace Org.BouncyCastle.Ocsp
 		internal static string GetAlgorithmName(
 			DerObjectIdentifier oid)
 		{
-			if (oids.Contains(oid))
+			if (oids.ContainsKey(oid))
 			{
 				return (string)oids[oid];
 			}
@@ -128,9 +128,9 @@ namespace Org.BouncyCastle.Ocsp
 			return new AlgorithmIdentifier(sigOid, DerNull.Instance);
 		}
 
-		internal static IEnumerable AlgNames
+		internal static IEnumerable<string> AlgNames
 		{
-			get { return new EnumerableProxy(algorithms.Keys); }
+			get { return new EnumerableProxy<string>(algorithms.Keys); }
 		}
 	}
 }

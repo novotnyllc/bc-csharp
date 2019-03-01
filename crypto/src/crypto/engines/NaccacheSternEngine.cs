@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Utilities;
@@ -18,7 +18,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 
 		private NaccacheSternKeyParameters key;
 
-		private IList[] lookup = null;
+		private IList<BigInteger>[] lookup = null;
 
 		public string AlgorithmName
 		{
@@ -48,14 +48,14 @@ namespace Org.BouncyCastle.Crypto.Engines
 			if (!this.forEncryption)
 			{
 				NaccacheSternPrivateKeyParameters priv = (NaccacheSternPrivateKeyParameters)key;
-				IList primes = priv.SmallPrimesList;
-				lookup = new IList[primes.Count];
+				var primes = priv.SmallPrimesList;
+				lookup = new IList<BigInteger>[primes.Count];
 				for (int i = 0; i < primes.Count; i++)
 				{
 					BigInteger actualPrime = (BigInteger) primes[i];
 					int actualPrimeValue = actualPrime.IntValue;
 
-					lookup[i] = Platform.CreateArrayList(actualPrimeValue);
+					lookup[i] = Platform.CreateArrayList<BigInteger>(actualPrimeValue);
 					lookup[i].Add(BigInteger.One);
 
 					BigInteger accJ = BigInteger.Zero;
@@ -153,14 +153,14 @@ namespace Org.BouncyCastle.Crypto.Engines
 			}
 			else
 			{
-				IList plain = Platform.CreateArrayList();
+			    var plain = Platform.CreateArrayList<BigInteger>();
 				NaccacheSternPrivateKeyParameters priv = (NaccacheSternPrivateKeyParameters)key;
-				IList primes = priv.SmallPrimesList;
+				var primes = priv.SmallPrimesList;
 				// Get Chinese Remainders of CipherText
 				for (int i = 0; i < primes.Count; i++)
 				{
 					BigInteger exp = input.ModPow(priv.PhiN.Divide((BigInteger)primes[i]), priv.Modulus);
-					IList al = lookup[i];
+					var al = lookup[i];
 					if (lookup[i].Count != ((BigInteger)primes[i]).IntValue)
 					{
 						throw new InvalidCipherTextException("Error in lookup Array for "
@@ -334,7 +334,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 		*            the primes p_i
 		* @return an integer x for that x % p_i == c_i
 		*/
-		private static BigInteger chineseRemainder(IList congruences, IList primes)
+		private static BigInteger chineseRemainder(IList<BigInteger> congruences, IList<BigInteger> primes)
 		{
 			BigInteger retval = BigInteger.Zero;
 			BigInteger all = BigInteger.One;

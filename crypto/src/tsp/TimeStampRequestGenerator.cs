@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Tsp;
 using Org.BouncyCastle.Asn1.X509;
@@ -19,8 +19,8 @@ namespace Org.BouncyCastle.Tsp
 
 		private DerBoolean certReq;
 
-		private IDictionary extensions = Platform.CreateHashtable();
-        private IList       extOrdering = Platform.CreateArrayList();
+		private IDictionary<DerObjectIdentifier, X509Extension> extensions = Platform.CreateHashtable<DerObjectIdentifier, X509Extension>();
+        private IList<DerObjectIdentifier>       extOrdering = Platform.CreateArrayList<DerObjectIdentifier>();
 
 		public void SetReqPolicy(
 			string reqPolicy)

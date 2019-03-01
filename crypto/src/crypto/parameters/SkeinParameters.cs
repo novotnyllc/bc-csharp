@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -71,15 +72,15 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// </summary>
 		public const int PARAM_TYPE_OUTPUT = 63;
 
-		private IDictionary parameters;
+		private IDictionary<int, byte[]> parameters;
 
 		public SkeinParameters()
-			: this(Platform.CreateHashtable())
+			: this(Platform.CreateHashtable<int, byte[]>())
 
 		{
 		}
 
-		private SkeinParameters(IDictionary parameters)
+		private SkeinParameters(IDictionary<int, byte[]> parameters)
 		{
 			this.parameters = parameters;
 		}
@@ -87,7 +88,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// <summary>
 		/// Obtains a map of type (int) to value (byte[]) for the parameters tracked in this object.
 		/// </summary>
-		public IDictionary GetParameters()
+		public IDictionary<int, byte[]> GetParameters()
 		{
 			return parameters;
 		}
@@ -143,15 +144,15 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// </summary>
 		public class Builder
 		{
-			private IDictionary parameters = Platform.CreateHashtable();
+			private IDictionary<int, byte[]> parameters = Platform.CreateHashtable<int, byte[]>();
 
 			public Builder()
 			{
 			}
 
-			public Builder(IDictionary paramsMap)
+			public Builder(IDictionary<int, byte[]> paramsMap)
 			{
-				IEnumerator keys = paramsMap.Keys.GetEnumerator();
+				var keys = paramsMap.Keys.GetEnumerator();
 				while (keys.MoveNext())
 				{
 					int key = (int)keys.Current;
@@ -161,7 +162,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 
 			public Builder(SkeinParameters parameters)
 			{
-				IEnumerator keys = parameters.parameters.Keys.GetEnumerator();
+				var keys = parameters.parameters.Keys.GetEnumerator();
 				while (keys.MoveNext())
 				{
 					int key = (int)keys.Current;

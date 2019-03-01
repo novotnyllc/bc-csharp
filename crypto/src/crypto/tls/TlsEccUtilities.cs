@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.X9;
@@ -24,23 +25,23 @@ namespace Org.BouncyCastle.Crypto.Tls
             "secp224r1", "secp256k1", "secp256r1", "secp384r1", "secp521r1",
             "brainpoolP256r1", "brainpoolP384r1", "brainpoolP512r1"};
 
-        public static void AddSupportedEllipticCurvesExtension(IDictionary extensions, int[] namedCurves)
+        public static void AddSupportedEllipticCurvesExtension(IDictionary<int, byte[]> extensions, int[] namedCurves)
         {
             extensions[ExtensionType.supported_groups] = CreateSupportedEllipticCurvesExtension(namedCurves);
         }
 
-        public static void AddSupportedPointFormatsExtension(IDictionary extensions, byte[] ecPointFormats)
+        public static void AddSupportedPointFormatsExtension(IDictionary<int, byte[]> extensions, byte[] ecPointFormats)
         {
             extensions[ExtensionType.ec_point_formats] = CreateSupportedPointFormatsExtension(ecPointFormats);
         }
 
-        public static int[] GetSupportedEllipticCurvesExtension(IDictionary extensions)
+        public static int[] GetSupportedEllipticCurvesExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.supported_groups);
             return extensionData == null ? null : ReadSupportedEllipticCurvesExtension(extensionData);
         }
 
-        public static byte[] GetSupportedPointFormatsExtension(IDictionary extensions)
+        public static byte[] GetSupportedPointFormatsExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.ec_point_formats);
             return extensionData == null ? null : ReadSupportedPointFormatsExtension(extensionData);

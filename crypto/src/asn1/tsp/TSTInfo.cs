@@ -55,7 +55,7 @@ namespace Org.BouncyCastle.Asn1.Tsp
 		private TstInfo(
 			Asn1Sequence seq)
 		{
-			IEnumerator e = seq.GetEnumerator();
+			var e = seq.GetEnumerator();
 
 			// version
 			e.MoveNext();

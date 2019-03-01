@@ -67,7 +67,7 @@ namespace Org.BouncyCastle.Bcpg
                 SignatureSubpacketsParser sIn = new SignatureSubpacketsParser(
                     new MemoryStream(hashed, false));
 
-				IList v = Platform.CreateArrayList();
+			    var v = Platform.CreateArrayList< SignatureSubpacket>();
 				SignatureSubpacket sub;
 				while ((sub = sIn.ReadPacket()) != null)
                 {

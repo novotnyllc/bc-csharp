@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Utilities;
 
@@ -8,27 +8,18 @@ namespace Org.BouncyCastle.Asn1.X509
 {
     public class AttributeTable
     {
-        private readonly IDictionary attributes;
+        private readonly IDictionary<DerObjectIdentifier, AttributeX509> attributes;
 
         public AttributeTable(
-            IDictionary attrs)
+            IDictionary<DerObjectIdentifier, AttributeX509> attrs)
         {
             this.attributes = Platform.CreateHashtable(attrs);
         }
-
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete]
-        public AttributeTable(
-            Hashtable attrs)
-        {
-            this.attributes = Platform.CreateHashtable(attrs);
-        }
-#endif
 
 		public AttributeTable(
             Asn1EncodableVector v)
         {
-            this.attributes = Platform.CreateHashtable(v.Count);
+            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, AttributeX509>(v.Count);
 
 			for (int i = 0; i != v.Count; i++)
             {
@@ -41,7 +32,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		public AttributeTable(
             Asn1Set s)
         {
-            this.attributes = Platform.CreateHashtable(s.Count);
+            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, AttributeX509>(s.Count);
 
 			for (int i = 0; i != s.Count; i++)
             {
@@ -57,15 +48,7 @@ namespace Org.BouncyCastle.Asn1.X509
             return (AttributeX509) attributes[oid];
         }
 
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete("Use 'ToDictionary' instead")]
-		public Hashtable ToHashtable()
-        {
-            return new Hashtable(attributes);
-        }
-#endif
-
-        public IDictionary ToDictionary()
+        public IDictionary<DerObjectIdentifier, AttributeX509> ToDictionary()
         {
             return Platform.CreateHashtable(attributes);
         }

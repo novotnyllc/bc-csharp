@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -47,14 +48,14 @@ namespace Org.BouncyCastle.Crypto.Tls
             };
         }
 
-        public override IDictionary GetClientExtensions()
+        public override IDictionary<int, byte[]> GetClientExtensions()
         {
-            IDictionary clientExtensions = TlsExtensionsUtilities.EnsureExtensionsInitialised(base.GetClientExtensions());
+            var clientExtensions = TlsExtensionsUtilities.EnsureExtensionsInitialised(base.GetClientExtensions());
             TlsSrpUtilities.AddSrpExtension(clientExtensions, this.mIdentity);
             return clientExtensions;
         }
 
-        public override void ProcessServerExtensions(IDictionary serverExtensions)
+        public override void ProcessServerExtensions(IDictionary<int, byte[]> serverExtensions)
         {
             if (!TlsUtilities.HasExpectedEmptyExtensionData(serverExtensions, ExtensionType.srp,
                 AlertDescription.illegal_parameter))

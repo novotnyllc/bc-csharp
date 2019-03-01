@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -16,7 +17,7 @@ namespace Org.BouncyCastle.Ocsp
 {
 	public class OcspReqGenerator
 	{
-		private IList			list = Platform.CreateArrayList();
+		private IList<RequestObject>         list = Platform.CreateArrayList<RequestObject>();
 		private GeneralName		requestorName = null;
 		private X509Extensions	requestExtensions = null;
 

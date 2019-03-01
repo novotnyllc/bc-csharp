@@ -1,26 +1,26 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Cms
 {
 	public class RecipientInformationStore
 	{
-		private readonly IList all; //ArrayList[RecipientInformation]
-		private readonly IDictionary table = Platform.CreateHashtable(); // Hashtable[RecipientID, ArrayList[RecipientInformation]]
+		private readonly IList<RecipientInformation> all; //ArrayList[RecipientInformation]
+		private readonly IDictionary<RecipientID, IList<RecipientInformation>> table = new Dictionary<RecipientID, IList<RecipientInformation>>(); // Hashtable[RecipientID, ArrayList[RecipientInformation]]
 
 		public RecipientInformationStore(
-			ICollection recipientInfos)
+			ICollection<RecipientInformation> recipientInfos)
 		{
 			foreach (RecipientInformation recipientInformation in recipientInfos)
 			{
 				RecipientID rid = recipientInformation.RecipientID;
-                IList list = (IList)table[rid];
+                var list = table[rid];
 
 				if (list == null)
 				{
-					table[rid] = list = Platform.CreateArrayList(1);
+					table[rid] = list = Platform.CreateArrayList<RecipientInformation>(1);
 				}
 
 				list.Add(recipientInformation);
@@ -64,7 +64,7 @@ namespace Org.BouncyCastle.Cms
 		*
 		* @return a collection of recipients.
 		*/
-		public ICollection GetRecipients()
+		public ICollection<RecipientInformation> GetRecipients()
 		{
 			return Platform.CreateArrayList(all);
 		}
@@ -75,12 +75,12 @@ namespace Org.BouncyCastle.Cms
 		* @param selector a recipient id to select against.
 		* @return a collection of RecipientInformation objects.
 		*/
-		public ICollection GetRecipients(
+		public ICollection<RecipientInformation> GetRecipients(
 			RecipientID selector)
 		{
-            IList list = (IList)table[selector];
+            var list = table[selector];
 
-            return list == null ? Platform.CreateArrayList() : Platform.CreateArrayList(list);
+            return list == null ? Platform.CreateArrayList<RecipientInformation>() : Platform.CreateArrayList(list);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -20,12 +21,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 				:	null;
 		}
 
-		internal static IList ReadSignaturesAndTrust(
+		internal static IList<PgpSignature> ReadSignaturesAndTrust(
 			BcpgInputStream	bcpgInput)
 		{
 			try
 			{
-				IList sigList = Platform.CreateArrayList();
+                var sigList = Platform.CreateArrayList<PgpSignature>();
 
 				while (bcpgInput.NextPacketTag() == PacketTag.Signature)
 				{
@@ -45,13 +46,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
 		internal static void ReadUserIDs(
 			BcpgInputStream	bcpgInput,
-			out IList       ids,
-			out IList       idTrusts,
-			out IList       idSigs)
+			out IList<object>       ids,
+			out IList<ContainedPacket>       idTrusts,
+			out IList<IList<PgpSignature>>       idSigs)
 		{
-			ids = Platform.CreateArrayList();
-            idTrusts = Platform.CreateArrayList();
-            idSigs = Platform.CreateArrayList();
+            ids = Platform.CreateArrayList<object>();
+            idTrusts = Platform.CreateArrayList<ContainedPacket>();
+            idSigs = Platform.CreateArrayList<IList<PgpSignature>>();
 
 			while (bcpgInput.NextPacketTag() == PacketTag.UserId
 				|| bcpgInput.NextPacketTag() == PacketTag.UserAttribute)

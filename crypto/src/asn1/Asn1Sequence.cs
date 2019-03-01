@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -8,9 +9,9 @@ using Org.BouncyCastle.Utilities.Collections;
 namespace Org.BouncyCastle.Asn1
 {
     public abstract class Asn1Sequence
-        : Asn1Object, IEnumerable
+        : Asn1Object, IEnumerable<Asn1Encodable>
     {
-        private readonly IList seq;
+        private readonly IList<Asn1Encodable> seq;
 
         /**
          * return an Asn1Sequence from the given object.
@@ -109,10 +110,10 @@ namespace Org.BouncyCastle.Asn1
         protected internal Asn1Sequence(
             int capacity)
         {
-            seq = Platform.CreateArrayList(capacity);
+            seq = Platform.CreateArrayList<Asn1Encodable>(capacity);
         }
 
-        public virtual IEnumerator GetEnumerator()
+        public virtual IEnumerator<Asn1Encodable> GetEnumerator()
         {
             return seq.GetEnumerator();
         }
@@ -229,7 +230,7 @@ namespace Org.BouncyCastle.Asn1
                 return false;
 
             IEnumerator s1 = GetEnumerator();
-            IEnumerator s2 = other.GetEnumerator();
+            var s2 = other.GetEnumerator();
 
             while (s1.MoveNext() && s2.MoveNext())
             {
@@ -263,6 +264,11 @@ namespace Org.BouncyCastle.Asn1
         public override string ToString()
         {
             return CollectionUtilities.ToString(seq);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

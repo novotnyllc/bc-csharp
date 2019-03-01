@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Utilities.Collections;
@@ -8,14 +8,14 @@ namespace Org.BouncyCastle.Pkcs
 {
     public abstract class Pkcs12Entry
     {
-        private readonly IDictionary attributes;
+        private readonly IDictionary<string, Asn1Encodable> attributes;
 
 		protected internal Pkcs12Entry(
-            IDictionary attributes)
+            IDictionary<string, Asn1Encodable> attributes)
         {
             this.attributes = attributes;
 
-			foreach (DictionaryEntry entry in attributes)
+			foreach (var entry in attributes)
 			{
 				if (!(entry.Key is string))
 					throw new ArgumentException("Attribute keys must be of type: " + typeof(string).FullName, "attributes");
@@ -39,7 +39,7 @@ namespace Org.BouncyCastle.Pkcs
         }
 
 		[Obsolete("Use 'BagAttributeKeys' property")]
-        public IEnumerator GetBagAttributeKeys()
+        public IEnumerator<string> GetBagAttributeKeys()
         {
             return this.attributes.Keys.GetEnumerator();
         }
@@ -56,9 +56,9 @@ namespace Org.BouncyCastle.Pkcs
 			get { return (Asn1Encodable) this.attributes[oid]; }
 		}
 
-		public IEnumerable BagAttributeKeys
+		public IEnumerable<string> BagAttributeKeys
 		{
-			get { return new EnumerableProxy(this.attributes.Keys); }
+			get { return new EnumerableProxy<string>(this.attributes.Keys); }
 		}
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Crypto.Modes.Gcm
@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
     {
         // A lookup table of the power-of-two powers of 'x'
         // - lookupPowX2[i] = x^(2^i)
-        private IList lookupPowX2;
+        private IList<uint[]> lookupPowX2;
 
         public void Init(byte[] x)
         {
@@ -18,7 +18,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
             if (lookupPowX2 != null && Arrays.AreEqual(y, (uint[])lookupPowX2[0]))
                 return;
 
-            lookupPowX2 = Platform.CreateArrayList(8);
+            lookupPowX2 = Platform.CreateArrayList< uint[]>(8);
             lookupPowX2.Add(y);
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.X509;
@@ -48,12 +49,12 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected TlsSignerCredentials mServerCredentials = null;
 
         [Obsolete("Use constructor taking an explicit 'groupVerifier' argument")]
-        public TlsSrpKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, byte[] identity, byte[] password)
+        public TlsSrpKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, byte[] identity, byte[] password)
             :   this(keyExchange, supportedSignatureAlgorithms, new DefaultTlsSrpGroupVerifier(), identity, password)
         {
         }
 
-        public TlsSrpKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, TlsSrpGroupVerifier groupVerifier,
+        public TlsSrpKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, TlsSrpGroupVerifier groupVerifier,
             byte[] identity, byte[] password)
             :   base(keyExchange, supportedSignatureAlgorithms)
         {
@@ -64,7 +65,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             this.mSrpClient = new Srp6Client();
         }
 
-        public TlsSrpKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, byte[] identity,
+        public TlsSrpKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, byte[] identity,
             TlsSrpLoginParameters loginParameters)
             :   base(keyExchange, supportedSignatureAlgorithms)
         {

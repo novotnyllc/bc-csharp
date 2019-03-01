@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
+using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Utilities;
 
@@ -13,25 +14,14 @@ namespace Org.BouncyCastle.Pkcs
 
 		public AsymmetricKeyEntry(
             AsymmetricKeyParameter key)
-			: base(Platform.CreateHashtable())
+			: base(new Dictionary<string, Asn1Encodable>())
         {
             this.key = key;
         }
-
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete]
-        public AsymmetricKeyEntry(
-            AsymmetricKeyParameter key,
-            Hashtable attributes)
-			: base(attributes)
-        {
-            this.key = key;
-        }
-#endif
 
         public AsymmetricKeyEntry(
             AsymmetricKeyParameter  key,
-            IDictionary             attributes)
+            IDictionary<string, Asn1Encodable> attributes)
 			: base(attributes)
         {
             this.key = key;

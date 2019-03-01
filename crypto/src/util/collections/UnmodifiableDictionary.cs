@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
-	public abstract class UnmodifiableDictionary
-		: IDictionary
-	{
+	public abstract class UnmodifiableDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>
+    {
 		protected UnmodifiableDictionary()
 		{
 		}
 
-		public virtual void Add(object k, object v)
+		public virtual void Add(TKey k, TValue v)
 		{
 			throw new NotSupportedException();
 		}
@@ -20,20 +21,13 @@ namespace Org.BouncyCastle.Utilities.Collections
 			throw new NotSupportedException();
 		}
 
-		public abstract bool Contains(object k);
+		public abstract bool ContainsKey(TKey k);
 
-		public abstract void CopyTo(Array array, int index);
+		public abstract void CopyTo(KeyValuePair<TKey, TValue>[] array, int index);
 
 		public abstract int Count { get; }
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
-
-		public abstract IDictionaryEnumerator GetEnumerator();
-
-		public virtual void Remove(object k)
+		public virtual bool Remove(TKey k)
 		{
 			throw new NotSupportedException();
 		}
@@ -45,20 +39,37 @@ namespace Org.BouncyCastle.Utilities.Collections
 			get { return true; }
 		}
 
-		public abstract bool IsSynchronized { get; }
+		public abstract ICollection<TKey> Keys { get; }
 
-		public abstract object SyncRoot { get; }
+		public abstract ICollection<TValue> Values { get; }
 
-		public abstract ICollection Keys { get; }
-
-		public abstract ICollection Values { get; }
-
-		public virtual object this[object k]
+		public virtual TValue this[TKey k]
 		{
 			get { return GetValue(k); }
 			set { throw new NotSupportedException(); }
 		}
 
-		protected abstract object GetValue(object k);
-	}
+		protected abstract TValue GetValue(TKey k);
+
+        public abstract bool TryGetValue(TKey key, out TValue value);
+
+        public void Add(KeyValuePair<TKey, TValue> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public abstract bool Contains(KeyValuePair<TKey, TValue> item);
+
+        public bool Remove(KeyValuePair<TKey, TValue> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public abstract IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
 }

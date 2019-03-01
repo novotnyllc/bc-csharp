@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Security;
@@ -46,8 +47,8 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
 
         /// <exception cref="IOException"/>
-        protected static short EvaluateMaxFragmentLengthExtension(bool resumedSession, IDictionary clientExtensions,
-            IDictionary serverExtensions, byte alertDescription)
+        protected static short EvaluateMaxFragmentLengthExtension(bool resumedSession, IDictionary<int, byte[]> clientExtensions,
+            IDictionary<int, byte[]> serverExtensions, byte alertDescription)
         {
             short maxFragmentLength = TlsExtensionsUtilities.GetMaxFragmentLengthExtension(serverExtensions);
             if (maxFragmentLength >= 0)

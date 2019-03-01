@@ -3,11 +3,10 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-#if SILVERLIGHT || PORTABLE
+
 using System.Collections.Generic;
-#else
 using System.Collections;
-#endif
+using System.Linq;
 
 namespace Org.BouncyCastle.Utilities
 {
@@ -85,85 +84,34 @@ namespace Org.BouncyCastle.Utilities
         }
 #endif
 
-#if SILVERLIGHT || PORTABLE
-        internal static System.Collections.IList CreateArrayList()
+        internal static IList<T> CreateArrayList<T>()
         {
-            return new List<object>();
+            return new List<T>();
         }
-        internal static System.Collections.IList CreateArrayList(int capacity)
+        internal static IList<T> CreateArrayList<T>(int capacity)
         {
-            return new List<object>(capacity);
+            return new List<T>(capacity);
         }
-        internal static System.Collections.IList CreateArrayList(System.Collections.ICollection collection)
+        internal static IList<T> CreateArrayList<T>(ICollection<T> collection)
         {
-            System.Collections.IList result = new List<object>(collection.Count);
-            foreach (object o in collection)
-            {
-                result.Add(o);
-            }
-            return result;
+            return collection.ToList();
         }
-        internal static System.Collections.IList CreateArrayList(System.Collections.IEnumerable collection)
+        internal static IList<T> CreateArrayList<T>(IEnumerable<T> collection)
         {
-            System.Collections.IList result = new List<object>();
-            foreach (object o in collection)
-            {
-                result.Add(o);
-            }
-            return result;
+            return collection.ToList();
         }
-        internal static System.Collections.IDictionary CreateHashtable()
+        internal static IDictionary<TKey, TValue> CreateHashtable<TKey, TValue>()
         {
-            return new Dictionary<object, object>();
+            return new Dictionary<TKey, TValue>();
         }
-        internal static System.Collections.IDictionary CreateHashtable(int capacity)
+        internal static IDictionary<TKey, TValue> CreateHashtable<TKey, TValue>(int capacity)
         {
-            return new Dictionary<object, object>(capacity);
+            return new Dictionary<TKey, TValue>(capacity);
         }
-        internal static System.Collections.IDictionary CreateHashtable(System.Collections.IDictionary dictionary)
+        internal static IDictionary<TKey, TValue> CreateHashtable<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
         {
-            System.Collections.IDictionary result = new Dictionary<object, object>(dictionary.Count);
-            foreach (System.Collections.DictionaryEntry entry in dictionary)
-            {
-                result.Add(entry.Key, entry.Value);
-            }
-            return result;
+            return dictionary.ToDictionary(t => t.Key, t => t.Value);
         }
-#else
-        internal static System.Collections.IList CreateArrayList()
-        {
-            return new ArrayList();
-        }
-        internal static System.Collections.IList CreateArrayList(int capacity)
-        {
-            return new ArrayList(capacity);
-        }
-        internal static System.Collections.IList CreateArrayList(System.Collections.ICollection collection)
-        {
-            return new ArrayList(collection);
-        }
-        internal static System.Collections.IList CreateArrayList(System.Collections.IEnumerable collection)
-        {
-            ArrayList result = new ArrayList();
-            foreach (object o in collection)
-            {
-                result.Add(o);
-            }
-            return result;
-        }
-        internal static System.Collections.IDictionary CreateHashtable()
-        {
-            return new Hashtable();
-        }
-        internal static System.Collections.IDictionary CreateHashtable(int capacity)
-        {
-            return new Hashtable(capacity);
-        }
-        internal static System.Collections.IDictionary CreateHashtable(System.Collections.IDictionary dictionary)
-        {
-            return new Hashtable(dictionary);
-        }
-#endif
 
         internal static string ToLowerInvariant(string s)
         {

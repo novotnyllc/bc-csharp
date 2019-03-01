@@ -1,5 +1,5 @@
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.CryptoPro;
 using Org.BouncyCastle.Asn1.EdEC;
@@ -24,9 +24,9 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary kgAlgorithms = Platform.CreateHashtable();
-        private static readonly IDictionary kpgAlgorithms = Platform.CreateHashtable();
-        private static readonly IDictionary defaultKeySizes = Platform.CreateHashtable();
+        private static readonly IDictionary<string, string> kgAlgorithms = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, string> kpgAlgorithms = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, int> defaultKeySizes = Platform.CreateHashtable<string, int>();
 
         static GeneratorUtilities()
         {
@@ -381,7 +381,7 @@ namespace Org.BouncyCastle.Security
         private static int FindDefaultKeySize(
             string canonicalName)
         {
-            if (!defaultKeySizes.Contains(canonicalName))
+            if (!defaultKeySizes.ContainsKey(canonicalName))
                 return -1;
 
             return (int)defaultKeySizes[canonicalName];

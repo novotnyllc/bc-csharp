@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -22,20 +23,20 @@ namespace Org.BouncyCastle.Tsp
 
         private int failInfo;
         private TimeStampTokenGenerator tokenGenerator;
-        private IList acceptedAlgorithms;
+        private IList<string> acceptedAlgorithms;
         private IList acceptedPolicies;
         private IList acceptedExtensions;
 
         public TimeStampResponseGenerator(
             TimeStampTokenGenerator tokenGenerator,
-            IList acceptedAlgorithms)
+            IList<string> acceptedAlgorithms)
             : this(tokenGenerator, acceptedAlgorithms, null, null)
         {
         }
 
         public TimeStampResponseGenerator(
             TimeStampTokenGenerator tokenGenerator,
-            IList acceptedAlgorithms,
+            IList<string> acceptedAlgorithms,
             IList acceptedPolicy)
             : this(tokenGenerator, acceptedAlgorithms, acceptedPolicy, null)
         {
@@ -43,7 +44,7 @@ namespace Org.BouncyCastle.Tsp
 
         public TimeStampResponseGenerator(
             TimeStampTokenGenerator tokenGenerator,
-            IList acceptedAlgorithms,
+            IList<string> acceptedAlgorithms,
             IList acceptedPolicies,
             IList acceptedExtensions)
         {

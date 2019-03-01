@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -56,7 +56,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public CompleteCertificateRefs(
-			IEnumerable otherCertIDs)
+			IEnumerable<Asn1Encodable> otherCertIDs)
 		{
 			if (otherCertIDs == null)
 				throw new ArgumentNullException("otherCertIDs");

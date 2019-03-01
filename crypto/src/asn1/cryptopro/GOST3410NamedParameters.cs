@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Utilities;
@@ -17,8 +17,8 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
 		{
 		}
 
-        private static readonly IDictionary objIds = Platform.CreateHashtable();
-        private static readonly IDictionary parameters = Platform.CreateHashtable();
+        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, Gost3410ParamSetParameters> parameters = Platform.CreateHashtable<DerObjectIdentifier, Gost3410ParamSetParameters>();
 
         private static readonly Gost3410ParamSetParameters cryptoProA = new Gost3410ParamSetParameters(
             1024,
@@ -96,9 +96,9 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         * returns an enumeration containing the name strings for parameters
         * contained in this structure.
         */
-        public static IEnumerable Names
+        public static IEnumerable<string> Names
         {
-			get { return new EnumerableProxy(objIds.Keys); }
+			get { return new EnumerableProxy<string>(objIds.Keys); }
         }
 
 		public static Gost3410ParamSetParameters GetByName(

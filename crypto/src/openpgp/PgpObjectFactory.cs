@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -42,7 +43,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             {
                 case PacketTag.Signature:
                 {
-                    IList l = Platform.CreateArrayList();
+                    var l = Platform.CreateArrayList< PgpSignature>();
 
                     while (bcpgIn.NextPacketTag() == PacketTag.Signature)
                     {
@@ -86,7 +87,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                     return new PgpEncryptedDataList(bcpgIn);
                 case PacketTag.OnePassSignature:
                 {
-                    IList l = Platform.CreateArrayList();
+                    var l = Platform.CreateArrayList< PgpOnePassSignature>();
 
                     while (bcpgIn.NextPacketTag() == PacketTag.OnePassSignature)
                     {
@@ -129,9 +130,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// Return all available objects in a list.
 		/// </summary>
 		/// <returns>An <c>IList</c> containing all objects from this factory, in order.</returns>
-		public IList AllPgpObjects()
+		public IList<PgpObject> AllPgpObjects()
 		{
-            IList result = Platform.CreateArrayList();
+            var result = Platform.CreateArrayList< PgpObject>();
 			PgpObject pgpObject;
 			while ((pgpObject = NextPgpObject()) != null)
 			{

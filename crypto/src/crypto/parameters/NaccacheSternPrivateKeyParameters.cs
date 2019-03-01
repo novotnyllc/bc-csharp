@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Math;
 
 namespace Org.BouncyCastle.Crypto.Parameters
@@ -14,22 +14,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 	public class NaccacheSternPrivateKeyParameters : NaccacheSternKeyParameters
 	{
 		private readonly BigInteger phiN;
-		private readonly IList smallPrimes;
-
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete]
-        public NaccacheSternPrivateKeyParameters(
-            BigInteger g,
-            BigInteger n,
-            int lowerSigmaBound,
-            ArrayList smallPrimes,
-            BigInteger phiN)
-            : base(true, g, n, lowerSigmaBound)
-        {
-            this.smallPrimes = smallPrimes;
-            this.phiN = phiN;
-        }
-#endif
+		private readonly IList<BigInteger> smallPrimes;
 
 		/**
 		 * Constructs a NaccacheSternPrivateKey
@@ -50,7 +35,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 			BigInteger	g,
 			BigInteger	n,
 			int			lowerSigmaBound,
-			IList       smallPrimes,
+			IList<BigInteger>       smallPrimes,
 			BigInteger	phiN)
 			: base(true, g, n, lowerSigmaBound)
 		{
@@ -63,15 +48,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 			get { return phiN; }
 		}
 
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete("Use 'SmallPrimesList' instead")]
-        public ArrayList SmallPrimes
-		{
-			get { return new ArrayList(smallPrimes); }
-		}
-#endif
-
-        public IList SmallPrimesList
+        public IList<BigInteger> SmallPrimesList
         {
             get { return smallPrimes; }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -9,12 +10,12 @@ namespace Org.BouncyCastle.Crypto.Tls
 {
     public class ServerNameList
     {
-        protected readonly IList mServerNameList;
+        protected readonly IList<ServerName> mServerNameList;
 
         /**
          * @param serverNameList an {@link IList} of {@link ServerName}.
          */
-        public ServerNameList(IList serverNameList)
+        public ServerNameList(IList<ServerName> serverNameList)
         {
             if (serverNameList == null)
                 throw new ArgumentNullException("serverNameList");
@@ -25,7 +26,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /**
          * @return an {@link IList} of {@link ServerName}.
          */
-        public virtual IList ServerNames
+        public virtual IList<ServerName> ServerNames
         {
             get { return mServerNameList; }
         }
@@ -75,7 +76,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             MemoryStream buf = new MemoryStream(data, false);
 
             byte[] nameTypesSeen = TlsUtilities.EmptyBytes;
-            IList server_name_list = Platform.CreateArrayList();
+            var server_name_list = Platform.CreateArrayList<ServerName>();
             while (buf.Position < buf.Length)
             {
                 ServerName entry = ServerName.Parse(buf);

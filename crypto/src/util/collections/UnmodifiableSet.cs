@@ -1,21 +1,22 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
-	public abstract class UnmodifiableSet
-		: ISet
-	{
+	public abstract class UnmodifiableSet<T>
+        : ISet<T>
+    {
 		protected UnmodifiableSet()
 		{
 		}
 
-		public virtual void Add(object o)
+		public virtual bool Add(T o)
 		{
 			throw new NotSupportedException();
 		}
 
-		public virtual void AddAll(IEnumerable e)
+		public virtual void AddAll(IEnumerable<T> e)
 		{
 			throw new NotSupportedException();
 		}
@@ -25,35 +26,69 @@ namespace Org.BouncyCastle.Utilities.Collections
 			throw new NotSupportedException();
 		}
 		
-		public abstract bool Contains(object o);
+		public abstract bool Contains(T o);
 
-		public abstract void CopyTo(Array array, int index);
+		public abstract void CopyTo(T[] array, int index);
 
 		public abstract int Count { get; }
 
-		public abstract IEnumerator GetEnumerator();
-
-		public abstract bool IsEmpty { get; }
-
-		public abstract bool IsFixedSize { get; }
+		public abstract IEnumerator<T> GetEnumerator();
 
 		public virtual bool IsReadOnly
 		{
 			get { return true; }
 		}
 
-		public abstract bool IsSynchronized { get; }
-
-		public abstract object SyncRoot { get; }
-
-		public virtual void Remove(object o)
+		public virtual bool Remove(T o)
 		{
 			throw new NotSupportedException();
 		}
 
-		public virtual void RemoveAll(IEnumerable e)
+		public virtual void RemoveAll(IEnumerable<T> e)
 		{
 			throw new NotSupportedException();
 		}
-	}
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void ExceptWith(IEnumerable<T> other)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void IntersectWith(IEnumerable<T> other)
+        {
+            throw new NotSupportedException();
+        }
+
+        public abstract bool IsProperSubsetOf(IEnumerable<T> other);
+
+        public abstract bool IsProperSupersetOf(IEnumerable<T> other);
+
+        public abstract bool IsSubsetOf(IEnumerable<T> other);
+
+        public abstract bool IsSupersetOf(IEnumerable<T> other);
+
+        public abstract bool Overlaps(IEnumerable<T> other);
+
+        public abstract bool SetEquals(IEnumerable<T> other);
+
+        public void SymmetricExceptWith(IEnumerable<T> other)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void UnionWith(IEnumerable<T> other)
+        {
+            throw new NotSupportedException();
+        }
+
+        void ICollection<T>.Add(T item)
+        {
+            Add(item);
+        }
+    }
 }

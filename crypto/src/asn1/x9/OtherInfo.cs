@@ -26,7 +26,7 @@ namespace Org.BouncyCastle.Asn1.X9
 		public OtherInfo(
             Asn1Sequence seq)
         {
-            IEnumerator e = seq.GetEnumerator();
+            var e = seq.GetEnumerator();
 
 			e.MoveNext();
             keyInfo = new KeySpecificInfo((Asn1Sequence) e.Current);

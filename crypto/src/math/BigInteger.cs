@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
@@ -3234,7 +3235,7 @@ namespace Org.BouncyCastle.Math
                 int mask = (1 << 30) - 1;
                 BigInteger u = this.Abs();
                 int bits = u.BitLength;
-                IList S = Platform.CreateArrayList();
+                var S = Platform.CreateArrayList<string>();
                 while (bits > 30)
                 {
                     S.Add(Convert.ToString(u.IntValue & mask, 8));
@@ -3270,7 +3271,7 @@ namespace Org.BouncyCastle.Math
                 }
 
                 // TODO Could cache the moduli for each radix (soft reference?)
-                IList moduli = Platform.CreateArrayList();
+                var moduli = Platform.CreateArrayList<BigInteger>();
                 BigInteger R = BigInteger.ValueOf(radix);
                 while (R.CompareTo(q) <= 0)
                 {
@@ -3290,7 +3291,7 @@ namespace Org.BouncyCastle.Math
             return sb.ToString();
         }
 
-        private static void ToString(StringBuilder sb, int radix, IList moduli, int scale, BigInteger pos)
+        private static void ToString(StringBuilder sb, int radix, IList<BigInteger> moduli, int scale, BigInteger pos)
         {
             if (pos.BitLength < 64)
             {

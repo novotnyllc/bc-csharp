@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1.X509;
@@ -37,7 +38,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected byte[] mPremasterSecret;
 
         [Obsolete("Use constructor that takes a TlsDHVerifier")]
-        public TlsPskKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, TlsPskIdentity pskIdentity,
+        public TlsPskKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, TlsPskIdentity pskIdentity,
             TlsPskIdentityManager pskIdentityManager, DHParameters dhParameters, int[] namedCurves,
             byte[] clientECPointFormats, byte[] serverECPointFormats)
             :   this(keyExchange, supportedSignatureAlgorithms, pskIdentity, pskIdentityManager, new DefaultTlsDHVerifier(),
@@ -45,7 +46,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
         }
 
-        public TlsPskKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, TlsPskIdentity pskIdentity,
+        public TlsPskKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, TlsPskIdentity pskIdentity,
             TlsPskIdentityManager pskIdentityManager, TlsDHVerifier dhVerifier, DHParameters dhParameters, int[] namedCurves,
             byte[] clientECPointFormats, byte[] serverECPointFormats)
             :   base(keyExchange, supportedSignatureAlgorithms)

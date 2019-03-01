@@ -95,7 +95,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(ad.MacAlgOid, macAlg);
 
-			ICollection c = recipients.GetRecipients();
+			var c = recipients.GetRecipients();
 
 			Assert.AreEqual(1, c.Count);
 

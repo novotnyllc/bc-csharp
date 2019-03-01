@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -132,7 +133,7 @@ namespace Org.BouncyCastle.Tests
 
 //			CertificateFactory cf = CertificateFactory.GetInstance("X.509");
 			X509CertificateParser cf = new X509CertificateParser();
-			IList certCol = new ArrayList();
+			var certCol = new List<X509Certificate>();
 
 			certCol.Add(cf.ReadCertificate(certA));
 			certCol.Add(cf.ReadCertificate(certB));
@@ -144,16 +145,16 @@ namespace Org.BouncyCastle.Tests
 			X509CertStoreSelector select = new X509CertStoreSelector();
 			select.Subject = ((X509Certificate)certCol[0]).SubjectDN;
 
-			ISet trustanchors = new HashSet();
+			var trustanchors = new HashSet<TrustAnchor>();
 			trustanchors.Add(new TrustAnchor(cf.ReadCertificate(rootCertBin), null));
 
 //			CertStore certStore = CertStore.getInstance("Collection", new CollectionCertStoreParameters(certCol));
-			IX509Store x509CertStore = X509StoreFactory.Create(
+		    var x509CertStore = X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters(certCol));
+				new X509CollectionStoreParameters<X509Certificate>(certCol));
 
 			PkixBuilderParameters parameters = new PkixBuilderParameters(trustanchors, select);
-			parameters.AddStore(x509CertStore);
+			parameters.AddStore((IX509Store<object>)x509CertStore);
 
 			try
 			{
@@ -176,7 +177,7 @@ namespace Org.BouncyCastle.Tests
 			X509Certificate finalCert = cf.ReadCertificate(finalCertBin);
 
 			//Testing CertPath generation from List
-			IList list = new ArrayList();
+			var list = new List<X509Certificate>();
 			list.Add(interCert);
 //			CertPath certPath1 = cf.generateCertPath(list);
 			PkixCertPath certPath1 = new PkixCertPath(list);
@@ -224,7 +225,7 @@ namespace Org.BouncyCastle.Tests
 			//
 			// empty list test
 			//
-			list = new ArrayList();
+			list = new List<X509Certificate>();
 
 //			CertPath certPath = CertificateFactory.GetInstance("X.509","BC").generateCertPath(list);
 			PkixCertPath certPath = new PkixCertPath(list);
@@ -313,9 +314,9 @@ namespace Org.BouncyCastle.Tests
 
 //		private class MyCertPath : PkixCertPath
 //		{
-//			private readonly ArrayList certificates;
+//			private readonly var certificates;
 //
-//			private readonly ArrayList encodingNames;
+//			private readonly var encodingNames;
 //
 //			private readonly byte[] encoding;
 //
@@ -329,7 +330,7 @@ namespace Org.BouncyCastle.Tests
 //				encodingNames.Add("MyEncoding");
 //			}
 //
-//			public override IList Certificates
+//			public override var Certificates
 //			{
 //				get { return CollectionUtilities.ReadOnly(certificates); }
 //			}

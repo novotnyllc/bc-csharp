@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -96,14 +97,14 @@ namespace Org.BouncyCastle.Cms.Tests
 			CmsSignedDataParser	sp,
 			byte[]				contentDigest)
 		{
-			IX509Store certStore = sp.GetCertificates("Collection");
+			var certStore = sp.GetCertificates("Collection");
 			SignerInformationStore signers = sp.GetSignerInfos();
 
 			foreach (SignerInformation signer in signers.GetSigners())
 			{
-				ICollection certCollection = certStore.GetMatches(signer.SignerID);
+				var certCollection = certStore.GetMatches(signer.SignerID);
 
-				IEnumerator certEnum = certCollection.GetEnumerator();
+				var certEnum = certCollection.GetEnumerator();
 
 				certEnum.MoveNext();
 				X509Certificate	cert = (X509Certificate) certEnum.Current;
@@ -154,8 +155,8 @@ namespace Org.BouncyCastle.Cms.Tests
 		[Test]
 		public void TestSha1WithRsa()
 		{
-			IList certList = new ArrayList();
-			IList crlList = new ArrayList();
+			var certList = new List<X509Certificate>();
+			var crlList = new List<X509Crl>();
 			MemoryStream bOut = new MemoryStream();
 
 			certList.Add(OrigCert);
@@ -164,12 +165,12 @@ namespace Org.BouncyCastle.Cms.Tests
 			crlList.Add(SignCrl);
 			crlList.Add(OrigCrl);
 
-			IX509Store x509Certs = X509StoreFactory.Create(
+			var x509Certs = X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters(certList));
-			IX509Store x509Crls = X509StoreFactory.Create(
+				new X509CollectionStoreParameters<X509Certificate>(certList));
+			var x509Crls = X509StoreFactory.Create(
 				"CRL/Collection",
-				new X509CollectionStoreParameters(crlList));
+				new X509CollectionStoreParameters<X509Crl>(crlList));
 
 			CmsSignedDataStreamGenerator gen = new CmsSignedDataStreamGenerator();
 

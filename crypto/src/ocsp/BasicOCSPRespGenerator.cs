@@ -11,6 +11,7 @@ using Org.BouncyCastle.Security.Certificates;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.Crypto.Operators;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Ocsp
 {
@@ -19,7 +20,7 @@ namespace Org.BouncyCastle.Ocsp
 	 */
 	public class BasicOcspRespGenerator
 	{
-		private readonly IList list = Platform.CreateArrayList();
+		private readonly IList<ResponseObject> list = Platform.CreateArrayList<ResponseObject>();
 
 		private X509Extensions responseExtensions;
 		private RespID responderID;

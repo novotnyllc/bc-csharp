@@ -16,7 +16,7 @@ namespace Org.BouncyCastle.Crypto.Prng.Test
         private string _personalisation;
         private int _ss;
         private String[] _ev;
-        private IList _ai = new ArrayList();
+        private ArrayList _ai = new ArrayList();
 
         public DrbgTestVector(IDigest digest, IEntropySource eSource, bool predictionResistance, string nonce,
             int securityStrength, string[] expected)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
@@ -51,7 +52,7 @@ namespace Org.BouncyCastle.Math.EC
         protected internal readonly bool m_withCompression;
 
         // Dictionary is (string -> PreCompInfo)
-        protected internal IDictionary m_preCompTable = null;
+        protected internal IDictionary<string, PreCompInfo> m_preCompTable = null;
 
         protected ECPoint(ECCurve curve, ECFieldElement	x, ECFieldElement y, bool withCompression)
             : this(curve, x, y, GetInitialZCoords(curve), withCompression)

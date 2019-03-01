@@ -74,7 +74,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          */
         public virtual void Encode(Stream output)
         {
-            IList derEncodings = Platform.CreateArrayList(mCertificateList.Length);
+            var derEncodings = Platform.CreateArrayList<byte[]>(mCertificateList.Length);
 
             int totalLength = 0;
             foreach (Asn1Encodable asn1Cert in mCertificateList)
@@ -112,7 +112,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             MemoryStream buf = new MemoryStream(certListData, false);
 
-            IList certificate_list = Platform.CreateArrayList();
+            var certificate_list = Platform.CreateArrayList<X509CertificateStructure>();
             while (buf.Position < buf.Length)
             {
                 byte[] berEncoding = TlsUtilities.ReadOpaque24(buf);

@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Security.Certificates;
 using Org.BouncyCastle.Utilities;
@@ -33,7 +33,7 @@ namespace Org.BouncyCastle.Pkix
 					+ typeof(PkixAttrCertPathBuilder).FullName + " class.");
 			}
 
-			ICollection targets;
+			ICollection<X509V2AttributeCertificate> targets;
 			try
 			{
 				targets = PkixCertPathValidatorUtilities.FindCertificates(
@@ -57,7 +57,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
 				X509Name[] principals = cert.Issuer.GetPrincipals();
-				ISet issuers = new HashSet();
+			 var issuers = new HashSet();
 				for (int i = 0; i < principals.Length; i++)
 				{
 					try
@@ -77,7 +77,7 @@ namespace Org.BouncyCastle.Pkix
 				if (issuers.IsEmpty)
 					throw new PkixCertPathBuilderException("Public key certificate for attribute certificate cannot be found.");
 
-                IList certPathList = Platform.CreateArrayList();
+                var certPathList = Platform.CreateArrayList<X509Certificate>();
 
 				foreach (X509Certificate issuer in issuers)
 				{
@@ -113,7 +113,7 @@ namespace Org.BouncyCastle.Pkix
 			IX509AttributeCertificate	attrCert,
 			X509Certificate				tbvCert,
 			PkixBuilderParameters		pkixParams,
-			IList						tbvPath)
+			IList<X509Certificate>                       tbvPath)
 		{
 			// If tbvCert is readily present in tbvPath, it indicates having run
 			// into a cycle in the
@@ -173,7 +173,7 @@ namespace Org.BouncyCastle.Pkix
 					}
 
 					// try to get the issuer certificate from one of the stores
-					ISet issuers = new HashSet();
+				 var issuers = new HashSet();
 					try
 					{
 						issuers.AddAll(PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams));

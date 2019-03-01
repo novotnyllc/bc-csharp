@@ -184,7 +184,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 			if (seq.Count > 5)
 				throw new ArgumentException("Bad sequence size: " + seq.Count);
 
-			IEnumerator e = seq.GetEnumerator();
+			var e = seq.GetEnumerator();
 
 			e.MoveNext();
 			Asn1Encodable o = (Asn1Encodable) e.Current;

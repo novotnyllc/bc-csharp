@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Crypto;
@@ -63,7 +63,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 
 		static readonly BigInteger g = BigInteger.ValueOf(131);
 
-		static readonly IList smallPrimes = new ArrayList();
+		static readonly IList<BigInteger> smallPrimes = new List<BigInteger>();
 
 		// static final BigInteger paperTest = BigInteger.ValueOf(202);
 

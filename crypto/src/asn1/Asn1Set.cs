@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 #if PORTABLE
-using System.Collections.Generic;
 using System.Linq;
 #endif
 
@@ -13,9 +13,9 @@ using Org.BouncyCastle.Utilities.Collections;
 namespace Org.BouncyCastle.Asn1
 {
     abstract public class Asn1Set
-        : Asn1Object, IEnumerable
+        : Asn1Object, IEnumerable<Asn1Encodable>
     {
-        private readonly IList _set;
+        private readonly IList<Asn1Encodable> _set;
 
         /**
          * return an ASN1Set from the given object.
@@ -127,18 +127,12 @@ namespace Org.BouncyCastle.Asn1
         protected internal Asn1Set(
             int capacity)
         {
-            _set = Platform.CreateArrayList(capacity);
+            _set = Platform.CreateArrayList<Asn1Encodable>(capacity);
         }
 
-        public virtual IEnumerator GetEnumerator()
+        public virtual IEnumerator<Asn1Encodable> GetEnumerator()
         {
             return _set.GetEnumerator();
-        }
-
-        [Obsolete("Use GetEnumerator() instead")]
-        public IEnumerator GetObjects()
-        {
-            return GetEnumerator();
         }
 
         /**
@@ -257,8 +251,8 @@ namespace Org.BouncyCastle.Asn1
                 return false;
             }
 
-            IEnumerator s1 = GetEnumerator();
-            IEnumerator s2 = other.GetEnumerator();
+            var s1 = GetEnumerator();
+            var s2 = other.GetEnumerator();
 
             while (s1.MoveNext() && s2.MoveNext())
             {
@@ -272,7 +266,7 @@ namespace Org.BouncyCastle.Asn1
             return true;
         }
 
-        private Asn1Encodable GetCurrent(IEnumerator e)
+        private Asn1Encodable GetCurrent(IEnumerator<Asn1Encodable> e)
         {
             Asn1Encodable encObj = (Asn1Encodable)e.Current;
 
@@ -327,6 +321,11 @@ namespace Org.BouncyCastle.Asn1
         public override string ToString()
         {
             return CollectionUtilities.ToString(_set);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
 #if PORTABLE

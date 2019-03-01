@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -16,12 +17,12 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected ProtocolVersion mClientVersion;
         protected int[] mOfferedCipherSuites;
         protected byte[] mOfferedCompressionMethods;
-        protected IDictionary mClientExtensions;
+        protected IDictionary<int, byte[]> mClientExtensions;
 
         protected bool mEncryptThenMacOffered;
         protected short mMaxFragmentLengthOffered;
         protected bool mTruncatedHMacOffered;
-        protected IList mSupportedSignatureAlgorithms;
+        protected IList<SignatureAndHashAlgorithm> mSupportedSignatureAlgorithms;
         protected bool mEccCipherSuitesOffered;
         protected int[] mNamedCurves;
         protected byte[] mClientECPointFormats, mServerECPointFormats;
@@ -29,7 +30,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected ProtocolVersion mServerVersion;
         protected int mSelectedCipherSuite;
         protected byte mSelectedCompressionMethod;
-        protected IDictionary mServerExtensions;
+        protected IDictionary<int, byte[]> mServerExtensions;
 
         public AbstractTlsServer()
             :   this(new DefaultTlsCipherFactory())
@@ -51,7 +52,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             get { return false; }
         }
 
-        protected virtual IDictionary CheckServerExtensions()
+        protected virtual IDictionary<int, byte[]> CheckServerExtensions()
         {
             return this.mServerExtensions = TlsExtensionsUtilities.EnsureExtensionsInitialised(this.mServerExtensions);
         }
@@ -133,7 +134,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             this.mOfferedCompressionMethods = offeredCompressionMethods;
         }
 
-        public virtual void ProcessClientExtensions(IDictionary clientExtensions)
+        public virtual void ProcessClientExtensions(IDictionary<int, byte[]> clientExtensions)
         {
             this.mClientExtensions = clientExtensions;
 
@@ -199,7 +200,7 @@ namespace Org.BouncyCastle.Crypto.Tls
              * somewhat inelegant but is a compromise designed to minimize changes to the original
              * cipher suite design.
              */
-            IList sigAlgs = TlsUtilities.GetUsableSignatureAlgorithms(this.mSupportedSignatureAlgorithms);
+            var sigAlgs = TlsUtilities.GetUsableSignatureAlgorithms(this.mSupportedSignatureAlgorithms);
 
             /*
              * RFC 4429 5.1. A server that receives a ClientHello containing one or both of these
@@ -240,7 +241,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
 
         // IDictionary is (Int32 -> byte[])
-        public virtual IDictionary GetServerExtensions()
+        public virtual IDictionary<int, byte[]> GetServerExtensions()
         {
             if (this.mEncryptThenMacOffered && AllowEncryptThenMac)
             {
@@ -303,7 +304,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return null;
         }
 
-        public virtual void ProcessClientSupplementalData(IList clientSupplementalData)
+        public virtual void ProcessClientSupplementalData(IList<SupplementalDataEntry> clientSupplementalData)
         {
             if (clientSupplementalData != null)
                 throw new TlsFatalAlert(AlertDescription.unexpected_message);

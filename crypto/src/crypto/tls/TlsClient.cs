@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Org.BouncyCastle.Crypto.Tls
@@ -64,7 +65,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /// A <see cref="IDictionary"/> (Int32 -> byte[]). May be null.
         /// </returns>
         /// <exception cref="IOException"></exception>
-        IDictionary GetClientExtensions();
+        IDictionary<int, byte[]> GetClientExtensions();
 
         /// <exception cref="IOException"></exception>
         void NotifyServerVersion(ProtocolVersion selectedVersion);
@@ -108,11 +109,11 @@ namespace Org.BouncyCastle.Crypto.Tls
         /// <param name="serverExtensions">
         /// A <see cref="IDictionary"/>  (Int32 -> byte[])
         /// </param>
-        void ProcessServerExtensions(IDictionary serverExtensions);
+        void ProcessServerExtensions(IDictionary<int, byte[]> serverExtensions);
 
         /// <param name="serverSupplementalData">A <see cref="IList">list</see> of <see cref="SupplementalDataEntry"/></param>
         /// <exception cref="IOException"/>
-        void ProcessServerSupplementalData(IList serverSupplementalData);
+        void ProcessServerSupplementalData(IList<SupplementalDataEntry> serverSupplementalData);
 
         /// <summary>
         /// Return an implementation of <see cref="TlsKeyExchange"/> to negotiate the key exchange

@@ -1,24 +1,25 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
-	public class UnmodifiableListProxy
-		: UnmodifiableList
+	public class UnmodifiableListProxy<T>
+		: UnmodifiableList<T>
 	{
-		private readonly IList l;
+		private readonly IList<T> l;
 
-		public UnmodifiableListProxy(IList l)
+		public UnmodifiableListProxy(IList<T> l)
 		{
 			this.l = l;
 		}
 
-		public override bool Contains(object o)
+		public override bool Contains(T o)
 		{
 			return l.Contains(o);
 		}
 
-		public override void CopyTo(Array array, int index)
+		public override void CopyTo(T[] array, int index)
 		{
 			l.CopyTo(array, index);
 		}
@@ -28,32 +29,17 @@ namespace Org.BouncyCastle.Utilities.Collections
 			get { return l.Count; }
 		}
 
-		public override IEnumerator GetEnumerator()
+		public override IEnumerator<T> GetEnumerator()
 		{
 			return l.GetEnumerator();
 		}
 
-		public override int IndexOf(object o)
+		public override int IndexOf(T o)
 		{
 			return l.IndexOf(o);
 		}
 
-		public override bool IsFixedSize
-		{
-			get { return l.IsFixedSize; }
-		}
-
-		public override bool IsSynchronized
-		{
-			get { return l.IsSynchronized; }
-		}
-
-		public override object SyncRoot
-		{
-			get { return l.SyncRoot; }
-		}
-
-		protected override object GetValue(int i)
+		protected override T GetValue(int i)
 		{
 			return l[i];
 		}

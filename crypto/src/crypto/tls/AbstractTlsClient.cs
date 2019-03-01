@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -13,7 +14,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         protected TlsClientContext mContext;
 
-        protected IList mSupportedSignatureAlgorithms;
+        protected IList<SignatureAndHashAlgorithm> mSupportedSignatureAlgorithms;
         protected int[] mNamedCurves;
         protected byte[] mClientECPointFormats, mServerECPointFormats;
 
@@ -57,7 +58,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
         }
 
-        protected virtual void CheckForUnexpectedServerExtension(IDictionary serverExtensions, int extensionType)
+        protected virtual void CheckForUnexpectedServerExtension(IDictionary<int, byte[]> serverExtensions, int extensionType)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(serverExtensions, extensionType);
             if (extensionData != null && !AllowUnexpectedServerExtension(extensionType, extensionData))
@@ -106,9 +107,9 @@ namespace Org.BouncyCastle.Crypto.Tls
             get { return false; }
         }
 
-        public virtual IDictionary GetClientExtensions()
+        public virtual IDictionary<int, byte[]> GetClientExtensions()
         {
-            IDictionary clientExtensions = null;
+            IDictionary<int, byte[]> clientExtensions = null;
 
             ProtocolVersion clientVersion = mContext.ClientVersion;
 
@@ -185,7 +186,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             this.mSelectedCompressionMethod = selectedCompressionMethod;
         }
 
-        public virtual void ProcessServerExtensions(IDictionary serverExtensions)
+        public virtual void ProcessServerExtensions(IDictionary<int, byte[]> serverExtensions)
         {
             /*
              * TlsProtocol implementation validates that any server extensions received correspond to
@@ -216,7 +217,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
         }
 
-        public virtual void ProcessServerSupplementalData(IList serverSupplementalData)
+        public virtual void ProcessServerSupplementalData(IList<SupplementalDataEntry> serverSupplementalData)
         {
             if (serverSupplementalData != null)
                 throw new TlsFatalAlert(AlertDescription.unexpected_message);

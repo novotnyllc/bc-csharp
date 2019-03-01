@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -24,8 +25,8 @@ namespace Org.BouncyCastle.Tests
     public class BlockCipherTest
         : SimpleTest
     {
-        private static readonly ISet validModes = CollectionUtilities.ReadOnly(
-            new HashSet(new string[]{ "CBC", "CCM", "CFB", "CTR", "CTS", "EAX", "ECB", "GCM", "OCB", "OFB" }));
+        private static readonly ISet<string> validModes = CollectionUtilities.ReadOnly(
+            new HashSet<string>(new string[]{ "CBC", "CCM", "CFB", "CTR", "CTS", "EAX", "ECB", "GCM", "OCB", "OFB" }));
 
         private static readonly string[] cipherTests1 =
         {

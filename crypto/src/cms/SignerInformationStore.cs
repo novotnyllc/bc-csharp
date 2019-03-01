@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -8,8 +9,8 @@ namespace Org.BouncyCastle.Cms
 {
     public class SignerInformationStore
     {
-        private readonly IList all; //ArrayList[SignerInformation]
-        private readonly IDictionary table = Platform.CreateHashtable(); // Hashtable[SignerID, ArrayList[SignerInformation]]
+        private readonly IList<SignerInformation> all; //ArrayList[SignerInformation]
+        private readonly IDictionary<SignerID, IList<SignerInformation>> table = Platform.CreateHashtable<SignerID, IList<SignerInformation>>(); // Hashtable[SignerID, ArrayList[SignerInformation]]
 
         /**
          * Create a store containing a single SignerInformation object.
@@ -19,7 +20,7 @@ namespace Org.BouncyCastle.Cms
         public SignerInformationStore(
             SignerInformation signerInfo)
         {
-            this.all = Platform.CreateArrayList(1);
+            this.all = Platform.CreateArrayList<SignerInformation>(1);
             this.all.Add(signerInfo);
 
             SignerID sid = signerInfo.SignerID;
@@ -33,16 +34,16 @@ namespace Org.BouncyCastle.Cms
          * @param signerInfos a collection signer information objects to contain.
          */
         public SignerInformationStore(
-            ICollection signerInfos)
+            ICollection<SignerInformation> signerInfos)
         {
             foreach (SignerInformation signer in signerInfos)
             {
                 SignerID sid = signer.SignerID;
-                IList list = (IList)table[sid];
+                var list = table[sid];
 
                 if (list == null)
                 {
-                    table[sid] = list = Platform.CreateArrayList(1);
+                    table[sid] = list = Platform.CreateArrayList<SignerInformation>(1);
                 }
 
                 list.Add(signer);
@@ -73,7 +74,7 @@ namespace Org.BouncyCastle.Cms
         }
 
         /// <returns>An ICollection of all signers in the collection</returns>
-        public ICollection GetSigners()
+        public ICollection<SignerInformation> GetSigners()
         {
             return Platform.CreateArrayList(all);
         }
@@ -84,12 +85,12 @@ namespace Org.BouncyCastle.Cms
         * @param selector a signer id to select against.
         * @return a collection of SignerInformation objects.
         */
-        public ICollection GetSigners(
+        public ICollection<SignerInformation> GetSigners(
             SignerID selector)
         {
-            IList list = (IList) table[selector];
+            var list = table[selector];
 
-            return list == null ? Platform.CreateArrayList() : Platform.CreateArrayList(list);
+            return list == null ? Platform.CreateArrayList<SignerInformation>() : Platform.CreateArrayList(list);
         }
     }
 }

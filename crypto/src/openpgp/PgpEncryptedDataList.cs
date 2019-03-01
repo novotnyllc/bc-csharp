@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
     public class PgpEncryptedDataList
 		: PgpObject
     {
-        private IList list = Platform.CreateArrayList();
+        private IList<object> list = Platform.CreateArrayList<object>();
         private InputStreamPacket data;
 
 		public PgpEncryptedDataList(
@@ -64,9 +64,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			get { return list.Count == 0; }
         }
 
-		public IEnumerable GetEncryptedDataObjects()
+		public IEnumerable<object> GetEncryptedDataObjects()
         {
-            return new EnumerableProxy(list);
+            return new EnumerableProxy<object>(list);
         }
     }
 }

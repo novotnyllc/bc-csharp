@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Org.BouncyCastle.Crypto.Tls
@@ -14,7 +15,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             extensions[ExtensionType.use_srtp] = CreateUseSrtpExtension(useSRTPData);
         }
 
-        public static UseSrtpData GetUseSrtpExtension(IDictionary extensions)
+        public static UseSrtpData GetUseSrtpExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.use_srtp);
             return extensionData == null ? null : ReadUseSrtpExtension(extensionData);

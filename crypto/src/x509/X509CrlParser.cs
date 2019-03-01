@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -95,7 +96,7 @@ namespace Org.BouncyCastle.X509
 		/// Create loading data from byte array.
 		/// </summary>
 		/// <param name="input"></param>
-		public ICollection ReadCrls(
+		public ICollection<X509Crl> ReadCrls(
 			byte[] input)
 		{
 			return ReadCrls(new MemoryStream(input, false));
@@ -178,11 +179,11 @@ namespace Org.BouncyCastle.X509
 		 * only significant field being crls.  In particular the signature
 		 * and the contents are ignored.
 		 */
-		public ICollection ReadCrls(
+		public ICollection<X509Crl> ReadCrls(
 			Stream inStream)
 		{
 			X509Crl crl;
-			IList crls = Platform.CreateArrayList();
+			var crls = Platform.CreateArrayList<X509Crl>();
 
 			while ((crl = ReadCrl(inStream)) != null)
 			{

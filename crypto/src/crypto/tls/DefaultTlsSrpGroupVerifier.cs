@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Agreement.Srp;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
@@ -11,7 +11,7 @@ namespace Org.BouncyCastle.Crypto.Tls
     public class DefaultTlsSrpGroupVerifier
         :   TlsSrpGroupVerifier
     {
-        protected static readonly IList DefaultGroups = Platform.CreateArrayList();
+        protected static readonly IList<Srp6GroupParameters> DefaultGroups = Platform.CreateArrayList<Srp6GroupParameters>();
 
         static DefaultTlsSrpGroupVerifier()
         {
@@ -25,7 +25,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
 
         // Vector is (SRP6GroupParameters)
-        protected readonly IList mGroups;
+        protected readonly IList<Srp6GroupParameters> mGroups;
 
         /**
          * Accept only the group parameters specified in RFC 5054 Appendix A.
@@ -40,7 +40,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          * 
          * @param groups a {@link Vector} of acceptable {@link SRP6GroupParameters}
          */
-        public DefaultTlsSrpGroupVerifier(IList groups)
+        public DefaultTlsSrpGroupVerifier(IList<Srp6GroupParameters> groups)
         {
             this.mGroups = groups;
         }

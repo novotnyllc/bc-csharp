@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.X509.Store
@@ -8,10 +8,10 @@ namespace Org.BouncyCastle.X509.Store
 	/**
 	 * A simple collection backed store.
 	 */
-	internal class X509CollectionStore
-		: IX509Store
+	internal class X509CollectionStore<T>
+		: IX509Store<T>
 	{
-		private ICollection _local;
+		private ICollection<T> _local;
 
 		/**
 		 * Basic constructor.
@@ -19,7 +19,7 @@ namespace Org.BouncyCastle.X509.Store
 		 * @param collection - initial contents for the store, this is copied.
 		 */
 		internal X509CollectionStore(
-			ICollection collection)
+			ICollection<T> collection)
 		{
 			_local = Platform.CreateArrayList(collection);
 		}
@@ -30,7 +30,7 @@ namespace Org.BouncyCastle.X509.Store
 		 * @param selector the selector to match against.
 		 * @return a possibly empty collection of matching objects.
 		 */
-		public ICollection GetMatches(
+		public ICollection<T> GetMatches(
 			IX509Selector selector)
 		{
 			if (selector == null)
@@ -38,8 +38,8 @@ namespace Org.BouncyCastle.X509.Store
                 return Platform.CreateArrayList(_local);
 			}
 
-            IList result = Platform.CreateArrayList();
-			foreach (object obj in _local)
+            var result = Platform.CreateArrayList<T>();
+			foreach (var obj in _local)
 			{
 				if (selector.Match(obj))
 					result.Add(obj);

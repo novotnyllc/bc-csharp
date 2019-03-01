@@ -150,7 +150,7 @@ namespace Org.BouncyCastle.X509
 
 		private ISet LoadCrlEntries()
 		{
-			ISet entrySet = new HashSet();
+		 var entrySet = new HashSet();
 			IEnumerable certs = c.GetRevokedCertificateEnumeration();
 
 			X509Name previousCertificateIssuer = IssuerDN;

@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Bcpg.Attr;
 using Org.BouncyCastle.Utilities;
 
@@ -8,7 +8,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 {
 	public class PgpUserAttributeSubpacketVectorGenerator
 	{
-		private IList list = Platform.CreateArrayList();
+		private IList<ImageAttrib> list = Platform.CreateArrayList<ImageAttrib>();
 
 		public virtual void SetImageAttribute(
 			ImageAttrib.Format	imageType,

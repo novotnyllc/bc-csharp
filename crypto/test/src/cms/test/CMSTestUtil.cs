@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -452,37 +453,37 @@ namespace Org.BouncyCastle.Cms.Tests
 		*  INTERNAL METHODS
 		*
 		*/
-        internal static IX509Store MakeAttrCertStore(params IX509AttributeCertificate[] attrCerts)
+        internal static IX509Store<IX509AttributeCertificate> MakeAttrCertStore(params IX509AttributeCertificate[] attrCerts)
         {
-            IList attrCertList = new ArrayList();
+            var attrCertList = new List<IX509AttributeCertificate>();
             foreach (IX509AttributeCertificate attrCert in attrCerts)
             {
                 attrCertList.Add(attrCert);
             }
 
-            return X509StoreFactory.Create("AttributeCertificate/Collection", new X509CollectionStoreParameters(attrCertList));
+            return X509StoreFactory.Create("AttributeCertificate/Collection", new X509CollectionStoreParameters<IX509AttributeCertificate>(attrCertList));
         }
 
-        internal static IX509Store MakeCertStore(params X509Certificate[] certs)
+        internal static IX509Store<X509Certificate> MakeCertStore(params X509Certificate[] certs)
         {
-            IList certList = new ArrayList();
+            var certList = new List<X509Certificate>();
             foreach (X509Certificate cert in certs)
             {
                 certList.Add(cert);
             }
 
-            return X509StoreFactory.Create("Certificate/Collection", new X509CollectionStoreParameters(certList));
+            return X509StoreFactory.Create("Certificate/Collection", new X509CollectionStoreParameters<X509Certificate>(certList));
         }
 
-        internal static IX509Store MakeCrlStore(params X509Crl[] crls)
+        internal static IX509Store<X509Crl> MakeCrlStore(params X509Crl[] crls)
         {
-            IList crlList = new ArrayList();
+            var crlList = new List<X509Crl>();
             foreach (X509Crl crl in crls)
             {
                 crlList.Add(crl);
             }
 
-            return X509StoreFactory.Create("CRL/Collection", new X509CollectionStoreParameters(crlList));
+            return X509StoreFactory.Create("CRL/Collection", new X509CollectionStoreParameters<X509Crl>(crlList));
         }
 
         private static AuthorityKeyIdentifier CreateAuthorityKeyId(

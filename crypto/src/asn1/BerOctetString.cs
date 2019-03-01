@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -11,9 +12,9 @@ namespace Org.BouncyCastle.Asn1
     {
 		public static BerOctetString FromSequence(Asn1Sequence seq)
 		{
-			IList v = Platform.CreateArrayList();
+		    var v = Platform.CreateArrayList<DerOctetString>();
 
-			foreach (Asn1Encodable obj in seq)
+			foreach (DerOctetString obj in seq)
 			{
 				v.Add(obj);
 			}
@@ -27,7 +28,7 @@ namespace Org.BouncyCastle.Asn1
          * convert a vector of octet strings into a single byte string
          */
         private static byte[] ToBytes(
-            IEnumerable octs)
+            IEnumerable<DerOctetString> octs)
         {
             MemoryStream bOut = new MemoryStream();
 			foreach (DerOctetString o in octs)
@@ -48,7 +49,7 @@ namespace Org.BouncyCastle.Asn1
 		}
 
 		public BerOctetString(
-			IEnumerable octets)
+			IEnumerable<DerOctetString> octets)
 			: base(ToBytes(octets))
         {
             this.octs = octets;
@@ -90,9 +91,9 @@ namespace Org.BouncyCastle.Asn1
 			return GetEnumerator();
 		}
 
-		private IList GenerateOcts()
+		private IList<DerOctetString> GenerateOcts()
         {
-            IList vec = Platform.CreateArrayList();
+            var vec = Platform.CreateArrayList< DerOctetString>();
 			for (int i = 0; i < str.Length; i += MaxLength)
 			{
 				int end = System.Math.Min(str.Length, i + MaxLength);

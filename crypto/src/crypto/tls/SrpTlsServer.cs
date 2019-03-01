@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Org.BouncyCastle.Crypto.Tls
@@ -46,7 +47,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             };
         }
 
-        public override void ProcessClientExtensions(IDictionary clientExtensions)
+        public override void ProcessClientExtensions(IDictionary<int, byte[]> clientExtensions)
         {
             base.ProcessClientExtensions(clientExtensions);
 

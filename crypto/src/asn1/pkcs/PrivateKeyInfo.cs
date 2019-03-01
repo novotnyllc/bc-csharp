@@ -108,7 +108,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
 
         private PrivateKeyInfo(Asn1Sequence seq)
         {
-            IEnumerator e = seq.GetEnumerator();
+            var e = seq.GetEnumerator();
 
             this.version = DerInteger.GetInstance(CollectionUtilities.RequireNext(e));
 

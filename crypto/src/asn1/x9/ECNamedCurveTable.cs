@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.Anssi;
 using Org.BouncyCastle.Asn1.CryptoPro;
 using Org.BouncyCastle.Asn1.GM;
@@ -162,11 +162,11 @@ namespace Org.BouncyCastle.Asn1.X9
          *
          * @return an enumeration of the names of the available curves.
          */
-        public static IEnumerable Names
+        public static IEnumerable<string> Names
         {
             get
             {
-                IList v = Platform.CreateArrayList();
+                var v = Platform.CreateArrayList<string>();
                 CollectionUtilities.AddRange(v, X962NamedCurves.Names);
                 CollectionUtilities.AddRange(v, SecNamedCurves.Names);
                 CollectionUtilities.AddRange(v, NistNamedCurves.Names);

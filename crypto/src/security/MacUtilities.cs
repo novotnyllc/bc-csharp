@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 
 using Org.BouncyCastle.Asn1;
@@ -24,7 +25,7 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
+        private static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
         //private static readonly IDictionary oids = Platform.CreateHashtable();
 
         static MacUtilities()

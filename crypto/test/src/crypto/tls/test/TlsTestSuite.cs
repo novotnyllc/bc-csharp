@@ -16,7 +16,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
 
         public static IEnumerable Suite()
         {
-            IList testSuite = new ArrayList();
+            var testSuite = new ArrayList();
 
             AddFallbackTests(testSuite);
             AddVersionTests(testSuite, ProtocolVersion.SSLv3);

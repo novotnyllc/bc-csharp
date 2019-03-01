@@ -13,6 +13,7 @@ using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security.Certificates;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Pkix
 {
@@ -81,24 +82,24 @@ namespace Org.BouncyCastle.Pkix
 	public class PkixCertPath
 //		: CertPath
 	{
-		internal static readonly IList certPathEncodings;
+		internal static readonly IList<string> certPathEncodings;
 
         static PkixCertPath()
         {
-            IList encodings = Platform.CreateArrayList();
+            var encodings = Platform.CreateArrayList<string>();
             encodings.Add("PkiPath");
             encodings.Add("PEM");
             encodings.Add("PKCS7");
             certPathEncodings = CollectionUtilities.ReadOnly(encodings);
         }
 
-        private readonly IList certificates;
+        private readonly IList<X509Certificate> certificates;
 
 		/**
 		 * @param certs
 		 */
-		private static IList SortCerts(
-			IList certs)
+		private static IList<X509Certificate> SortCerts(
+			IList<X509Certificate> certs)
 		{
 			if (certs.Count < 2)
 				return certs;
@@ -125,8 +126,8 @@ namespace Org.BouncyCastle.Pkix
 				return certs;
 
 			// find end-entity cert
-            IList retList = Platform.CreateArrayList(certs.Count);
-            IList orig = Platform.CreateArrayList(certs);
+            var retList = Platform.CreateArrayList<X509Certificate>(certs.Count);
+            var orig = Platform.CreateArrayList(certs);
 
 			for (int i = 0; i < certs.Count; i++)
 			{
@@ -184,10 +185,10 @@ namespace Org.BouncyCastle.Pkix
 		 * @param type the standard name of the type of Certificatesin this path
 		 **/
 		public PkixCertPath(
-			ICollection certificates)
+			ICollection<X509Certificate> certificates)
 //			: base("X.509")
 		{
-			this.certificates = SortCerts(Platform.CreateArrayList(certificates));
+			this.certificates = SortCerts(Platform.CreateArrayList<X509Certificate>(certificates));
 		}
 
 		public PkixCertPath(
@@ -210,7 +211,7 @@ namespace Org.BouncyCastle.Pkix
 		{
             string upper = Platform.ToUpperInvariant(encoding);
 
-            IList certs;
+            IList<X509Certificate> certs;
 			try
 			{
 				if (upper.Equals(Platform.ToUpperInvariant("PkiPath")))
@@ -223,7 +224,7 @@ namespace Org.BouncyCastle.Pkix
 							"input stream does not contain a ASN1 SEQUENCE while reading PkiPath encoded data to load CertPath");
 					}
 
-                    certs = Platform.CreateArrayList();
+                    certs = Platform.CreateArrayList<X509Certificate>();
 
                     foreach (Asn1Encodable ae in (Asn1Sequence)derObject)
                     {
@@ -236,7 +237,7 @@ namespace Org.BouncyCastle.Pkix
 				}
                 else if (upper.Equals("PKCS7") || upper.Equals("PEM"))
 				{
-                    certs = Platform.CreateArrayList(new X509CertificateParser().ReadCertificates(inStream));
+                    certs = Platform.CreateArrayList<X509Certificate>(new X509CertificateParser().ReadCertificates(inStream));
 				}
 				else
 				{
@@ -261,9 +262,9 @@ namespace Org.BouncyCastle.Pkix
 		 *
 		 * @return an Iterator over the names of the supported encodings (as Strings)
 		 **/
-		public virtual IEnumerable Encodings
+		public virtual IEnumerable<string> Encodings
 		{
-            get { return new EnumerableProxy(certPathEncodings); }
+            get { return new EnumerableProxy<string>(certPathEncodings); }
 		}
 
 		/**
@@ -299,14 +300,14 @@ namespace Org.BouncyCastle.Pkix
 			//return this.Certificates.Equals(other.Certificates);
 
 			// TODO Extract this to a utility class
-			IList thisCerts = this.Certificates;
-			IList otherCerts = other.Certificates;
+			var thisCerts = this.Certificates;
+			var otherCerts = other.Certificates;
 
 			if (thisCerts.Count != otherCerts.Count)
 				return false;
 
-			IEnumerator e1 = thisCerts.GetEnumerator();
-			IEnumerator e2 = thisCerts.GetEnumerator();
+			var e1 = thisCerts.GetEnumerator();
+			var e2 = thisCerts.GetEnumerator();
 
 			while (e1.MoveNext())
 			{
@@ -420,7 +421,7 @@ namespace Org.BouncyCastle.Pkix
 		/// Returns the list of certificates in this certification
 		/// path.
 		/// </summary>
-		public virtual IList Certificates
+		public virtual IList<X509Certificate> Certificates
 		{
             get { return CollectionUtilities.ReadOnly(certificates); }
 		}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -43,10 +44,10 @@ namespace Org.BouncyCastle.Cms
     {
 		private static readonly CmsSignedHelper Helper = CmsSignedHelper.Instance;
 
-		private readonly IList      _signerInfs = Platform.CreateArrayList();
-		private readonly ISet		_messageDigestOids = new HashSet();
-        private readonly IDictionary _messageDigests = Platform.CreateHashtable();
-        private readonly IDictionary _messageHashes = Platform.CreateHashtable();
+		private readonly IList<DigestAndSignerInfoGeneratorHolder>      _signerInfs = Platform.CreateArrayList<DigestAndSignerInfoGeneratorHolder>();
+		private readonly ISet<string>       _messageDigestOids = new HashSet<string>();
+        private readonly IDictionary<string, IDigest> _messageDigests = Platform.CreateHashtable<string, IDigest>();
+        private readonly IDictionary<string, byte[]> _messageHashes = Platform.CreateHashtable<string, byte[]>();
 		private bool				_messageDigestsLocked;
         private int					_bufferSize;
 
@@ -167,7 +168,7 @@ namespace Org.BouncyCastle.Cms
 					Asn1Set signedAttr = null;
 					if (_sAttr != null)
 					{
-						IDictionary parameters = outer.GetBaseParameters(contentType, digestAlgorithm, calculatedDigest);
+					 var parameters = outer.GetBaseParameters(contentType, digestAlgorithm, calculatedDigest);
 
 //						Asn1.Cms.AttributeTable signed = _sAttr.GetAttributes(Collections.unmodifiableMap(parameters));
 						Asn1.Cms.AttributeTable signed = _sAttr.GetAttributes(parameters);
@@ -176,7 +177,7 @@ namespace Org.BouncyCastle.Cms
                         {
                             if (signed != null && signed[CmsAttributes.ContentType] != null)
                             {
-                                IDictionary tmpSigned = signed.ToDictionary();
+                                var tmpSigned = signed.ToDictionary();
                                 tmpSigned.Remove(CmsAttributes.ContentType);
                                 signed = new Asn1.Cms.AttributeTable(tmpSigned);
                             }
@@ -203,7 +204,7 @@ namespace Org.BouncyCastle.Cms
 					Asn1Set unsignedAttr = null;
 					if (_unsAttr != null)
 					{
-						IDictionary parameters = outer.GetBaseParameters(
+						var parameters = outer.GetBaseParameters(
 							contentType, digestAlgorithm, calculatedDigest);
 						parameters[CmsAttributeTableParameter.Signature] = sigBytes.Clone();
 
@@ -726,7 +727,7 @@ namespace Org.BouncyCastle.Cms
         }
 
 		private bool CheckForVersion3(
-			IList signerInfos)
+			IList<SignerInformation> signerInfos)
 		{
 			foreach (SignerInformation si in signerInfos)
 			{
@@ -741,7 +742,7 @@ namespace Org.BouncyCastle.Cms
 			return false;
 		}
 
-		private static Stream AttachDigestsToOutputStream(ICollection digests, Stream s)
+		private static Stream AttachDigestsToOutputStream(ICollection<IDigest> digests, Stream s)
 		{
 			Stream result = s;
 			foreach (IDigest digest in digests)
@@ -857,7 +858,7 @@ namespace Org.BouncyCastle.Cms
                 //
                 // Calculate the digest hashes
                 //
-                foreach (DictionaryEntry de in outer._messageDigests)
+                foreach (var de in outer._messageDigests)
                 {
                     outer._messageHashes.Add(de.Key, DigestUtilities.DoFinal((IDigest)de.Value));
                 }
@@ -880,7 +881,7 @@ namespace Org.BouncyCastle.Cms
 
                         byte[] calculatedDigest = (byte[])outer._messageHashes[
                             Helper.GetDigestAlgName(holder.digestOID)];
-                        outer._digests[holder.digestOID] = calculatedDigest.Clone();
+                        outer._digests[holder.digestOID] = (byte[])calculatedDigest.Clone();
 
                         signerInfos.Add(holder.signerInf.Generate(_contentOID, digestAlgorithm, calculatedDigest));
                     }

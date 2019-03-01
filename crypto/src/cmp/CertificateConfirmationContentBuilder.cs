@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Cmp;
 using Org.BouncyCastle.Asn1.X509;
@@ -18,8 +18,8 @@ namespace Org.BouncyCastle.Cmp
         private static readonly DefaultSignatureAlgorithmIdentifierFinder sigAlgFinder = new DefaultSignatureAlgorithmIdentifierFinder();
 
         private readonly DefaultDigestAlgorithmIdentifierFinder digestAlgFinder;
-        private readonly IList acceptedCerts = Platform.CreateArrayList();
-        private readonly IList acceptedReqIds = Platform.CreateArrayList();
+        private readonly IList<X509Certificate> acceptedCerts = Platform.CreateArrayList< X509Certificate>();
+        private readonly IList<BigInteger> acceptedReqIds = Platform.CreateArrayList<BigInteger>();
 
         public CertificateConfirmationContentBuilder()
             : this(new DefaultDigestAlgorithmIdentifierFinder())

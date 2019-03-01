@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Bcpg.Sig;
 using Org.BouncyCastle.Utilities;
 
@@ -9,7 +9,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 	/// <remarks>Generator for signature subpackets.</remarks>
     public class PgpSignatureSubpacketGenerator
     {
-        private IList list = Platform.CreateArrayList();
+        private IList<SignatureSubpacket> list = Platform.CreateArrayList<SignatureSubpacket>();
 
 		public void SetRevocable(
             bool	isCritical,

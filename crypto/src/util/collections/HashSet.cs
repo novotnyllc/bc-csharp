@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
 	public class HashSet
 		: ISet
 	{
-		private readonly IDictionary impl = Platform.CreateHashtable();
+		private readonly ISet<object> impl = new HashSet<object>();
 
 		public HashSet()
 		{
@@ -22,7 +23,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual void Add(object o)
 		{
-			impl[o] = null;
+			impl.Add(o);
 		}
 
 		public virtual void AddAll(IEnumerable e)
@@ -45,7 +46,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual void CopyTo(Array array, int index)
 		{
-			impl.Keys.CopyTo(array, index);
+			impl.CopyTo((object[])array, index);
 		}
 
 		public virtual int Count
@@ -55,7 +56,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual IEnumerator GetEnumerator()
 		{
-			return impl.Keys.GetEnumerator();
+			return impl.GetEnumerator();
 		}
 
 		public virtual bool IsEmpty
@@ -65,7 +66,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual bool IsFixedSize
 		{
-			get { return impl.IsFixedSize; }
+			get { return false; }
 		}
 
 		public virtual bool IsReadOnly
@@ -75,7 +76,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual bool IsSynchronized
 		{
-			get { return impl.IsSynchronized; }
+			get { return false; }
 		}
 
 		public virtual void Remove(object o)
@@ -93,7 +94,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual object SyncRoot
 		{
-			get { return impl.SyncRoot; }
+			get { return impl; }
 		}
 	}
 }

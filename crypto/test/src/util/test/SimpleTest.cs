@@ -148,7 +148,7 @@ namespace Org.BouncyCastle.Utilities.Test
 		{
 			string fullPrefix = GetFullName(prefix);
 
-			ArrayList result = new ArrayList();
+			var result = new ArrayList();
 			string[] fullNames = typeof(SimpleTest).GetTypeInfo().Assembly.GetManifestResourceNames();
 			foreach (string fullName in fullNames)
 			{

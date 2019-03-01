@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Bcpg
             UserAttributeSubpacketsParser sIn = new UserAttributeSubpacketsParser(bcpgIn);
             UserAttributeSubpacket sub;
 
-            IList v = Platform.CreateArrayList();
+            var v = Platform.CreateArrayList< UserAttributeSubpacket>();
             while ((sub = sIn.ReadPacket()) != null)
             {
                 v.Add(sub);

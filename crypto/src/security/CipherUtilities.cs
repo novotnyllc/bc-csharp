@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.CryptoPro;
 using Org.BouncyCastle.Asn1.Kisa;
@@ -102,8 +102,8 @@ namespace Org.BouncyCastle.Security
             ZEROBYTEPADDING,
         };
 
-        private static readonly IDictionary algorithms = Platform.CreateHashtable();
-        private static readonly IDictionary oids = Platform.CreateHashtable();
+        private static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, DerObjectIdentifier> oids = Platform.CreateHashtable<string, DerObjectIdentifier>();
 
         static CipherUtilities()
         {
@@ -234,7 +234,7 @@ namespace Org.BouncyCastle.Security
             return (DerObjectIdentifier) oids[mechanism];
         }
 
-        public static ICollection Algorithms
+        public static ICollection<string> Algorithms
         {
             get { return oids.Keys; }
         }

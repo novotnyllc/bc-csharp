@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -56,7 +56,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public CompleteRevocationRefs(
-			IEnumerable crlOcspRefs)
+			IEnumerable<Asn1Encodable> crlOcspRefs)
 		{
 			if (crlOcspRefs == null)
 				throw new ArgumentNullException("crlOcspRefs");

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -28,7 +29,7 @@ namespace Org.BouncyCastle.Cms
         private KeyAgreeRecipientInfo info;
         private Asn1OctetString       encryptedKey;
 
-        internal static void ReadRecipientInfo(IList infos, KeyAgreeRecipientInfo info,
+        internal static void ReadRecipientInfo(IList<RecipientInformation> infos, KeyAgreeRecipientInfo info,
             CmsSecureReadable secureReadable)
         {
             try

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
@@ -57,7 +58,7 @@ namespace Org.BouncyCastle.Pkix
             //
             // (a)
             //
-            IList certs = certPath.Certificates;
+            var certs = certPath.Certificates;
             int n = certs.Count;
 
             if (certs.Count == 0)
@@ -71,7 +72,7 @@ namespace Org.BouncyCastle.Pkix
             //
             // (c)
             //
-            ISet userInitialPolicySet = paramsPkix.GetInitialPolicies();
+            var userInitialPolicySet = paramsPkix.GetInitialPolicies();
 
             //
             // (d)
@@ -108,17 +109,17 @@ namespace Org.BouncyCastle.Pkix
             //
             // (a)
             //
-            IList[] policyNodes = new IList[n + 1];
+            var policyNodes = new IList<PkixPolicyNode>[n + 1];
             for (int j = 0; j < policyNodes.Length; j++)
             {
-                policyNodes[j] = Platform.CreateArrayList();
+                policyNodes[j] = Platform.CreateArrayList<PkixPolicyNode>();
             }
 
-            ISet policySet = new HashSet();
+            var policySet = new HashSet<string>();
 
             policySet.Add(Rfc3280CertPathUtilities.ANY_POLICY);
 
-            PkixPolicyNode validPolicyTree = new PkixPolicyNode(Platform.CreateArrayList(), 0, policySet, null, new HashSet(),
+            PkixPolicyNode validPolicyTree = new PkixPolicyNode(Platform.CreateArrayList<PkixPolicyNode>(), 0, policySet, null, new HashSet<PolicyQualifierInfo>(),
                     Rfc3280CertPathUtilities.ANY_POLICY, false);
 
             policyNodes[0].Add(validPolicyTree);
@@ -131,7 +132,7 @@ namespace Org.BouncyCastle.Pkix
             // (d)
             //
             int explicitPolicy;
-            ISet acceptablePolicies = new HashSet();
+            var acceptablePolicies = new HashSet<string>();
 
             if (paramsPkix.IsExplicitPolicyRequired)
             {
@@ -229,7 +230,7 @@ namespace Org.BouncyCastle.Pkix
             //
             // initialize CertPathChecker's
             //
-            IList pathCheckers = paramsPkix.GetCertPathCheckers();
+            var pathCheckers = paramsPkix.GetCertPathCheckers();
             certIter = pathCheckers.GetEnumerator();
 
             while (certIter.MoveNext())
@@ -330,11 +331,11 @@ namespace Org.BouncyCastle.Pkix
                     // (n)
                     Rfc3280CertPathUtilities.PrepareNextCertN(certPath, index);
 
-					ISet criticalExtensions1 = cert.GetCriticalExtensionOids();
+					var criticalExtensions1 = cert.GetCriticalExtensionOids();
 
 					if (criticalExtensions1 != null)
 					{
-						criticalExtensions1 = new HashSet(criticalExtensions1);
+						criticalExtensions1 = new HashSet<string>(criticalExtensions1);
 
 						// these extensions are handled by the algorithm
 						criticalExtensions1.Remove(X509Extensions.KeyUsage.Id);
@@ -350,7 +351,7 @@ namespace Org.BouncyCastle.Pkix
 					}
 					else
 					{
-						criticalExtensions1 = new HashSet();
+						criticalExtensions1 = new HashSet<string>();
 					}
 
 					// (o)
@@ -395,11 +396,11 @@ namespace Org.BouncyCastle.Pkix
             //
             // (f)
             //
-            ISet criticalExtensions = cert.GetCriticalExtensionOids();
+            var criticalExtensions = cert.GetCriticalExtensionOids();
 
             if (criticalExtensions != null)
             {
-                criticalExtensions = new HashSet(criticalExtensions);
+                criticalExtensions = new HashSet<string>(criticalExtensions);
 
                 // Requires .Id
                 // these extensions are handled by the algorithm
@@ -417,7 +418,7 @@ namespace Org.BouncyCastle.Pkix
             }
             else
             {
-                criticalExtensions = new HashSet();
+                criticalExtensions = new HashSet<string>();
             }
 
             Rfc3280CertPathUtilities.WrapupCertF(certPath, index + 1, pathCheckers, criticalExtensions);

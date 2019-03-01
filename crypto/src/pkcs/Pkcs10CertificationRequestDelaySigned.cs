@@ -121,7 +121,7 @@ namespace Org.BouncyCastle.Pkcs
 			{
 				this.sigAlgId = new AlgorithmIdentifier(sigOid);
 			}
-			else if (exParams.Contains(algorithmName))
+			else if (exParams.ContainsKey(algorithmName))
 			{
 				this.sigAlgId = new AlgorithmIdentifier(sigOid, (Asn1Encodable) exParams[algorithmName]);
 			}

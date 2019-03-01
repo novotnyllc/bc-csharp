@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -87,7 +87,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 		public SignaturePolicyId(
 			DerObjectIdentifier		sigPolicyIdentifier,
 			OtherHashAlgAndValue	sigPolicyHash,
-			IEnumerable				sigPolicyQualifiers)
+			IEnumerable<Asn1Encodable> sigPolicyQualifiers)
 		{
 			if (sigPolicyIdentifier == null)
 				throw new ArgumentNullException("sigPolicyIdentifier");

@@ -14,16 +14,17 @@ using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.Utilities.Encoders;
 using Org.BouncyCastle.X509;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Pkcs
 {
     public class Pkcs12Store
     {
         private readonly IgnoresCaseHashtable	keys = new IgnoresCaseHashtable();
-        private readonly IDictionary            localIds = Platform.CreateHashtable();
+        private readonly IDictionary<string, string> localIds = Platform.CreateHashtable<string, string>();
         private readonly IgnoresCaseHashtable	certs = new IgnoresCaseHashtable();
-        private readonly IDictionary            chainCerts = Platform.CreateHashtable();
-        private readonly IDictionary            keyCerts = Platform.CreateHashtable();
+        private readonly IDictionary<CertId, X509CertificateEntry> chainCerts = Platform.CreateHashtable<CertId, X509CertificateEntry>();
+        private readonly IDictionary<string, X509CertificateEntry> keyCerts = Platform.CreateHashtable<string, X509CertificateEntry>();
         private readonly DerObjectIdentifier	keyAlgorithm;
         private readonly DerObjectIdentifier	certAlgorithm;
         private readonly bool					useDerEncoding;
@@ -113,7 +114,7 @@ namespace Org.BouncyCastle.Pkcs
         {
             AsymmetricKeyParameter privKey = PrivateKeyFactory.CreateKey(privKeyInfo);
 
-                                IDictionary attributes = Platform.CreateHashtable();
+                                IDictionary<string, Asn1Encodable> attributes = new Dictionary<string, Asn1Encodable>();
             AsymmetricKeyEntry keyEntry = new AsymmetricKeyEntry(privKey, attributes);
 
                                 string alias = null;
@@ -134,7 +135,7 @@ namespace Org.BouncyCastle.Pkcs
 
                                             // TODO We might want to "merge" attribute sets with
                                             // the same OID - currently, differing values give an error
-                                            if (attributes.Contains(aOid.Id))
+                                            if (attributes.ContainsKey(aOid.Id))
                                             {
                                                 // OK, but the value has to be the same
                                                 if (!attributes[aOid.Id].Equals(attr))
@@ -235,7 +236,7 @@ namespace Org.BouncyCastle.Pkcs
             localIds.Clear();
             unmarkedKeyEntry = null;
 
-            IList certBags = Platform.CreateArrayList();
+            var certBags = Platform.CreateArrayList<SafeBag>();
 
             if (info.ContentType.Equals(PkcsObjectIdentifiers.Data))
                             {
@@ -310,7 +311,7 @@ namespace Org.BouncyCastle.Pkcs
                 //
                 // set the attributes
                 //
-                IDictionary attributes = Platform.CreateHashtable();
+                IDictionary<string, Asn1Encodable> attributes = new Dictionary<string, Asn1Encodable>();
                 Asn1OctetString localId = null;
                 string alias = null;
 
@@ -328,7 +329,7 @@ namespace Org.BouncyCastle.Pkcs
 
                             // TODO We might want to "merge" attribute sets with
                             // the same OID - currently, differing values give an error
-                            if (attributes.Contains(aOid.Id))
+                            if (attributes.ContainsKey(aOid.Id))
                             {
                                 // OK, but the value has to be the same
                                 if (!attributes[aOid.Id].Equals(attr))
@@ -417,9 +418,9 @@ namespace Org.BouncyCastle.Pkcs
             return (keys[alias] != null);
         }
 
-        private IDictionary GetAliasesTable()
+        private IDictionary<string, string> GetAliasesTable()
         {
-            IDictionary tab = Platform.CreateHashtable();
+            IDictionary<string, string> tab = new Dictionary<string, string>();
 
             foreach (string key in certs.Keys)
             {
@@ -437,9 +438,9 @@ namespace Org.BouncyCastle.Pkcs
             return tab;
         }
 
-        public IEnumerable Aliases
+        public IEnumerable<string> Aliases
         {
-            get { return new EnumerableProxy(GetAliasesTable().Keys); }
+            get { return new EnumerableProxy<string>(GetAliasesTable().Keys); }
         }
 
         public bool ContainsAlias(
@@ -484,7 +485,7 @@ namespace Org.BouncyCastle.Pkcs
             if (cert == null)
                 throw new ArgumentNullException("cert");
 
-            foreach (DictionaryEntry entry in certs)
+            foreach (var entry in certs)
             {
                 X509CertificateEntry entryValue = (X509CertificateEntry) entry.Value;
                 if (entryValue.Certificate.Equals(cert))
@@ -493,7 +494,7 @@ namespace Org.BouncyCastle.Pkcs
                 }
             }
 
-            foreach (DictionaryEntry entry in keyCerts)
+            foreach (var entry in keyCerts)
             {
                 X509CertificateEntry entryValue = (X509CertificateEntry) entry.Value;
                 if (entryValue.Certificate.Equals(cert))
@@ -520,7 +521,7 @@ namespace Org.BouncyCastle.Pkcs
 
             if (c != null)
             {
-                IList cs = Platform.CreateArrayList();
+                var cs = Platform.CreateArrayList<X509CertificateEntry>();
 
                 while (c != null)
                 {
@@ -798,7 +799,7 @@ namespace Org.BouncyCastle.Pkcs
             Asn1EncodableVector	certBags = new Asn1EncodableVector();
             Pkcs12PbeParams		cParams = new Pkcs12PbeParams(cSalt, MinIterations);
             AlgorithmIdentifier	cAlgId = new AlgorithmIdentifier(certAlgorithm, cParams.ToAsn1Object());
-            ISet				doneCerts = new HashSet();
+            ISet<X509Certificate>               doneCerts = new HashSet<X509Certificate>();
 
             foreach (string name in keys.Keys)
             {
@@ -1032,10 +1033,10 @@ namespace Org.BouncyCastle.Pkcs
         }
 
         private class IgnoresCaseHashtable
-            : IEnumerable
+            : IEnumerable<KeyValuePair<string, object>>
         {
-            private readonly IDictionary orig = Platform.CreateHashtable();
-            private readonly IDictionary keys = Platform.CreateHashtable();
+            private readonly IDictionary<string, object> orig = new Dictionary<string, object>();
+            private readonly IDictionary<string, string> keys = new Dictionary<string, string>();
 
             public void Clear()
             {
@@ -1043,12 +1044,12 @@ namespace Org.BouncyCastle.Pkcs
                 keys.Clear();
             }
 
-            public IEnumerator GetEnumerator()
+            public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
             {
                 return orig.GetEnumerator();
             }
 
-            public ICollection Keys
+            public ICollection<string> Keys
             {
                 get { return orig.Keys; }
             }
@@ -1067,6 +1068,11 @@ namespace Org.BouncyCastle.Pkcs
                 object o = orig[k];
                 orig.Remove(k);
                 return o;
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return orig.GetEnumerator();
             }
 
             public object this[
@@ -1095,7 +1101,7 @@ namespace Org.BouncyCastle.Pkcs
                 }
             }
 
-            public ICollection Values
+            public ICollection<object> Values
             {
                 get { return orig.Values; }
             }

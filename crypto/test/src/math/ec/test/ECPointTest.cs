@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Asn1.X9;
@@ -500,11 +500,11 @@ namespace Org.BouncyCastle.Math.EC.Tests
         [Test]
         public void TestAddSubtractMultiplyTwiceEncoding()
         {
-            ArrayList names = new ArrayList();
+            var names = new List<string>();
             CollectionUtilities.AddRange(names, ECNamedCurveTable.Names);
             CollectionUtilities.AddRange(names, CustomNamedCurves.Names);
 
-            ISet uniqNames = new HashSet(names);
+            var uniqNames = new HashSet(names);
 
             foreach (string name in uniqNames)
             {

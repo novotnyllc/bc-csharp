@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 using Org.BouncyCastle.Asn1;
@@ -244,12 +245,12 @@ namespace Org.BouncyCastle.Tests
 				return null;
 			}
 
-			public override ISet GetCriticalExtensionOids()
+			public override ISet<string> GetCriticalExtensionOids()
 			{
 				return null;
 			}
 
-			public override ISet GetNonCriticalExtensionOids()
+			public override ISet<string> GetNonCriticalExtensionOids()
 			{
 				return null;
 			}

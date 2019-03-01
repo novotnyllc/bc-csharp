@@ -28,7 +28,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
 		public DHParameter(
             Asn1Sequence seq)
         {
-            IEnumerator e = seq.GetEnumerator();
+            var e = seq.GetEnumerator();
 
 			e.MoveNext();
             p = (DerInteger)e.Current;

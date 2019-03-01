@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Org.BouncyCastle.Crypto.Tls
@@ -23,7 +24,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         /// <param name="clientExtensions">A <see cref="IDictionary"/> (Int32 -> byte[]). Will never be null.</param>
         /// <exception cref="IOException"></exception>
-        void ProcessClientExtensions(IDictionary clientExtensions);
+        void ProcessClientExtensions(IDictionary<int, byte[]> clientExtensions);
 
         /// <exception cref="IOException"></exception>
         ProtocolVersion GetServerVersion();
@@ -41,7 +42,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /// A <see cref="IDictionary"/> (Int32 -> byte[]). May be null.
         /// </returns>
         /// <exception cref="IOException"></exception>
-        IDictionary GetServerExtensions();
+        IDictionary<int, byte[]> GetServerExtensions();
 
         /// <returns>
         /// A <see cref="IList"/> (<see cref="SupplementalDataEntry"/>). May be null.
@@ -70,7 +71,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         /// <param name="clientSupplementalData"><see cref="IList"/> (<see cref="SupplementalDataEntry"/>)</param>
         /// <exception cref="IOException"></exception>
-        void ProcessClientSupplementalData(IList clientSupplementalData);
+        void ProcessClientSupplementalData(IList<SupplementalDataEntry> clientSupplementalData);
 
         /// <summary>
         /// Called by the protocol handler to report the client certificate, only if <c>GetCertificateRequest</c>

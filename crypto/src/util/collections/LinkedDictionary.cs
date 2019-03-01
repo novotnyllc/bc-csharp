@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
 	public class LinkedDictionary
 		: IDictionary
 	{
-		internal readonly IDictionary hash = Platform.CreateHashtable();
-		internal readonly IList keys = Platform.CreateArrayList();
+		internal readonly IDictionary<object, object> hash = Platform.CreateHashtable<object, object>();
+		internal readonly IList<object> keys = Platform.CreateArrayList<object>();
 
 		public LinkedDictionary()
 		{
@@ -27,7 +29,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual bool Contains(object k)
 		{
-			return hash.Contains(k);
+			return hash.ContainsKey(k);
 		}
 
 		public virtual void CopyTo(Array array, int index)
@@ -55,7 +57,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual void Remove(object k)
 		{
-			hash.Remove(k);
+            hash.Remove(k);
 			keys.Remove(k);
 		}
 
@@ -81,7 +83,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual ICollection Keys
 		{
-            get { return Platform.CreateArrayList(keys); }
+            get { return keys.Cast<object>().ToList(); }
 		}
 
 		public virtual ICollection Values
@@ -89,12 +91,12 @@ namespace Org.BouncyCastle.Utilities.Collections
 			// NB: Order has to be the same as for Keys property
 			get
 			{
-                IList values = Platform.CreateArrayList(keys.Count);
+                var values = Platform.CreateArrayList<object>(keys.Count);
 				foreach (object k in keys)
 				{
 					values.Add(hash[k]);
 				}
-				return values;
+				return values.ToList();
 			}
 		}
 
@@ -106,7 +108,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 			}
 			set
 			{
-				if (!hash.Contains(k))
+				if (!hash.ContainsKey(k))
 					keys.Add(k);
 				hash[k] = value;
 			}

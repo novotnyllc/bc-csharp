@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Math.EC.Abc;
 using Org.BouncyCastle.Math.EC.Endo;
 using Org.BouncyCastle.Math.EC.Multiplier;
@@ -162,7 +162,7 @@ namespace Org.BouncyCastle.Math.EC
         {
             CheckPoint(point);
 
-            IDictionary table;
+            IDictionary<string, PreCompInfo> table;
             lock (point)
             {
                 table = point.m_preCompTable;
@@ -193,13 +193,13 @@ namespace Org.BouncyCastle.Math.EC
         {
             CheckPoint(point);
 
-            IDictionary table;
+            IDictionary<string, PreCompInfo> table;
             lock (point)
             {
                 table = point.m_preCompTable;
                 if (null == table)
                 {
-                    point.m_preCompTable = table = Platform.CreateHashtable(4);
+                    point.m_preCompTable = table = Platform.CreateHashtable<string, PreCompInfo>(4);
                 }
             }
 

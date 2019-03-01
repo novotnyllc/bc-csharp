@@ -43,9 +43,9 @@ namespace Org.BouncyCastle.Cms
 		private SignedData				signedData;
 		private ContentInfo				contentInfo;
 		private SignerInformationStore	signerInfoStore;
-		private IX509Store				attrCertStore;
-		private IX509Store				certificateStore;
-		private IX509Store				crlStore;
+		private IX509Store<IX509AttributeCertificate>                attrCertStore;
+		private IX509Store<X509Certificate>				certificateStore;
+		private IX509Store<X509Crl> crlStore;
 		private IDictionary				hashes;
 
 		private CmsSignedData(
@@ -158,7 +158,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			if (signerInfoStore == null)
 			{
-                IList signerInfos = Platform.CreateArrayList();
+                var signerInfos = Platform.CreateArrayList<SignerInformation>();
 				Asn1Set s = signedData.SignerInfos;
 
 				foreach (object obj in s)
@@ -193,7 +193,7 @@ namespace Org.BouncyCastle.Cms
 		 * @exception NoSuchStoreException if the store type isn't available.
 		 * @exception CmsException if a general exception prevents creation of the X509Store
 		 */
-		public IX509Store GetAttributeCertificates(
+		public IX509Store<IX509AttributeCertificate> GetAttributeCertificates(
 			string type)
 		{
 			if (attrCertStore == null)
@@ -213,7 +213,7 @@ namespace Org.BouncyCastle.Cms
 		 * @exception NoSuchStoreException if the store type isn't available.
 		 * @exception CmsException if a general exception prevents creation of the X509Store
 		 */
-		public IX509Store GetCertificates(
+		public IX509Store<X509Certificate> GetCertificates(
 			string type)
 		{
 			if (certificateStore == null)
@@ -233,7 +233,7 @@ namespace Org.BouncyCastle.Cms
 		* @exception NoSuchStoreException if the store type isn't available.
 		* @exception CmsException if a general exception prevents creation of the X509Store
 		*/
-		public IX509Store GetCrls(
+		public IX509Store<X509Crl> GetCrls(
 			string type)
 		{
 			if (crlStore == null)
@@ -356,9 +356,9 @@ namespace Org.BouncyCastle.Cms
 		*/
 		public static CmsSignedData ReplaceCertificatesAndCrls(
 			CmsSignedData	signedData,
-			IX509Store		x509Certs,
-			IX509Store		x509Crls,
-			IX509Store		x509AttrCerts)
+			IX509Store<X509Certificate> x509Certs,
+			IX509Store<X509Crl>		x509Crls,
+			IX509Store<IX509AttributeCertificate>        x509AttrCerts)
 		{
 			if (x509AttrCerts != null)
 				throw Platform.CreateNotImplementedException("Currently can't replace attribute certificates");

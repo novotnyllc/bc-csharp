@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Crypto.Parameters;
@@ -16,7 +17,7 @@ namespace Org.BouncyCastle.Crypto.Tls
     {
         protected TlsSignerCredentials mServerCredentials = null;
 
-        public TlsECDheKeyExchange(int keyExchange, IList supportedSignatureAlgorithms, int[] namedCurves,
+        public TlsECDheKeyExchange(int keyExchange, IList<SignatureAndHashAlgorithm> supportedSignatureAlgorithms, int[] namedCurves,
             byte[] clientECPointFormats, byte[] serverECPointFormats)
             :   base(keyExchange, supportedSignatureAlgorithms, namedCurves, clientECPointFormats, serverECPointFormats)
         {

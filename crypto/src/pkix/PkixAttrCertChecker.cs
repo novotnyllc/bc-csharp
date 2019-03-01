@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 
@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Pkix
 		*             does not pass the check.
 		*/
 		public abstract void Check(IX509AttributeCertificate attrCert, PkixCertPath certPath,
-			PkixCertPath holderCertPath, ICollection unresolvedCritExts);
+			PkixCertPath holderCertPath, ICollection<string> unresolvedCritExts);
 
 		/**
 		* Returns a clone of this object.

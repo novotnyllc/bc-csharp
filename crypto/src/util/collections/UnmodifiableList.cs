@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
-	public abstract class UnmodifiableList
-		: IList
+	public abstract class UnmodifiableList<T>
+        : IList<T>
 	{
 		protected UnmodifiableList()
 		{
 		}
 
-		public virtual int Add(object o)
+		public virtual int Add(T o)
 		{
 			throw new NotSupportedException();
 		}
@@ -20,31 +21,27 @@ namespace Org.BouncyCastle.Utilities.Collections
 			throw new NotSupportedException();
 		}
 
-		public abstract bool Contains(object o);
+		public abstract bool Contains(T o);
 
-		public abstract void CopyTo(Array array, int index);
+		public abstract void CopyTo(T[] array, int index);
 
 		public abstract int Count { get; }
 
-		public abstract IEnumerator GetEnumerator();
+		public abstract IEnumerator<T> GetEnumerator();
 
-		public abstract int IndexOf(object o);
+		public abstract int IndexOf(T o);
 
-		public virtual void Insert(int i, object o)
+		public virtual void Insert(int i, T o)
 		{
 			throw new NotSupportedException();
 		}
-
-		public abstract bool IsFixedSize { get; }
 
 		public virtual bool IsReadOnly
 		{
 			get { return true; }
 		}
 
-		public abstract bool IsSynchronized { get; }
-
-		public virtual void Remove(object o)
+		public virtual bool Remove(T o)
 		{
 			throw new NotSupportedException();
 		}
@@ -53,15 +50,23 @@ namespace Org.BouncyCastle.Utilities.Collections
 		{
 			throw new NotSupportedException();
 		}
-
-		public abstract object SyncRoot { get; }
 		
-		public virtual object this[int i]
+		public virtual T this[int i]
 		{
 			get { return GetValue(i); }
 			set { throw new NotSupportedException(); }
 		}
 
-		protected abstract object GetValue(int i);
-	}
+		protected abstract T GetValue(int i);
+
+        void ICollection<T>.Add(T item)
+        {
+            Add(item);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
 }

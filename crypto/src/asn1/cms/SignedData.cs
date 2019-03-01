@@ -162,7 +162,7 @@ namespace Org.BouncyCastle.Asn1.Cms
         private SignedData(
             Asn1Sequence seq)
         {
-            IEnumerator e = seq.GetEnumerator();
+            var e = seq.GetEnumerator();
 
             e.MoveNext();
             version = (DerInteger)e.Current;

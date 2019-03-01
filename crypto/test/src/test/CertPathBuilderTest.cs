@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Crypto;
@@ -31,30 +31,30 @@ namespace Org.BouncyCastle.Tests
             X509Crl rootCrl = crlParser.ReadCrl(CertPathTest.rootCrlBin);
             X509Crl interCrl = crlParser.ReadCrl(CertPathTest.interCrlBin);
 
-            IList certList = new ArrayList();
+            var certList = new List<X509Certificate>();
             certList.Add(rootCert);
             certList.Add(interCert);
             certList.Add(finalCert);
 
-            IList crlList = new ArrayList();
+            var crlList = new List<X509Crl>();
             crlList.Add(rootCrl);
             crlList.Add(interCrl);
 
 //			CollectionCertStoreParameters ccsp = new CollectionCertStoreParameters(list);
 //			CertStore store = CertStore.getInstance("Collection", ccsp, "BC");
-            IX509Store x509CertStore = X509StoreFactory.Create(
+            var x509CertStore = X509StoreFactory.Create(
                 "Certificate/Collection",
-                new X509CollectionStoreParameters(certList));
-            IX509Store x509CrlStore = X509StoreFactory.Create(
+                new X509CollectionStoreParameters<X509Certificate>(certList));
+            var x509CrlStore = X509StoreFactory.Create(
                 "CRL/Collection",
-                new X509CollectionStoreParameters(crlList));
+                new X509CollectionStoreParameters<X509Crl>(crlList));
 
             // NB: Month is 1-based in .NET
             //DateTime validDate = new DateTime(2008, 9, 4, 14, 49, 10).ToUniversalTime();
             DateTime validDate = new DateTime(2008, 9, 4, 5, 49, 10);
 
             //Searching for rootCert by subjectDN without CRL
-            ISet trust = new HashSet();
+            var trust = new HashSet<TrustAnchor>();
             trust.Add(new TrustAnchor(rootCert, null));
 
 //			CertPathBuilder cpb = CertPathBuilder.getInstance("PKIX","BC");
@@ -63,8 +63,8 @@ namespace Org.BouncyCastle.Tests
             targetConstraints.Subject = finalCert.SubjectDN;
             PkixBuilderParameters parameters = new PkixBuilderParameters(trust, targetConstraints);
 //			parameters.addCertStore(store);
-            parameters.AddStore(x509CertStore);
-            parameters.AddStore(x509CrlStore);
+            parameters.AddStore((IX509Store<object>)x509CertStore);
+            parameters.AddStore((IX509Store<object>)x509CrlStore);
             parameters.Date = new DateTimeObject(validDate);
             PkixCertPathBuilderResult result = cpb.Build(parameters);
             PkixCertPath path = result.CertPath;
@@ -91,25 +91,25 @@ namespace Org.BouncyCastle.Tests
             X509Crl interCRL = TestUtilities.CreateCrl(interCert, interPair.Private, revokedSerialNumber);
 
             // create CertStore to support path building
-            IList certList = new ArrayList();
+            var certList = new List<X509Certificate>();
             certList.Add(rootCert);
             certList.Add(interCert);
             certList.Add(endCert);
 
-            IList crlList = new ArrayList();
+            var crlList = new List<X509Crl>();
             crlList.Add(rootCRL);
             crlList.Add(interCRL);
 
 //			CollectionCertStoreParameters parameters = new CollectionCertStoreParameters(list);
 //			CertStore                     store = CertStore.getInstance("Collection", parameters);
-            IX509Store x509CertStore = X509StoreFactory.Create(
+            var x509CertStore = X509StoreFactory.Create(
                 "Certificate/Collection",
-                new X509CollectionStoreParameters(certList));
-            IX509Store x509CrlStore = X509StoreFactory.Create(
+                new X509CollectionStoreParameters<X509Certificate>(certList));
+            var x509CrlStore = X509StoreFactory.Create(
                 "CRL/Collection",
-                new X509CollectionStoreParameters(crlList));
+                new X509CollectionStoreParameters<X509Crl>(crlList));
 
-            ISet trust = new HashSet();
+            var trust = new HashSet<TrustAnchor>();
             trust.Add(new TrustAnchor(rootCert, null));
 
             // build the path
@@ -121,8 +121,8 @@ namespace Org.BouncyCastle.Tests
 
             PkixBuilderParameters buildParams = new PkixBuilderParameters(trust, pathConstraints);
 //			buildParams.addCertStore(store);
-            buildParams.AddStore(x509CertStore);
-            buildParams.AddStore(x509CrlStore);
+            buildParams.AddStore((IX509Store<object>)x509CertStore);
+            buildParams.AddStore((IX509Store<object>)x509CrlStore);
 
             buildParams.Date = new DateTimeObject(DateTime.UtcNow);
 

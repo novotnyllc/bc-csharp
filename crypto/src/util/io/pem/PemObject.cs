@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities.Collections;
 
 namespace Org.BouncyCastle.Utilities.IO.Pem
@@ -9,15 +9,15 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 		: PemObjectGenerator
 	{
 		private string		type;
-		private IList		headers;
+		private IList<PemHeader> headers;
 		private byte[]		content;
 
 		public PemObject(string type, byte[] content)
-			: this(type, Platform.CreateArrayList(), content)
+			: this(type, Platform.CreateArrayList<PemHeader>(), content)
 		{
 		}
 
-		public PemObject(String type, IList headers, byte[] content)
+		public PemObject(String type, IList<PemHeader> headers, byte[] content)
 		{
 			this.type = type;
             this.headers = Platform.CreateArrayList(headers);
@@ -29,7 +29,7 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 			get { return type; }
 		}
 
-		public IList Headers
+		public IList<PemHeader> Headers
 		{
 			get { return headers; }
 		}

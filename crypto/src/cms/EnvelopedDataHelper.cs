@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Nist;
 using Org.BouncyCastle.Asn1.Oiw;
@@ -19,8 +19,8 @@ namespace Org.BouncyCastle.Cms
 {
     internal class EnvelopedDataHelper
     {
-        private static readonly IDictionary BaseCipherNames = Platform.CreateHashtable();
-        private static readonly IDictionary MacAlgNames = Platform.CreateHashtable();
+        private static readonly IDictionary<DerObjectIdentifier, string> BaseCipherNames = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        private static readonly IDictionary<DerObjectIdentifier, string> MacAlgNames = Platform.CreateHashtable<DerObjectIdentifier, string>();
         //private static readonly IDictionary PrfDigests = Platform.CreateHashtable();
 
         static EnvelopedDataHelper()

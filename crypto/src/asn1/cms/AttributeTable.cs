@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Utilities;
 
@@ -8,19 +8,10 @@ namespace Org.BouncyCastle.Asn1.Cms
 {
     public class AttributeTable
     {
-        private readonly IDictionary attributes;
-
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete]
-        public AttributeTable(
-            Hashtable attrs)
-        {
-            this.attributes = Platform.CreateHashtable(attrs);
-        }
-#endif
+        private readonly IDictionary<DerObjectIdentifier, object> attributes;
 
         public AttributeTable(
-            IDictionary attrs)
+            IDictionary<DerObjectIdentifier, object> attrs)
         {
             this.attributes = Platform.CreateHashtable(attrs);
         }
@@ -28,7 +19,7 @@ namespace Org.BouncyCastle.Asn1.Cms
         public AttributeTable(
             Asn1EncodableVector v)
         {
-            this.attributes = Platform.CreateHashtable(v.Count);
+            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, object>(v.Count);
 
 			foreach (Asn1Encodable o in v)
             {
@@ -41,7 +32,7 @@ namespace Org.BouncyCastle.Asn1.Cms
         public AttributeTable(
             Asn1Set s)
         {
-            this.attributes = Platform.CreateHashtable(s.Count);
+            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, object>(s.Count);
 
 			for (int i = 0; i != s.Count; i++)
             {
@@ -69,18 +60,18 @@ namespace Org.BouncyCastle.Asn1.Cms
             }
             else
             {
-                IList v;
+                IList<Attribute> v;
 
                 if (obj is Attribute)
                 {
-                    v = Platform.CreateArrayList();
+                    v = Platform.CreateArrayList<Attribute>();
 
-                    v.Add(obj);
+                    v.Add((Attribute)obj);
                     v.Add(a);
                 }
                 else
                 {
-                    v = (IList) obj;
+                    v = (IList<Attribute>) obj;
 
                     v.Add(a);
                 }
@@ -96,9 +87,9 @@ namespace Org.BouncyCastle.Asn1.Cms
 			{
 				object obj = attributes[oid];
 
-				if (obj is IList)
+				if (obj is IList<Attribute>)
 				{
-					return (Attribute)((IList)obj)[0];
+					return (Attribute)((IList<Attribute>)obj)[0];
 				}
 
 				return (Attribute) obj;
@@ -163,18 +154,10 @@ namespace Org.BouncyCastle.Asn1.Cms
 			}
 		}
 
-        public IDictionary ToDictionary()
+        public IDictionary<DerObjectIdentifier, object> ToDictionary()
         {
             return Platform.CreateHashtable(attributes);
         }
-
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete("Use 'ToDictionary' instead")]
-		public Hashtable ToHashtable()
-        {
-            return new Hashtable(attributes);
-        }
-#endif
 
 		public Asn1EncodableVector ToAsn1EncodableVector()
         {

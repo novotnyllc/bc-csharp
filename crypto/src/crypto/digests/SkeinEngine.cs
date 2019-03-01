@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Utilities;
@@ -131,7 +131,7 @@ namespace Org.BouncyCastle.Crypto.Digests
          * Precalculated UBI(CFG) states for common state/output combinations without key or other
          * pre-message params.
          */
-        private static readonly IDictionary INITIAL_STATES = Platform.CreateHashtable();
+        private static readonly IDictionary<int, ulong[]> INITIAL_STATES = Platform.CreateHashtable<int, ulong[]>();
 
         static SkeinEngine()
         {
@@ -617,11 +617,11 @@ namespace Org.BouncyCastle.Crypto.Digests
             UbiInit(PARAM_TYPE_MESSAGE);
         }
 
-        private void InitParams(IDictionary parameters)
+        private void InitParams(IDictionary<int, byte[]> parameters)
         {
-            IEnumerator keys = parameters.Keys.GetEnumerator();
-            IList pre = Platform.CreateArrayList();
-            IList post = Platform.CreateArrayList();
+            var keys = parameters.Keys.GetEnumerator();
+            var pre = Platform.CreateArrayList<Parameter>();
+            var post = Platform.CreateArrayList<Parameter>();
 
             while (keys.MoveNext())
             {

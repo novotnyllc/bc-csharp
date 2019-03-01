@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -8,159 +9,159 @@ namespace Org.BouncyCastle.Crypto.Tls
 {
     public abstract class TlsExtensionsUtilities
     {
-        public static IDictionary EnsureExtensionsInitialised(IDictionary extensions)
+        public static IDictionary<TKey, TValue> EnsureExtensionsInitialised<TKey, TValue>(IDictionary<TKey, TValue> extensions)
         {
-            return extensions == null ? Platform.CreateHashtable() : extensions;
+            return extensions == null ? Platform.CreateHashtable<TKey, TValue>() : extensions;
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddClientCertificateTypeExtensionClient(IDictionary extensions, byte[] certificateTypes)
+        public static void AddClientCertificateTypeExtensionClient(IDictionary<int, byte[]> extensions, byte[] certificateTypes)
         {
             extensions[ExtensionType.client_certificate_type] = CreateCertificateTypeExtensionClient(certificateTypes);
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddClientCertificateTypeExtensionServer(IDictionary extensions, byte certificateType)
+        public static void AddClientCertificateTypeExtensionServer(IDictionary<int, byte[]> extensions, byte certificateType)
         {
             extensions[ExtensionType.client_certificate_type] = CreateCertificateTypeExtensionServer(certificateType);
         }
 
-        public static void AddEncryptThenMacExtension(IDictionary extensions)
+        public static void AddEncryptThenMacExtension(IDictionary<int, byte[]> extensions)
         {
             extensions[ExtensionType.encrypt_then_mac] = CreateEncryptThenMacExtension();
         }
 
-        public static void AddExtendedMasterSecretExtension(IDictionary extensions)
+        public static void AddExtendedMasterSecretExtension(IDictionary<int, byte[]> extensions)
         {
             extensions[ExtensionType.extended_master_secret] = CreateExtendedMasterSecretExtension();
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddHeartbeatExtension(IDictionary extensions, HeartbeatExtension heartbeatExtension)
+        public static void AddHeartbeatExtension(IDictionary<int, byte[]> extensions, HeartbeatExtension heartbeatExtension)
         {
             extensions[ExtensionType.heartbeat] = CreateHeartbeatExtension(heartbeatExtension);
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddMaxFragmentLengthExtension(IDictionary extensions, byte maxFragmentLength)
+        public static void AddMaxFragmentLengthExtension(IDictionary<int, byte[]> extensions, byte maxFragmentLength)
         {
             extensions[ExtensionType.max_fragment_length] = CreateMaxFragmentLengthExtension(maxFragmentLength);
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddPaddingExtension(IDictionary extensions, int dataLength)
+        public static void AddPaddingExtension(IDictionary<int, byte[]> extensions, int dataLength)
         {
             extensions[ExtensionType.padding] = CreatePaddingExtension(dataLength);
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddServerCertificateTypeExtensionClient(IDictionary extensions, byte[] certificateTypes)
+        public static void AddServerCertificateTypeExtensionClient(IDictionary<int, byte[]> extensions, byte[] certificateTypes)
         {
             extensions[ExtensionType.server_certificate_type] = CreateCertificateTypeExtensionClient(certificateTypes);
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddServerCertificateTypeExtensionServer(IDictionary extensions, byte certificateType)
+        public static void AddServerCertificateTypeExtensionServer(IDictionary<int, byte[]> extensions, byte certificateType)
         {
             extensions[ExtensionType.server_certificate_type] = CreateCertificateTypeExtensionServer(certificateType);
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddServerNameExtension(IDictionary extensions, ServerNameList serverNameList)
+        public static void AddServerNameExtension(IDictionary<int, byte[]> extensions, ServerNameList serverNameList)
         {
             extensions[ExtensionType.server_name] = CreateServerNameExtension(serverNameList);
         }
 
         /// <exception cref="IOException"></exception>
-        public static void AddStatusRequestExtension(IDictionary extensions, CertificateStatusRequest statusRequest)
+        public static void AddStatusRequestExtension(IDictionary<int, byte[]> extensions, CertificateStatusRequest statusRequest)
         {
             extensions[ExtensionType.status_request] = CreateStatusRequestExtension(statusRequest);
         }
 
-        public static void AddTruncatedHMacExtension(IDictionary extensions)
+        public static void AddTruncatedHMacExtension(IDictionary<int, byte[]> extensions)
         {
             extensions[ExtensionType.truncated_hmac] = CreateTruncatedHMacExtension();
         }
 
         /// <exception cref="IOException"></exception>
-        public static byte[] GetClientCertificateTypeExtensionClient(IDictionary extensions)
+        public static byte[] GetClientCertificateTypeExtensionClient(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.client_certificate_type);
             return extensionData == null ? null : ReadCertificateTypeExtensionClient(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static short GetClientCertificateTypeExtensionServer(IDictionary extensions)
+        public static short GetClientCertificateTypeExtensionServer(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.client_certificate_type);
             return extensionData == null ? (short)-1 : (short)ReadCertificateTypeExtensionServer(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static HeartbeatExtension GetHeartbeatExtension(IDictionary extensions)
+        public static HeartbeatExtension GetHeartbeatExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.heartbeat);
             return extensionData == null ? null : ReadHeartbeatExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static short GetMaxFragmentLengthExtension(IDictionary extensions)
+        public static short GetMaxFragmentLengthExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.max_fragment_length);
             return extensionData == null ? (short)-1 : (short)ReadMaxFragmentLengthExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static int GetPaddingExtension(IDictionary extensions)
+        public static int GetPaddingExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.padding);
             return extensionData == null ? -1 : ReadPaddingExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static byte[] GetServerCertificateTypeExtensionClient(IDictionary extensions)
+        public static byte[] GetServerCertificateTypeExtensionClient(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.server_certificate_type);
             return extensionData == null ? null : ReadCertificateTypeExtensionClient(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static short GetServerCertificateTypeExtensionServer(IDictionary extensions)
+        public static short GetServerCertificateTypeExtensionServer(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.server_certificate_type);
             return extensionData == null ? (short)-1 : (short)ReadCertificateTypeExtensionServer(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static ServerNameList GetServerNameExtension(IDictionary extensions)
+        public static ServerNameList GetServerNameExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.server_name);
             return extensionData == null ? null : ReadServerNameExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static CertificateStatusRequest GetStatusRequestExtension(IDictionary extensions)
+        public static CertificateStatusRequest GetStatusRequestExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.status_request);
             return extensionData == null ? null : ReadStatusRequestExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static bool HasEncryptThenMacExtension(IDictionary extensions)
+        public static bool HasEncryptThenMacExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.encrypt_then_mac);
             return extensionData == null ? false : ReadEncryptThenMacExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static bool HasExtendedMasterSecretExtension(IDictionary extensions)
+        public static bool HasExtendedMasterSecretExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.extended_master_secret);
             return extensionData == null ? false : ReadExtendedMasterSecretExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
-        public static bool HasTruncatedHMacExtension(IDictionary extensions)
+        public static bool HasTruncatedHMacExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.truncated_hmac);
             return extensionData == null ? false : ReadTruncatedHMacExtension(extensionData);

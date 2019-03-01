@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Security;
@@ -566,7 +567,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
         }
 
-        protected virtual void HandleSupplementalData(IList serverSupplementalData)
+        protected virtual void HandleSupplementalData(IList<SupplementalDataEntry> serverSupplementalData)
         {
             this.mTlsClient.ProcessServerSupplementalData(serverSupplementalData);
             this.mConnectionState = CS_SERVER_SUPPLEMENTAL_DATA;
@@ -735,7 +736,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             // TODO[compat-gnutls] GnuTLS test server fails to Send renegotiation_info extension when resuming
             this.mTlsClient.NotifySecureRenegotiation(this.mSecureRenegotiation);
 
-            IDictionary sessionClientExtensions = mClientExtensions, sessionServerExtensions = mServerExtensions;
+            IDictionary<int, byte[]> sessionClientExtensions = mClientExtensions, sessionServerExtensions = mServerExtensions;
             if (this.mResumedSession)
             {
                 if (selectedCipherSuite != this.mSessionParameters.CipherSuite

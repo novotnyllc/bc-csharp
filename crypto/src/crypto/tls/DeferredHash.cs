@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
 
@@ -17,20 +17,20 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected TlsContext mContext;
 
         private DigestInputBuffer mBuf;
-        private IDictionary mHashes;
+        private IDictionary<byte, IDigest> mHashes;
         private int mPrfHashAlgorithm;
 
         internal DeferredHash()
         {
             this.mBuf = new DigestInputBuffer();
-            this.mHashes = Platform.CreateHashtable();
+            this.mHashes = Platform.CreateHashtable<byte, IDigest>();
             this.mPrfHashAlgorithm = -1;
         }
 
         private DeferredHash(byte prfHashAlgorithm, IDigest prfHash)
         {
             this.mBuf = null;
-            this.mHashes = Platform.CreateHashtable();
+            this.mHashes = Platform.CreateHashtable<byte, IDigest>();
             this.mPrfHashAlgorithm = prfHashAlgorithm;
             mHashes[prfHashAlgorithm] = prfHash;
         }
@@ -191,7 +191,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         protected virtual void CheckTrackingHash(byte hashAlgorithm)
         {
-            if (!mHashes.Contains(hashAlgorithm))
+            if (!mHashes.ContainsKey(hashAlgorithm))
             {
                 IDigest hash = TlsUtilities.CreateHash(hashAlgorithm);
                 mHashes[hashAlgorithm] = hash;

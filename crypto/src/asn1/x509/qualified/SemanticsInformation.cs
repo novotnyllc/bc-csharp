@@ -50,7 +50,7 @@ namespace Org.BouncyCastle.Asn1.X509.Qualified
                 throw new ArgumentException("no objects in SemanticsInformation");
             }
 
-			IEnumerator e = seq.GetEnumerator();
+			var e = seq.GetEnumerator();
 			e.MoveNext();
             object obj = e.Current;
             if (obj is DerObjectIdentifier)

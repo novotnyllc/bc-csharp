@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-
+using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities;
 
@@ -60,13 +61,13 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             byte[] certificateTypes = new byte[]{ ClientCertificateType.rsa_sign,
                 ClientCertificateType.dss_sign, ClientCertificateType.ecdsa_sign };
 
-            IList serverSigAlgs = null;
+            IList<SignatureAndHashAlgorithm> serverSigAlgs = null;
             if (TlsUtilities.IsSignatureAlgorithmsExtensionAllowed(mServerVersion))
             {
                 serverSigAlgs = TlsUtilities.GetDefaultSupportedSignatureAlgorithms();
             }
 
-            IList certificateAuthorities = new ArrayList();
+            var certificateAuthorities = new List<Asn1Encodable>();
             certificateAuthorities.Add(TlsTestUtilities.LoadCertificateResource("x509-ca.pem").Subject);
 
             return new CertificateRequest(certificateTypes, serverSigAlgs, certificateAuthorities);

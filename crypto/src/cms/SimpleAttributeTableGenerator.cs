@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.Cms;
 
 namespace Org.BouncyCastle.Cms
@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Cms
 		}
 
 		public virtual AttributeTable GetAttributes(
-			IDictionary parameters)
+			IDictionary<CmsAttributeTableParameter, object> parameters)
 		{
 			return attributes;
 		}

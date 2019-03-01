@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -13,12 +14,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 	/// </remarks>
     public class PgpSecretKeyRingBundle
     {
-        private readonly IDictionary secretRings;
-        private readonly IList order;
+        private readonly IDictionary<long, PgpSecretKeyRing> secretRings;
+        private readonly IList<long> order;
 
 		private PgpSecretKeyRingBundle(
-            IDictionary	secretRings,
-            IList       order)
+            IDictionary<long, PgpSecretKeyRing> secretRings,
+            IList<long>       order)
         {
             this.secretRings = secretRings;
             this.order = order;
@@ -43,8 +44,8 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		public PgpSecretKeyRingBundle(
             IEnumerable e)
         {
-			this.secretRings = Platform.CreateHashtable();
-            this.order = Platform.CreateArrayList();
+			this.secretRings = Platform.CreateHashtable<long, PgpSecretKeyRing>();
+            this.order = Platform.CreateArrayList<long>();
 
 			foreach (object obj in e)
 			{
@@ -74,9 +75,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         }
 
 		/// <summary>Allow enumeration of the secret key rings making up this collection.</summary>
-		public IEnumerable GetKeyRings()
+		public IEnumerable<PgpSecretKeyRing> GetKeyRings()
         {
-            return new EnumerableProxy(secretRings.Values);
+            return new EnumerableProxy<PgpSecretKeyRing>(secretRings.Values);
         }
 
 		/// <summary>Allow enumeration of the key rings associated with the passed in userId.</summary>
@@ -104,12 +105,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// <param name="matchPartial">If true, userId need only be a substring of an actual ID string to match.</param>
 		/// <param name="ignoreCase">If true, case is ignored in user ID comparisons.</param>
 		/// <returns>An <c>IEnumerable</c> of key rings which matched (possibly none).</returns>
-		public IEnumerable GetKeyRings(
+		public IEnumerable<PgpSecretKeyRing> GetKeyRings(
 			string	userId,
 			bool	matchPartial,
 			bool	ignoreCase)
 		{
-            IList rings = Platform.CreateArrayList();
+            var rings = Platform.CreateArrayList<PgpSecretKeyRing>();
 
 			if (ignoreCase)
 			{
@@ -143,7 +144,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 				}
 			}
 
-			return new EnumerableProxy(rings);
+			return new EnumerableProxy<PgpSecretKeyRing>(rings);
 		}
 
 		/// <summary>Return the PGP secret key associated with the given key id.</summary>
@@ -171,7 +172,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
             long id = keyId;
 
-            if (secretRings.Contains(id))
+            if (secretRings.ContainsKey(id))
             {
                 return (PgpSecretKeyRing) secretRings[id];
             }
@@ -235,13 +236,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
             long key = secretKeyRing.GetPublicKey().KeyId;
 
-            if (bundle.secretRings.Contains(key))
+            if (bundle.secretRings.ContainsKey(key))
             {
                 throw new ArgumentException("Collection already contains a key with a keyId for the passed in ring.");
             }
 
-            IDictionary newSecretRings = Platform.CreateHashtable(bundle.secretRings);
-            IList newOrder = Platform.CreateArrayList(bundle.order);
+            var newSecretRings = Platform.CreateHashtable(bundle.secretRings);
+            var newOrder = Platform.CreateArrayList(bundle.order);
 
             newSecretRings[key] = secretKeyRing;
             newOrder.Add(key);
@@ -263,13 +264,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
             long key = secretKeyRing.GetPublicKey().KeyId;
 
-			if (!bundle.secretRings.Contains(key))
+			if (!bundle.secretRings.ContainsKey(key))
             {
                 throw new ArgumentException("Collection does not contain a key with a keyId for the passed in ring.");
             }
 
-            IDictionary newSecretRings = Platform.CreateHashtable(bundle.secretRings);
-            IList newOrder = Platform.CreateArrayList(bundle.order);
+            var newSecretRings = Platform.CreateHashtable(bundle.secretRings);
+            var newOrder = Platform.CreateArrayList(bundle.order);
 
 			newSecretRings.Remove(key);
 			newOrder.Remove(key);

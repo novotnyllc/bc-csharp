@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
 
@@ -12,7 +12,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 	/// </remarks>
     public class PgpKeyRingGenerator
     {
-        private IList					    keys = Platform.CreateArrayList();
+        private IList<object>					    keys = Platform.CreateArrayList<object>();
         private string                      id;
         private SymmetricKeyAlgorithmTag	encAlgorithm;
         private HashAlgorithmTag            hashAlgorithm;
@@ -306,7 +306,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 				sGen.SetHashedSubpackets(hashedPackets);
                 sGen.SetUnhashedSubpackets(unhashedPackets);
 
-				IList subSigs = Platform.CreateArrayList();
+				var subSigs = Platform.CreateArrayList<PgpSignature>();
 
 				subSigs.Add(sGen.GenerateCertification(masterKey.PublicKey, keyPair.PublicKey));
 
@@ -351,7 +351,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 sGen.SetHashedSubpackets(hashedPackets);
                 sGen.SetUnhashedSubpackets(unhashedPackets);
 
-                IList subSigs = Platform.CreateArrayList();
+                var subSigs = Platform.CreateArrayList<PgpSignature>();
                 subSigs.Add(sGen.GenerateCertification(masterKey.PublicKey, keyPair.PublicKey));
 
                 keys.Add(new PgpSecretKey(keyPair.PrivateKey, new PgpPublicKey(keyPair.PublicKey, null, subSigs), encAlgorithm,
@@ -377,9 +377,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// <summary>Return the public key ring that corresponds to the secret key ring.</summary>
         public PgpPublicKeyRing GeneratePublicKeyRing()
         {
-            IList pubKeys = Platform.CreateArrayList();
+            var pubKeys = Platform.CreateArrayList<PgpPublicKey>();
 
-            IEnumerator enumerator = keys.GetEnumerator();
+            var enumerator = keys.GetEnumerator();
             enumerator.MoveNext();
 
 			PgpSecretKey pgpSecretKey = (PgpSecretKey) enumerator.Current;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Security;
@@ -724,7 +725,8 @@ namespace Org.BouncyCastle.Crypto.Tls
             // TODO[compat-gnutls] GnuTLS test server fails to send renegotiation_info extension when resuming
             state.client.NotifySecureRenegotiation(state.secure_renegotiation);
 
-            IDictionary sessionClientExtensions = state.clientExtensions, sessionServerExtensions = state.serverExtensions;
+            var sessionClientExtensions = state.clientExtensions;
+            var sessionServerExtensions = state.serverExtensions;
             if (state.resumedSession)
             {
                 if (selectedCipherSuite != state.sessionParameters.CipherSuite
@@ -800,7 +802,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         protected virtual void ProcessServerSupplementalData(ClientHandshakeState state, byte[] body)
         {
             MemoryStream buf = new MemoryStream(body, false);
-            IList serverSupplementalData = TlsProtocol.ReadSupplementalDataMessage(buf);
+            var serverSupplementalData = TlsProtocol.ReadSupplementalDataMessage(buf);
             state.client.ProcessServerSupplementalData(serverSupplementalData);
         }
 
@@ -845,8 +847,8 @@ namespace Org.BouncyCastle.Crypto.Tls
             internal SessionParameters sessionParameters = null;
             internal SessionParameters.Builder sessionParametersBuilder = null;
             internal int[] offeredCipherSuites = null;
-            internal IDictionary clientExtensions = null;
-            internal IDictionary serverExtensions = null;
+            internal IDictionary<int, byte[]> clientExtensions = null;
+            internal IDictionary<int, byte[]> serverExtensions = null;
             internal byte[] selectedSessionID = null;
             internal bool resumedSession = false;
             internal bool secure_renegotiation = false;

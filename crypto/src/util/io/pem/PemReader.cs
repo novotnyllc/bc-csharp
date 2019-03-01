@@ -51,7 +51,7 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 		private PemObject LoadObject(string type)
 		{
 			string endMarker = EndString + type;
-			IList headers = Platform.CreateArrayList();
+            var headers = Platform.CreateArrayList<PemHeader>();
 			StringBuilder buf = new StringBuilder();
 
 			string line;

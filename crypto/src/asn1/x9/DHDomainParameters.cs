@@ -49,7 +49,7 @@ namespace Org.BouncyCastle.Asn1.X9
 			if (seq.Count < 3 || seq.Count > 5)
 				throw new ArgumentException("Bad sequence size: " + seq.Count, "seq");
 
-			IEnumerator e = seq.GetEnumerator();
+			var e = seq.GetEnumerator();
 			this.p = DerInteger.GetInstance(GetNext(e));
 			this.g = DerInteger.GetInstance(GetNext(e));
 			this.q = DerInteger.GetInstance(GetNext(e));

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Asn1.X509
@@ -14,7 +15,7 @@ namespace Org.BouncyCastle.Asn1.X509
     public class ExtendedKeyUsage
         : Asn1Encodable
     {
-        internal readonly IDictionary usageTable = Platform.CreateHashtable();
+        internal readonly IDictionary<object, object> usageTable = Platform.CreateHashtable<object, object>();
         internal readonly Asn1Sequence seq;
 
         public static ExtendedKeyUsage GetInstance(
@@ -98,14 +99,14 @@ namespace Org.BouncyCastle.Asn1.X509
         public bool HasKeyPurposeId(
             KeyPurposeID keyPurposeId)
         {
-            return usageTable.Contains(keyPurposeId);
+            return usageTable.ContainsKey(keyPurposeId);
         }
 
 #if !(SILVERLIGHT || PORTABLE)
         [Obsolete("Use 'GetAllUsages'")]
         public ArrayList GetUsages()
         {
-            return new ArrayList(usageTable.Values);
+            return new ArrayList(usageTable.Values.ToList());
         }
 #endif
 
@@ -114,7 +115,7 @@ namespace Org.BouncyCastle.Asn1.X509
          * The returned ArrayList contains DerObjectIdentifier instances.
          * @return An ArrayList with all key purposes.
          */
-        public IList GetAllUsages()
+        public IList<object> GetAllUsages()
         {
             return Platform.CreateArrayList(usageTable.Values);
         }

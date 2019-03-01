@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Utilities;
@@ -36,7 +37,7 @@ namespace Org.BouncyCastle.Asn1.X509
         private X509Name			issuer;
         private Time				thisUpdate, nextUpdate;
         private X509Extensions		extensions;
-        private IList			    crlEntries;
+        private IList<Asn1Sequence>              crlEntries;
 
 		public V2TbsCertListGenerator()
         {
@@ -85,7 +86,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		{
 			if (crlEntries == null)
 			{
-				crlEntries = Platform.CreateArrayList();
+				crlEntries = Platform.CreateArrayList< Asn1Sequence>();
 			}
 
 			crlEntries.Add(crlEntry);
@@ -104,8 +105,8 @@ namespace Org.BouncyCastle.Asn1.X509
 		public void AddCrlEntry(DerInteger userCertificate, Time revocationDate, int reason,
 			DerGeneralizedTime invalidityDate)
 		{
-            IList extOids = Platform.CreateArrayList();
-            IList extValues = Platform.CreateArrayList();
+            var extOids = Platform.CreateArrayList<DerObjectIdentifier>();
+            var extValues = Platform.CreateArrayList< X509Extension>();
 
 			if (reason != 0)
 			{

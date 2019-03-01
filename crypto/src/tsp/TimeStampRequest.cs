@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -125,7 +126,7 @@ namespace Org.BouncyCastle.Tsp
 		* @throws TspException if the request is invalid, or processing fails.
 		*/
 		public void Validate(
-			IList algorithms,
+			IList<string> algorithms,
 			IList policies,
 			IList extensions)
 		{
@@ -173,7 +174,7 @@ namespace Org.BouncyCastle.Tsp
 			return extensions == null ? null : extensions.GetExtension(oid);
 		}
 
-		public virtual IList GetExtensionOids()
+		public virtual IList<DerObjectIdentifier> GetExtensionOids()
 		{
 			return TspUtil.GetExtensionOids(extensions);
 		}

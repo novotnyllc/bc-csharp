@@ -13,6 +13,8 @@ using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Utilities.Encoders;
 using Org.BouncyCastle.X509;
+using Org.BouncyCastle.Asn1;
+using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Security.Tests
 {
@@ -48,14 +50,14 @@ namespace Org.BouncyCastle.Security.Tests
 			DsaPrivateKeyParameters dsaPriv = new DsaPrivateKeyParameters(DsaPrivateX, para);
 			DsaPublicKeyParameters dsaPub = new DsaPublicKeyParameters(DSAPublicY, para);
 
-			IDictionary attrs = new Hashtable();
+			var attrs = new Dictionary<DerObjectIdentifier, string>();
 			attrs[X509Name.C] = "AU";
 			attrs[X509Name.O] = "The Legion of the Bouncy Castle";
 			attrs[X509Name.L] = "Melbourne";
 			attrs[X509Name.ST] = "Victoria";
 			attrs[X509Name.E] = "feedback-crypto@bouncycastle.org";
 
-			IList ord = new ArrayList(attrs.Keys);
+			var ord = new List<DerObjectIdentifier>(attrs.Keys);
 
 			X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
 

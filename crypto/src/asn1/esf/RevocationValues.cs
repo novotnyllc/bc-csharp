@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities.Collections;
@@ -90,8 +90,8 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public RevocationValues(
-			IEnumerable			crlVals,
-			IEnumerable			ocspVals,
+			IEnumerable<Asn1Encodable> crlVals,
+			IEnumerable<Asn1Encodable> ocspVals,
 			OtherRevVals		otherRevVals)
 		{
 			if (crlVals != null)

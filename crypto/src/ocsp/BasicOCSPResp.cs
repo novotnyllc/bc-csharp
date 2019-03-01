@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -114,11 +115,11 @@ namespace Org.BouncyCastle.Ocsp
 			return resp.GetSignatureOctets();
 		}
 
-		private IList GetCertList()
+		private IList<X509Certificate> GetCertList()
 		{
 			// load the certificates and revocation lists if we have any
 
-			IList certs = Platform.CreateArrayList();
+			var certs = Platform.CreateArrayList<X509Certificate>();
 			Asn1Sequence s = resp.Certs;
 
 			if (s != null)
@@ -145,7 +146,7 @@ namespace Org.BouncyCastle.Ocsp
 
 		public X509Certificate[] GetCerts()
 		{
-			IList certs = GetCertList();
+			var certs = GetCertList();
             X509Certificate[] result = new X509Certificate[certs.Count];
             for (int i = 0; i < certs.Count; ++i)
             {
@@ -156,14 +157,14 @@ namespace Org.BouncyCastle.Ocsp
 
 		/// <returns>The certificates, if any, associated with the response.</returns>
 		/// <exception cref="OcspException">In the event of an encoding error.</exception>
-		public IX509Store GetCertificates(
+		public IX509Store<X509Certificate> GetCertificates(
 			string type)
 		{
 			try
 			{
 				return X509StoreFactory.Create(
 					"Certificate/" + type,
-					new X509CollectionStoreParameters(this.GetCertList()));
+					new X509CollectionStoreParameters<X509Certificate>(this.GetCertList()));
 			}
 			catch (Exception e)
 			{

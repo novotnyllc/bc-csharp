@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Asn1;
@@ -429,17 +429,17 @@ namespace Org.BouncyCastle.Tests
 			//
 			// search test
 			//
-			IList list = new ArrayList();
+			var list = new List<X509Certificate>();
 
 			list.Add(sCert);
 
 //			CollectionCertStoreParameters ccsp = new CollectionCertStoreParameters(list);
 //			CertStore store = CertStore.getInstance("Collection", ccsp);
-			IX509Store store = X509StoreFactory.Create(
+		    var store = X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters(list));
+				new X509CollectionStoreParameters<X509Certificate>(list));
 
-			ArrayList certs = new ArrayList(
+			var certs = new List<X509Certificate>(
 //				store.getCertificates(aCert.getIssuer()));
 				store.GetMatches(aCert.Issuer));
 
@@ -510,7 +510,7 @@ namespace Org.BouncyCastle.Tests
 			// as the issuer is the same this should still work (even though it is not
 			// technically correct
 
-			certs = new ArrayList(
+			certs = new List<X509Certificate>(
 //				store.getCertificates(aCert.Issuer));
 				store.GetMatches(aCert.Issuer));
 
@@ -577,7 +577,7 @@ namespace Org.BouncyCastle.Tests
 
 			aCert = gen.Generate(privKey);
 
-			ISet exts = aCert.GetCriticalExtensionOids();
+			var exts = aCert.GetCriticalExtensionOids();
 
 			if (exts.Count != 1 || !exts.Contains("1.1"))
 			{

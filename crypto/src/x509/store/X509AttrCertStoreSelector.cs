@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -28,8 +29,8 @@ namespace Org.BouncyCastle.X509.Store
 		private AttributeCertificateHolder holder;
 		private AttributeCertificateIssuer issuer;
 		private BigInteger serialNumber;
-		private ISet targetNames = new HashSet();
-		private ISet targetGroups = new HashSet();
+		private ISet<GeneralName> targetNames = new HashSet<GeneralName>();
+		private ISet<GeneralName> targetGroups = new HashSet<GeneralName>();
 
 		public X509AttrCertStoreSelector()
 		{
@@ -43,8 +44,8 @@ namespace Org.BouncyCastle.X509.Store
 			this.holder = o.holder;
 			this.issuer = o.issuer;
 			this.serialNumber = o.serialNumber;
-			this.targetGroups = new HashSet(o.targetGroups);
-			this.targetNames = new HashSet(o.targetNames);
+			this.targetGroups = new HashSet<GeneralName>(o.targetGroups);
+			this.targetNames = new HashSet<GeneralName>(o.targetNames);
 		}
 
 		/// <summary>
@@ -259,7 +260,7 @@ namespace Org.BouncyCastle.X509.Store
 		* @see #AddTargetName(GeneralName)
 		*/
 		public void SetTargetNames(
-			IEnumerable names)
+			IEnumerable<GeneralName> names)
 		{
 			targetNames = ExtractGeneralNames(names);
 		}
@@ -273,9 +274,9 @@ namespace Org.BouncyCastle.X509.Store
 		* @return The collection of target names
 		* @see #setTargetNames(Collection)
 		*/
-		public IEnumerable GetTargetNames()
+		public IEnumerable<GeneralName> GetTargetNames()
 		{
-			return new EnumerableProxy(targetNames);
+			return new EnumerableProxy<GeneralName>(targetNames);
 		}
 
 		/**
@@ -331,7 +332,7 @@ namespace Org.BouncyCastle.X509.Store
 		* @see #AddTargetGroup(GeneralName)
 		*/
 		public void SetTargetGroups(
-			IEnumerable names)
+			IEnumerable<GeneralName> names)
 		{
 			targetGroups = ExtractGeneralNames(names);
 		}
@@ -345,23 +346,24 @@ namespace Org.BouncyCastle.X509.Store
 		* @return The collection of target groups.
 		* @see #setTargetGroups(Collection)
 		*/
-		public IEnumerable GetTargetGroups()
+		public IEnumerable<GeneralName> GetTargetGroups()
 		{
-			return new EnumerableProxy(targetGroups);
+			return new EnumerableProxy<GeneralName>(targetGroups);
 		}
 
-		private ISet ExtractGeneralNames(
-			IEnumerable names)
+		private ISet<GeneralName> ExtractGeneralNames(
+			IEnumerable<GeneralName> names)
 		{
-			ISet result = new HashSet();
+			var result = new HashSet<GeneralName>();
 
 			if (names != null)
 			{
 				foreach (object o in names)
 				{
-					if (o is GeneralName)
+                    var generalName = o as GeneralName;
+					if (generalName != null)
 					{
-						result.Add(o);
+						result.Add(generalName);
 					}
 					else
 					{
