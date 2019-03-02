@@ -114,7 +114,7 @@ namespace Org.BouncyCastle.Pkcs
         {
             AsymmetricKeyParameter privKey = PrivateKeyFactory.CreateKey(privKeyInfo);
 
-                                IDictionary<string, Asn1Encodable> attributes = new Dictionary<string, Asn1Encodable>();
+                                IDictionary<string, Asn1Encodable> attributes = Platform.CreateDictionary<string, Asn1Encodable>();
             AsymmetricKeyEntry keyEntry = new AsymmetricKeyEntry(privKey, attributes);
 
                                 string alias = null;
@@ -311,7 +311,7 @@ namespace Org.BouncyCastle.Pkcs
                 //
                 // set the attributes
                 //
-                IDictionary<string, Asn1Encodable> attributes = new Dictionary<string, Asn1Encodable>();
+                IDictionary<string, Asn1Encodable> attributes = Platform.CreateDictionary<string, Asn1Encodable>();
                 Asn1OctetString localId = null;
                 string alias = null;
 
@@ -420,7 +420,7 @@ namespace Org.BouncyCastle.Pkcs
 
         private IDictionary<string, string> GetAliasesTable()
         {
-            IDictionary<string, string> tab = new Dictionary<string, string>();
+            IDictionary<string, string> tab = Platform.CreateDictionary<string, string>();
 
             foreach (string key in certs.Keys)
             {
@@ -1038,8 +1038,8 @@ namespace Org.BouncyCastle.Pkcs
         private class IgnoresCaseHashtable
             : IEnumerable<KeyValuePair<string, object>>
         {
-            private readonly IDictionary<string, object> orig = new Dictionary<string, object>();
-            private readonly IDictionary<string, string> keys = new Dictionary<string, string>();
+            private readonly IDictionary<string, object> orig = Platform.CreateDictionary<string, object>();
+            private readonly IDictionary<string, string> keys = Platform.CreateDictionary<string, string>();
 
             public void Clear()
             {

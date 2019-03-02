@@ -8,7 +8,7 @@ namespace Org.BouncyCastle.Cms
 	public class RecipientInformationStore
 	{
 		private readonly IList<RecipientInformation> all; //ArrayList[RecipientInformation]
-		private readonly IDictionary<RecipientID, IList<RecipientInformation>> table = new Dictionary<RecipientID, IList<RecipientInformation>>();
+		private readonly IDictionary<RecipientID, IList<RecipientInformation>> table = Platform.CreateDictionary<RecipientID, IList<RecipientInformation>>();
 
 		public RecipientInformationStore(
 			ICollection<RecipientInformation> recipientInfos)

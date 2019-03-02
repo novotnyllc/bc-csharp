@@ -14,7 +14,7 @@ namespace Org.BouncyCastle.Pkcs
 
 		public AsymmetricKeyEntry(
             AsymmetricKeyParameter key)
-			: base(new Dictionary<string, Asn1Encodable>())
+			: base(Platform.CreateDictionary<string, Asn1Encodable>())
         {
             this.key = key;
         }

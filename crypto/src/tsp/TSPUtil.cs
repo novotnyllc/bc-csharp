@@ -26,8 +26,8 @@ namespace Org.BouncyCastle.Tsp
 		private static ISet<DerObjectIdentifier> EmptySet = CollectionUtilities.ReadOnly(new HashSet<DerObjectIdentifier>());
 		private static IList<DerObjectIdentifier> EmptyList = CollectionUtilities.ReadOnly(Platform.CreateList<DerObjectIdentifier>());
 
-		private static readonly IDictionary<string, int> digestLengths = new Dictionary<string, int>();
-        private static readonly IDictionary<string, string> digestNames = new Dictionary<string, string>();
+		private static readonly IDictionary<string, int> digestLengths = Platform.CreateDictionary<string, int>();
+        private static readonly IDictionary<string, string> digestNames = Platform.CreateDictionary<string, string>();
 
 		static TspUtil()
 		{

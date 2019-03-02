@@ -110,7 +110,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			bool	matchPartial,
 			bool	ignoreCase)
 		{
-			var rings = new List<PgpPublicKeyRing>();
+			var rings = Platform.CreateList<PgpPublicKeyRing>();
 
 			if (ignoreCase)
 			{
