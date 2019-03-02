@@ -21,7 +21,7 @@ namespace Org.BouncyCastle.X509.Store
 		internal X509CollectionStore(
 			ICollection<T> collection)
 		{
-			_local = Platform.CreateArrayList(collection);
+			_local = Platform.CreateList(collection);
 		}
 
 		/**
@@ -35,10 +35,10 @@ namespace Org.BouncyCastle.X509.Store
 		{
 			if (selector == null)
 			{
-                return Platform.CreateArrayList(_local);
+                return Platform.CreateList(_local);
 			}
 
-            var result = Platform.CreateArrayList<T>();
+            var result = Platform.CreateList<T>();
 			foreach (var obj in _local)
 			{
 				if (selector.Match(obj))

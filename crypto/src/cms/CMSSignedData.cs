@@ -158,7 +158,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			if (signerInfoStore == null)
 			{
-                var signerInfos = Platform.CreateArrayList<SignerInformation>();
+                var signerInfos = Platform.CreateList<SignerInformation>();
 				Asn1Set s = signedData.SignerInfos;
 
 				foreach (object obj in s)

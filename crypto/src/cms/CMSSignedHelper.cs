@@ -213,7 +213,7 @@ namespace Org.BouncyCastle.Cms
 			string	type,
 			Asn1Set	certSet)
 		{
-			var certs = Platform.CreateArrayList<IX509AttributeCertificate>();
+			var certs = Platform.CreateList<IX509AttributeCertificate>();
 
 			if (certSet != null)
 			{
@@ -258,7 +258,7 @@ namespace Org.BouncyCastle.Cms
 			string	type,
 			Asn1Set	certSet)
 		{
-			var certs = Platform.CreateArrayList<X509Certificate>();
+			var certs = Platform.CreateList<X509Certificate>();
 
 			if (certSet != null)
 			{
@@ -281,7 +281,7 @@ namespace Org.BouncyCastle.Cms
 			string	type,
 			Asn1Set	crlSet)
 		{
-			var crls = Platform.CreateArrayList<X509Crl>();
+			var crls = Platform.CreateList<X509Crl>();
 
 			if (crlSet != null)
 			{

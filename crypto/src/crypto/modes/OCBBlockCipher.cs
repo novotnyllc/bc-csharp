@@ -161,7 +161,7 @@ namespace Org.BouncyCastle.Crypto.Modes
 
             this.L_Dollar = OCB_double(L_Asterisk);
 
-            this.L = Platform.CreateArrayList<byte[]>();
+            this.L = Platform.CreateList<byte[]>();
             this.L.Add(OCB_double(L_Dollar));
 
             /*

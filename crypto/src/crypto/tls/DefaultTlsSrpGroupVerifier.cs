@@ -11,7 +11,7 @@ namespace Org.BouncyCastle.Crypto.Tls
     public class DefaultTlsSrpGroupVerifier
         :   TlsSrpGroupVerifier
     {
-        protected static readonly IList<Srp6GroupParameters> DefaultGroups = Platform.CreateArrayList<Srp6GroupParameters>();
+        protected static readonly IList<Srp6GroupParameters> DefaultGroups = Platform.CreateList<Srp6GroupParameters>();
 
         static DefaultTlsSrpGroupVerifier()
         {

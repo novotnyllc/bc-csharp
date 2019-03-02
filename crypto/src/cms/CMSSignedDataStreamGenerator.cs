@@ -44,7 +44,7 @@ namespace Org.BouncyCastle.Cms
     {
 		private static readonly CmsSignedHelper Helper = CmsSignedHelper.Instance;
 
-		private readonly IList<DigestAndSignerInfoGeneratorHolder>      _signerInfs = Platform.CreateArrayList<DigestAndSignerInfoGeneratorHolder>();
+		private readonly IList<DigestAndSignerInfoGeneratorHolder>      _signerInfs = Platform.CreateList<DigestAndSignerInfoGeneratorHolder>();
 		private readonly ISet<string>       _messageDigestOids = new HashSet<string>();
         private readonly IDictionary<string, IDigest> _messageDigests = Platform.CreateHashtable<string, IDigest>();
         private readonly IDictionary<string, byte[]> _messageHashes = Platform.CreateHashtable<string, byte[]>();

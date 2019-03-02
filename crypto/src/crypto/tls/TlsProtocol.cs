@@ -1161,7 +1161,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             MemoryStream buf = new MemoryStream(supp_data, false);
 
-            var supplementalData = Platform.CreateArrayList<SupplementalDataEntry>();
+            var supplementalData = Platform.CreateList<SupplementalDataEntry>();
 
             while (buf.Position < buf.Length)
             {

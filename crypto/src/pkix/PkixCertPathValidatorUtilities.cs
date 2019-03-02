@@ -347,7 +347,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				for (int j = 0; j < policyNodes.Length; j++)
 				{
-                    policyNodes[j] = Platform.CreateArrayList<PkixPolicyNode>();
+                    policyNodes[j] = Platform.CreateList<PkixPolicyNode>();
 				}
 
 				return null;
@@ -452,7 +452,7 @@ namespace Org.BouncyCastle.Pkix
 						if (ANY_POLICY.Equals(p_node.ValidPolicy))
 						{
 							PkixPolicyNode c_node = new PkixPolicyNode(
-                                Platform.CreateArrayList<PkixPolicyNode>(), i,
+                                Platform.CreateList<PkixPolicyNode>(), i,
 								m_idp[id_p],
 								p_node, pq, id_p, ci);
 							p_node.AddChild(c_node);
@@ -473,7 +473,7 @@ namespace Org.BouncyCastle.Pkix
 			int pos = 0;
 
 			// Copy to avoid RemoveAt calls interfering with enumeration
-            foreach (PkixPolicyNode node in Platform.CreateArrayList(policyNodes[i]))
+            foreach (PkixPolicyNode node in Platform.CreateList(policyNodes[i]))
 			{
 				if (node.ValidPolicy.Equals(id_p))
 				{
@@ -754,7 +754,7 @@ namespace Org.BouncyCastle.Pkix
 			X509CrlStoreSelector	selector,
 			PkixParameters			pkixParams)
 		{
-            var issuers = Platform.CreateArrayList<X509Name>();
+            var issuers = Platform.CreateList<X509Name>();
 			// indirect CRL
 			if (dp.CrlIssuer != null)
 			{
@@ -934,7 +934,7 @@ namespace Org.BouncyCastle.Pkix
 			// 5.2.4 (a)
 			try
 			{
-                var deltaSelectIssuer = Platform.CreateArrayList<X509Name>();
+                var deltaSelectIssuer = Platform.CreateList<X509Name>();
 				deltaSelectIssuer.Add(completeCRL.IssuerDN);
 				deltaSelect.Issuers = deltaSelectIssuer;
 			}
@@ -1099,7 +1099,7 @@ namespace Org.BouncyCastle.Pkix
 				 var childExpectedPolicies = new HashSet<string>();
 					childExpectedPolicies.Add(pOid.Id);
 
-                    PkixPolicyNode child = new PkixPolicyNode(Platform.CreateArrayList<PkixPolicyNode>(),
+                    PkixPolicyNode child = new PkixPolicyNode(Platform.CreateList<PkixPolicyNode>(),
 						index,
 						childExpectedPolicies,
 						node,
@@ -1133,7 +1133,7 @@ namespace Org.BouncyCastle.Pkix
 				 var _childExpectedPolicies = new HashSet<string>();
 					_childExpectedPolicies.Add(_poid.Id);
 
-                    PkixPolicyNode _child = new PkixPolicyNode(Platform.CreateArrayList<PkixPolicyNode>(),
+                    PkixPolicyNode _child = new PkixPolicyNode(Platform.CreateList<PkixPolicyNode>(),
                         index,
                         _childExpectedPolicies,
                         _node,

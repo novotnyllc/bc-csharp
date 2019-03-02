@@ -236,7 +236,7 @@ namespace Org.BouncyCastle.Pkcs
             localIds.Clear();
             unmarkedKeyEntry = null;
 
-            var certBags = Platform.CreateArrayList<SafeBag>();
+            var certBags = Platform.CreateList<SafeBag>();
 
             if (info.ContentType.Equals(PkcsObjectIdentifiers.Data))
                             {
@@ -524,7 +524,7 @@ namespace Org.BouncyCastle.Pkcs
 
             if (c != null)
             {
-                var cs = Platform.CreateArrayList<X509CertificateEntry>();
+                var cs = Platform.CreateList<X509CertificateEntry>();
 
                 while (c != null)
                 {

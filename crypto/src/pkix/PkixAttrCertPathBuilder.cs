@@ -80,7 +80,7 @@ namespace Org.BouncyCastle.Pkix
 				if (!issuers.Any())
 					throw new PkixCertPathBuilderException("Public key certificate for attribute certificate cannot be found.");
 
-                var certPathList = Platform.CreateArrayList<X509Certificate>();
+                var certPathList = Platform.CreateList<X509Certificate>();
 
 				foreach (X509Certificate issuer in issuers)
 				{

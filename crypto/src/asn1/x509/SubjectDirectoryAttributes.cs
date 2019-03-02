@@ -70,7 +70,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		private SubjectDirectoryAttributes(
 			Asn1Sequence seq)
 		{
-            this.attributes = Platform.CreateArrayList<AttributeX509>();
+            this.attributes = Platform.CreateList<AttributeX509>();
             foreach (object o in seq)
 			{
 				Asn1Sequence s = Asn1Sequence.GetInstance(o);
@@ -89,7 +89,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		public SubjectDirectoryAttributes(
 			IList<AttributeX509> attributes)
 		{
-            this.attributes = Platform.CreateArrayList<AttributeX509>(attributes);
+            this.attributes = Platform.CreateList<AttributeX509>(attributes);
         }
 
 		/**

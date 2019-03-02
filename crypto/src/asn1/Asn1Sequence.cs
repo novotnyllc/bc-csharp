@@ -110,7 +110,7 @@ namespace Org.BouncyCastle.Asn1
         protected internal Asn1Sequence(
             int capacity)
         {
-            seq = Platform.CreateArrayList<Asn1Encodable>(capacity);
+            seq = Platform.CreateList<Asn1Encodable>(capacity);
         }
 
         public virtual IEnumerator<Asn1Encodable> GetEnumerator()

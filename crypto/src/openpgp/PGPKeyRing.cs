@@ -26,7 +26,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		{
 			try
 			{
-                var sigList = Platform.CreateArrayList<PgpSignature>();
+                var sigList = Platform.CreateList<PgpSignature>();
 
 				while (bcpgInput.NextPacketTag() == PacketTag.Signature)
 				{
@@ -50,9 +50,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			out IList<ContainedPacket>       idTrusts,
 			out IList<IList<PgpSignature>>       idSigs)
 		{
-            ids = Platform.CreateArrayList<object>();
-            idTrusts = Platform.CreateArrayList<ContainedPacket>();
-            idSigs = Platform.CreateArrayList<IList<PgpSignature>>();
+            ids = Platform.CreateList<object>();
+            idTrusts = Platform.CreateList<ContainedPacket>();
+            idSigs = Platform.CreateList<IList<PgpSignature>>();
 
 			while (bcpgInput.NextPacketTag() == PacketTag.UserId
 				|| bcpgInput.NextPacketTag() == PacketTag.UserAttribute)

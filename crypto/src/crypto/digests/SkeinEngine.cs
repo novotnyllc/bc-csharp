@@ -620,8 +620,8 @@ namespace Org.BouncyCastle.Crypto.Digests
         private void InitParams(IDictionary<int, byte[]> parameters)
         {
             var keys = parameters.Keys.GetEnumerator();
-            var pre = Platform.CreateArrayList<Parameter>();
-            var post = Platform.CreateArrayList<Parameter>();
+            var pre = Platform.CreateList<Parameter>();
+            var post = Platform.CreateList<Parameter>();
 
             while (keys.MoveNext())
             {

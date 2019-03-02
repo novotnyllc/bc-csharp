@@ -313,11 +313,11 @@ namespace Org.BouncyCastle.Asn1.X509
             DefaultLookup.Add("telephonenumber", TelephoneNumber);
         }
 
-        private readonly IList<DerObjectIdentifier> ordering = Platform.CreateArrayList<DerObjectIdentifier>();
+        private readonly IList<DerObjectIdentifier> ordering = Platform.CreateList<DerObjectIdentifier>();
         private readonly X509NameEntryConverter converter;
 
-        private IList<string>		    values = Platform.CreateArrayList<string>();
-        private IList<bool>           added = Platform.CreateArrayList<bool>();
+        private IList<string>		    values = Platform.CreateList<string>();
+        private IList<bool>           added = Platform.CreateList<bool>();
         private Asn1Sequence	seq;
 
         /**
@@ -641,9 +641,9 @@ namespace Org.BouncyCastle.Asn1.X509
 //				this.ordering.Reverse();
 //				this.values.Reverse();
 //				this.added.Reverse();
-                var o = Platform.CreateArrayList<DerObjectIdentifier>();
-                var v = Platform.CreateArrayList<string>();
-                var a = Platform.CreateArrayList<bool>();
+                var o = Platform.CreateList<DerObjectIdentifier>();
+                var v = Platform.CreateList<string>();
+                var a = Platform.CreateList<bool>();
                 int count = 1;
 
                 for (int i = 0; i < this.ordering.Count; i++)
@@ -671,7 +671,7 @@ namespace Org.BouncyCastle.Asn1.X509
         */
         public IList<DerObjectIdentifier> GetOidList()
         {
-            return Platform.CreateArrayList(ordering);
+            return Platform.CreateList(ordering);
         }
 
         /**
@@ -689,7 +689,7 @@ namespace Org.BouncyCastle.Asn1.X509
          */
         public IList<string> GetValueList(DerObjectIdentifier oid)
         {
-            var v = Platform.CreateArrayList<string>();
+            var v = Platform.CreateList<string>();
             for (int i = 0; i != values.Count; i++)
             {
                 if (null == oid || oid.Equals(ordering[i]))

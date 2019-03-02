@@ -83,7 +83,7 @@ namespace Org.BouncyCastle.X509
 			Stream inStream)
 		{
 			X509CertificatePair certPair;
-			var certPairs = Platform.CreateArrayList<X509CertificatePair>();
+			var certPairs = Platform.CreateList<X509CertificatePair>();
 
 			while ((certPair = ReadCertPair(inStream)) != null)
 			{

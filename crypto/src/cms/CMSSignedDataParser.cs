@@ -199,7 +199,7 @@ namespace Org.BouncyCastle.Cms
 			{
 				PopulateCertCrlSets();
 
-                var signerInfos = Platform.CreateArrayList<SignerInformation>();
+                var signerInfos = Platform.CreateList<SignerInformation>();
                 var hashes = Platform.CreateHashtable<object, byte[]>();
 
 				foreach (var digestKey in _digests.Keys)

@@ -213,7 +213,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
         }
 
-		private readonly IList<EncMethod> methods = Platform.CreateArrayList<EncMethod>();
+		private readonly IList<EncMethod> methods = Platform.CreateList<EncMethod>();
         private readonly SymmetricKeyAlgorithmTag defAlgorithm;
         private readonly SecureRandom rand;
 

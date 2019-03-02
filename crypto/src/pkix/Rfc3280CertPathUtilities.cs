@@ -81,7 +81,7 @@ namespace Org.BouncyCastle.Pkix
 				{
 					// make list of names
 					DistributionPointName dpName = IssuingDistributionPoint.GetInstance(idp).DistributionPoint;
-                    var names = Platform.CreateArrayList<GeneralName>();
+                    var names = Platform.CreateList<GeneralName>();
 
 					if (dpName.PointType == DistributionPointName.FullName)
 					{
@@ -522,7 +522,7 @@ namespace Org.BouncyCastle.Pkix
 									 var _newChildExpectedPolicies = new HashSet<string>();
 										_newChildExpectedPolicies.Add(_policy);
 
-										PkixPolicyNode _newChild = new PkixPolicyNode(Platform.CreateArrayList<PkixPolicyNode>(), i,
+										PkixPolicyNode _newChild = new PkixPolicyNode(Platform.CreateList<PkixPolicyNode>(), i,
 											_newChildExpectedPolicies, _node, _apq, _policy, false);
                                         _node.AddChild(_newChild);
 										policyNodes[i].Add(_newChild);
@@ -750,7 +750,7 @@ namespace Org.BouncyCastle.Pkix
 			}
 
 			// get CRL signing certs
-			var coll = Platform.CreateArrayList<X509Certificate>();
+			var coll = Platform.CreateList<X509Certificate>();
 
 			try
 			{
@@ -766,8 +766,8 @@ namespace Org.BouncyCastle.Pkix
 
 			var cert_it = coll.GetEnumerator();
 
-            var validCerts = Platform.CreateArrayList<X509Certificate>();
-            var validKeys = Platform.CreateArrayList<AsymmetricKeyParameter>();
+            var validCerts = Platform.CreateList<X509Certificate>();
+            var validKeys = Platform.CreateList<AsymmetricKeyParameter>();
 
 			while (cert_it.MoveNext())
 			{
@@ -1359,7 +1359,7 @@ namespace Org.BouncyCastle.Pkix
 									PkixPolicyNode p_node = (PkixPolicyNode)node.Parent;
 									if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(p_node.ValidPolicy))
 									{
-										PkixPolicyNode c_node = new PkixPolicyNode(Platform.CreateArrayList<PkixPolicyNode>(), i,
+										PkixPolicyNode c_node = new PkixPolicyNode(Platform.CreateList<PkixPolicyNode>(), i,
 											m_idp[id_p], p_node, pq, id_p, ci);
 										p_node.AddChild(c_node);
 										policyNodes[i].Add(c_node);
@@ -1375,7 +1375,7 @@ namespace Org.BouncyCastle.Pkix
 					}
 					else if (policyMapping <= 0)
 					{
-                        foreach (PkixPolicyNode node in Platform.CreateArrayList<PkixPolicyNode>(policyNodes[i]))
+                        foreach (PkixPolicyNode node in Platform.CreateList<PkixPolicyNode>(policyNodes[i]))
                         {
 							if (node.ValidPolicy.Equals(id_p))
 							{
@@ -1383,7 +1383,7 @@ namespace Org.BouncyCastle.Pkix
 
                                 for (int k = i - 1; k >= 0; k--)
 								{
-                                    foreach (PkixPolicyNode node2 in Platform.CreateArrayList<PkixPolicyNode>(policyNodes[k]))
+                                    foreach (PkixPolicyNode node2 in Platform.CreateList<PkixPolicyNode>(policyNodes[k]))
 									{
 										if (!node2.HasChildren)
 										{
@@ -1415,7 +1415,7 @@ namespace Org.BouncyCastle.Pkix
 
 			try
 			{
-				var issuer = Platform.CreateArrayList<X509Name>();
+				var issuer = Platform.CreateList<X509Name>();
 				issuer.Add(crl.IssuerDN);
 				crlselect.Issuers = issuer;
 			}

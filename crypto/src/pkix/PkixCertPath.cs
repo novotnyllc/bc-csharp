@@ -86,7 +86,7 @@ namespace Org.BouncyCastle.Pkix
 
         static PkixCertPath()
         {
-            var encodings = Platform.CreateArrayList<string>();
+            var encodings = Platform.CreateList<string>();
             encodings.Add("PkiPath");
             encodings.Add("PEM");
             encodings.Add("PKCS7");
@@ -126,8 +126,8 @@ namespace Org.BouncyCastle.Pkix
 				return certs;
 
 			// find end-entity cert
-            var retList = Platform.CreateArrayList<X509Certificate>(certs.Count);
-            var orig = Platform.CreateArrayList(certs);
+            var retList = Platform.CreateList<X509Certificate>(certs.Count);
+            var orig = Platform.CreateList(certs);
 
 			for (int i = 0; i < certs.Count; i++)
 			{
@@ -188,7 +188,7 @@ namespace Org.BouncyCastle.Pkix
 			ICollection<X509Certificate> certificates)
 //			: base("X.509")
 		{
-			this.certificates = SortCerts(Platform.CreateArrayList<X509Certificate>(certificates));
+			this.certificates = SortCerts(Platform.CreateList<X509Certificate>(certificates));
 		}
 
 		public PkixCertPath(
@@ -224,7 +224,7 @@ namespace Org.BouncyCastle.Pkix
 							"input stream does not contain a ASN1 SEQUENCE while reading PkiPath encoded data to load CertPath");
 					}
 
-                    certs = Platform.CreateArrayList<X509Certificate>();
+                    certs = Platform.CreateList<X509Certificate>();
 
                     foreach (Asn1Encodable ae in (Asn1Sequence)derObject)
                     {
@@ -237,7 +237,7 @@ namespace Org.BouncyCastle.Pkix
 				}
                 else if (upper.Equals("PKCS7") || upper.Equals("PEM"))
 				{
-                    certs = Platform.CreateArrayList<X509Certificate>(new X509CertificateParser().ReadCertificates(inStream));
+                    certs = Platform.CreateList<X509Certificate>(new X509CertificateParser().ReadCertificates(inStream));
 				}
 				else
 				{

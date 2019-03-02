@@ -3235,7 +3235,7 @@ namespace Org.BouncyCastle.Math
                 int mask = (1 << 30) - 1;
                 BigInteger u = this.Abs();
                 int bits = u.BitLength;
-                var S = Platform.CreateArrayList<string>();
+                var S = Platform.CreateList<string>();
                 while (bits > 30)
                 {
                     S.Add(Convert.ToString(u.IntValue & mask, 8));
@@ -3271,7 +3271,7 @@ namespace Org.BouncyCastle.Math
                 }
 
                 // TODO Could cache the moduli for each radix (soft reference?)
-                var moduli = Platform.CreateArrayList<BigInteger>();
+                var moduli = Platform.CreateList<BigInteger>();
                 BigInteger R = BigInteger.ValueOf(radix);
                 while (R.CompareTo(q) <= 0)
                 {

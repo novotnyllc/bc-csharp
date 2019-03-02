@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             IEnumerable<object> e)
         {
 			this.pubRings = Platform.CreateHashtable<long, PgpPublicKeyRing>();
-			this.order = Platform.CreateArrayList<long>();
+			this.order = Platform.CreateList<long>();
 
 			foreach (object obj in e)
             {
@@ -240,7 +240,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
 
 			IDictionary<long, PgpPublicKeyRing> newPubRings = Platform.CreateHashtable<long, PgpPublicKeyRing>(bundle.pubRings);
-            var newOrder = Platform.CreateArrayList(bundle.order);
+            var newOrder = Platform.CreateList(bundle.order);
 
 			newPubRings[key] = publicKeyRing;
 
@@ -269,7 +269,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
 
 			IDictionary<long, PgpPublicKeyRing> newPubRings = Platform.CreateHashtable(bundle.pubRings);
-            var newOrder = Platform.CreateArrayList(bundle.order);
+            var newOrder = Platform.CreateList(bundle.order);
 
 			newPubRings.Remove(key);
 			newOrder.Remove(key);

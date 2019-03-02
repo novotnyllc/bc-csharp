@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Cms
         public SignerInformationStore(
             SignerInformation signerInfo)
         {
-            this.all = Platform.CreateArrayList<SignerInformation>(1);
+            this.all = Platform.CreateList<SignerInformation>(1);
             this.all.Add(signerInfo);
 
             SignerID sid = signerInfo.SignerID;
@@ -43,13 +43,13 @@ namespace Org.BouncyCastle.Cms
 
                 if (!table.TryGetValue(sid, out list))
                 {
-                    table[sid] = list = Platform.CreateArrayList<SignerInformation>(1);
+                    table[sid] = list = Platform.CreateList<SignerInformation>(1);
                 }
 
                 list.Add(signer);
             }
 
-            this.all = Platform.CreateArrayList(signerInfos);
+            this.all = Platform.CreateList(signerInfos);
         }
 
         /**
@@ -76,7 +76,7 @@ namespace Org.BouncyCastle.Cms
         /// <returns>An ICollection of all signers in the collection</returns>
         public ICollection<SignerInformation> GetSigners()
         {
-            return Platform.CreateArrayList(all);
+            return Platform.CreateList(all);
         }
 
         /**
@@ -90,7 +90,7 @@ namespace Org.BouncyCastle.Cms
         {
             var list = table[selector];
 
-            return list == null ? Platform.CreateArrayList<SignerInformation>() : Platform.CreateArrayList(list);
+            return list == null ? Platform.CreateList<SignerInformation>() : Platform.CreateList(list);
         }
     }
 }

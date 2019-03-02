@@ -86,7 +86,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		{
 			if (crlEntries == null)
 			{
-				crlEntries = Platform.CreateArrayList<Asn1Sequence>();
+				crlEntries = Platform.CreateList<Asn1Sequence>();
 			}
 
 			crlEntries.Add(crlEntry);
@@ -105,8 +105,8 @@ namespace Org.BouncyCastle.Asn1.X509
 		public void AddCrlEntry(DerInteger userCertificate, Time revocationDate, int reason,
 			DerGeneralizedTime invalidityDate)
 		{
-            var extOids = Platform.CreateArrayList<DerObjectIdentifier>();
-            var extValues = Platform.CreateArrayList<X509Extension>();
+            var extOids = Platform.CreateList<DerObjectIdentifier>();
+            var extValues = Platform.CreateList<X509Extension>();
 
 			if (reason != 0)
 			{

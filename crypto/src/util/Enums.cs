@@ -43,7 +43,7 @@ namespace Org.BouncyCastle.Utilities
                 throw new ArgumentException("Not an enumeration type", "enumType");
 
 #if NETCF_1_0 || NETCF_2_0 || SILVERLIGHT
-            var result = Platform.CreateArrayList();
+            var result = Platform.CreateList();
             FieldInfo[] fields = enumType.GetFields(BindingFlags.Static | BindingFlags.Public);
             foreach (FieldInfo field in fields)
             {

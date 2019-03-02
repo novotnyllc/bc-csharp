@@ -13,14 +13,14 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 		private byte[]		content;
 
 		public PemObject(string type, byte[] content)
-			: this(type, Platform.CreateArrayList<PemHeader>(), content)
+			: this(type, Platform.CreateList<PemHeader>(), content)
 		{
 		}
 
 		public PemObject(String type, IList<PemHeader> headers, byte[] content)
 		{
 			this.type = type;
-            this.headers = Platform.CreateArrayList(headers);
+            this.headers = Platform.CreateList(headers);
 			this.content = content;
 		}
 

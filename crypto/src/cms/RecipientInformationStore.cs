@@ -20,13 +20,13 @@ namespace Org.BouncyCastle.Cms
 
 				if (!table.TryGetValue(rid, out list))
 				{
-					table[rid] = list = Platform.CreateArrayList<RecipientInformation>(1);
+					table[rid] = list = Platform.CreateList<RecipientInformation>(1);
 				}
 
 				list.Add(recipientInformation);
 			}
 
-            this.all = Platform.CreateArrayList(recipientInfos);
+            this.all = Platform.CreateList(recipientInfos);
 		}
 
 		public RecipientInformation this[RecipientID selector]
@@ -66,7 +66,7 @@ namespace Org.BouncyCastle.Cms
 		*/
 		public ICollection<RecipientInformation> GetRecipients()
 		{
-			return Platform.CreateArrayList(all);
+			return Platform.CreateList(all);
 		}
 
 		/**
@@ -80,7 +80,7 @@ namespace Org.BouncyCastle.Cms
 		{
             var list = table[selector];
 
-            return list == null ? Platform.CreateArrayList<RecipientInformation>() : Platform.CreateArrayList(list);
+            return list == null ? Platform.CreateList<RecipientInformation>() : Platform.CreateList(list);
 		}
 	}
 }

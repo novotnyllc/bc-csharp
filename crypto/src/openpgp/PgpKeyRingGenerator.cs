@@ -12,7 +12,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 	/// </remarks>
     public class PgpKeyRingGenerator
     {
-        private IList<object>					    keys = Platform.CreateArrayList<object>();
+        private IList<object>					    keys = Platform.CreateList<object>();
         private string                      id;
         private SymmetricKeyAlgorithmTag	encAlgorithm;
         private HashAlgorithmTag            hashAlgorithm;
@@ -306,7 +306,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 				sGen.SetHashedSubpackets(hashedPackets);
                 sGen.SetUnhashedSubpackets(unhashedPackets);
 
-				var subSigs = Platform.CreateArrayList<PgpSignature>();
+				var subSigs = Platform.CreateList<PgpSignature>();
 
 				subSigs.Add(sGen.GenerateCertification(masterKey.PublicKey, keyPair.PublicKey));
 
@@ -351,7 +351,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 sGen.SetHashedSubpackets(hashedPackets);
                 sGen.SetUnhashedSubpackets(unhashedPackets);
 
-                var subSigs = Platform.CreateArrayList<PgpSignature>();
+                var subSigs = Platform.CreateList<PgpSignature>();
                 subSigs.Add(sGen.GenerateCertification(masterKey.PublicKey, keyPair.PublicKey));
 
                 keys.Add(new PgpSecretKey(keyPair.PrivateKey, new PgpPublicKey(keyPair.PublicKey, null, subSigs), encAlgorithm,
@@ -377,7 +377,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// <summary>Return the public key ring that corresponds to the secret key ring.</summary>
         public PgpPublicKeyRing GeneratePublicKeyRing()
         {
-            var pubKeys = Platform.CreateArrayList<PgpPublicKey>();
+            var pubKeys = Platform.CreateList<PgpPublicKey>();
 
             var enumerator = keys.GetEnumerator();
             enumerator.MoveNext();

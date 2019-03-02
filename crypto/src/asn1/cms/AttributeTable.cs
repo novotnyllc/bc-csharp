@@ -60,7 +60,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
                 if (obj is Attribute)
                 {
-                    v = Platform.CreateArrayList<Attribute>();
+                    v = Platform.CreateList<Attribute>();
 
                     v.Add((Attribute)obj);
                     v.Add(a);

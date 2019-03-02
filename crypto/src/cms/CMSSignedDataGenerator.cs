@@ -39,7 +39,7 @@ namespace Org.BouncyCastle.Cms
     {
 		private static readonly CmsSignedHelper Helper = CmsSignedHelper.Instance;
 
-		private readonly IList<SignerInf> signerInfs = Platform.CreateArrayList<SignerInf>();
+		private readonly IList<SignerInf> signerInfs = Platform.CreateList<SignerInf>();
 
 		private class SignerInf
         {

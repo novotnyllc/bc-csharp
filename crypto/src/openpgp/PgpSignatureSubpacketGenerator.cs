@@ -9,7 +9,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 	/// <remarks>Generator for signature subpackets.</remarks>
     public class PgpSignatureSubpacketGenerator
     {
-        private IList<SignatureSubpacket> list = Platform.CreateArrayList<SignatureSubpacket>();
+        private IList<SignatureSubpacket> list = Platform.CreateList<SignatureSubpacket>();
 
 		public void SetRevocable(
             bool	isCritical,

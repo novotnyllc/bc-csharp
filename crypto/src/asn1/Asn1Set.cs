@@ -127,7 +127,7 @@ namespace Org.BouncyCastle.Asn1
         protected internal Asn1Set(
             int capacity)
         {
-            _set = Platform.CreateArrayList<Asn1Encodable>(capacity);
+            _set = Platform.CreateList<Asn1Encodable>(capacity);
         }
 
         public virtual IEnumerator<Asn1Encodable> GetEnumerator()

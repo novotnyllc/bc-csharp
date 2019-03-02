@@ -24,7 +24,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         internal PgpSecretKeyRing(
             IList<object> keys)
-            : this(keys, Platform.CreateArrayList<PgpPublicKey>())
+            : this(keys, Platform.CreateList<PgpPublicKey>())
         {
         }
 
@@ -45,8 +45,8 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         public PgpSecretKeyRing(
             Stream inputStream)
         {
-            this.keys = Platform.CreateArrayList<object>();
-            this.extraPubKeys = Platform.CreateArrayList<PgpPublicKey>();
+            this.keys = Platform.CreateList<object>();
+            this.extraPubKeys = Platform.CreateList<PgpPublicKey>();
 
             BcpgInputStream bcpgInput = BcpgInputStream.Wrap(inputStream);
 
@@ -191,7 +191,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpSecretKeyRing	secretRing,
             PgpPublicKeyRing	publicRing)
         {
-            var newList = Platform.CreateArrayList<object>(secretRing.keys.Count);
+            var newList = Platform.CreateList<object>(secretRing.keys.Count);
 
             foreach (PgpSecretKey sk in secretRing.keys)
             {
@@ -219,7 +219,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             SymmetricKeyAlgorithmTag	newEncAlgorithm,
             SecureRandom				rand)
         {
-            var newKeys = Platform.CreateArrayList<object>(ring.keys.Count);
+            var newKeys = Platform.CreateList<object>(ring.keys.Count);
             foreach (PgpSecretKey secretKey in ring.GetSecretKeys())
             {
                 if (secretKey.IsPrivateKeyEmpty)
@@ -246,7 +246,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpSecretKeyRing  secRing,
             PgpSecretKey      secKey)
         {
-            var keys = Platform.CreateArrayList(secRing.keys);
+            var keys = Platform.CreateList(secRing.keys);
             bool found = false;
             bool masterFound = false;
 
@@ -291,7 +291,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpSecretKeyRing  secRing,
             PgpSecretKey      secKey)
         {
-            var keys = Platform.CreateArrayList(secRing.keys);
+            var keys = Platform.CreateList(secRing.keys);
             bool found = false;
 
             for (int i = 0; i < keys.Count; i++)

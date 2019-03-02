@@ -231,7 +231,7 @@ namespace Org.BouncyCastle.X509
 			string oid)
 		{
 			Asn1Sequence seq = cert.ACInfo.Attributes;
-            var list = Platform.CreateArrayList<X509Attribute>();
+            var list = Platform.CreateList<X509Attribute>();
 
 			for (int i = 0; i != seq.Count; i++)
 			{

@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             IEnumerable<object> e)
         {
 			this.secretRings = Platform.CreateHashtable<long, PgpSecretKeyRing>();
-            this.order = Platform.CreateArrayList<long>();
+            this.order = Platform.CreateList<long>();
 
 			foreach (object obj in e)
 			{
@@ -110,7 +110,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			bool	matchPartial,
 			bool	ignoreCase)
 		{
-            var rings = Platform.CreateArrayList<PgpSecretKeyRing>();
+            var rings = Platform.CreateList<PgpSecretKeyRing>();
 
 			if (ignoreCase)
 			{
@@ -242,7 +242,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
 
             var newSecretRings = Platform.CreateHashtable(bundle.secretRings);
-            var newOrder = Platform.CreateArrayList(bundle.order);
+            var newOrder = Platform.CreateList(bundle.order);
 
             newSecretRings[key] = secretKeyRing;
             newOrder.Add(key);
@@ -270,7 +270,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
 
             var newSecretRings = Platform.CreateHashtable(bundle.secretRings);
-            var newOrder = Platform.CreateArrayList(bundle.order);
+            var newOrder = Platform.CreateList(bundle.order);
 
 			newSecretRings.Remove(key);
 			newOrder.Remove(key);

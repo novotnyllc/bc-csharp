@@ -773,7 +773,7 @@ namespace Org.BouncyCastle.Crypto.EC
         private static readonly IDictionary<string, DerObjectIdentifier> nameToOid = Platform.CreateHashtable<string, DerObjectIdentifier>();
         private static readonly IDictionary<DerObjectIdentifier, X9ECParametersHolder> oidToCurve = Platform.CreateHashtable<DerObjectIdentifier, X9ECParametersHolder>();
         private static readonly IDictionary<DerObjectIdentifier, string> oidToName = Platform.CreateHashtable<DerObjectIdentifier, string>();
-        private static readonly IList<string> names = Platform.CreateArrayList<string>();
+        private static readonly IList<string> names = Platform.CreateList<string>();
 
         private static void DefineCurve(string name, X9ECParametersHolder holder)
         {

@@ -55,7 +55,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 					BigInteger actualPrime = (BigInteger) primes[i];
 					int actualPrimeValue = actualPrime.IntValue;
 
-					lookup[i] = Platform.CreateArrayList<BigInteger>(actualPrimeValue);
+					lookup[i] = Platform.CreateList<BigInteger>(actualPrimeValue);
 					lookup[i].Add(BigInteger.One);
 
 					BigInteger accJ = BigInteger.Zero;
@@ -153,7 +153,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 			}
 			else
 			{
-			    var plain = Platform.CreateArrayList<BigInteger>();
+			    var plain = Platform.CreateList<BigInteger>();
 				NaccacheSternPrivateKeyParameters priv = (NaccacheSternPrivateKeyParameters)key;
 				var primes = priv.SmallPrimesList;
 				// Get Chinese Remainders of CipherText

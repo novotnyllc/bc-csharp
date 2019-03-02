@@ -9,13 +9,13 @@ namespace Org.BouncyCastle.Asn1.X509
 	public class X509ExtensionsGenerator
 	{
 		private IDictionary<DerObjectIdentifier, X509Extension> extensions = Platform.CreateHashtable<DerObjectIdentifier, X509Extension>();
-        private IList<DerObjectIdentifier> extOrdering = Platform.CreateArrayList<DerObjectIdentifier>();
+        private IList<DerObjectIdentifier> extOrdering = Platform.CreateList<DerObjectIdentifier>();
 
 		/// <summary>Reset the generator</summary>
 		public void Reset()
 		{
             extensions = Platform.CreateHashtable<DerObjectIdentifier, X509Extension>();
-            extOrdering = Platform.CreateArrayList<DerObjectIdentifier>();
+            extOrdering = Platform.CreateList<DerObjectIdentifier>();
 		}
 
 		/// <summary>

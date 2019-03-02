@@ -63,7 +63,7 @@ namespace Org.BouncyCastle.Crypto.Engines
             Array.Copy(buffer, 0, B, 0, blockSize / 2);
             //Console.WriteLine("B0: "+ Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(B));
 
-            var bTemp = Platform.CreateArrayList<byte[]>();
+            var bTemp = Platform.CreateList<byte[]>();
             int bHalfBlocksLen = buffer.Length - blockSize / 2;
             int bufOff = blockSize / 2;
             while (bHalfBlocksLen != 0)
@@ -140,7 +140,7 @@ namespace Org.BouncyCastle.Crypto.Engines
             Array.Copy(buffer, 0, B, 0, blockSize / 2);
             //Console.WriteLine("B18: " + Org.BouncyCastle.Utilities.Encoders.Hex.ToHexString(B));
 
-            var bTemp = Platform.CreateArrayList<byte[]>();
+            var bTemp = Platform.CreateList<byte[]>();
 
             int bHalfBlocksLen = buffer.Length - blockSize / 2;
             int bufOff = blockSize / 2;

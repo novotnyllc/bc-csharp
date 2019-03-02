@@ -76,7 +76,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             MemoryStream buf = new MemoryStream(data, false);
 
             byte[] nameTypesSeen = TlsUtilities.EmptyBytes;
-            var server_name_list = Platform.CreateArrayList<ServerName>();
+            var server_name_list = Platform.CreateList<ServerName>();
             while (buf.Position < buf.Length)
             {
                 ServerName entry = ServerName.Parse(buf);

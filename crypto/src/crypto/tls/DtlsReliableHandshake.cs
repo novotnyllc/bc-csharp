@@ -18,7 +18,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         private IDictionary<int, DtlsReassembler> mCurrentInboundFlight = Platform.CreateHashtable<int, DtlsReassembler>();
         private IDictionary<int, DtlsReassembler> mPreviousInboundFlight = null;
-        private IList<Message> mOutboundFlight = Platform.CreateArrayList<Message>();
+        private IList<Message> mOutboundFlight = Platform.CreateList<Message>();
         private bool mSending = true;
 
         private int mMessageSeq = 0, mNextReceiveSeq = 0;

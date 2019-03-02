@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Ocsp
 	 */
 	public class BasicOcspRespGenerator
 	{
-		private readonly IList<ResponseObject> list = Platform.CreateArrayList<ResponseObject>();
+		private readonly IList<ResponseObject> list = Platform.CreateList<ResponseObject>();
 
 		private X509Extensions responseExtensions;
 		private RespID responderID;

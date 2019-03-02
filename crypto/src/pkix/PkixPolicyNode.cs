@@ -77,11 +77,11 @@ namespace Org.BouncyCastle.Pkix
 		{
             if (children == null)
             {
-                this.mChildren = Platform.CreateArrayList<PkixPolicyNode>();
+                this.mChildren = Platform.CreateList<PkixPolicyNode>();
             }
             else
             {
-                this.mChildren = Platform.CreateArrayList(children);
+                this.mChildren = Platform.CreateList(children);
             }
 
             this.mDepth = depth;
@@ -138,7 +138,7 @@ namespace Org.BouncyCastle.Pkix
 		public virtual PkixPolicyNode Copy()
 		{
 			PkixPolicyNode node = new PkixPolicyNode(
-                Platform.CreateArrayList<PkixPolicyNode>(),
+                Platform.CreateList<PkixPolicyNode>(),
 				mDepth,
 				new HashSet<string>(mExpectedPolicies),
 				null,

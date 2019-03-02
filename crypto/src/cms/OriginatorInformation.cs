@@ -30,7 +30,7 @@ namespace Org.BouncyCastle.Cms
 
 			if (certSet != null)
 			{
-				var certList = Platform.CreateArrayList<X509Certificate>(certSet.Count);
+				var certList = Platform.CreateList<X509Certificate>(certSet.Count);
 
 				foreach (Asn1Encodable enc in certSet)
 				{
@@ -48,7 +48,7 @@ namespace Org.BouncyCastle.Cms
 
 			return X509StoreFactory.Create(
 				"Certificate/Collection",
-				new X509CollectionStoreParameters<X509Certificate>(Platform.CreateArrayList<X509Certificate>()));
+				new X509CollectionStoreParameters<X509Certificate>(Platform.CreateList<X509Certificate>()));
 		}
 
 		/**
@@ -62,7 +62,7 @@ namespace Org.BouncyCastle.Cms
 
 			if (crlSet != null)
 			{
-                var crlList = Platform.CreateArrayList<X509Crl>(crlSet.Count);
+                var crlList = Platform.CreateList<X509Crl>(crlSet.Count);
 
 				foreach (Asn1Encodable enc in crlSet)
 				{
@@ -80,7 +80,7 @@ namespace Org.BouncyCastle.Cms
 
 			return X509StoreFactory.Create(
 				"CRL/Collection",
-                new X509CollectionStoreParameters<X509Crl>(Platform.CreateArrayList<X509Crl>()));
+                new X509CollectionStoreParameters<X509Crl>(Platform.CreateList<X509Crl>()));
 		}
 
 		/**

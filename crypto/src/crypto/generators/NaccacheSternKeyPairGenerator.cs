@@ -135,7 +135,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 			for (;;)
 			{
 				// TODO After the first loop, just regenerate one randomly-selected gPart each time?
-			    var gParts = Platform.CreateArrayList<BigInteger>();
+			    var gParts = Platform.CreateList<BigInteger>();
 				for (int ind = 0; ind != smallPrimes.Count; ind++)
 				{
 					BigInteger i = (BigInteger)smallPrimes[ind];
@@ -233,7 +233,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 		{
             // TODO Create a utility method for generating permutation of first 'n' integers
 
-            var retval = Platform.CreateArrayList<BigInteger>(arr.Count);
+            var retval = Platform.CreateList<BigInteger>(arr.Count);
 
 			foreach (var element in arr)
 			{
@@ -254,7 +254,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 		private static IList<BigInteger> findFirstPrimes(
 			int count)
 		{
-		    var primes = Platform.CreateArrayList<BigInteger>(count);
+		    var primes = Platform.CreateList<BigInteger>(count);
 
 			for (int i = 0; i != count; i++)
 			{

@@ -609,7 +609,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public static IList<byte> GetAllSignatureAlgorithms()
         {
-            var v = Platform.CreateArrayList<byte>(4);
+            var v = Platform.CreateList<byte>(4);
             v.Add(SignatureAlgorithm.anonymous);
             v.Add(SignatureAlgorithm.rsa);
             v.Add(SignatureAlgorithm.dsa);
@@ -647,7 +647,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             byte[] signatureAlgorithms = new byte[]{ SignatureAlgorithm.rsa, SignatureAlgorithm.dsa,
                 SignatureAlgorithm.ecdsa };
 
-            var result = Platform.CreateArrayList<SignatureAndHashAlgorithm>();
+            var result = Platform.CreateList<SignatureAndHashAlgorithm>();
             for (int i = 0; i < signatureAlgorithms.Length; ++i)
             {
                 for (int j = 0; j < hashAlgorithms.Length; ++j)
@@ -791,7 +791,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             if (length < 2 || (length & 1) != 0)
                 throw new TlsFatalAlert(AlertDescription.decode_error);
             int count = length / 2;
-            var supportedSignatureAlgorithms = Platform.CreateArrayList<SignatureAndHashAlgorithm>(count);
+            var supportedSignatureAlgorithms = Platform.CreateList<SignatureAndHashAlgorithm>(count);
             for (int i = 0; i < count; ++i)
             {
                 SignatureAndHashAlgorithm entry = SignatureAndHashAlgorithm.Parse(input);
@@ -1264,7 +1264,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         private static IList<T> VectorOfOne<T>(T obj)
         {
-            IList<T> v = Platform.CreateArrayList<T>(1);
+            IList<T> v = Platform.CreateList<T>(1);
             v.Add(obj);
             return v;
         }
@@ -2386,7 +2386,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             if (sigHashAlgs == null)
                 return GetAllSignatureAlgorithms();
 
-            var v = Platform.CreateArrayList<byte>(4);
+            var v = Platform.CreateList<byte>(4);
             v.Add(SignatureAlgorithm.anonymous);
             foreach (SignatureAndHashAlgorithm sigHashAlg in sigHashAlgs)
             {

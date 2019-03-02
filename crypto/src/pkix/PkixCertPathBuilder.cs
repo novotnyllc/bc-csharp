@@ -66,7 +66,7 @@ namespace Org.BouncyCastle.Pkix
 				throw new PkixCertPathBuilderException("No certificate found matching targetContraints.");
 
 			PkixCertPathBuilderResult result = null;
-			var certPathList = Platform.CreateArrayList<X509Certificate>();
+			var certPathList = Platform.CreateList<X509Certificate>();
 
 			// check all potential target certificates
 			foreach (X509Certificate cert in targets)

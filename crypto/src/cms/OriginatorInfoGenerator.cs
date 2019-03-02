@@ -18,7 +18,7 @@ namespace Org.BouncyCastle.Cms
 
         public OriginatorInfoGenerator(X509Certificate origCert)
         {
-            this.origCerts = Platform.CreateArrayList<Asn1Encodable>(1);
+            this.origCerts = Platform.CreateList<Asn1Encodable>(1);
             this.origCrls = null;
             origCerts.Add(origCert.CertificateStructure);
         }

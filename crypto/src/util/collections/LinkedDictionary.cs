@@ -9,7 +9,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 		: IDictionary
 	{
 		internal readonly IDictionary<object, object> hash = Platform.CreateHashtable<object, object>();
-		internal readonly IList<object> keys = Platform.CreateArrayList<object>();
+		internal readonly IList<object> keys = Platform.CreateList<object>();
 
 		public LinkedDictionary()
 		{
@@ -91,7 +91,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 			// NB: Order has to be the same as for Keys property
 			get
 			{
-                var values = Platform.CreateArrayList<object>(keys.Count);
+                var values = Platform.CreateList<object>(keys.Count);
 				foreach (object k in keys)
 				{
 					values.Add(hash[k]);

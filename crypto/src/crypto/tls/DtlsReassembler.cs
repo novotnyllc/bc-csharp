@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         private readonly byte mMsgType;
         private readonly byte[] mBody;
 
-        private readonly IList<Range> mMissing = Platform.CreateArrayList<Range>();
+        private readonly IList<Range> mMissing = Platform.CreateList<Range>();
 
         internal DtlsReassembler(byte msg_type, int length)
         {

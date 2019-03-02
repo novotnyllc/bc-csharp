@@ -470,9 +470,9 @@ namespace Org.BouncyCastle.Cms
         public static readonly string EncryptionGost3410 = CryptoProObjectIdentifiers.GostR3410x94.Id;
         public static readonly string EncryptionECGost3410 = CryptoProObjectIdentifiers.GostR3410x2001.Id;
 
-        internal IList<Asn1Encodable> _certs = Platform.CreateArrayList<Asn1Encodable>();
-        internal IList<Asn1Encodable> _crls = Platform.CreateArrayList<Asn1Encodable>();
-        internal IList<SignerInformation> _signers = Platform.CreateArrayList<SignerInformation>();
+        internal IList<Asn1Encodable> _certs = Platform.CreateList<Asn1Encodable>();
+        internal IList<Asn1Encodable> _crls = Platform.CreateList<Asn1Encodable>();
+        internal IList<SignerInformation> _signers = Platform.CreateList<SignerInformation>();
         internal IDictionary<string, byte[]> _digests = Platform.CreateHashtable<string, byte[]>();
         internal bool _useDerForCerts = false;
         internal bool _useDerForCrls = false;

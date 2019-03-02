@@ -161,7 +161,7 @@ namespace Org.BouncyCastle.Ocsp
 		{
 			// load the certificates if we have any
 
-			var certs = Platform.CreateArrayList<X509Certificate>();
+			var certs = Platform.CreateList<X509Certificate>();
 			Asn1Sequence s = req.OptionalSignature.Certs;
 
 			if (s != null)

@@ -112,14 +112,14 @@ namespace Org.BouncyCastle.Pkix
             var policyNodes = new IList<PkixPolicyNode>[n + 1];
             for (int j = 0; j < policyNodes.Length; j++)
             {
-                policyNodes[j] = Platform.CreateArrayList<PkixPolicyNode>();
+                policyNodes[j] = Platform.CreateList<PkixPolicyNode>();
             }
 
             var policySet = new HashSet<string>();
 
             policySet.Add(Rfc3280CertPathUtilities.ANY_POLICY);
 
-            PkixPolicyNode validPolicyTree = new PkixPolicyNode(Platform.CreateArrayList<PkixPolicyNode>(), 0, policySet, null, new HashSet<PolicyQualifierInfo>(),
+            PkixPolicyNode validPolicyTree = new PkixPolicyNode(Platform.CreateList<PkixPolicyNode>(), 0, policySet, null, new HashSet<PolicyQualifierInfo>(),
                     Rfc3280CertPathUtilities.ANY_POLICY, false);
 
             policyNodes[0].Add(validPolicyTree);

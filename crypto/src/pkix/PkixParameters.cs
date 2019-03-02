@@ -86,9 +86,9 @@ namespace Org.BouncyCastle.Pkix
 			SetTrustAnchors(trustAnchors);
 
 			this.initialPolicies = new HashSet<string>();
-			this.certPathCheckers = Platform.CreateArrayList<PkixCertPathChecker>();
-            this.stores = Platform.CreateArrayList<object>();
-			this.additionalStores = Platform.CreateArrayList<object>();
+			this.certPathCheckers = Platform.CreateList<PkixCertPathChecker>();
+            this.stores = Platform.CreateList<object>();
+			this.additionalStores = Platform.CreateList<object>();
 			this.trustedACIssuers = new HashSet<TrustAnchor>();
 			this.necessaryACAttributes = new HashSet<string>();
 			this.prohibitedACAttributes = new HashSet<string>();
@@ -356,7 +356,7 @@ namespace Org.BouncyCastle.Pkix
 		*/
 		public virtual void SetCertPathCheckers(IList<PkixCertPathChecker> checkers)
 		{
-            certPathCheckers = Platform.CreateArrayList<PkixCertPathChecker>();
+            certPathCheckers = Platform.CreateList<PkixCertPathChecker>();
 			if (checkers != null)
 			{
 				foreach (PkixCertPathChecker obj in checkers)
@@ -377,7 +377,7 @@ namespace Org.BouncyCastle.Pkix
 		 */
 		public virtual IList<PkixCertPathChecker> GetCertPathCheckers()
 		{
-			var checkers = Platform.CreateArrayList<PkixCertPathChecker>();
+			var checkers = Platform.CreateList<PkixCertPathChecker>();
 			foreach (PkixCertPathChecker obj in certPathCheckers)
 			{
 				checkers.Add((PkixCertPathChecker)obj.Clone());
@@ -467,8 +467,8 @@ namespace Org.BouncyCastle.Pkix
 			additionalLocationsEnabled = parameters.additionalLocationsEnabled;
 			selector = parameters.selector == null ? null
 				: (IX509Selector) parameters.selector.Clone();
-			stores = Platform.CreateArrayList(parameters.stores);
-            additionalStores = Platform.CreateArrayList(parameters.additionalStores);
+			stores = Platform.CreateList(parameters.stores);
+            additionalStores = Platform.CreateList(parameters.additionalStores);
 			trustedACIssuers = new HashSet<TrustAnchor>(parameters.trustedACIssuers);
 			prohibitedACAttributes = new HashSet<string>(parameters.prohibitedACAttributes);
 			necessaryACAttributes = new HashSet<string>(parameters.necessaryACAttributes);
@@ -513,11 +513,11 @@ namespace Org.BouncyCastle.Pkix
 		{
 			if (stores == null)
 			{
-                this.stores = Platform.CreateArrayList<object>();
+                this.stores = Platform.CreateList<object>();
 			}
 			else
 			{
-                this.stores = Platform.CreateArrayList(stores.Cast<object>());
+                this.stores = Platform.CreateList(stores.Cast<object>());
 			}
 		}
 
@@ -581,7 +581,7 @@ namespace Org.BouncyCastle.Pkix
 		*/
 		public virtual IList<IX509Store<T>> GetAdditionalStores<T>()
 		{
-            return Platform.CreateArrayList(additionalStores.OfType<IX509Store<T>>());
+            return Platform.CreateList(additionalStores.OfType<IX509Store<T>>());
 		}
 
 		/**
@@ -596,7 +596,7 @@ namespace Org.BouncyCastle.Pkix
 		*/
 		public virtual IList<IX509Store<T>> GetStores<T>()
 		{
-            return Platform.CreateArrayList(stores.OfType<IX509Store<T>>());
+            return Platform.CreateList(stores.OfType<IX509Store<T>>());
 		}
 
 		/**

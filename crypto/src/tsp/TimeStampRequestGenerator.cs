@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Tsp
 		private DerBoolean certReq;
 
 		private IDictionary<DerObjectIdentifier, X509Extension> extensions = Platform.CreateHashtable<DerObjectIdentifier, X509Extension>();
-        private IList<DerObjectIdentifier>       extOrdering = Platform.CreateArrayList<DerObjectIdentifier>();
+        private IList<DerObjectIdentifier>       extOrdering = Platform.CreateList<DerObjectIdentifier>();
 
 		public void SetReqPolicy(
 			string reqPolicy)

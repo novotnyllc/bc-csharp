@@ -42,7 +42,7 @@ namespace Org.BouncyCastle.Cms
 
 		internal ICollection<X509Certificate> RecipientCerts
 		{
-			set { this.recipientCerts = Platform.CreateArrayList(value); }
+			set { this.recipientCerts = Platform.CreateList(value); }
 		}
 
 		internal AsymmetricCipherKeyPair SenderKeyPair

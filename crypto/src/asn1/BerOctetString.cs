@@ -12,7 +12,7 @@ namespace Org.BouncyCastle.Asn1
     {
 		public static BerOctetString FromSequence(Asn1Sequence seq)
 		{
-		    var v = Platform.CreateArrayList<DerOctetString>();
+		    var v = Platform.CreateList<DerOctetString>();
 
 			foreach (DerOctetString obj in seq)
 			{
@@ -87,7 +87,7 @@ namespace Org.BouncyCastle.Asn1
 
 		private IList<DerOctetString> GenerateOcts()
         {
-            var vec = Platform.CreateArrayList<DerOctetString>();
+            var vec = Platform.CreateList<DerOctetString>();
 			for (int i = 0; i < str.Length; i += MaxLength)
 			{
 				int end = System.Math.Min(str.Length, i + MaxLength);

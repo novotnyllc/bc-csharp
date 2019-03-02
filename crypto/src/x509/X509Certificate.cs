@@ -310,7 +310,7 @@ namespace Org.BouncyCastle.X509
 				Asn1Sequence seq = Asn1Sequence.GetInstance(
 					X509ExtensionUtilities.FromExtensionValue(str));
 
-                var list = Platform.CreateArrayList<string>();
+                var list = Platform.CreateList<string>();
 
 				foreach (DerObjectIdentifier oid in seq)
 				{
@@ -362,10 +362,10 @@ namespace Org.BouncyCastle.X509
 
 			GeneralNames gns = GeneralNames.GetInstance(asn1Object);
 
-            var result = Platform.CreateArrayList<IList<object>>();
+            var result = Platform.CreateList<IList<object>>();
 			foreach (GeneralName gn in gns.GetNames())
 			{
-                var entry = Platform.CreateArrayList<object>();
+                var entry = Platform.CreateList<object>();
 				entry.Add(gn.TagNo);
 				entry.Add(gn.Name.ToString());
 				result.Add(entry);

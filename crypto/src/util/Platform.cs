@@ -84,15 +84,15 @@ namespace Org.BouncyCastle.Utilities
         }
 #endif
 
-        internal static IList<T> CreateArrayList<T>()
+        internal static IList<T> CreateList<T>()
         {
             return new List<T>();
         }
-        internal static IList<T> CreateArrayList<T>(int capacity)
+        internal static IList<T> CreateList<T>(int capacity)
         {
             return new List<T>(capacity);
         }
-        internal static IList<T> CreateArrayList<T>(IEnumerable<T> collection)
+        internal static IList<T> CreateList<T>(IEnumerable<T> collection)
         {
             return collection.ToList();
         }

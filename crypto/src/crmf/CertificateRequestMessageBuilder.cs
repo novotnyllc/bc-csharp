@@ -16,7 +16,7 @@ namespace Org.BouncyCastle.Crmf
         private readonly BigInteger _certReqId;
         private X509ExtensionsGenerator _extGenerator;
         private CertTemplateBuilder _templateBuilder;
-        private IList<IControl> _controls = Platform.CreateArrayList<IControl>();
+        private IList<IControl> _controls = Platform.CreateList<IControl>();
         private ISignatureFactory _popSigner;
         private PKMacBuilder _pkMacBuilder;
         private char[] _password;

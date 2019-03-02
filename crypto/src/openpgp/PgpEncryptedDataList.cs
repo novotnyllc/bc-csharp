@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
     public class PgpEncryptedDataList
 		: PgpObject
     {
-        private IList<object> list = Platform.CreateArrayList<object>();
+        private IList<object> list = Platform.CreateList<object>();
         private InputStreamPacket data;
 
 		public PgpEncryptedDataList(

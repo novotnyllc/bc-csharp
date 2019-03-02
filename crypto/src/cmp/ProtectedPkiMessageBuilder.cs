@@ -15,8 +15,8 @@ namespace Org.BouncyCastle.Cmp
     {
         private PkiHeaderBuilder hdrBuilBuilder;
         private PkiBody body;
-        private IList<InfoTypeAndValue> generalInfos = Platform.CreateArrayList<InfoTypeAndValue>();
-        private IList<X509Certificate> extraCerts = Platform.CreateArrayList<X509Certificate>();
+        private IList<InfoTypeAndValue> generalInfos = Platform.CreateList<InfoTypeAndValue>();
+        private IList<X509Certificate> extraCerts = Platform.CreateList<X509Certificate>();
 
         public ProtectedPkiMessageBuilder(GeneralName sender, GeneralName recipient)
             : this(PkiHeader.CMP_2000, sender, recipient)

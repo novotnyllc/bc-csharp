@@ -27,7 +27,7 @@ namespace Org.BouncyCastle.X509.Store
 			if (collection == null)
 				throw new ArgumentNullException("collection");
 
-			this.collection = Platform.CreateArrayList<T>(collection);
+			this.collection = Platform.CreateList<T>(collection);
 		}
 
 		// TODO Do we need to be able to Clone() these, and should it really be shallow?
@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.X509.Store
 		/// <summary>Returns a copy of the <code>ICollection</code>.</summary>
 		public ICollection<T> GetCollection()
 		{
-			return Platform.CreateArrayList(collection);
+			return Platform.CreateList(collection);
 		}
 
 		/// <summary>Returns a formatted string describing the parameters.</summary>

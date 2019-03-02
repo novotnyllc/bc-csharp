@@ -209,7 +209,7 @@ namespace Org.BouncyCastle.Asn1.X509
         private X509Extensions(
             Asn1Sequence seq)
         {
-            this.ordering = Platform.CreateArrayList<DerObjectIdentifier>();
+            this.ordering = Platform.CreateList<DerObjectIdentifier>();
 
 			foreach (Asn1Encodable ae in seq)
 			{
@@ -255,11 +255,11 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             if (ordering == null)
             {
-                this.ordering = Platform.CreateArrayList(extensions.Keys);
+                this.ordering = Platform.CreateList(extensions.Keys);
             }
             else
             {
-                this.ordering = Platform.CreateArrayList(ordering);
+                this.ordering = Platform.CreateList(ordering);
             }
 
             foreach (DerObjectIdentifier oid in this.ordering)
@@ -278,7 +278,7 @@ namespace Org.BouncyCastle.Asn1.X509
             IList<DerObjectIdentifier> oids,
             IList<X509Extension> values)
         {
-            this.ordering = Platform.CreateArrayList(oids);
+            this.ordering = Platform.CreateList(oids);
 
             int count = 0;
             foreach (DerObjectIdentifier oid in this.ordering)
@@ -375,7 +375,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 		private DerObjectIdentifier[] GetExtensionOids(bool isCritical)
 		{
-			var oids = Platform.CreateArrayList<DerObjectIdentifier>();
+			var oids = Platform.CreateList<DerObjectIdentifier>();
 
 			foreach (DerObjectIdentifier oid in this.ordering)
             {

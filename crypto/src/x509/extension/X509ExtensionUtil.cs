@@ -37,7 +37,7 @@ namespace Org.BouncyCastle.X509.Extension
 		private static ICollection<IList<object>> GetAlternativeName(
 			Asn1OctetString extVal)
 		{
-			var temp = Platform.CreateArrayList<IList<object>>();
+			var temp = Platform.CreateList<IList<object>>();
 
 			if (extVal != null)
 			{
@@ -47,7 +47,7 @@ namespace Org.BouncyCastle.X509.Extension
 
 					foreach (Asn1Encodable primName in seq)
 					{
-                        var list = Platform.CreateArrayList<object>();
+                        var list = Platform.CreateList<object>();
                         GeneralName genName = GeneralName.GetInstance(primName);
 
 						list.Add(genName.TagNo);

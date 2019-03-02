@@ -171,7 +171,7 @@ namespace Org.BouncyCastle.X509
 			Stream inStream)
 		{
 			X509Certificate cert;
-            var certs = Platform.CreateArrayList<X509Certificate>();
+            var certs = Platform.CreateList<X509Certificate>();
 
 			while ((cert = ReadCertificate(inStream)) != null)
 			{

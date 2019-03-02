@@ -99,7 +99,7 @@ namespace Org.BouncyCastle.Cms
 		public static readonly string ECDHSha1Kdf		= X9ObjectIdentifiers.DHSinglePassStdDHSha1KdfScheme.Id;
 		public static readonly string ECMqvSha1Kdf		= X9ObjectIdentifiers.MqvSinglePassSha1KdfScheme.Id;
 
-		internal readonly IList<RecipientInfoGenerator> recipientInfoGenerators = Platform.CreateArrayList<RecipientInfoGenerator>();
+		internal readonly IList<RecipientInfoGenerator> recipientInfoGenerators = Platform.CreateList<RecipientInfoGenerator>();
 		internal readonly SecureRandom rand;
 
         internal CmsAttributeTableGenerator unprotectedAttributeGenerator = null;
@@ -219,7 +219,7 @@ namespace Org.BouncyCastle.Cms
 			X509Certificate			recipientCert,
 			string					cekWrapAlgorithm)
 		{
-            var recipientCerts = Platform.CreateArrayList<X509Certificate>(1);
+            var recipientCerts = Platform.CreateList<X509Certificate>(1);
 			recipientCerts.Add(recipientCert);
 
 			AddKeyAgreementRecipients(agreementAlgorithm, senderPrivateKey, senderPublicKey,

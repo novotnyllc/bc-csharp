@@ -8,7 +8,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 {
 	public class PgpUserAttributeSubpacketVectorGenerator
 	{
-		private IList<ImageAttrib> list = Platform.CreateArrayList<ImageAttrib>();
+		private IList<ImageAttrib> list = Platform.CreateList<ImageAttrib>();
 
 		public virtual void SetImageAttribute(
 			ImageAttrib.Format	imageType,

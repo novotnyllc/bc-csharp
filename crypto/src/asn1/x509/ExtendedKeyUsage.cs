@@ -108,7 +108,7 @@ namespace Org.BouncyCastle.Asn1.X509
          */
         public IList<object> GetAllUsages()
         {
-            return Platform.CreateArrayList(usageTable.Values);
+            return Platform.CreateList(usageTable.Values);
         }
 
         public int Count

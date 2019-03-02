@@ -161,7 +161,7 @@ namespace Org.BouncyCastle.X509
 			Stream inStream)
 		{
 			IX509AttributeCertificate attrCert;
-            var attrCerts = Platform.CreateArrayList<IX509AttributeCertificate>();
+            var attrCerts = Platform.CreateList<IX509AttributeCertificate>();
 
 			while ((attrCert = ReadAttrCert(inStream)) != null)
 			{

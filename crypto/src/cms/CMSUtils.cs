@@ -88,7 +88,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			try
 			{
-				var certs = Platform.CreateArrayList<Asn1Encodable>();
+				var certs = Platform.CreateList<Asn1Encodable>();
 
 				if (certStore != null)
 				{
@@ -117,7 +117,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			try
 			{
-                var crls = Platform.CreateArrayList<CertificateList>();
+                var crls = Platform.CreateList<CertificateList>();
 
 				if (crlStore != null)
 				{

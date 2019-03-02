@@ -17,7 +17,7 @@ namespace Org.BouncyCastle.Ocsp
 {
 	public class OcspReqGenerator
 	{
-		private IList<RequestObject>         list = Platform.CreateArrayList<RequestObject>();
+		private IList<RequestObject>         list = Platform.CreateList<RequestObject>();
 		private GeneralName		requestorName = null;
 		private X509Extensions	requestExtensions = null;
 

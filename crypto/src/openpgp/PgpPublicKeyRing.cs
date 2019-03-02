@@ -35,7 +35,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         public PgpPublicKeyRing(
             Stream inputStream)
         {
-            this.keys = Platform.CreateArrayList<PgpPublicKey>();
+            this.keys = Platform.CreateList<PgpPublicKey>();
 
             BcpgInputStream bcpgInput = BcpgInputStream.Wrap(inputStream);
 
@@ -127,7 +127,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpPublicKeyRing	pubRing,
             PgpPublicKey		pubKey)
         {
-            var keys = Platform.CreateArrayList(pubRing.keys);
+            var keys = Platform.CreateList(pubRing.keys);
             bool found = false;
             bool masterFound = false;
 
@@ -172,7 +172,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpPublicKeyRing	pubRing,
             PgpPublicKey		pubKey)
         {
-            var keys = Platform.CreateArrayList(pubRing.keys);
+            var keys = Platform.CreateList(pubRing.keys);
             bool found = false;
 
             for (int i = 0; i < keys.Count; i++)

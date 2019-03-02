@@ -24,7 +24,7 @@ namespace Org.BouncyCastle.Tsp
 	public class TspUtil
 	{
 		private static ISet<DerObjectIdentifier> EmptySet = CollectionUtilities.ReadOnly(new HashSet<DerObjectIdentifier>());
-		private static IList<DerObjectIdentifier> EmptyList = CollectionUtilities.ReadOnly(Platform.CreateArrayList<DerObjectIdentifier>());
+		private static IList<DerObjectIdentifier> EmptyList = CollectionUtilities.ReadOnly(Platform.CreateList<DerObjectIdentifier>());
 
 		private static readonly IDictionary<string, int> digestLengths = new Dictionary<string, int>();
         private static readonly IDictionary<string, string> digestNames = new Dictionary<string, string>();
@@ -82,7 +82,7 @@ namespace Org.BouncyCastle.Tsp
 		public static ICollection<TimeStampToken> GetSignatureTimestamps(
 			SignerInformation signerInfo)
 		{
-			var timestamps = Platform.CreateArrayList<TimeStampToken>();
+			var timestamps = Platform.CreateList<TimeStampToken>();
 
 			Asn1.Cms.AttributeTable unsignedAttrs = signerInfo.UnsignedAttributes;
 			if (unsignedAttrs != null)
@@ -209,7 +209,7 @@ namespace Org.BouncyCastle.Tsp
 			if (extensions == null)
 				return EmptyList;
 
-			return CollectionUtilities.ReadOnly(Platform.CreateArrayList(extensions.GetExtensionOids()));
+			return CollectionUtilities.ReadOnly(Platform.CreateList(extensions.GetExtensionOids()));
 		}
 	}
 }

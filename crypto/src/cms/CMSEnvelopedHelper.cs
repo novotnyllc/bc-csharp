@@ -105,7 +105,7 @@ namespace Org.BouncyCastle.Cms
 		internal static RecipientInformationStore BuildRecipientInformationStore(
 			Asn1Set recipientInfos, CmsSecureReadable secureReadable)
 		{
-			var infos = Platform.CreateArrayList<RecipientInformation>();
+			var infos = Platform.CreateList<RecipientInformation>();
 			for (int i = 0; i != recipientInfos.Count; i++)
 			{
 				RecipientInfo info = RecipientInfo.GetInstance(recipientInfos[i]);
