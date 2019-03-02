@@ -244,10 +244,10 @@ namespace Org.BouncyCastle.Security
         public static DerObjectIdentifier GetObjectIdentifier(
             string mechanism)
         {
-            mechanism = (string) algorithms[Platform.ToUpperInvariant(mechanism)];
+            mechanism = algorithms[Platform.ToUpperInvariant(mechanism)];
             if (mechanism != null)
             {
-                return (DerObjectIdentifier)oids[mechanism];
+                return oids[mechanism];
             }
             return null;
         }
@@ -260,7 +260,7 @@ namespace Org.BouncyCastle.Security
         public static bool IsPkcs12(
             string algorithm)
         {
-            string mechanism = (string)algorithms[Platform.ToUpperInvariant(algorithm)];
+            string mechanism = algorithms[Platform.ToUpperInvariant(algorithm)];
 
             return mechanism != null && Pkcs12.Equals(algorithmType[mechanism]);
         }
@@ -268,7 +268,7 @@ namespace Org.BouncyCastle.Security
         public static bool IsPkcs5Scheme1(
             string algorithm)
         {
-            string mechanism = (string)algorithms[Platform.ToUpperInvariant(algorithm)];
+            string mechanism = algorithms[Platform.ToUpperInvariant(algorithm)];
 
             return mechanism != null && Pkcs5S1.Equals(algorithmType[mechanism]);
         }
@@ -276,7 +276,7 @@ namespace Org.BouncyCastle.Security
         public static bool IsPkcs5Scheme2(
             string algorithm)
         {
-            string mechanism = (string)algorithms[Platform.ToUpperInvariant(algorithm)];
+            string mechanism = algorithms[Platform.ToUpperInvariant(algorithm)];
 
             return mechanism != null && Pkcs5S2.Equals(algorithmType[mechanism]);
         }
@@ -284,7 +284,7 @@ namespace Org.BouncyCastle.Security
         public static bool IsOpenSsl(
             string algorithm)
         {
-            string mechanism = (string)algorithms[Platform.ToUpperInvariant(algorithm)];
+            string mechanism = algorithms[Platform.ToUpperInvariant(algorithm)];
 
             return mechanism != null && OpenSsl.Equals(algorithmType[mechanism]);
         }
@@ -292,7 +292,7 @@ namespace Org.BouncyCastle.Security
         public static bool IsPbeAlgorithm(
             string algorithm)
         {
-            string mechanism = (string)algorithms[Platform.ToUpperInvariant(algorithm)];
+            string mechanism = algorithms[Platform.ToUpperInvariant(algorithm)];
 
             return mechanism != null && algorithmType[mechanism] != null;
         }
@@ -370,7 +370,7 @@ namespace Org.BouncyCastle.Security
             bool			wrongPkcs12Zero,
             Asn1Encodable   pbeParameters)
         {
-            string mechanism = (string)algorithms[Platform.ToUpperInvariant(algorithm)];
+            string mechanism = algorithms[Platform.ToUpperInvariant(algorithm)];
 
             byte[] keyBytes = null;
             byte[] salt = null;
@@ -427,7 +427,7 @@ namespace Org.BouncyCastle.Security
                     :	GeneratorUtilities.GetDefaultKeySize(encOid);
 
                 PbeParametersGenerator gen = MakePbeGenerator(
-                    (string)algorithmType[mechanism], null, keyBytes, salt, iterationCount);
+                    algorithmType[mechanism], null, keyBytes, salt, iterationCount);
 
                 parameters = gen.GenerateDerivedParameters(encOid.Id, keyLength);
 
@@ -447,7 +447,7 @@ namespace Org.BouncyCastle.Security
             else if (Platform.StartsWith(mechanism, "PBEwithSHA-1"))
             {
                 PbeParametersGenerator generator = MakePbeGenerator(
-                    (string) algorithmType[mechanism], new Sha1Digest(), keyBytes, salt, iterationCount);
+                     algorithmType[mechanism], new Sha1Digest(), keyBytes, salt, iterationCount);
 
                 if (mechanism.Equals("PBEwithSHA-1and128bitAES-CBC-BC"))
                 {
@@ -497,7 +497,7 @@ namespace Org.BouncyCastle.Security
             else if (Platform.StartsWith(mechanism, "PBEwithSHA-256"))
             {
                 PbeParametersGenerator generator = MakePbeGenerator(
-                    (string) algorithmType[mechanism], new Sha256Digest(), keyBytes, salt, iterationCount);
+                     algorithmType[mechanism], new Sha256Digest(), keyBytes, salt, iterationCount);
 
                 if (mechanism.Equals("PBEwithSHA-256and128bitAES-CBC-BC"))
                 {
@@ -515,7 +515,7 @@ namespace Org.BouncyCastle.Security
             else if (Platform.StartsWith(mechanism, "PBEwithMD5"))
             {
                 PbeParametersGenerator generator = MakePbeGenerator(
-                    (string)algorithmType[mechanism], new MD5Digest(), keyBytes, salt, iterationCount);
+                    algorithmType[mechanism], new MD5Digest(), keyBytes, salt, iterationCount);
 
                 if (mechanism.Equals("PBEwithMD5andDES-CBC"))
                 {
@@ -541,7 +541,7 @@ namespace Org.BouncyCastle.Security
             else if (Platform.StartsWith(mechanism, "PBEwithMD2"))
             {
                 PbeParametersGenerator generator = MakePbeGenerator(
-                    (string)algorithmType[mechanism], new MD2Digest(), keyBytes, salt, iterationCount);
+                    algorithmType[mechanism], new MD2Digest(), keyBytes, salt, iterationCount);
                 if (mechanism.Equals("PBEwithMD2andDES-CBC"))
                 {
                     parameters = generator.GenerateDerivedParameters("DES", 64, 64);
@@ -557,7 +557,7 @@ namespace Org.BouncyCastle.Security
                 IDigest digest = DigestUtilities.GetDigest(digestName);
 
                 PbeParametersGenerator generator = MakePbeGenerator(
-                    (string) algorithmType[mechanism], digest, keyBytes, salt, iterationCount);
+                     algorithmType[mechanism], digest, keyBytes, salt, iterationCount);
 
                 int bitLen = digest.GetDigestSize() * 8;
                 parameters = generator.GenerateDerivedMacParameters(bitLen);
@@ -592,7 +592,7 @@ namespace Org.BouncyCastle.Security
         public static object CreateEngine(
             string algorithm)
         {
-            string mechanism = (string)algorithms[Platform.ToUpperInvariant(algorithm)];
+            string mechanism = algorithms[Platform.ToUpperInvariant(algorithm)];
 
             if (Platform.StartsWith(mechanism, "PBEwithHmac"))
             {
@@ -638,7 +638,7 @@ namespace Org.BouncyCastle.Security
         public static string GetEncodingName(
             DerObjectIdentifier oid)
         {
-            return (string) algorithms[oid.Id];
+            return algorithms[oid.Id];
         }
 
         private static ICipherParameters FixDesParity(string mechanism, ICipherParameters parameters)

@@ -55,7 +55,7 @@ namespace Org.BouncyCastle.Crypto.Operators
 
         public static IKeyWrapper WrapperForName(string algorithm, ICipherParameters parameters)
         {
-            WrapperProvider provider = (WrapperProvider)providerMap[Strings.ToUpperCase(algorithm)];
+            WrapperProvider provider = providerMap[Strings.ToUpperCase(algorithm)];
 
             if (provider == null)
                 throw new ArgumentException("could not resolve " + algorithm + " to a KeyWrapper");
@@ -65,7 +65,7 @@ namespace Org.BouncyCastle.Crypto.Operators
 
         public static IKeyUnwrapper UnwrapperForName(string algorithm, ICipherParameters parameters)
         {
-            WrapperProvider provider = (WrapperProvider)providerMap[Strings.ToUpperCase(algorithm)];
+            WrapperProvider provider = providerMap[Strings.ToUpperCase(algorithm)];
             if (provider == null)
                 throw new ArgumentException("could not resolve " + algorithm + " to a KeyUnwrapper");
 

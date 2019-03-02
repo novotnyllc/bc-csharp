@@ -655,7 +655,7 @@ namespace Org.BouncyCastle.Math.EC.Abc
             int a = curve.A.ToBigInteger().IntValue;
             sbyte mu = GetMu(a);
             BigInteger[] s = curve.GetSi();
-            ZTauElement rho = PartModReduction(k, m, (sbyte)a, s, mu, (sbyte)10);
+            ZTauElement rho = PartModReduction(k, m, (sbyte)a, s, mu, 10);
 
             return MultiplyTnaf(p, rho);
         }

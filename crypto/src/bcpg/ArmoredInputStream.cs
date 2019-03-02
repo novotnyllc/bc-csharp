@@ -226,7 +226,7 @@ namespace Org.BouncyCastle.Bcpg
 
 			if (headerList.Count > 0)
             {
-                header = (string) headerList[0];
+                header = headerList[0];
             }
 
 			clearText = "-----BEGIN PGP SIGNED MESSAGE-----".Equals(header);
@@ -275,7 +275,7 @@ namespace Org.BouncyCastle.Bcpg
 			string[] hdrs = new string[headerList.Count - 1];
             for (int i = 0; i != hdrs.Length; i++)
             {
-                hdrs[i] = (string) headerList[i + 1];
+                hdrs[i] = headerList[i + 1];
             }
 
 			return hdrs;

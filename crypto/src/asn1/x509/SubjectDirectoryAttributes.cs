@@ -117,7 +117,7 @@ namespace Org.BouncyCastle.Asn1.X509
             AttributeX509[] v = new AttributeX509[attributes.Count];
             for (int i = 0; i < attributes.Count; ++i)
             {
-                v[i] = (AttributeX509)attributes[i];
+                v[i] = attributes[i];
             }
             return new DerSequence(v);
 		}

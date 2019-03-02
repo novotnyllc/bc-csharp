@@ -73,19 +73,19 @@ namespace Org.BouncyCastle.Asn1.X509
 			switch (type)
 			{
 				case ContentTypeIA5String:
-					contents = (IAsn1String)new DerIA5String (text);
+					contents = new DerIA5String(text);
 					break;
 				case ContentTypeUtf8String:
-					contents = (IAsn1String)new DerUtf8String(text);
+					contents = new DerUtf8String(text);
 					break;
 				case ContentTypeVisibleString:
-					contents = (IAsn1String)new DerVisibleString(text);
+					contents = new DerVisibleString(text);
 					break;
 				case ContentTypeBmpString:
-					contents = (IAsn1String)new DerBmpString(text);
+					contents = new DerBmpString(text);
 					break;
 				default:
-					contents = (IAsn1String)new DerUtf8String(text);
+					contents = new DerUtf8String(text);
 					break;
 			}
 		}

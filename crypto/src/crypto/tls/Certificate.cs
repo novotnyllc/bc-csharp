@@ -123,7 +123,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             X509CertificateStructure[] certificateList = new X509CertificateStructure[certificate_list.Count];
             for (int i = 0; i < certificate_list.Count; ++i)
             {
-                certificateList[i] = (X509CertificateStructure)certificate_list[i];
+                certificateList[i] = certificate_list[i];
             }
             return new Certificate(certificateList);
         }

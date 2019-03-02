@@ -86,7 +86,7 @@ namespace Org.BouncyCastle.Asn1.Anssi
         public static X9ECParameters GetByOid(
             DerObjectIdentifier oid)
         {
-            X9ECParametersHolder holder = (X9ECParametersHolder)curves[oid];
+            X9ECParametersHolder holder = curves[oid];
             return holder == null ? null : holder.Parameters;
         }
 
@@ -110,7 +110,7 @@ namespace Org.BouncyCastle.Asn1.Anssi
         public static string GetName(
             DerObjectIdentifier oid)
         {
-            return (string)names[oid];
+            return names[oid];
         }
 
         /**

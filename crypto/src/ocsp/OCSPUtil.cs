@@ -99,7 +99,7 @@ namespace Org.BouncyCastle.Ocsp
 
             if (algorithms.ContainsKey(algorithmName))
 			{
-				return (DerObjectIdentifier)algorithms[algorithmName];
+				return algorithms[algorithmName];
 			}
 
 			return new DerObjectIdentifier(algorithmName);
@@ -111,7 +111,7 @@ namespace Org.BouncyCastle.Ocsp
 		{
 			if (oids.ContainsKey(oid))
 			{
-				return (string)oids[oid];
+				return oids[oid];
 			}
 
 			return oid.Id;

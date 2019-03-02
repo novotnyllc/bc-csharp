@@ -71,7 +71,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 			var e = seq.GetEnumerator();
 
 			e.MoveNext();
-			Asn1Encodable o = (Asn1Encodable) e.Current;
+			Asn1Encodable o = e.Current;
 			if (o is Asn1TaggedObject)
 			{
 				switch (((Asn1TaggedObject)o).TagNo)
@@ -86,7 +86,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 						throw new ArgumentException("Bad tag number: " + ((Asn1TaggedObject)o).TagNo);
 				}
 				e.MoveNext();
-				o = (Asn1Encodable) e.Current;
+				o = e.Current;
 			}
 			if (o is Asn1TaggedObject)
 			{
@@ -99,7 +99,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 						throw new ArgumentException("Bad tag number: " + ((Asn1TaggedObject)o).TagNo);
 				}
 				e.MoveNext();
-				o = (Asn1Encodable) e.Current;
+				o = e.Current;
 			}
 			professionInfos = Asn1Sequence.GetInstance(o);
 			if (e.MoveNext())

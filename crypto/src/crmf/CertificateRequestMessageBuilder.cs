@@ -201,7 +201,7 @@ namespace Org.BouncyCastle.Crmf
 
                 foreach (var item in _controls)
                 {
-                    IControl control = (IControl)item;
+                    IControl control = item;
                     controlV.Add(new AttributeTypeAndValue(control.Type, control.Value));
                 }
 

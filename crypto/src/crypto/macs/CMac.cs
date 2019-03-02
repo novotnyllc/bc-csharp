@@ -28,8 +28,8 @@ namespace Org.BouncyCastle.Crypto.Macs
     public class CMac
         : IMac
     {
-        private const byte CONSTANT_128 = (byte)0x87;
-        private const byte CONSTANT_64 = (byte)0x1b;
+        private const byte CONSTANT_128 = 0x87;
+        private const byte CONSTANT_64 = 0x1b;
 
         private byte[] ZEROES;
 

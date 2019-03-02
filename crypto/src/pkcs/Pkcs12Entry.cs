@@ -28,14 +28,14 @@ namespace Org.BouncyCastle.Pkcs
 		public Asn1Encodable GetBagAttribute(
             DerObjectIdentifier oid)
         {
-            return (Asn1Encodable)this.attributes[oid.Id];
+            return this.attributes[oid.Id];
         }
 
 		[Obsolete("Use 'object[index]' syntax instead")]
 		public Asn1Encodable GetBagAttribute(
             string oid)
         {
-            return (Asn1Encodable)this.attributes[oid];
+            return this.attributes[oid];
         }
 
 		[Obsolete("Use 'BagAttributeKeys' property")]

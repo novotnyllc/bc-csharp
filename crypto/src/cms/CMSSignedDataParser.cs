@@ -205,7 +205,7 @@ namespace Org.BouncyCastle.Cms
 				foreach (var digestKey in _digests.Keys)
 				{
 					hashes[digestKey] = DigestUtilities.DoFinal(
-						(IDigest)_digests[digestKey]);
+                        _digests[digestKey]);
 				}
 
 				try
@@ -219,7 +219,7 @@ namespace Org.BouncyCastle.Cms
 						string digestName = Helper.GetDigestAlgName(
                             info.DigestAlgorithm.Algorithm.Id);
 
-						byte[] hash = (byte[]) hashes[digestName];
+						byte[] hash = hashes[digestName];
 
 						signerInfos.Add(new SignerInformation(info, _signedContentType, null, new BaseDigestCalculator(hash)));
 					}

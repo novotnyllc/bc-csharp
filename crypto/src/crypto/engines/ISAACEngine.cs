@@ -192,8 +192,8 @@ namespace Org.BouncyCastle.Crypto.Engines
                     case 3: a ^= (a >> 16); break;
                 }
                 a += engineState[(i+128) & 0xFF];
-                engineState[i] = y = engineState[(int)((uint)x >> 2) & 0xFF] + a + b;
-                results[i] = b = engineState[(int)((uint)y >> 10) & 0xFF] + x;
+                engineState[i] = y = engineState[(int)(x >> 2) & 0xFF] + a + b;
+                results[i] = b = engineState[(int)(y >> 10) & 0xFF] + x;
             }
         }
 

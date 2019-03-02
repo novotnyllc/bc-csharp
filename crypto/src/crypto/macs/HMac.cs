@@ -15,8 +15,8 @@ namespace Org.BouncyCastle.Crypto.Macs
     public class HMac
 		: IMac
     {
-        private const byte IPAD = (byte)0x36;
-        private const byte OPAD = (byte)0x5C;
+        private const byte IPAD = 0x36;
+        private const byte OPAD = 0x5C;
 
         private readonly IDigest digest;
         private readonly int digestSize;

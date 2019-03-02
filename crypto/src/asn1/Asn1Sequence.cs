@@ -171,7 +171,7 @@ namespace Org.BouncyCastle.Asn1
          */
         public virtual Asn1Encodable this[int index]
         {
-            get { return (Asn1Encodable) seq[index]; }
+            get { return seq[index]; }
         }
 
         [Obsolete("Use 'object[index]' syntax instead")]
@@ -240,7 +240,7 @@ namespace Org.BouncyCastle.Asn1
 
         private Asn1Encodable GetCurrent(IEnumerator<Asn1Encodable> e)
         {
-            Asn1Encodable encObj = (Asn1Encodable)e.Current;
+            Asn1Encodable encObj = e.Current;
 
             // unfortunately null was allowed as a substitute for DER null
             if (encObj == null)

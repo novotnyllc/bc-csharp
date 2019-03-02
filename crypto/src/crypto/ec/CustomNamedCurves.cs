@@ -891,7 +891,7 @@ namespace Org.BouncyCastle.Crypto.EC
          */
         public static DerObjectIdentifier GetOid(string name)
         {
-            return (DerObjectIdentifier)nameToOid[Platform.ToUpperInvariant(name)];
+            return nameToOid[Platform.ToUpperInvariant(name)];
         }
 
         /**
@@ -899,7 +899,7 @@ namespace Org.BouncyCastle.Crypto.EC
          */
         public static string GetName(DerObjectIdentifier oid)
         {
-            return (string)oidToName[oid];
+            return oidToName[oid];
         }
 
         /**

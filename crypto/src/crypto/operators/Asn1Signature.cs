@@ -207,7 +207,7 @@ namespace Org.BouncyCastle.Crypto.Operators
 
 			if (algorithms.ContainsKey(algorithmName))
 			{
-				return (DerObjectIdentifier) algorithms[algorithmName];
+				return algorithms[algorithmName];
 			}
 
 			return new DerObjectIdentifier(algorithmName);
@@ -226,7 +226,7 @@ namespace Org.BouncyCastle.Crypto.Operators
 
 			if (exParams.ContainsKey(algorithmName))
 			{
-				return new AlgorithmIdentifier(sigOid, (Asn1Encodable) exParams[algorithmName]);
+				return new AlgorithmIdentifier(sigOid, exParams[algorithmName]);
 			}
 
 			return new AlgorithmIdentifier(sigOid, DerNull.Instance);

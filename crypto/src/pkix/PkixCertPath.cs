@@ -104,16 +104,16 @@ namespace Org.BouncyCastle.Pkix
 			if (certs.Count < 2)
 				return certs;
 
-			X509Name issuer = ((X509Certificate)certs[0]).IssuerDN;
+			X509Name issuer = certs[0].IssuerDN;
 			bool okay = true;
 
 			for (int i = 1; i != certs.Count; i++)
 			{
-				X509Certificate cert = (X509Certificate)certs[i];
+				X509Certificate cert = certs[i];
 
 				if (issuer.Equivalent(cert.SubjectDN, true))
 				{
-					issuer = ((X509Certificate)certs[i]).IssuerDN;
+					issuer = certs[i].IssuerDN;
 				}
 				else
 				{
@@ -131,7 +131,7 @@ namespace Org.BouncyCastle.Pkix
 
 			for (int i = 0; i < certs.Count; i++)
 			{
-				X509Certificate cert = (X509Certificate)certs[i];
+				X509Certificate cert = certs[i];
 				bool           found = false;
 
 				X509Name subject = cert.SubjectDN;
@@ -157,11 +157,11 @@ namespace Org.BouncyCastle.Pkix
 
 			for (int i = 0; i != retList.Count; i++)
 			{
-				issuer = ((X509Certificate)retList[i]).IssuerDN;
+				issuer = retList[i].IssuerDN;
 
 				for (int j = 0; j < certs.Count; j++)
 				{
-					X509Certificate c = (X509Certificate)certs[j];
+					X509Certificate c = certs[j];
 					if (issuer.Equivalent(c.SubjectDN, true))
 					{
 						retList.Add(c);
@@ -339,7 +339,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				if (enc is string)
 				{
-					return GetEncoded((string)enc);
+					return GetEncoded(enc);
 				}
 			}
 			return null;
@@ -364,7 +364,7 @@ namespace Org.BouncyCastle.Pkix
 
 				for (int i = certificates.Count - 1; i >= 0; i--)
 				{
-					v.Add(ToAsn1Object((X509Certificate) certificates[i]));
+					v.Add(ToAsn1Object(certificates[i]));
 				}
 
 				return ToDerEncoded(new DerSequence(v));
@@ -377,7 +377,7 @@ namespace Org.BouncyCastle.Pkix
 				Asn1EncodableVector v = new Asn1EncodableVector();
 				for (int i = 0; i != certificates.Count; i++)
 				{
-					v.Add(ToAsn1Object((X509Certificate)certificates[i]));
+					v.Add(ToAsn1Object(certificates[i]));
 				}
 
 				Asn1.Pkcs.SignedData sd = new Asn1.Pkcs.SignedData(

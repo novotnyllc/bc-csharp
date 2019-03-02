@@ -109,30 +109,30 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             ulong t1 = xx07 + xx11;
 
             ulong cc = 0;
-            cc += (ulong)xx[0] + t0;
+            cc += xx[0] + t0;
             uint z0 = (uint)cc;
             cc >>= 32;
-            cc += (ulong)xx[1] + t1;
+            cc += xx[1] + t1;
             z[1] = (uint)cc;
             cc >>= 32;
 
             t0 += xx08;
             t1 += xx09;
 
-            cc += (ulong)xx[2] + t0;
+            cc += xx[2] + t0;
             ulong z2 = (uint)cc;
             cc >>= 32;
-            cc += (ulong)xx[3] + t1;
+            cc += xx[3] + t1;
             z[3] = (uint)cc;
             cc >>= 32;
 
             t0 -= xx06;
             t1 -= xx07;
 
-            cc += (ulong)xx[4] + t0;
+            cc += xx[4] + t0;
             z[4] = (uint)cc;
             cc >>= 32;
-            cc += (ulong)xx[5] + t1;
+            cc += xx[5] + t1;
             z[5] = (uint)cc;
             cc >>= 32;
 
@@ -170,7 +170,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
                 cc >>= 32;
                 if (cc != 0)
                 {
-                    cc += (ulong)z[1];
+                    cc += z[1];
                     z[1] = (uint)cc;
                     cc >>= 32;
                 }
@@ -247,7 +247,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[1];
+                c += z[1];
                 z[1] = (uint)c;
                 c >>= 32;
             }
@@ -267,7 +267,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[1];
+                c += z[1];
                 z[1] = (uint)c;
                 c >>= 32;
             }

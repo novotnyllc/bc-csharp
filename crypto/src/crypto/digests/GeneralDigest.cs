@@ -102,9 +102,9 @@ namespace Org.BouncyCastle.Crypto.Digests
             //
             // add the pad bytes.
             //
-            Update((byte)128);
+            Update(128);
 
-            while (xBufOff != 0) Update((byte)0);
+            while (xBufOff != 0) Update(0);
             ProcessLength(bitLength);
             ProcessBlock();
         }

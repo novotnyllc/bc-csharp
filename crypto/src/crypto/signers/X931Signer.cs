@@ -158,7 +158,7 @@ namespace Org.BouncyCastle.Crypto.Signers
             {
                 delta = block.Length - digSize - 1;
                 digest.DoFinal(block, delta);
-                block[block.Length - 1] = (byte)IsoTrailers.TRAILER_IMPLICIT;
+                block[block.Length - 1] = IsoTrailers.TRAILER_IMPLICIT;
             }
             else
             {
@@ -171,9 +171,9 @@ namespace Org.BouncyCastle.Crypto.Signers
             block[0] = 0x6b;
             for (int i = delta - 2; i != 0; i--)
             {
-                block[i] = (byte)0xbb;
+                block[i] = 0xbb;
             }
-            block[delta - 1] = (byte)0xba;
+            block[delta - 1] = 0xba;
         }
 
         /**

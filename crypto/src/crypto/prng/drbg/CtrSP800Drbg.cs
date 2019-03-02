@@ -222,7 +222,7 @@ namespace Org.BouncyCastle.Crypto.Prng.Drbg
 	        copyIntToByteArray(S, L, 0);
 	        copyIntToByteArray(S, N, 4);
 	        Array.Copy(inputString, 0, S, 8, L);
-	        S[8 + L] = (byte)0x80;
+	        S[8 + L] = 0x80;
 	        // S already padded with zeros
 
 	        byte[] temp = new byte[mKeySizeInBits / 8 + outLen];

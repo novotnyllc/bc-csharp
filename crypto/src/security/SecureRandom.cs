@@ -256,7 +256,7 @@ namespace Org.BouncyCastle.Security
 
         public virtual long NextLong()
         {
-            return ((long)(uint) NextInt() << 32) | (long)(uint) NextInt();
+            return ((long)(uint) NextInt() << 32) | (uint)NextInt();
         }
     }
 }

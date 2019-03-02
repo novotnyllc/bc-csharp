@@ -321,7 +321,7 @@ namespace Org.BouncyCastle.Utilities.Zlib {
             return Z_OK;
         }
 
-        private static readonly byte[] mark = {(byte)0, (byte)0, (byte)0xff, (byte)0xff};
+        private static readonly byte[] mark = { 0, 0, 0xff, 0xff };
 
         internal int inflateSync(ZStream z){
             int n;       // number of bytes to look at

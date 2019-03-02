@@ -213,7 +213,7 @@ namespace Org.BouncyCastle.Crypto.Agreement
 
         private byte[] S1(IDigest digest, ECPoint u, byte[] inner)
         {
-            digest.Update((byte)0x02);
+            digest.Update(0x02);
             AddFieldElement(digest, u.AffineYCoord);
             digest.BlockUpdate(inner, 0, inner.Length);
 
@@ -235,7 +235,7 @@ namespace Org.BouncyCastle.Crypto.Agreement
 
         private byte[] S2(IDigest digest, ECPoint u, byte[] inner)
         {
-            digest.Update((byte)0x03);
+            digest.Update(0x03);
             AddFieldElement(digest, u.AffineYCoord);
             digest.BlockUpdate(inner, 0, inner.Length);
 

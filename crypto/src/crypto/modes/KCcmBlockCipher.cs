@@ -417,10 +417,10 @@ namespace Org.BouncyCastle.Crypto.Modes
 
         public virtual void Reset()
         {
-            Arrays.Fill(G1, (byte)0);
-            Arrays.Fill(buffer, (byte)0);
-            Arrays.Fill(counter, (byte)0);
-            Arrays.Fill(macBlock, (byte)0);
+            Arrays.Fill(G1, 0);
+            Arrays.Fill(buffer, 0);
+            Arrays.Fill(counter, 0);
+            Arrays.Fill(macBlock, 0);
 
             counter[0] = 0x01;
             data.SetLength(0);

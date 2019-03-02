@@ -32,7 +32,7 @@ namespace Org.BouncyCastle.Bcpg
 
 			algorithm = (PublicKeyAlgorithmTag) bcpgIn.ReadByte();
 
-			switch ((PublicKeyAlgorithmTag) algorithm)
+			switch (algorithm)
 			{
 				case PublicKeyAlgorithmTag.RsaEncrypt:
 				case PublicKeyAlgorithmTag.RsaGeneral:

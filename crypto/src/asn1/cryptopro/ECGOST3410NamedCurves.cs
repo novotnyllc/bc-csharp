@@ -234,7 +234,7 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
 
             if (objIds.TryGetValue(name, out oid))
             {
-                return (ECDomainParameters)parameters[oid];
+                return parameters[oid];
             }
 
             return null;
@@ -246,13 +246,13 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         public static string GetName(
             DerObjectIdentifier oid)
         {
-            return (string)names[oid];
+            return names[oid];
         }
 
         public static DerObjectIdentifier GetOid(
             string name)
         {
-            return (DerObjectIdentifier)objIds[name];
+            return objIds[name];
         }
     }
 }

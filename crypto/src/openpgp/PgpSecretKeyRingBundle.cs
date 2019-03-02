@@ -174,7 +174,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
             if (secretRings.ContainsKey(id))
             {
-                return (PgpSecretKeyRing) secretRings[id];
+                return secretRings[id];
             }
 
 			foreach (var secretRing in GetKeyRings())
@@ -216,7 +216,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
 			foreach (var key in order)
             {
-                PgpSecretKeyRing pub = (PgpSecretKeyRing) secretRings[key];
+                PgpSecretKeyRing pub = secretRings[key];
 
 				pub.Encode(bcpgOut);
             }

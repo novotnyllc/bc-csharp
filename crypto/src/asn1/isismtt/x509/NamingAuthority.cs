@@ -85,7 +85,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 
 			if (e.MoveNext())
 			{
-				Asn1Encodable o = (Asn1Encodable) e.Current;
+				Asn1Encodable o = e.Current;
 				if (o is DerObjectIdentifier)
 				{
 					namingAuthorityID = (DerObjectIdentifier) o;
@@ -106,7 +106,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 
 			if (e.MoveNext())
 			{
-				Asn1Encodable o = (Asn1Encodable) e.Current;
+				Asn1Encodable o = e.Current;
 				if (o is DerIA5String)
 				{
 					namingAuthorityUrl = DerIA5String.GetInstance(o).GetString();
@@ -123,7 +123,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 
 			if (e.MoveNext())
 			{
-				Asn1Encodable o = (Asn1Encodable) e.Current;
+				Asn1Encodable o = e.Current;
 				if (o is IAsn1String)
 				{
 					namingAuthorityText = DirectoryString.GetInstance(o);

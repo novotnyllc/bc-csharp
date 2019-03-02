@@ -174,7 +174,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Djb
             uint[] Z3Squared = (Z1IsOne && Z2IsOne) ? HSquared : null;
 
             // TODO If the result will only be used in a subsequent addition, we don't need W3
-            Curve25519FieldElement W3 = CalculateJacobianModifiedW((Curve25519FieldElement)Z3, Z3Squared);
+            Curve25519FieldElement W3 = CalculateJacobianModifiedW(Z3, Z3Squared);
 
             ECFieldElement[] zs = new ECFieldElement[] { Z3, W3 };
 

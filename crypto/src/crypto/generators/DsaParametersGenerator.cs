@@ -112,8 +112,8 @@ namespace Org.BouncyCastle.Crypto.Generators
                     u[i] = (byte)(part1[i] ^ part2[i]);
                 }
 
-                u[0] |= (byte)0x80;
-                u[19] |= (byte)0x01;
+                u[0] |= 0x80;
+                u[19] |= 0x01;
 
                 BigInteger q = new BigInteger(1, u);
 
@@ -136,7 +136,7 @@ namespace Org.BouncyCastle.Crypto.Generators
                     Hash(digest, offset, part1);
                     Array.Copy(part1, part1.Length - ((w.Length - (n) * part1.Length)), w, 0, w.Length - n * part1.Length);
 
-                    w[0] |= (byte)0x80;
+                    w[0] |= 0x80;
 
                     BigInteger x = new BigInteger(1, w);
 

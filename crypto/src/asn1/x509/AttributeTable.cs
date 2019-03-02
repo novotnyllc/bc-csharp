@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		public AttributeX509 Get(
             DerObjectIdentifier oid)
         {
-            return (AttributeX509) attributes[oid];
+            return attributes[oid];
         }
 
         public IDictionary<DerObjectIdentifier, AttributeX509> ToDictionary()

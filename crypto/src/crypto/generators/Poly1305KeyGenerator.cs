@@ -22,8 +22,8 @@ namespace Org.BouncyCastle.Crypto.Generators
 	public class Poly1305KeyGenerator
 		: CipherKeyGenerator
 	{
-		private const byte R_MASK_LOW_2 = (byte)0xFC;
-		private const byte R_MASK_HIGH_4 = (byte)0x0F;
+		private const byte R_MASK_LOW_2 = 0xFC;
+		private const byte R_MASK_HIGH_4 = 0x0F;
 
 		/// <summary>
 		/// Initialises the key generator.

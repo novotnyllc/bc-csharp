@@ -186,7 +186,7 @@ namespace Org.BouncyCastle.Math.EC.Rfc8032
             uint[] v = X448Field.Create();
 
             X448Field.Sqr(r.y, u);
-            X448Field.Mul(u, (uint)-C_d, v);
+            X448Field.Mul(u, -C_d, v);
             X448Field.Negate(u, u);
             X448Field.AddOne(u);
             X448Field.AddOne(v);

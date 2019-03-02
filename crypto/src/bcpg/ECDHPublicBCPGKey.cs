@@ -75,7 +75,7 @@ namespace Org.BouncyCastle.Bcpg
 
         private void VerifyHashAlgorithm()
         {
-            switch ((HashAlgorithmTag)hashFunctionId)
+            switch (hashFunctionId)
             {
             case HashAlgorithmTag.Sha256:
             case HashAlgorithmTag.Sha384:
@@ -88,7 +88,7 @@ namespace Org.BouncyCastle.Bcpg
 
         private void VerifySymmetricKeyAlgorithm()
         {
-            switch ((SymmetricKeyAlgorithmTag)symAlgorithmId)
+            switch (symAlgorithmId)
             {
             case SymmetricKeyAlgorithmTag.Aes128:
             case SymmetricKeyAlgorithmTag.Aes192:

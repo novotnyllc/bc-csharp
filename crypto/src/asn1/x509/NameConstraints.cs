@@ -73,7 +73,7 @@ namespace Org.BouncyCastle.Asn1.X509
             GeneralSubtree[] gsts = new GeneralSubtree[subtrees.Count];
             for (int i = 0; i < subtrees.Count; ++i)
             {
-                gsts[i] = (GeneralSubtree)subtrees[i];
+                gsts[i] = subtrees[i];
             }
             return new DerSequence(gsts);
 		}

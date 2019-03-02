@@ -735,7 +735,7 @@ namespace Org.BouncyCastle.Math
 
             while (vI >= 0)
             {
-                m += ((long)(uint)a[tI] + (long)(uint)b[vI--]);
+                m += ((uint)a[tI] + (long)(uint)b[vI--]);
                 a[tI--] = (int)m;
                 m = (long)((ulong)m >> 32);
             }
@@ -3245,7 +3245,7 @@ namespace Org.BouncyCastle.Math
                 sb.Append(Convert.ToString(u.IntValue, 8));
                 for (int i = S.Count - 1; i >= 0; --i)
                 {
-                    AppendZeroExtendedString(sb, (string)S[i], 10);
+                    AppendZeroExtendedString(sb, S[i], 10);
                 }
                 break;
             }
@@ -3307,7 +3307,7 @@ namespace Org.BouncyCastle.Math
                 return;
             }
 
-            BigInteger[] qr = pos.DivideAndRemainder((BigInteger)moduli[--scale]);
+            BigInteger[] qr = pos.DivideAndRemainder(moduli[--scale]);
 
             ToString(sb, radix, moduli, scale, qr[0]);
             ToString(sb, radix, moduli, scale, qr[1]);

@@ -301,7 +301,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			AddSigner(privateKey, cert, encryptionOid, digestOid,
 				new DefaultSignedAttributeTableGenerator(),
-				(CmsAttributeTableGenerator)null);
+                null);
 		}
 
         /**
@@ -376,7 +376,7 @@ namespace Org.BouncyCastle.Cms
 			string					digestOid)
 		{
 			AddSigner(privateKey, subjectKeyID, digestOid, new DefaultSignedAttributeTableGenerator(),
-				(CmsAttributeTableGenerator)null);
+                null);
 		}
 
 		/**
@@ -394,7 +394,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			AddSigner(privateKey, subjectKeyID, encryptionOid, digestOid,
 				new DefaultSignedAttributeTableGenerator(),
-				(CmsAttributeTableGenerator)null);
+                null);
 		}
 
 		/**
@@ -860,7 +860,7 @@ namespace Org.BouncyCastle.Cms
                 //
                 foreach (var de in outer._messageDigests)
                 {
-                    outer._messageHashes.Add(de.Key, DigestUtilities.DoFinal((IDigest)de.Value));
+                    outer._messageHashes.Add(de.Key, DigestUtilities.DoFinal(de.Value));
                 }
 
                 // TODO If the digest OIDs for precalculated signers weren't mixed in with
@@ -879,7 +879,7 @@ namespace Org.BouncyCastle.Cms
                     {
                         AlgorithmIdentifier digestAlgorithm = holder.DigestAlgorithm;
 
-                        byte[] calculatedDigest = (byte[])outer._messageHashes[
+                        byte[] calculatedDigest = outer._messageHashes[
                             Helper.GetDigestAlgName(holder.digestOID)];
                         outer._digests[holder.digestOID] = (byte[])calculatedDigest.Clone();
 

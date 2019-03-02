@@ -186,7 +186,7 @@ namespace Org.BouncyCastle.Asn1.X509
                 Asn1Sequence[] certs = new Asn1Sequence[crlEntries.Count];
                 for (int i = 0; i < crlEntries.Count; ++i)
                 {
-                    certs[i] = (Asn1Sequence)crlEntries[i];
+                    certs[i] = crlEntries[i];
                 }
 				v.Add(new DerSequence(certs));
             }

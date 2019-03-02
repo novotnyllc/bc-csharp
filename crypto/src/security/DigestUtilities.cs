@@ -165,12 +165,12 @@ namespace Org.BouncyCastle.Security
                 throw new System.ArgumentNullException("mechanism");
 
             mechanism = Platform.ToUpperInvariant(mechanism);
-            string aliased = (string) algorithms[mechanism];
+            string aliased = algorithms[mechanism];
 
             if (aliased != null)
                 mechanism = aliased;
 
-            return (DerObjectIdentifier) oids[mechanism];
+            return oids[mechanism];
         }
 
         public static ICollection<string> Algorithms
@@ -257,7 +257,7 @@ namespace Org.BouncyCastle.Security
         public static string GetAlgorithmName(
             DerObjectIdentifier oid)
         {
-            return (string) algorithms[oid.Id];
+            return algorithms[oid.Id];
         }
 
         public static byte[] CalculateDigest(DerObjectIdentifier id, byte[] input)

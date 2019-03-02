@@ -135,7 +135,7 @@ namespace Org.BouncyCastle.Cms
         internal string GetDigestAlgName(
             string digestAlgOid)
         {
-			string algName = (string)digestAlgs[digestAlgOid];
+			string algName = digestAlgs[digestAlgOid];
 
 			if (algName != null)
 			{
@@ -160,7 +160,7 @@ namespace Org.BouncyCastle.Cms
     internal string[] GetDigestAliases(
 			string algName)
 		{
-			string[] aliases = (string[]) digestAliases[algName];
+			string[] aliases = digestAliases[algName];
 
 			return aliases == null ? new string[0] : (string[]) aliases.Clone();
 		}
@@ -406,7 +406,7 @@ namespace Org.BouncyCastle.Cms
                 else
                 {
                     // TODO Should we insist on algName being one of "EC" or "ECDSA", as Java does?
-                    encOID = (string)ecAlgorithms[digestOID];
+                    encOID = ecAlgorithms[digestOID];
 
                     if (encOID == null)
                         throw new ArgumentException("can't mix ECDSA with anything but SHA family digests");

@@ -221,7 +221,7 @@ namespace Org.BouncyCastle.X509
 
 			for (int i = 0; i != seq.Count; i++)
 			{
-				attrs[i] = new X509Attribute((Asn1Encodable)seq[i]);
+				attrs[i] = new X509Attribute(seq[i]);
 			}
 
 			return attrs;
@@ -235,7 +235,7 @@ namespace Org.BouncyCastle.X509
 
 			for (int i = 0; i != seq.Count; i++)
 			{
-				X509Attribute attr = new X509Attribute((Asn1Encodable)seq[i]);
+				X509Attribute attr = new X509Attribute(seq[i]);
 				if (attr.Oid.Equals(oid))
 				{
 					list.Add(attr);
@@ -250,7 +250,7 @@ namespace Org.BouncyCastle.X509
             X509Attribute[] result = new X509Attribute[list.Count];
             for (int i = 0; i < list.Count; ++i)
             {
-                result[i] = (X509Attribute)list[i];
+                result[i] = list[i];
             }
             return result;
 		}

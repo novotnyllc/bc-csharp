@@ -730,28 +730,28 @@ namespace Org.BouncyCastle.Math.Raw
         public static uint MulByWord(uint x, uint[] z)
         {
             ulong c = 0, xVal = x;
-            c += xVal * (ulong)z[0];
+            c += xVal * z[0];
             z[0] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[1];
+            c += xVal * z[1];
             z[1] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[2];
+            c += xVal * z[2];
             z[2] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[3];
+            c += xVal * z[3];
             z[3] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[4];
+            c += xVal * z[4];
             z[4] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[5];
+            c += xVal * z[5];
             z[5] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[6];
+            c += xVal * z[6];
             z[6] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[7];
+            c += xVal * z[7];
             z[7] = (uint)c;
             c >>= 32;
             return (uint)c;
@@ -760,28 +760,28 @@ namespace Org.BouncyCastle.Math.Raw
         public static uint MulByWordAddTo(uint x, uint[] y, uint[] z)
         {
             ulong c = 0, xVal = x;
-            c += xVal * (ulong)z[0] + y[0];
+            c += xVal * z[0] + y[0];
             z[0] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[1] + y[1];
+            c += xVal * z[1] + y[1];
             z[1] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[2] + y[2];
+            c += xVal * z[2] + y[2];
             z[2] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[3] + y[3];
+            c += xVal * z[3] + y[3];
             z[3] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[4] + y[4];
+            c += xVal * z[4] + y[4];
             z[4] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[5] + y[5];
+            c += xVal * z[5] + y[5];
             z[5] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[6] + y[6];
+            c += xVal * z[6] + y[6];
             z[6] = (uint)c;
             c >>= 32;
-            c += xVal * (ulong)z[7] + y[7];
+            c += xVal * z[7] + y[7];
             z[7] = (uint)c;
             c >>= 32;
             return (uint)c;
@@ -906,7 +906,7 @@ namespace Org.BouncyCastle.Math.Raw
 
                 {
                     ulong p = x_0 * x_0;
-                    zz_1 = (ulong)(c << 31) | (p >> 33);
+                    zz_1 = c << 31 | (p >> 33);
                     zz[0] = (uint)p;
                     c = (uint)(p >> 32) & 1;
                 }
@@ -1070,7 +1070,7 @@ namespace Org.BouncyCastle.Math.Raw
 
                 {
                     ulong p = x_0 * x_0;
-                    zz_1 = (ulong)(c << 31) | (p >> 33);
+                    zz_1 = c << 31 | (p >> 33);
                     zz[zzOff + 0] = (uint)p;
                     c = (uint)(p >> 32) & 1;
                 }

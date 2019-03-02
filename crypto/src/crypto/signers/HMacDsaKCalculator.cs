@@ -46,8 +46,8 @@ namespace Org.BouncyCastle.Crypto.Signers
         {
             this.n = n;
 
-            Arrays.Fill(V, (byte)0x01);
-            Arrays.Fill(K, (byte)0);
+            Arrays.Fill(V, 0x01);
+            Arrays.Fill(K, 0);
 
             int size = BigIntegers.GetUnsignedByteLength(n);
             byte[] x = new byte[size];
@@ -71,7 +71,7 @@ namespace Org.BouncyCastle.Crypto.Signers
             hMac.Init(new KeyParameter(K));
 
             hMac.BlockUpdate(V, 0, V.Length);
-            hMac.Update((byte)0x00);
+            hMac.Update(0x00);
             hMac.BlockUpdate(x, 0, x.Length);
             hMac.BlockUpdate(m, 0, m.Length);
 
@@ -84,7 +84,7 @@ namespace Org.BouncyCastle.Crypto.Signers
             hMac.DoFinal(V, 0);
 
             hMac.BlockUpdate(V, 0, V.Length);
-            hMac.Update((byte)0x01);
+            hMac.Update(0x01);
             hMac.BlockUpdate(x, 0, x.Length);
             hMac.BlockUpdate(m, 0, m.Length);
 
@@ -124,7 +124,7 @@ namespace Org.BouncyCastle.Crypto.Signers
                 }
 
                 hMac.BlockUpdate(V, 0, V.Length);
-                hMac.Update((byte)0x00);
+                hMac.Update(0x00);
 
                 hMac.DoFinal(K, 0);
 

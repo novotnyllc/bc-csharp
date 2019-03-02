@@ -46,7 +46,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 
         public static int GetTrailer(IDigest digest)
         {
-            return (int)trailerMap[digest.AlgorithmName];
+            return trailerMap[digest.AlgorithmName];
         }
 
         public static bool NoTrailerAvailable(IDigest digest)

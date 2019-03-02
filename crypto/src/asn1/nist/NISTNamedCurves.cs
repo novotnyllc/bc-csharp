@@ -89,7 +89,7 @@ namespace Org.BouncyCastle.Asn1.Nist
         public static string GetName(
             DerObjectIdentifier  oid)
         {
-            return (string) names[oid];
+            return names[oid];
         }
 
         /**

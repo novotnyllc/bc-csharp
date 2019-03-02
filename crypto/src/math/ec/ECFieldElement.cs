@@ -820,7 +820,7 @@ namespace Org.BouncyCastle.Math.EC
 
             if (ab == ax || ab == bx)
             {
-                ab = (LongArray)ab.Copy();
+                ab = ab.Copy();
             }
 
             ab.AddShiftedByWords(xy, 0);
@@ -862,7 +862,7 @@ namespace Org.BouncyCastle.Math.EC
 
             if (aa == ax)
             {
-                aa = (LongArray)aa.Copy();
+                aa = aa.Copy();
             }
 
             aa.AddShiftedByWords(xy, 0);

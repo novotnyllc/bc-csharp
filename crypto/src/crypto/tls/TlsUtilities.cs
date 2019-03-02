@@ -406,7 +406,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         public static int ReadUint16(byte[] buf, int offset)
         {
             uint n = (uint)buf[offset] << 8;
-            n |= (uint)buf[++offset];
+            n |= buf[++offset];
             return (int)n;
         }
 
@@ -424,7 +424,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
             uint n = (uint)buf[offset] << 16;
             n |= (uint)buf[++offset] << 8;
-            n |= (uint)buf[++offset];
+            n |= buf[++offset];
             return (int)n;
         }
 
@@ -436,7 +436,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             int i4 = input.ReadByte();
             if (i4 < 0)
                 throw new EndOfStreamException();
-            return (long)(uint)((i1 << 24) | (i2 << 16) | (i3 << 8) | i4);
+            return (uint)((i1 << 24) | (i2 << 16) | (i3 << 8) | i4);
         }
 
         public static long ReadUint32(byte[] buf, int offset)
@@ -444,22 +444,22 @@ namespace Org.BouncyCastle.Crypto.Tls
             uint n = (uint)buf[offset] << 24;
             n |= (uint)buf[++offset] << 16;
             n |= (uint)buf[++offset] << 8;
-            n |= (uint)buf[++offset];
-            return (long)n;
+            n |= buf[++offset];
+            return n;
         }
 
         public static long ReadUint48(Stream input)
         {
             int hi = ReadUint24(input);
             int lo = ReadUint24(input);
-            return ((long)(hi & 0xffffffffL) << 24) | (long)(lo & 0xffffffffL);
+            return ((hi & 0xffffffffL) << 24) | lo & 0xffffffffL;
         }
 
         public static long ReadUint48(byte[] buf, int offset)
         {
             int hi = ReadUint24(buf, offset);
             int lo = ReadUint24(buf, offset + 3);
-            return ((long)(hi & 0xffffffffL) << 24) | (long)(lo & 0xffffffffL);
+            return ((hi & 0xffffffffL) << 24) | lo & 0xffffffffL;
         }
 
         public static byte[] ReadAllOrNothing(int length, Stream input)

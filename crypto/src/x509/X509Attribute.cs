@@ -62,7 +62,7 @@ namespace Org.BouncyCastle.X509
 
 			for (int i = 0; i != s.Count; i++)
 			{
-				values[i] = (Asn1Encodable)s[i];
+				values[i] = s[i];
 			}
 
 			return values;

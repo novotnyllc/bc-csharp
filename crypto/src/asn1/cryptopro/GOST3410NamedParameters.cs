@@ -89,7 +89,7 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         public static Gost3410ParamSetParameters GetByOid(
             DerObjectIdentifier oid)
         {
-            return (Gost3410ParamSetParameters) parameters[oid];
+            return parameters[oid];
         }
 
 		/**
@@ -104,11 +104,11 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
 		public static Gost3410ParamSetParameters GetByName(
             string name)
         {
-            DerObjectIdentifier oid = (DerObjectIdentifier) objIds[name];
+            DerObjectIdentifier oid = objIds[name];
 
             if (oid != null)
             {
-                return (Gost3410ParamSetParameters) parameters[oid];
+                return parameters[oid];
             }
 
             return null;
@@ -117,7 +117,7 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         public static DerObjectIdentifier GetOid(
 			string name)
         {
-            return (DerObjectIdentifier) objIds[name];
+            return objIds[name];
         }
     }
 }

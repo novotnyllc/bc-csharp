@@ -81,7 +81,7 @@ namespace Org.BouncyCastle.Asn1
             if (bytes.Length > 1)
             {
                 if ((bytes[0] == 0 && (bytes[1] & 0x80) == 0)
-                    || (bytes[0] == (byte)0xff && (bytes[1] & 0x80) != 0))
+                    || (bytes[0] == 0xff && (bytes[1] & 0x80) != 0))
                 {
                     if (!AllowUnsafe())
                         throw new ArgumentException("malformed integer");

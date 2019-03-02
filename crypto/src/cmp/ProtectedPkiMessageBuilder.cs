@@ -120,7 +120,7 @@ namespace Org.BouncyCastle.Cmp
                 InfoTypeAndValue[] genInfos = new InfoTypeAndValue[generalInfos.Count];
                 for (int t = 0; t < genInfos.Length; t++)
                 {
-                    genInfos[t] = (InfoTypeAndValue)generalInfos[t];
+                    genInfos[t] = generalInfos[t];
                 }
 
                 hdrBuilBuilder.SetGeneralInfo(genInfos);
@@ -134,7 +134,7 @@ namespace Org.BouncyCastle.Cmp
                 CmpCertificate[] cmpCertificates = new CmpCertificate[extraCerts.Count];
                 for (int i = 0; i < cmpCertificates.Length; i++)
                 {
-                    byte[] cert = ((X509Certificate)extraCerts[i]).GetEncoded();
+                    byte[] cert = extraCerts[i].GetEncoded();
                     cmpCertificates[i] = CmpCertificate.GetInstance((Asn1Sequence.FromByteArray(cert)));
                 }
 

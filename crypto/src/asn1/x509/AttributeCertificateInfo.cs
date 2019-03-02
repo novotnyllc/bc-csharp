@@ -58,7 +58,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 			for (int i = 7; i < seq.Count; i++)
             {
-                Asn1Encodable obj = (Asn1Encodable) seq[i];
+                Asn1Encodable obj = seq[i];
 
 				if (obj is DerBitString)
                 {

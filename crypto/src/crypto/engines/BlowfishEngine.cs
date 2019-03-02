@@ -454,7 +454,7 @@ namespace Org.BouncyCastle.Crypto.Engines
                 for (int j=0; j < 4; j++)
                 {
                     // create a 32 bit block
-                    data = (data << 8) | (uint)key[keyIndex++];
+                    data = (data << 8) | key[keyIndex++];
 
                     // wrap when we get to the end of the key
                     if (keyIndex >= keyLength)

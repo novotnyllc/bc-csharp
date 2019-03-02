@@ -67,7 +67,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 MemoryStream buf = new MemoryStream();
                 for (int i = 0; i < mResponderIDList.Count; ++i)
                 {
-                    ResponderID responderID = (ResponderID)mResponderIDList[i];
+                    ResponderID responderID = mResponderIDList[i];
                     byte[] derEncoding = responderID.GetEncoded(Asn1Encodable.Der);
                     TlsUtilities.WriteOpaque16(derEncoding, buf);
                 }

@@ -34,7 +34,7 @@ namespace Org.BouncyCastle.Math.EC.Multiplier
             sbyte mu = Tnaf.GetMu(a);
             BigInteger[] s = curve.GetSi();
 
-            ZTauElement rho = Tnaf.PartModReduction(k, m, a, s, mu, (sbyte)10);
+            ZTauElement rho = Tnaf.PartModReduction(k, m, a, s, mu, 10);
 
             return MultiplyWTnaf(p, rho, a, mu);
         }

@@ -88,7 +88,7 @@ namespace Org.BouncyCastle.Bcpg
 
             byte[] buffer = new byte[length + 2];
             bcpgIn.ReadFully(buffer, 2, buffer.Length - 2);
-            buffer[0] = (byte)0x06;
+            buffer[0] = 0x06;
             buffer[1] = (byte)length;
 
             return buffer;

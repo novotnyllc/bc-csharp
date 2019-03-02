@@ -81,7 +81,7 @@ namespace Org.BouncyCastle.Pkix
             try
             {
                 trust = PkixCertPathValidatorUtilities.FindTrustAnchor(
-					(X509Certificate)certs[certs.Count - 1],
+                    certs[certs.Count - 1],
 					paramsPkix.GetTrustAnchors());
 
                 if (trust == null)
@@ -221,7 +221,7 @@ namespace Org.BouncyCastle.Pkix
             //
 
 			X509CertStoreSelector certConstraints = paramsPkix.GetTargetCertConstraints();
-            if (certConstraints != null && !certConstraints.Match((X509Certificate)certs[0]))
+            if (certConstraints != null && !certConstraints.Match(certs[0]))
             {
                 throw new PkixCertPathValidatorException(
 					"Target certificate in certification path does not match targetConstraints.", null, certPath, 0);
@@ -235,7 +235,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (certIter.MoveNext())
             {
-                ((PkixCertPathChecker)certIter.Current).Init(false);
+                certIter.Current.Init(false);
             }
 
             X509Certificate cert = null;
@@ -255,7 +255,7 @@ namespace Org.BouncyCastle.Pkix
                 // at the end of the for loop and initialized the
                 // first time from the TrustAnchor
                 //
-                cert = (X509Certificate)certs[index];
+                cert = certs[index];
 
                 try
                 {

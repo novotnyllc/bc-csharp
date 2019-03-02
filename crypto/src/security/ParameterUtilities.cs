@@ -147,7 +147,7 @@ namespace Org.BouncyCastle.Security
         public static string GetCanonicalAlgorithmName(
             string algorithm)
         {
-            return (string) algorithms[Platform.ToUpperInvariant(algorithm)];
+            return algorithms[Platform.ToUpperInvariant(algorithm)];
         }
 
         public static KeyParameter CreateKeyParameter(
@@ -330,7 +330,7 @@ namespace Org.BouncyCastle.Security
             if (!basicIVSizes.ContainsKey(canonicalName))
                 return -1;
 
-            return (int)basicIVSizes[canonicalName];
+            return basicIVSizes[canonicalName];
         }
     }
 }

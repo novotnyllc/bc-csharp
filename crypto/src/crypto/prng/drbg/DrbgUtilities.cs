@@ -24,14 +24,14 @@ namespace Org.BouncyCastle.Crypto.Prng.Drbg
 
         internal static int GetMaxSecurityStrength(IDigest d)
 	    {
-	        return (int)maxSecurityStrengths[d.AlgorithmName];
+	        return maxSecurityStrengths[d.AlgorithmName];
 	    }
 
         internal static int GetMaxSecurityStrength(IMac m)
 	    {
 	        string name = m.AlgorithmName;
 
-            return (int)maxSecurityStrengths[name.Substring(0, name.IndexOf("/"))];
+            return maxSecurityStrengths[name.Substring(0, name.IndexOf("/"))];
 	    }
 
 	    /**

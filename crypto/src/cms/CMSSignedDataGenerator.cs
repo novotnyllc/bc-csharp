@@ -123,7 +123,7 @@ namespace Org.BouncyCastle.Cms
                 byte[] hash;
                 if (outer._digests.ContainsKey(digestOID))
                 {
-                    hash = (byte[])outer._digests[digestOID];
+                    hash = outer._digests[digestOID];
                 }
                 else
                 {

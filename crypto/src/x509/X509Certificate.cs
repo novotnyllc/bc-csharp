@@ -485,7 +485,7 @@ namespace Org.BouncyCastle.X509
 
 				do
 				{
-					DerObjectIdentifier oid = (DerObjectIdentifier)e.Current;
+					DerObjectIdentifier oid = e.Current;
 					X509Extension ext = extensions.GetExtension(oid);
 
 					if (ext.Value != null)

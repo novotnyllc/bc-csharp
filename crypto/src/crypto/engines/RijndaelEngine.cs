@@ -454,7 +454,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 				{
 					tk[i,0] ^= S[tk[(i+1)%4,KC-1] & 0xff];
 				}
-				tk[0,0] ^= (byte) rcon[rconpointer++];
+				tk[0,0] ^= rcon[rconpointer++];
 
 				if (KC <= 6)
 				{
@@ -639,10 +639,10 @@ namespace Org.BouncyCastle.Crypto.Engines
 		{
 			int     index = off;
 
-			A0 = (long)(bytes[index++] & 0xff);
-			A1 = (long)(bytes[index++] & 0xff);
-			A2 = (long)(bytes[index++] & 0xff);
-			A3 = (long)(bytes[index++] & 0xff);
+			A0 = bytes[index++] & 0xff;
+			A1 = bytes[index++] & 0xff;
+			A2 = bytes[index++] & 0xff;
+			A3 = bytes[index++] & 0xff;
 
 			for (int j = 8; j != BC; j += 8)
 			{

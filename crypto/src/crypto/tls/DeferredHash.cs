@@ -74,7 +74,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         public virtual TlsHandshakeHash StopTracking()
         {
             byte prfHashAlgorithm = (byte)mPrfHashAlgorithm;
-            IDigest prfHash = TlsUtilities.CloneHash(prfHashAlgorithm, (IDigest)mHashes[prfHashAlgorithm]);
+            IDigest prfHash = TlsUtilities.CloneHash(prfHashAlgorithm, mHashes[prfHashAlgorithm]);
             if (mBuf != null)
             {
                 mBuf.UpdateDigest(prfHash);
@@ -96,12 +96,12 @@ namespace Org.BouncyCastle.Crypto.Tls
                 return prfHash;
             }
 
-            return TlsUtilities.CloneHash(prfHashAlgorithm, (IDigest)mHashes[prfHashAlgorithm]);
+            return TlsUtilities.CloneHash(prfHashAlgorithm, mHashes[prfHashAlgorithm]);
         }
 
         public virtual byte[] GetFinalHash(byte hashAlgorithm)
         {
-            IDigest d = (IDigest)mHashes[hashAlgorithm];
+            IDigest d = mHashes[hashAlgorithm];
             if (d == null)
                 throw new InvalidOperationException("HashAlgorithm." + HashAlgorithm.GetText(hashAlgorithm) + " is not being tracked");
 

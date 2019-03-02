@@ -281,7 +281,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 			uint word = 0;
 			for (int i = 0; i < 4; i++)
 			{
-				word = (word << 8) + (uint)src[i + offset];
+				word = (word << 8) + src[i + offset];
 			}
 			return word;
 		}

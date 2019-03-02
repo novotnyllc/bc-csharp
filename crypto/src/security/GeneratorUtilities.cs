@@ -269,14 +269,14 @@ namespace Org.BouncyCastle.Security
         internal static string GetCanonicalKeyGeneratorAlgorithm(
             string algorithm)
         {
-            return (string) kgAlgorithms[Platform.ToUpperInvariant(algorithm)];
+            return kgAlgorithms[Platform.ToUpperInvariant(algorithm)];
         }
 
         // TODO Consider making this public
         internal static string GetCanonicalKeyPairGeneratorAlgorithm(
             string algorithm)
         {
-            return (string)kpgAlgorithms[Platform.ToUpperInvariant(algorithm)];
+            return kpgAlgorithms[Platform.ToUpperInvariant(algorithm)];
         }
 
         public static CipherKeyGenerator GetKeyGenerator(
@@ -384,7 +384,7 @@ namespace Org.BouncyCastle.Security
             if (!defaultKeySizes.ContainsKey(canonicalName))
                 return -1;
 
-            return (int)defaultKeySizes[canonicalName];
+            return defaultKeySizes[canonicalName];
         }
     }
 }

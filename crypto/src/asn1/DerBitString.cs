@@ -180,7 +180,7 @@ namespace Org.BouncyCastle.Asn1
                 int value = 0, length = System.Math.Min(4, mData.Length);
                 for (int i = 0; i < length; ++i)
                 {
-                    value |= (int)mData[i] << (8 * i);
+                    value |= mData[i] << (8 * i);
                 }
                 if (mPadBits > 0 && length == mData.Length)
                 {

@@ -91,13 +91,13 @@ namespace Org.BouncyCastle.Crypto.Digests
 			{
 				int i = 8 * (r - 1);
 				_rc[r] = (long)((ulong)C0[i] & 0xff00000000000000L) ^
-					(C1[i + 1] & (long) 0x00ff000000000000L) ^
-					(C2[i + 2] & (long) 0x0000ff0000000000L) ^
-					(C3[i + 3] & (long) 0x000000ff00000000L) ^
-					(C4[i + 4] & (long) 0x00000000ff000000L) ^
-					(C5[i + 5] & (long) 0x0000000000ff0000L) ^
-					(C6[i + 6] & (long) 0x000000000000ff00L) ^
-					(C7[i + 7] & (long) 0x00000000000000ffL);
+					(C1[i + 1] & 0x00ff000000000000L) ^
+					(C2[i + 2] & 0x0000ff0000000000L) ^
+					(C3[i + 3] & 0x000000ff00000000L) ^
+					(C4[i + 4] & 0x00000000ff000000L) ^
+					(C5[i + 5] & 0x0000000000ff0000L) ^
+					(C6[i + 6] & 0x000000000000ff00L) ^
+					(C7[i + 7] & 0x00000000000000ffL);
 			}
 		}
 
@@ -353,13 +353,13 @@ namespace Org.BouncyCastle.Crypto.Digests
 			{
 				while (_bufferPos != 0)
 				{
-					Update((byte)0);
+					Update(0);
 				}
 			}
 
 			while (_bufferPos <= 32)
 			{
-				Update((byte)0);
+				Update(0);
 			}
 
 			// copy the length information to the final 32 bytes of the

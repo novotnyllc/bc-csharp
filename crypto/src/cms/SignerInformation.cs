@@ -528,7 +528,7 @@ namespace Org.BouncyCastle.Cms
 		private DigestInfo DerDecode(
 			byte[] encoding)
 		{
-			if (encoding[0] != (int)(Asn1Tags.Constructed | Asn1Tags.Sequence))
+			if (encoding[0] != (Asn1Tags.Constructed | Asn1Tags.Sequence))
 			{
 				throw new IOException("not a digest info object");
 			}

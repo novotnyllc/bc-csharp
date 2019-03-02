@@ -119,10 +119,10 @@ namespace Org.BouncyCastle.Crypto.Digests
         {
             base.Reset();
 
-            H1 = unchecked((int) 0x67452301);
+            H1 = unchecked(0x67452301);
             H2 = unchecked((int) 0xefcdab89);
             H3 = unchecked((int) 0x98badcfe);
-            H4 = unchecked((int) 0x10325476);
+            H4 = unchecked(0x10325476);
 
             xOff = 0;
 

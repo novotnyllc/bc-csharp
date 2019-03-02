@@ -342,11 +342,11 @@ namespace Org.BouncyCastle.Apache.Bzip2
         }
 
         private int BsGetIntVS(int numBits) {
-            return (int) BsR(numBits);
+            return BsR(numBits);
         }
 
         private int BsGetInt32() {
-            return (int) BsGetint();
+            return BsGetint();
         }
 
         private void HbCreateDecodeTables(int[] limit, int[] basev,
@@ -705,7 +705,7 @@ namespace Org.BouncyCastle.Apache.Bzip2
             }
 
             for (i = 0; i <= last; i++) {
-                ch = (char) ll8[i];
+                ch = ll8[i];
                 tt[cftab[ch]] = i;
                 cftab[ch]++;
             }
@@ -739,7 +739,7 @@ namespace Org.BouncyCastle.Apache.Bzip2
                     }
                 }
                 rNToGo--;
-                ch2 ^= (int) ((rNToGo == 1) ? 1 : 0);
+                ch2 ^= (rNToGo == 1) ? 1 : 0;
                 i2++;
 
                 currentChar = ch2;
@@ -799,7 +799,7 @@ namespace Org.BouncyCastle.Apache.Bzip2
         }
 
         private void SetupRandPartC() {
-            if (j2 < (int) z) {
+            if (j2 < z) {
                 currentChar = ch2;
                 mCrc.UpdateCRC(ch2);
                 j2++;
@@ -832,7 +832,7 @@ namespace Org.BouncyCastle.Apache.Bzip2
         }
 
         private void SetupNoRandPartC() {
-            if (j2 < (int) z) {
+            if (j2 < z) {
                 currentChar = ch2;
                 mCrc.UpdateCRC(ch2);
                 j2++;

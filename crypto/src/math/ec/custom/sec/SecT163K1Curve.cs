@@ -145,7 +145,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
 
                 for (int i = 0; i < m_size; ++i)
                 {
-                    ulong MASK = (ulong)(long)(((i ^ index) - 1) >> 31);
+                    ulong MASK = (ulong)(((i ^ index) - 1) >> 31);
 
                     for (int j = 0; j < SECT163K1_FE_LONGS; ++j)
                     {

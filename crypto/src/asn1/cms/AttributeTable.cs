@@ -90,7 +90,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
 				if (obj is IList<Attribute>)
 				{
-					return (Attribute)((IList<Attribute>)obj)[0];
+					return ((IList<Attribute>)obj)[0];
 				}
 
 				return (Attribute) obj;

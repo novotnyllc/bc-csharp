@@ -113,28 +113,28 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             long t7 = t5 - t0;
 
             long cc = 0;
-            cc += (long)xx[0] - t3 - t7;
+            cc += xx[0] - t3 - t7;
             z[0] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[1] + t1 - t4 - t6;
+            cc += xx[1] + t1 - t4 - t6;
             z[1] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[2] + t2 - t5;
+            cc += xx[2] + t2 - t5;
             z[2] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[3] + (t3 << 1) + t7 - t6;
+            cc += xx[3] + (t3 << 1) + t7 - t6;
             z[3] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[4] + (t4 << 1) + xx14 - t1;
+            cc += xx[4] + (t4 << 1) + xx14 - t1;
             z[4] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[5] + (t5 << 1) - t2;
+            cc += xx[5] + (t5 << 1) - t2;
             z[5] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[6] + (t6 << 1) + t7;
+            cc += xx[6] + (t6 << 1) + t7;
             z[6] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[7] + (xx15 << 1) + xx08 - t2 - t4;
+            cc += xx[7] + (xx15 << 1) + xx08 - t2 - t4;
             z[7] = (uint)cc;
             cc >>= 32;
             cc += n;
@@ -152,34 +152,34 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             {
                 long xx08 = x;
 
-                cc += (long)z[0] + xx08;
+                cc += z[0] + xx08;
                 z[0] = (uint)cc;
                 cc >>= 32;
                 if (cc != 0)
                 {
-                    cc += (long)z[1];
+                    cc += z[1];
                     z[1] = (uint)cc;
                     cc >>= 32;
-                    cc += (long)z[2];
+                    cc += z[2];
                     z[2] = (uint)cc;
                     cc >>= 32;
                 }
-                cc += (long)z[3] - xx08;
+                cc += z[3] - xx08;
                 z[3] = (uint)cc;
                 cc >>= 32;
                 if (cc != 0)
                 {
-                    cc += (long)z[4];
+                    cc += z[4];
                     z[4] = (uint)cc;
                     cc >>= 32;
-                    cc += (long)z[5];
+                    cc += z[5];
                     z[5] = (uint)cc;
                     cc >>= 32;
                 }
-                cc += (long)z[6] - xx08;
+                cc += z[6] - xx08;
                 z[6] = (uint)cc;
                 cc >>= 32;
-                cc += (long)z[7] + xx08;
+                cc += z[7] + xx08;
                 z[7] = (uint)cc;
                 cc >>= 32;
 
@@ -248,10 +248,10 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[1];
+                c += z[1];
                 z[1] = (uint)c;
                 c >>= 32;
-                c += (long)z[2];
+                c += z[2];
                 z[2] = (uint)c;
                 c >>= 32;
             }
@@ -260,10 +260,10 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[4];
+                c += z[4];
                 z[4] = (uint)c;
                 c >>= 32;
-                c += (long)z[5];
+                c += z[5];
                 z[5] = (uint)c;
                 c >>= 32;
             }
@@ -282,10 +282,10 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[1];
+                c += z[1];
                 z[1] = (uint)c;
                 c >>= 32;
-                c += (long)z[2];
+                c += z[2];
                 z[2] = (uint)c;
                 c >>= 32;
             }
@@ -294,10 +294,10 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[4];
+                c += z[4];
                 z[4] = (uint)c;
                 c >>= 32;
-                c += (long)z[5];
+                c += z[5];
                 z[5] = (uint)c;
                 c >>= 32;
             }

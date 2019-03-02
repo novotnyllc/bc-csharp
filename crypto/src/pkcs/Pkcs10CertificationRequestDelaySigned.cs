@@ -105,7 +105,7 @@ namespace Org.BouncyCastle.Pkcs
 				throw new ArgumentException("expected public key", "publicKey");
 //			DerObjectIdentifier sigOid = SignerUtilities.GetObjectIdentifier(signatureAlgorithm);
 			string algorithmName = Platform.ToUpperInvariant(signatureAlgorithm);
-			DerObjectIdentifier sigOid = (DerObjectIdentifier) algorithms[algorithmName];
+			DerObjectIdentifier sigOid = algorithms[algorithmName];
 			if (sigOid == null)
 			{
 				try
@@ -123,7 +123,7 @@ namespace Org.BouncyCastle.Pkcs
 			}
 			else if (exParams.ContainsKey(algorithmName))
 			{
-				this.sigAlgId = new AlgorithmIdentifier(sigOid, (Asn1Encodable) exParams[algorithmName]);
+				this.sigAlgId = new AlgorithmIdentifier(sigOid, exParams[algorithmName]);
 			}
 			else
 			{

@@ -39,7 +39,7 @@ namespace Org.BouncyCastle.Asn1.X9
                 {
                     partyAInfo = (Asn1OctetString) o.GetObject();
                 }
-                else if ((int) o.TagNo == 2)
+                else if (o.TagNo == 2)
                 {
                     suppPubInfo = (Asn1OctetString) o.GetObject();
                 }

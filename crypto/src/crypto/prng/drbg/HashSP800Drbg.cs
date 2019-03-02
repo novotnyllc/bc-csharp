@@ -59,7 +59,7 @@ namespace Org.BouncyCastle.Crypto.Prng.Drbg
             mDigest = digest;
 	        mEntropySource = entropySource;
 	        mSecurityStrength = securityStrength;
-            mSeedLength = (int)seedlens[digest.AlgorithmName];
+            mSeedLength = seedlens[digest.AlgorithmName];
 
             // 1. seed_material = entropy_input || nonce || personalization_string.
 	        // 2. seed = Hash_df (seed_material, seedlen).
@@ -189,7 +189,7 @@ namespace Org.BouncyCastle.Crypto.Prng.Drbg
             int i = shorter.Length;
             while (--i >= 0)
             {
-                carry += (uint)longer[off + i] + (uint)shorter[i];
+                carry += longer[off + i] + (uint)shorter[i];
                 longer[off + i] = (byte)carry;
                 carry >>= 8;
             }

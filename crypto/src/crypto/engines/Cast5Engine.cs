@@ -419,7 +419,7 @@ namespace Org.BouncyCastle.Crypto.Engines
             /* copy the key into x */
             for (int i=0; i< key.Length; i++)
             {
-                x[i] = (int)(key[i] & 0xff);
+                x[i] = key[i] & 0xff;
             }
 
             /*

@@ -562,7 +562,7 @@ namespace Org.BouncyCastle.Asn1.X509
                 return new DerObjectIdentifier(name);
             }
 
-            DerObjectIdentifier oid = (DerObjectIdentifier)lookUp[Platform.ToLowerInvariant(name)];
+            DerObjectIdentifier oid = lookUp[Platform.ToLowerInvariant(name)];
             if (oid == null)
             {
                 throw new ArgumentException("Unknown object id - " + name + " - passed to distinguished name");
@@ -648,7 +648,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
                 for (int i = 0; i < this.ordering.Count; i++)
                 {
-                    if (!((bool) this.added[i]))
+                    if (!this.added[i])
                     {
                         count = 0;
                     }
@@ -694,7 +694,7 @@ namespace Org.BouncyCastle.Asn1.X509
             {
                 if (null == oid || oid.Equals(ordering[i]))
                 {
-                    string val = (string)values[i];
+                    string val = values[i];
 
                     if (Platform.StartsWith(val, "\\#"))
                     {
@@ -717,11 +717,11 @@ namespace Org.BouncyCastle.Asn1.X509
 
                 for (int i = 0; i != ordering.Count; i++)
                 {
-                    DerObjectIdentifier oid = (DerObjectIdentifier)ordering[i];
-                    string str = (string)values[i];
+                    DerObjectIdentifier oid = ordering[i];
+                    string str = values[i];
 
                     if (lstOid == null
-                        || ((bool)this.added[i]))
+                        || this.added[i])
                     {
                     }
                     else
@@ -769,14 +769,14 @@ namespace Org.BouncyCastle.Asn1.X509
 
             for (int i = 0; i < orderingSize; i++)
             {
-                DerObjectIdentifier oid = (DerObjectIdentifier) ordering[i];
-                DerObjectIdentifier oOid = (DerObjectIdentifier) other.ordering[i];
+                DerObjectIdentifier oid = ordering[i];
+                DerObjectIdentifier oOid = other.ordering[i];
 
                 if (!oid.Equals(oOid))
                     return false;
 
-                string val = (string) values[i];
-                string oVal = (string) other.values[i];
+                string val = values[i];
+                string oVal = other.values[i];
 
                 if (!equivalentStrings(val, oVal))
                     return false;
@@ -823,8 +823,8 @@ namespace Org.BouncyCastle.Asn1.X509
             for (int i = start; i != end; i += delta)
             {
                 bool found = false;
-                DerObjectIdentifier  oid = (DerObjectIdentifier)ordering[i];
-                string value = (string)values[i];
+                DerObjectIdentifier  oid = ordering[i];
+                string value = values[i];
 
                 for (int j = 0; j < orderingSize; j++)
                 {
@@ -833,11 +833,11 @@ namespace Org.BouncyCastle.Asn1.X509
                         continue;
                     }
 
-                    DerObjectIdentifier oOid = (DerObjectIdentifier)other.ordering[j];
+                    DerObjectIdentifier oOid = other.ordering[j];
 
                     if (oid.Equals(oOid))
                     {
-                        string oValue = (string)other.values[j];
+                        string oValue = other.values[j];
 
                         if (equivalentStrings(value, oValue))
                         {
@@ -1005,19 +1005,19 @@ namespace Org.BouncyCastle.Asn1.X509
 
             for (int i = 0; i < ordering.Count; i++)
             {
-                if ((bool) added[i])
+                if (added[i])
                 {
                     ava.Append('+');
                     AppendValue(ava, oidSymbols,
-                        (DerObjectIdentifier)ordering[i],
-                        (string)values[i]);
+                        ordering[i],
+                        values[i]);
                 }
                 else
                 {
                     ava = new StringBuilder();
                     AppendValue(ava, oidSymbols,
-                        (DerObjectIdentifier)ordering[i],
-                        (string)values[i]);
+                        ordering[i],
+                        values[i]);
                     components.Add(ava);
                 }
             }

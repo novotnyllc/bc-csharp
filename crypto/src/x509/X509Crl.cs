@@ -49,7 +49,7 @@ namespace Org.BouncyCastle.X509
 
 				if (c.SignatureAlgorithm.Parameters != null)
 				{
-					this.sigAlgParams = ((Asn1Encodable)c.SignatureAlgorithm.Parameters).GetDerEncoded();
+					this.sigAlgParams = c.SignatureAlgorithm.Parameters.GetDerEncoded();
 				}
 				else
 				{
@@ -294,7 +294,7 @@ namespace Org.BouncyCastle.X509
 
 				do
 				{
-					DerObjectIdentifier oid = (DerObjectIdentifier) e.Current;
+					DerObjectIdentifier oid = e.Current;
 					X509Extension ext = extensions.GetExtension(oid);
 
 					if (ext.Value != null)

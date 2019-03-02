@@ -165,7 +165,7 @@ namespace Org.BouncyCastle.Tsp
 		internal static string GetDigestAlgName(
 			string digestAlgOID)
 		{
-			string digestName = (string) digestNames[digestAlgOID];
+			string digestName = digestNames[digestAlgOID];
 
 			return digestName != null ? digestName : digestAlgOID;
 		}
@@ -176,7 +176,7 @@ namespace Org.BouncyCastle.Tsp
 			if (!digestLengths.ContainsKey(digestAlgOID))
 				throw new TspException("digest algorithm cannot be found.");
 
-			return (int)digestLengths[digestAlgOID];
+			return digestLengths[digestAlgOID];
 		}
 
 		internal static IDigest CreateDigestInstance(

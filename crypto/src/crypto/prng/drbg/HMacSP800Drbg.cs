@@ -49,7 +49,7 @@ namespace Org.BouncyCastle.Crypto.Prng.Drbg
 
             mK = new byte[hMac.GetMacSize()];
 	        mV = new byte[mK.Length];
-	        Arrays.Fill(mV, (byte)1);
+	        Arrays.Fill(mV, 1);
 
             hmac_DRBG_Update(seedMaterial);
 
@@ -58,10 +58,10 @@ namespace Org.BouncyCastle.Crypto.Prng.Drbg
 
         private void hmac_DRBG_Update(byte[] seedMaterial)
 	    {
-	        hmac_DRBG_Update_Func(seedMaterial, (byte)0x00);
+	        hmac_DRBG_Update_Func(seedMaterial, 0x00);
 	        if (seedMaterial != null)
 	        {
-	            hmac_DRBG_Update_Func(seedMaterial, (byte)0x01);
+	            hmac_DRBG_Update_Func(seedMaterial, 0x01);
 	        }
 	    }
 

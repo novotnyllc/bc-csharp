@@ -187,7 +187,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 			var e = seq.GetEnumerator();
 
 			e.MoveNext();
-			Asn1Encodable o = (Asn1Encodable) e.Current;
+			Asn1Encodable o = e.Current;
 
 			if (o is Asn1TaggedObject)
 			{
@@ -197,14 +197,14 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 
 				namingAuthority = NamingAuthority.GetInstance(ato, true);
 				e.MoveNext();
-				o = (Asn1Encodable) e.Current;
+				o = e.Current;
 			}
 
 			professionItems = Asn1Sequence.GetInstance(o);
 
 			if (e.MoveNext())
 			{
-				o = (Asn1Encodable) e.Current;
+				o = e.Current;
 				if (o is Asn1Sequence)
 				{
 					professionOids = Asn1Sequence.GetInstance(o);
@@ -225,7 +225,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 
 			if (e.MoveNext())
 			{
-				o = (Asn1Encodable) e.Current;
+				o = e.Current;
 				if (o is DerPrintableString)
 				{
 					registrationNumber = DerPrintableString.GetInstance(o).GetString();
@@ -242,7 +242,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 
 			if (e.MoveNext())
 			{
-				o = (Asn1Encodable) e.Current;
+				o = e.Current;
 				if (o is DerOctetString)
 				{
 					addProfessionInfo = (DerOctetString) o;

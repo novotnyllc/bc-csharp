@@ -148,7 +148,7 @@ namespace Org.BouncyCastle.Bcpg
          */
         public void ResetHeaders()
         {
-            string existingVersion = (string)headers[HeaderVersion];
+            string existingVersion = headers[HeaderVersion];
 
             headers.Clear();
 
@@ -267,15 +267,15 @@ namespace Org.BouncyCastle.Bcpg
                 DoWrite(headerStart + type + headerTail + nl);
                 if (headers.ContainsKey(HeaderVersion))
                 {
-                    WriteHeaderEntry(HeaderVersion, (string)headers[HeaderVersion]);
+                    WriteHeaderEntry(HeaderVersion, headers[HeaderVersion]);
                 }
 
                 foreach (var de in headers)
                 {
-                    string k = (string)de.Key;
+                    string k = de.Key;
                     if (k != HeaderVersion)
                     {
-                        string v = (string)de.Value;
+                        string v = de.Value;
                         WriteHeaderEntry(k, v);
                     }
                 }

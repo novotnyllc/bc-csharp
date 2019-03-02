@@ -202,7 +202,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			byte[] keyBytes = GetEncodedPublicKey(key);
 
 			this.Update(
-				(byte) 0x99,
+                 0x99,
 				(byte)(keyBytes.Length >> 8),
 				(byte)(keyBytes.Length));
 			this.Update(keyBytes);

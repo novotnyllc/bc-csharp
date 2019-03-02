@@ -410,7 +410,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                     }
                 }
 
-				pOut.WritePacket((ContainedPacket)methods[0]);
+				pOut.WritePacket(methods[0]);
             }
             else // multiple methods
             {
@@ -419,7 +419,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
 				for (int i = 0; i != methods.Count; i++)
                 {
-                    EncMethod m = (EncMethod)methods[i];
+                    EncMethod m = methods[i];
 
                     try
                     {

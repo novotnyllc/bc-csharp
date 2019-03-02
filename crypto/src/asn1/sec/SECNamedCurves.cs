@@ -1172,7 +1172,7 @@ namespace Org.BouncyCastle.Asn1.Sec
         public static string GetName(
             DerObjectIdentifier oid)
         {
-            return (string)names[oid];
+            return names[oid];
         }
 
         /**

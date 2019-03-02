@@ -36,7 +36,7 @@ namespace Org.BouncyCastle.Operators
         {
             if (KeySizes.ContainsKey(oid))
             {
-                return (int)KeySizes[oid];
+                return KeySizes[oid];
             }
 
             return -1;

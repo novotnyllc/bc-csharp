@@ -371,7 +371,7 @@ namespace Org.BouncyCastle.Utilities.Zlib {
                             r[0]=(byte)j;     // bits in this table
                             r[1]=(byte)l;     // bits to dump before this table
                             j=i>>(w - l);
-                            r[2] = (int)(q - u[h-1] - j);               // offset to this table
+                            r[2] = q - u[h - 1] - j;               // offset to this table
                             System.Array.Copy(r, 0, hp, (u[h-1]+j)*3, 3); // connect to last table
                         }
                         else{

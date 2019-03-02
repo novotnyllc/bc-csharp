@@ -7,7 +7,7 @@ namespace Org.BouncyCastle.Bcpg
         : ContainedPacket
     {
         // "PGP"
-        byte[] marker = { (byte)0x50, (byte)0x47, (byte)0x50 };
+        byte[] marker = { 0x50, 0x47, 0x50 };
 
         public MarkerPacket(
             BcpgInputStream bcpgIn)

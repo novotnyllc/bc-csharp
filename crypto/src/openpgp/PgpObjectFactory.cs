@@ -60,7 +60,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                     PgpSignature[] sigs = new PgpSignature[l.Count];
                     for (int i = 0; i < l.Count; ++i)
                     {
-                        sigs[i] = (PgpSignature)l[i];
+                        sigs[i] = l[i];
                     }
 					return new PgpSignatureList(sigs);
                 }
@@ -104,7 +104,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                     PgpOnePassSignature[] sigs = new PgpOnePassSignature[l.Count];
                     for (int i = 0; i < l.Count; ++i)
                     {
-                        sigs[i] = (PgpOnePassSignature)l[i];
+                        sigs[i] = l[i];
                     }
 					return new PgpOnePassSignatureList(sigs);
                 }

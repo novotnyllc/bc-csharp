@@ -150,7 +150,7 @@ namespace Org.BouncyCastle.Ocsp
             X509Certificate[] result = new X509Certificate[certs.Count];
             for (int i = 0; i < certs.Count; ++i)
             {
-                result[i] = (X509Certificate)certs[i];
+                result[i] = certs[i];
             }
             return result;
 		}

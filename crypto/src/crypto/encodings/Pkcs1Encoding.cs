@@ -176,7 +176,7 @@ namespace Org.BouncyCastle.Crypto.Encodings
 
                 for (int i = 1; i != block.Length - inLen - 1; i++)
                 {
-                    block[i] = (byte)0xFF;
+                    block[i] = 0xFF;
                 }
             }
             else
@@ -375,7 +375,7 @@ namespace Org.BouncyCastle.Crypto.Encodings
                 {
                     start = i;
                 }
-                padErr |= ((type == 1) & (start < 0) & (pad != (byte)0xff));
+                padErr |= ((type == 1) & (start < 0) & (pad != 0xff));
             }
 
             return padErr ? -1 : start;

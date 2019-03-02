@@ -44,7 +44,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 // NOTE: Empty messages still require an empty fragment to complete it
                 if (fragment_offset == 0 && mMissing.Count > 0)
                 {
-                    Range firstRange = (Range)mMissing[0];
+                    Range firstRange = mMissing[0];
                     if (firstRange.End == 0)
                     {
                         mMissing.RemoveAt(0);
@@ -55,7 +55,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             for (int i = 0; i < mMissing.Count; ++i)
             {
-                Range range = (Range)mMissing[i];
+                Range range = mMissing[i];
                 if (range.Start >= fragment_end)
                 {
                     break;

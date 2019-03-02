@@ -2068,7 +2068,7 @@ namespace Org.BouncyCastle.Math.EC
             }
 
             // u(z) := a(z)
-            LongArray uz = (LongArray)Copy();
+            LongArray uz = Copy();
 
             int t = (m + 63) >> 6;
 

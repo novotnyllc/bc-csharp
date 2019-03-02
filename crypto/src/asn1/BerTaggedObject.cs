@@ -52,7 +52,7 @@ namespace Org.BouncyCastle.Asn1
 		{
 			if (derOut is Asn1OutputStream || derOut is BerOutputStream)
 			{
-				derOut.WriteTag((byte)(Asn1Tags.Constructed | Asn1Tags.Tagged), tagNo);
+				derOut.WriteTag(Asn1Tags.Constructed | Asn1Tags.Tagged, tagNo);
 				derOut.WriteByte(0x80);
 
 				if (!IsEmpty())

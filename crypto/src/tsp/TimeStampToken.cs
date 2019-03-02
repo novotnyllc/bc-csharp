@@ -56,7 +56,7 @@ namespace Org.BouncyCastle.Tsp
 			var signerEnum = signers.GetEnumerator();
 
 			signerEnum.MoveNext();
-			tsaSignerInfo = (SignerInformation) signerEnum.Current;
+			tsaSignerInfo = signerEnum.Current;
 
 			try
 			{

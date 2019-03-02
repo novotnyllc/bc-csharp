@@ -39,12 +39,12 @@ namespace Org.BouncyCastle.Bcpg.Sig
 
         public DateTime GetTime()
         {
-			long time = (long)(
-					((uint)data[0] << 24)
-				|	((uint)data[1] << 16)
-				|	((uint)data[2] << 8)
-				|	((uint)data[3])
-				);
+			long time =
+                    ((uint)data[0] << 24)
+                | ((uint)data[1] << 16)
+                | ((uint)data[2] << 8)
+                | data[3]
+                ;
 			return DateTimeUtilities.UnixMsToDateTime(time * 1000L);
         }
     }

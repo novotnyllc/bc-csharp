@@ -354,7 +354,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 		public static byte[] GetSBox(
 			string sBoxName)
 		{
-			byte[] sBox = (byte[])sBoxes[Platform.ToUpperInvariant(sBoxName)];
+			byte[] sBox = sBoxes[Platform.ToUpperInvariant(sBoxName)];
 
             if (sBox == null)
 			{
@@ -369,7 +369,7 @@ namespace Org.BouncyCastle.Crypto.Engines
         {
             foreach (var name in sBoxes.Keys)
             {
-                byte[] sb = (byte[])sBoxes[name];
+                byte[] sb = sBoxes[name];
                 if (Arrays.AreEqual(sb, sBox))
                 {
                     return name;

@@ -146,7 +146,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             cipher.ProcessBytes(firstBlock, 0, firstBlock.Length, firstBlock, 0);
 
             KeyParameter macKey = new KeyParameter(firstBlock, 0, 32);
-            Arrays.Fill(firstBlock, (byte)0);
+            Arrays.Fill(firstBlock, 0);
             return macKey;
         }
 

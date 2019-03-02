@@ -389,8 +389,8 @@ namespace Org.BouncyCastle.Crypto.Modes
                 }
                 else // can't go any higher than 2^32
                 {
-                    cMac.Update((byte)0xff);
-                    cMac.Update((byte)0xfe);
+                    cMac.Update(0xff);
+                    cMac.Update(0xfe);
                     cMac.Update((byte)(textLength >> 24));
                     cMac.Update((byte)(textLength >> 16));
                     cMac.Update((byte)(textLength >> 8));
@@ -421,7 +421,7 @@ namespace Org.BouncyCastle.Crypto.Modes
                 {
                     for (int i = extra; i < 16; ++i)
                     {
-                        cMac.Update((byte)0x00);
+                        cMac.Update(0x00);
                     }
                 }
             }

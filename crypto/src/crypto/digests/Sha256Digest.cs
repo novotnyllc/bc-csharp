@@ -97,14 +97,14 @@ namespace Org.BouncyCastle.Crypto.Digests
         {
             Finish();
 
-            Pack.UInt32_To_BE((uint)H1, output, outOff);
-            Pack.UInt32_To_BE((uint)H2, output, outOff + 4);
-            Pack.UInt32_To_BE((uint)H3, output, outOff + 8);
-            Pack.UInt32_To_BE((uint)H4, output, outOff + 12);
-            Pack.UInt32_To_BE((uint)H5, output, outOff + 16);
-            Pack.UInt32_To_BE((uint)H6, output, outOff + 20);
-            Pack.UInt32_To_BE((uint)H7, output, outOff + 24);
-            Pack.UInt32_To_BE((uint)H8, output, outOff + 28);
+            Pack.UInt32_To_BE(H1, output, outOff);
+            Pack.UInt32_To_BE(H2, output, outOff + 4);
+            Pack.UInt32_To_BE(H3, output, outOff + 8);
+            Pack.UInt32_To_BE(H4, output, outOff + 12);
+            Pack.UInt32_To_BE(H5, output, outOff + 16);
+            Pack.UInt32_To_BE(H6, output, outOff + 20);
+            Pack.UInt32_To_BE(H7, output, outOff + 24);
+            Pack.UInt32_To_BE(H8, output, outOff + 28);
 
             Reset();
 

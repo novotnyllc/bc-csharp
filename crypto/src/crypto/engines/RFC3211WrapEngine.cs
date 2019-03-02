@@ -146,7 +146,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 				engine.ProcessBlock(cekBlock, i, cekBlock, i);
 			}
 
-            bool invalidLength = (int)cekBlock[0] > (cekBlock.Length - 4);
+            bool invalidLength = cekBlock[0] > (cekBlock.Length - 4);
 
             byte[] key;
             if (invalidLength)

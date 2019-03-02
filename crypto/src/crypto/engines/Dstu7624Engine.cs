@@ -365,13 +365,13 @@ namespace Org.BouncyCastle.Crypto.Engines
                     byte t1 = T1[(lo0 >> 8) & 0xFF];
                     byte t2 = T2[(lo0 >> 16) & 0xFF];
                     byte t3 = T3[lo0 >> 24];
-                    lo0 = (uint)t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
+                    lo0 = t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
                     byte t4 = T0[hi1 & 0xFF];
                     byte t5 = T1[(hi1 >> 8) & 0xFF];
                     byte t6 = T2[(hi1 >> 16) & 0xFF];
                     byte t7 = T3[hi1 >> 24];
-                    hi1 = (uint)t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
-                    c0 = (ulong)lo0 | ((ulong)hi1 << 32);
+                    hi1 = t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
+                    c0 = lo0 | ((ulong)hi1 << 32);
                 }
 
                 {
@@ -379,13 +379,13 @@ namespace Org.BouncyCastle.Crypto.Engines
                     byte t1 = T1[(lo1 >> 8) & 0xFF];
                     byte t2 = T2[(lo1 >> 16) & 0xFF];
                     byte t3 = T3[lo1 >> 24];
-                    lo1 = (uint)t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
+                    lo1 = t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
                     byte t4 = T0[hi0 & 0xFF];
                     byte t5 = T1[(hi0 >> 8) & 0xFF];
                     byte t6 = T2[(hi0 >> 16) & 0xFF];
                     byte t7 = T3[hi0 >> 24];
-                    hi0 = (uint)t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
-                    c1 = (ulong)lo1 | ((ulong)hi0 << 32);
+                    hi0 = t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
+                    c1 = lo1 | ((ulong)hi0 << 32);
                 }
 
                 if (--round == 0)
@@ -425,13 +425,13 @@ namespace Org.BouncyCastle.Crypto.Engines
                     byte t1 = S1[(lo0 >> 8) & 0xFF];
                     byte t2 = S2[(lo0 >> 16) & 0xFF];
                     byte t3 = S3[lo0 >> 24];
-                    lo0 = (uint)t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
+                    lo0 = t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
                     byte t4 = S0[hi1 & 0xFF];
                     byte t5 = S1[(hi1 >> 8) & 0xFF];
                     byte t6 = S2[(hi1 >> 16) & 0xFF];
                     byte t7 = S3[hi1 >> 24];
-                    hi1 = (uint)t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
-                    c0 = (ulong)lo0 | ((ulong)hi1 << 32);
+                    hi1 = t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
+                    c0 = lo0 | ((ulong)hi1 << 32);
                 }
 
                 {
@@ -439,13 +439,13 @@ namespace Org.BouncyCastle.Crypto.Engines
                     byte t1 = S1[(lo1 >> 8) & 0xFF];
                     byte t2 = S2[(lo1 >> 16) & 0xFF];
                     byte t3 = S3[lo1 >> 24];
-                    lo1 = (uint)t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
+                    lo1 = t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
                     byte t4 = S0[hi0 & 0xFF];
                     byte t5 = S1[(hi0 >> 8) & 0xFF];
                     byte t6 = S2[(hi0 >> 16) & 0xFF];
                     byte t7 = S3[hi0 >> 24];
-                    hi0 = (uint)t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
-                    c1 = (ulong)lo1 | ((ulong)hi0 << 32);
+                    hi0 = t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
+                    c1 = lo1 | ((ulong)hi0 << 32);
                 }
 
                 c0 = MixColumn(c0);
@@ -479,13 +479,13 @@ namespace Org.BouncyCastle.Crypto.Engines
                 byte t1 = S1[(lo >> 8) & 0xFF];
                 byte t2 = S2[(lo >> 16) & 0xFF];
                 byte t3 = S3[lo >> 24];
-                lo = (uint)t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
+                lo = t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
                 byte t4 = S0[hi & 0xFF];
                 byte t5 = S1[(hi >> 8) & 0xFF];
                 byte t6 = S2[(hi >> 16) & 0xFF];
                 byte t7 = S3[hi >> 24];
-                hi = (uint)t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
-                internalState[i] = (ulong)lo | ((ulong)hi << 32);
+                hi = t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
+                internalState[i] = lo | ((ulong)hi << 32);
             }
         }
 
@@ -499,13 +499,13 @@ namespace Org.BouncyCastle.Crypto.Engines
                 byte t1 = T1[(lo >> 8) & 0xFF];
                 byte t2 = T2[(lo >> 16) & 0xFF];
                 byte t3 = T3[lo >> 24];
-                lo = (uint)t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
+                lo = t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
                 byte t4 = T0[hi & 0xFF];
                 byte t5 = T1[(hi >> 8) & 0xFF];
                 byte t6 = T2[(hi >> 16) & 0xFF];
                 byte t7 = T3[hi >> 24];
-                hi = (uint)t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
-                internalState[i] = (ulong)lo | ((ulong)hi << 32);
+                hi = t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
+                internalState[i] = lo | ((ulong)hi << 32);
             }
         }
 

@@ -311,7 +311,7 @@ namespace Org.BouncyCastle.Crypto.Signers
                 t = 8;
                 delta = block.Length - digSize - 1;
                 digest.DoFinal(block, delta);
-                block[block.Length - 1] = (byte)IsoTrailers.TRAILER_IMPLICIT;
+                block[block.Length - 1] = IsoTrailers.TRAILER_IMPLICIT;
             }
             else
             {
@@ -328,7 +328,7 @@ namespace Org.BouncyCastle.Crypto.Signers
             if (x > 0)
             {
                 int mR = messageLength - ((x + 7) / 8);
-                header = (byte) (0x60);
+                header = 0x60;
 
                 delta -= mR;
 
@@ -336,7 +336,7 @@ namespace Org.BouncyCastle.Crypto.Signers
             }
             else
             {
-                header = (byte) (0x40);
+                header = 0x40;
                 delta -= messageLength;
 
                 Array.Copy(mBuf, 0, block, delta, messageLength);
@@ -346,15 +346,15 @@ namespace Org.BouncyCastle.Crypto.Signers
             {
                 for (int i = delta - 1; i != 0; i--)
                 {
-                    block[i] = (byte) 0xbb;
+                    block[i] = 0xbb;
                 }
-                block[delta - 1] ^= (byte) 0x01;
-                block[0] = (byte) 0x0b;
+                block[delta - 1] ^= 0x01;
+                block[0] = 0x0b;
                 block[0] |= header;
             }
             else
             {
-                block[0] = (byte) 0x0a;
+                block[0] = 0x0a;
                 block[0] |= header;
             }
 

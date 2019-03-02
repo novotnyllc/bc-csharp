@@ -30,7 +30,7 @@ namespace Org.BouncyCastle.Bcpg
 
             for (int i = 0; i != subpackets.Length; i++)
             {
-                subpackets[i] = (UserAttributeSubpacket)v[i];
+                subpackets[i] = v[i];
             }
         }
 

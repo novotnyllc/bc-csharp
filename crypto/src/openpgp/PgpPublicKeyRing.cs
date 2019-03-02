@@ -70,7 +70,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         /// <summary>Return the first public key in the ring.</summary>
         public virtual PgpPublicKey GetPublicKey()
         {
-            return (PgpPublicKey) keys[0];
+            return keys[0];
         }
 
         /// <summary>Return the public key referred to by the passed in key ID if it is present.</summary>
@@ -133,7 +133,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
             for (int i = 0; i != keys.Count; i++)
             {
-                PgpPublicKey key = (PgpPublicKey) keys[i];
+                PgpPublicKey key = keys[i];
 
                 if (key.KeyId == pubKey.KeyId)
                 {
@@ -177,7 +177,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
             for (int i = 0; i < keys.Count; i++)
             {
-                PgpPublicKey key = (PgpPublicKey) keys[i];
+                PgpPublicKey key = keys[i];
 
                 if (key.KeyId == pubKey.KeyId)
                 {

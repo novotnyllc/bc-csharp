@@ -625,8 +625,8 @@ namespace Org.BouncyCastle.Crypto.Digests
 
             while (keys.MoveNext())
             {
-                int type = (int)keys.Current;
-                byte[] value = (byte[])parameters[type];
+                int type = keys.Current;
+                byte[] value = parameters[type];
 
                 if (type == PARAM_TYPE_KEY)
                 {

@@ -220,7 +220,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
             if (this.mExpectedVerifyData != null)
             {
-                Arrays.Fill(this.mExpectedVerifyData, (byte)0);
+                Arrays.Fill(this.mExpectedVerifyData, 0);
                 this.mExpectedVerifyData = null;
             }
 
@@ -1102,7 +1102,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                  */
                 if (pre_master_secret != null)
                 {
-                    Arrays.Fill(pre_master_secret, (byte)0);
+                    Arrays.Fill(pre_master_secret, 0);
                 }
             }
         }
@@ -1194,7 +1194,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
             foreach (var extension_type in extensions.Keys)
             {
-                byte[] extension_data = (byte[])extensions[extension_type];
+                byte[] extension_data = extensions[extension_type];
                 if (selectEmpty == (extension_data.Length == 0))
                 {
                     TlsUtilities.CheckUint16(extension_type);

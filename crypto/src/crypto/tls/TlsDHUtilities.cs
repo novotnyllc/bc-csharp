@@ -192,7 +192,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         public static short GetNegotiatedDheGroupsServerExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.negotiated_ff_dhe_groups);
-            return extensionData == null ? (short)-1 : (short)ReadNegotiatedDheGroupsServerExtension(extensionData);
+            return extensionData == null ? (short)-1 : ReadNegotiatedDheGroupsServerExtension(extensionData);
         }
 
         public static byte[] CreateNegotiatedDheGroupsClientExtension(byte[] dheGroups)

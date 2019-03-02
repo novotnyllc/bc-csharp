@@ -420,9 +420,9 @@ namespace Org.BouncyCastle.Crypto.Modes
         {
             while (n >= L.Count)
             {
-                L.Add(OCB_double((byte[]) L[L.Count - 1]));
+                L.Add(OCB_double(L[L.Count - 1]));
             }
-            return (byte[])L[n];
+            return L[n];
         }
 
         protected virtual void ProcessHashBlock()
@@ -517,7 +517,7 @@ namespace Org.BouncyCastle.Crypto.Modes
 
         protected static void OCB_extend(byte[] block, int pos)
         {
-            block[pos] = (byte) 0x80;
+            block[pos] = 0x80;
             while (++pos < 16)
             {
                 block[pos] = 0;

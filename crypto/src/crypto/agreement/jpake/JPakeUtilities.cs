@@ -269,7 +269,7 @@ namespace Org.BouncyCastle.Crypto.Agreement.JPake
 
             HMac mac = new HMac(digest);
             mac.Init(new KeyParameter(macKey));
-            Arrays.Fill(macKey, (byte)0);
+            Arrays.Fill(macKey, 0);
 
             /*
              * MacData = "KC_1_U" || participantId_Alice || participantId_Bob || gx1 || gx2 || gx3 || gx4.
@@ -346,7 +346,7 @@ namespace Org.BouncyCastle.Crypto.Agreement.JPake
         private static void UpdateDigest(IDigest digest, byte[] bytes)
         {
             digest.BlockUpdate(bytes, 0, bytes.Length);
-            Arrays.Fill(bytes, (byte)0);
+            Arrays.Fill(bytes, 0);
         }
 
         private static void UpdateDigestIncludingSize(IDigest digest, BigInteger bigInteger)
@@ -363,7 +363,7 @@ namespace Org.BouncyCastle.Crypto.Agreement.JPake
         {
             digest.BlockUpdate(IntToByteArray(bytes.Length), 0, 4);
             digest.BlockUpdate(bytes, 0, bytes.Length);
-            Arrays.Fill(bytes, (byte)0);
+            Arrays.Fill(bytes, 0);
         }
 
         private static void UpdateMac(IMac mac, BigInteger bigInteger)
@@ -379,7 +379,7 @@ namespace Org.BouncyCastle.Crypto.Agreement.JPake
         private static void UpdateMac(IMac mac, byte[] bytes)
         {
             mac.BlockUpdate(bytes, 0, bytes.Length);
-            Arrays.Fill(bytes, (byte)0);
+            Arrays.Fill(bytes, 0);
         }
 
         private static byte[] IntToByteArray(int value)

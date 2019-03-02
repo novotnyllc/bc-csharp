@@ -143,7 +143,7 @@ namespace Org.BouncyCastle.Asn1
          */
         public virtual Asn1Encodable this[int index]
         {
-            get { return (Asn1Encodable) _set[index]; }
+            get { return _set[index]; }
         }
 
         [Obsolete("Use 'object[index]' syntax instead")]
@@ -268,7 +268,7 @@ namespace Org.BouncyCastle.Asn1
 
         private Asn1Encodable GetCurrent(IEnumerator<Asn1Encodable> e)
         {
-            Asn1Encodable encObj = (Asn1Encodable)e.Current;
+            Asn1Encodable encObj = e.Current;
 
             // unfortunately null was allowed as a substitute for DER null
             if (encObj == null)
@@ -299,7 +299,7 @@ namespace Org.BouncyCastle.Asn1
 
             for (int i = 0; i < _set.Count; ++i)
             {
-                Asn1Encodable item = (Asn1Encodable)_set[i];
+                Asn1Encodable item = _set[i];
                 items[i] = item;
                 keys[i] = item.GetEncoded(Asn1Encodable.Der);
             }

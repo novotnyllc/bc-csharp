@@ -35,71 +35,71 @@ namespace Org.BouncyCastle.Crypto.Engines
 		*
 		*/
 		private static readonly byte[] SBOX1 = {
-			(byte)112, (byte)130, (byte)44, (byte)236,
-			(byte)179, (byte)39, (byte)192, (byte)229,
-			(byte)228, (byte)133, (byte)87, (byte)53,
-			(byte)234, (byte)12, (byte)174, (byte)65,
-			(byte)35, (byte)239, (byte)107, (byte)147,
-			(byte)69, (byte)25, (byte)165, (byte)33,
-			(byte)237, (byte)14, (byte)79, (byte)78,
-			(byte)29, (byte)101, (byte)146, (byte)189,
-			(byte)134, (byte)184, (byte)175, (byte)143,
-			(byte)124, (byte)235, (byte)31, (byte)206,
-			(byte)62, (byte)48, (byte)220, (byte)95,
-			(byte)94, (byte)197, (byte)11, (byte)26,
-			(byte)166, (byte)225, (byte)57, (byte)202,
-			(byte)213, (byte)71, (byte)93, (byte)61,
-			(byte)217, (byte)1, (byte)90, (byte)214,
-			(byte)81, (byte)86, (byte)108, (byte)77,
-			(byte)139, (byte)13, (byte)154, (byte)102,
-			(byte)251, (byte)204, (byte)176, (byte)45,
-			(byte)116, (byte)18, (byte)43, (byte)32,
-			(byte)240, (byte)177, (byte)132, (byte)153,
-			(byte)223, (byte)76, (byte)203, (byte)194,
-			(byte)52, (byte)126, (byte)118, (byte)5,
-			(byte)109, (byte)183, (byte)169, (byte)49,
-			(byte)209, (byte)23, (byte)4, (byte)215,
-			(byte)20, (byte)88, (byte)58, (byte)97,
-			(byte)222, (byte)27, (byte)17, (byte)28,
-			(byte)50, (byte)15, (byte)156, (byte)22,
-			(byte)83, (byte)24, (byte)242, (byte)34,
-			(byte)254, (byte)68, (byte)207, (byte)178,
-			(byte)195, (byte)181, (byte)122, (byte)145,
-			(byte)36, (byte)8, (byte)232, (byte)168,
-			(byte)96, (byte)252, (byte)105, (byte)80,
-			(byte)170, (byte)208, (byte)160, (byte)125,
-			(byte)161, (byte)137, (byte)98, (byte)151,
-			(byte)84, (byte)91, (byte)30, (byte)149,
-			(byte)224, (byte)255, (byte)100, (byte)210,
-			(byte)16, (byte)196, (byte)0, (byte)72,
-			(byte)163, (byte)247, (byte)117, (byte)219,
-			(byte)138, (byte)3, (byte)230, (byte)218,
-			(byte)9, (byte)63, (byte)221, (byte)148,
-			(byte)135, (byte)92, (byte)131, (byte)2,
-			(byte)205, (byte)74, (byte)144, (byte)51,
-			(byte)115, (byte)103, (byte)246, (byte)243,
-			(byte)157, (byte)127, (byte)191, (byte)226,
-			(byte)82, (byte)155, (byte)216, (byte)38,
-			(byte)200, (byte)55, (byte)198, (byte)59,
-			(byte)129, (byte)150, (byte)111, (byte)75,
-			(byte)19, (byte)190, (byte)99, (byte)46,
-			(byte)233, (byte)121, (byte)167, (byte)140,
-			(byte)159, (byte)110, (byte)188, (byte)142,
-			(byte)41, (byte)245, (byte)249, (byte)182,
-			(byte)47, (byte)253, (byte)180, (byte)89,
-			(byte)120, (byte)152, (byte)6, (byte)106,
-			(byte)231, (byte)70, (byte)113, (byte)186,
-			(byte)212, (byte)37, (byte)171, (byte)66,
-			(byte)136, (byte)162, (byte)141, (byte)250,
-			(byte)114, (byte)7, (byte)185, (byte)85,
-			(byte)248, (byte)238, (byte)172, (byte)10,
-			(byte)54, (byte)73, (byte)42, (byte)104,
-			(byte)60, (byte)56, (byte)241, (byte)164,
-			(byte)64, (byte)40, (byte)211, (byte)123,
-			(byte)187, (byte)201, (byte)67, (byte)193,
-			(byte)21, (byte)227, (byte)173, (byte)244,
-			(byte)119, (byte)199, (byte)128, (byte)158
-		};
+            112, 130, 44, 236,
+            179, 39, 192, 229,
+            228, 133, 87, 53,
+            234, 12, 174, 65,
+            35, 239, 107, 147,
+            69, 25, 165, 33,
+            237, 14, 79, 78,
+            29, 101, 146, 189,
+            134, 184, 175, 143,
+            124, 235, 31, 206,
+            62, 48, 220, 95,
+            94, 197, 11, 26,
+            166, 225, 57, 202,
+            213, 71, 93, 61,
+            217, 1, 90, 214,
+            81, 86, 108, 77,
+            139, 13, 154, 102,
+            251, 204, 176, 45,
+            116, 18, 43, 32,
+            240, 177, 132, 153,
+            223, 76, 203, 194,
+            52, 126, 118, 5,
+            109, 183, 169, 49,
+            209, 23, 4, 215,
+            20, 88, 58, 97,
+            222, 27, 17, 28,
+            50, 15, 156, 22,
+            83, 24, 242, 34,
+            254, 68, 207, 178,
+            195, 181, 122, 145,
+            36, 8, 232, 168,
+            96, 252, 105, 80,
+            170, 208, 160, 125,
+            161, 137, 98, 151,
+            84, 91, 30, 149,
+            224, 255, 100, 210,
+            16, 196, 0, 72,
+            163, 247, 117, 219,
+            138, 3, 230, 218,
+            9, 63, 221, 148,
+            135, 92, 131, 2,
+            205, 74, 144, 51,
+            115, 103, 246, 243,
+            157, 127, 191, 226,
+            82, 155, 216, 38,
+            200, 55, 198, 59,
+            129, 150, 111, 75,
+            19, 190, 99, 46,
+            233, 121, 167, 140,
+            159, 110, 188, 142,
+            41, 245, 249, 182,
+            47, 253, 180, 89,
+            120, 152, 6, 106,
+            231, 70, 113, 186,
+            212, 37, 171, 66,
+            136, 162, 141, 250,
+            114, 7, 185, 85,
+            248, 238, 172, 10,
+            54, 73, 42, 104,
+            60, 56, 241, 164,
+            64, 40, 211, 123,
+            187, 201, 67, 193,
+            21, 227, 173, 244,
+            119, 199, 128, 158
+        };
 
 		private static uint rightRotate(uint x, int s)
 		{
@@ -164,7 +164,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 			uint word = 0;
 			for (int i = 0; i < 4; i++)
 			{
-				word = (word << 8) + (uint)src[i + offset];
+				word = (word << 8) + src[i + offset];
 			}
 			return word;
 		}
@@ -185,17 +185,17 @@ namespace Org.BouncyCastle.Crypto.Engines
 
 		private uint sbox2(int x)
 		{
-			return (uint)lRot8(SBOX1[x], 1);
+			return lRot8(SBOX1[x], 1);
 		}
 
 		private uint sbox3(int x)
 		{
-			return (uint)lRot8(SBOX1[x], 7);
+			return lRot8(SBOX1[x], 7);
 		}
 
 		private uint sbox4(int x)
 		{
-			return (uint)SBOX1[lRot8((byte)x, 1)];
+			return SBOX1[lRot8((byte)x, 1)];
 		}
 
 		private void camelliaF2(uint[] s, uint[] skey, int keyoff)
@@ -209,7 +209,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 			u |= ((uint)(SBOX1[(byte)(t1 >> 24)]) << 24);
 
 			t2 = s[1] ^ skey[1 + keyoff];
-			v = (uint)SBOX1[(byte)t2];
+			v = SBOX1[(byte)t2];
 			v |= (sbox4((byte)(t2 >> 8)) << 8);
 			v |= (sbox3((byte)(t2 >> 16)) << 16);
 			v |= (sbox2((byte)(t2 >> 24)) << 24);
@@ -228,7 +228,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 			u |= ((uint)SBOX1[(byte)(t1 >> 24)]) << 24;
 
 			t2 = s[3] ^ skey[3 + keyoff];
-			v = (uint)SBOX1[(byte)t2];
+			v = SBOX1[(byte)t2];
 			v |= sbox4((byte)(t2 >> 8)) << 8;
 			v |= sbox3((byte)(t2 >> 16)) << 16;
 			v |= sbox2((byte)(t2 >> 24)) << 24;

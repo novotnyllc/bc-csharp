@@ -124,7 +124,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
             if (this.mMasterSecret != null)
             {
-                Arrays.Fill(this.mMasterSecret, (byte)0);
+                Arrays.Fill(this.mMasterSecret, 0);
             }
         }
 

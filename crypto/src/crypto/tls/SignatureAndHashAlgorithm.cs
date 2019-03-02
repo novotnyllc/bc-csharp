@@ -62,7 +62,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public override int GetHashCode()
         {
-            return ((int)Hash << 16) | (int)Signature;
+            return (Hash << 16) | Signature;
         }
 
         /**

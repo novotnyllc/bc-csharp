@@ -142,8 +142,8 @@ namespace Org.BouncyCastle.Pkix
 					PkixCertPathValidatorResult result = null;
 					try
 					{
-						result = (PkixCertPathValidatorResult)validator.Validate(
-							certPath, pkixParams);
+						result = validator.Validate(
+                            certPath, pkixParams);
 					}
 					catch (Exception e)
 					{

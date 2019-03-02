@@ -123,16 +123,16 @@ namespace Org.BouncyCastle.Crypto.Digests
         {
             base.Reset();
 
-            H0 = unchecked((int) 0x67452301);
+            H0 = unchecked(0x67452301);
             H1 = unchecked((int) 0xefcdab89);
             H2 = unchecked((int) 0x98badcfe);
-            H3 = unchecked((int) 0x10325476);
+            H3 = unchecked(0x10325476);
             H4 = unchecked((int) 0xc3d2e1f0);
-            H5 = unchecked((int) 0x76543210);
+            H5 = unchecked(0x76543210);
             H6 = unchecked((int) 0xFEDCBA98);
             H7 = unchecked((int) 0x89ABCDEF);
-            H8 = unchecked((int) 0x01234567);
-            H9 = unchecked((int) 0x3C2D1E0F);
+            H8 = unchecked(0x01234567);
+            H9 = unchecked(0x3C2D1E0F);
 
             xOff = 0;
 
@@ -238,62 +238,62 @@ namespace Org.BouncyCastle.Crypto.Digests
             a = RL(a + F1(b, c, d) + X[15], 8) + e; c = RL(c, 10);
 
             // right
-            aa = RL(aa + F5(bb, cc, dd) + X[5] + unchecked((int)0x50a28be6), 8) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F5(aa, bb, cc) + X[14] + unchecked((int)0x50a28be6), 9) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F5(ee, aa, bb) + X[7] + unchecked((int)0x50a28be6), 9) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F5(dd, ee, aa) + X[0] + unchecked((int)0x50a28be6), 11) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F5(cc, dd, ee) + X[9] + unchecked((int)0x50a28be6), 13) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F5(bb, cc, dd) + X[2] + unchecked((int)0x50a28be6), 15) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F5(aa, bb, cc) + X[11] + unchecked((int)0x50a28be6), 15) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F5(ee, aa, bb) + X[4] + unchecked((int)0x50a28be6), 5) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F5(dd, ee, aa) + X[13] + unchecked((int)0x50a28be6), 7) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F5(cc, dd, ee) + X[6] + unchecked((int)0x50a28be6), 7) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F5(bb, cc, dd) + X[15] + unchecked((int)0x50a28be6), 8) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F5(aa, bb, cc) + X[8] + unchecked((int)0x50a28be6), 11) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F5(ee, aa, bb) + X[1] + unchecked((int)0x50a28be6), 14) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F5(dd, ee, aa) + X[10] + unchecked((int)0x50a28be6), 14) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F5(cc, dd, ee) + X[3] + unchecked((int)0x50a28be6), 12) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F5(bb, cc, dd) + X[12] + unchecked((int)0x50a28be6), 6) + ee; cc = RL(cc, 10);
+            aa = RL(aa + F5(bb, cc, dd) + X[5] + unchecked(0x50a28be6), 8) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F5(aa, bb, cc) + X[14] + unchecked(0x50a28be6), 9) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F5(ee, aa, bb) + X[7] + unchecked(0x50a28be6), 9) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F5(dd, ee, aa) + X[0] + unchecked(0x50a28be6), 11) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F5(cc, dd, ee) + X[9] + unchecked(0x50a28be6), 13) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F5(bb, cc, dd) + X[2] + unchecked(0x50a28be6), 15) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F5(aa, bb, cc) + X[11] + unchecked(0x50a28be6), 15) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F5(ee, aa, bb) + X[4] + unchecked(0x50a28be6), 5) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F5(dd, ee, aa) + X[13] + unchecked(0x50a28be6), 7) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F5(cc, dd, ee) + X[6] + unchecked(0x50a28be6), 7) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F5(bb, cc, dd) + X[15] + unchecked(0x50a28be6), 8) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F5(aa, bb, cc) + X[8] + unchecked(0x50a28be6), 11) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F5(ee, aa, bb) + X[1] + unchecked(0x50a28be6), 14) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F5(dd, ee, aa) + X[10] + unchecked(0x50a28be6), 14) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F5(cc, dd, ee) + X[3] + unchecked(0x50a28be6), 12) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F5(bb, cc, dd) + X[12] + unchecked(0x50a28be6), 6) + ee; cc = RL(cc, 10);
 
             t = a; a = aa; aa = t;
             //
             // Rounds 16-31
             //
             // left
-            e = RL(e + F2(a, b, c) + X[7] + unchecked((int)0x5a827999), 7) + d; b = RL(b, 10);
-            d = RL(d + F2(e, a, b) + X[4] + unchecked((int)0x5a827999), 6) + c; a = RL(a, 10);
-            c = RL(c + F2(d, e, a) + X[13] + unchecked((int)0x5a827999), 8) + b; e = RL(e, 10);
-            b = RL(b + F2(c, d, e) + X[1] + unchecked((int)0x5a827999), 13) + a; d = RL(d, 10);
-            a = RL(a + F2(b, c, d) + X[10] + unchecked((int)0x5a827999), 11) + e; c = RL(c, 10);
-            e = RL(e + F2(a, b, c) + X[6] + unchecked((int)0x5a827999), 9) + d; b = RL(b, 10);
-            d = RL(d + F2(e, a, b) + X[15] + unchecked((int)0x5a827999), 7) + c; a = RL(a, 10);
-            c = RL(c + F2(d, e, a) + X[3] + unchecked((int)0x5a827999), 15) + b; e = RL(e, 10);
-            b = RL(b + F2(c, d, e) + X[12] + unchecked((int)0x5a827999), 7) + a; d = RL(d, 10);
-            a = RL(a + F2(b, c, d) + X[0] + unchecked((int)0x5a827999), 12) + e; c = RL(c, 10);
-            e = RL(e + F2(a, b, c) + X[9] + unchecked((int)0x5a827999), 15) + d; b = RL(b, 10);
-            d = RL(d + F2(e, a, b) + X[5] + unchecked((int)0x5a827999), 9) + c; a = RL(a, 10);
-            c = RL(c + F2(d, e, a) + X[2] + unchecked((int)0x5a827999), 11) + b; e = RL(e, 10);
-            b = RL(b + F2(c, d, e) + X[14] + unchecked((int)0x5a827999), 7) + a; d = RL(d, 10);
-            a = RL(a + F2(b, c, d) + X[11] + unchecked((int)0x5a827999), 13) + e; c = RL(c, 10);
-            e = RL(e + F2(a, b, c) + X[8] + unchecked((int)0x5a827999), 12) + d; b = RL(b, 10);
+            e = RL(e + F2(a, b, c) + X[7] + unchecked(0x5a827999), 7) + d; b = RL(b, 10);
+            d = RL(d + F2(e, a, b) + X[4] + unchecked(0x5a827999), 6) + c; a = RL(a, 10);
+            c = RL(c + F2(d, e, a) + X[13] + unchecked(0x5a827999), 8) + b; e = RL(e, 10);
+            b = RL(b + F2(c, d, e) + X[1] + unchecked(0x5a827999), 13) + a; d = RL(d, 10);
+            a = RL(a + F2(b, c, d) + X[10] + unchecked(0x5a827999), 11) + e; c = RL(c, 10);
+            e = RL(e + F2(a, b, c) + X[6] + unchecked(0x5a827999), 9) + d; b = RL(b, 10);
+            d = RL(d + F2(e, a, b) + X[15] + unchecked(0x5a827999), 7) + c; a = RL(a, 10);
+            c = RL(c + F2(d, e, a) + X[3] + unchecked(0x5a827999), 15) + b; e = RL(e, 10);
+            b = RL(b + F2(c, d, e) + X[12] + unchecked(0x5a827999), 7) + a; d = RL(d, 10);
+            a = RL(a + F2(b, c, d) + X[0] + unchecked(0x5a827999), 12) + e; c = RL(c, 10);
+            e = RL(e + F2(a, b, c) + X[9] + unchecked(0x5a827999), 15) + d; b = RL(b, 10);
+            d = RL(d + F2(e, a, b) + X[5] + unchecked(0x5a827999), 9) + c; a = RL(a, 10);
+            c = RL(c + F2(d, e, a) + X[2] + unchecked(0x5a827999), 11) + b; e = RL(e, 10);
+            b = RL(b + F2(c, d, e) + X[14] + unchecked(0x5a827999), 7) + a; d = RL(d, 10);
+            a = RL(a + F2(b, c, d) + X[11] + unchecked(0x5a827999), 13) + e; c = RL(c, 10);
+            e = RL(e + F2(a, b, c) + X[8] + unchecked(0x5a827999), 12) + d; b = RL(b, 10);
 
             // right
-            ee = RL(ee + F4(aa, bb, cc) + X[6] + unchecked((int)0x5c4dd124), 9) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F4(ee, aa, bb) + X[11] + unchecked((int)0x5c4dd124), 13) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F4(dd, ee, aa) + X[3] + unchecked((int)0x5c4dd124), 15) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F4(cc, dd, ee) + X[7] + unchecked((int)0x5c4dd124), 7) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F4(bb, cc, dd) + X[0] + unchecked((int)0x5c4dd124), 12) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F4(aa, bb, cc) + X[13] + unchecked((int)0x5c4dd124), 8) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F4(ee, aa, bb) + X[5] + unchecked((int)0x5c4dd124), 9) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F4(dd, ee, aa) + X[10] + unchecked((int)0x5c4dd124), 11) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F4(cc, dd, ee) + X[14] + unchecked((int)0x5c4dd124), 7) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F4(bb, cc, dd) + X[15] + unchecked((int)0x5c4dd124), 7) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F4(aa, bb, cc) + X[8] + unchecked((int)0x5c4dd124), 12) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F4(ee, aa, bb) + X[12] + unchecked((int)0x5c4dd124), 7) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F4(dd, ee, aa) + X[4] + unchecked((int)0x5c4dd124), 6) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F4(cc, dd, ee) + X[9] + unchecked((int)0x5c4dd124), 15) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F4(bb, cc, dd) + X[1] + unchecked((int)0x5c4dd124), 13) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F4(aa, bb, cc) + X[2] + unchecked((int)0x5c4dd124), 11) + dd; bb = RL(bb, 10);
+            ee = RL(ee + F4(aa, bb, cc) + X[6] + unchecked(0x5c4dd124), 9) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F4(ee, aa, bb) + X[11] + unchecked(0x5c4dd124), 13) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F4(dd, ee, aa) + X[3] + unchecked(0x5c4dd124), 15) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F4(cc, dd, ee) + X[7] + unchecked(0x5c4dd124), 7) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F4(bb, cc, dd) + X[0] + unchecked(0x5c4dd124), 12) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F4(aa, bb, cc) + X[13] + unchecked(0x5c4dd124), 8) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F4(ee, aa, bb) + X[5] + unchecked(0x5c4dd124), 9) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F4(dd, ee, aa) + X[10] + unchecked(0x5c4dd124), 11) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F4(cc, dd, ee) + X[14] + unchecked(0x5c4dd124), 7) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F4(bb, cc, dd) + X[15] + unchecked(0x5c4dd124), 7) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F4(aa, bb, cc) + X[8] + unchecked(0x5c4dd124), 12) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F4(ee, aa, bb) + X[12] + unchecked(0x5c4dd124), 7) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F4(dd, ee, aa) + X[4] + unchecked(0x5c4dd124), 6) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F4(cc, dd, ee) + X[9] + unchecked(0x5c4dd124), 15) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F4(bb, cc, dd) + X[1] + unchecked(0x5c4dd124), 13) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F4(aa, bb, cc) + X[2] + unchecked(0x5c4dd124), 11) + dd; bb = RL(bb, 10);
 
             t = b; b = bb; bb = t;
 
@@ -301,40 +301,40 @@ namespace Org.BouncyCastle.Crypto.Digests
             // Rounds 32-47
             //
             // left
-            d = RL(d + F3(e, a, b) + X[3] + unchecked((int)0x6ed9eba1), 11) + c; a = RL(a, 10);
-            c = RL(c + F3(d, e, a) + X[10] + unchecked((int)0x6ed9eba1), 13) + b; e = RL(e, 10);
-            b = RL(b + F3(c, d, e) + X[14] + unchecked((int)0x6ed9eba1), 6) + a; d = RL(d, 10);
-            a = RL(a + F3(b, c, d) + X[4] + unchecked((int)0x6ed9eba1), 7) + e; c = RL(c, 10);
-            e = RL(e + F3(a, b, c) + X[9] + unchecked((int)0x6ed9eba1), 14) + d; b = RL(b, 10);
-            d = RL(d + F3(e, a, b) + X[15] + unchecked((int)0x6ed9eba1), 9) + c; a = RL(a, 10);
-            c = RL(c + F3(d, e, a) + X[8] + unchecked((int)0x6ed9eba1), 13) + b; e = RL(e, 10);
-            b = RL(b + F3(c, d, e) + X[1] + unchecked((int)0x6ed9eba1), 15) + a; d = RL(d, 10);
-            a = RL(a + F3(b, c, d) + X[2] + unchecked((int)0x6ed9eba1), 14) + e; c = RL(c, 10);
-            e = RL(e + F3(a, b, c) + X[7] + unchecked((int)0x6ed9eba1), 8) + d; b = RL(b, 10);
-            d = RL(d + F3(e, a, b) + X[0] + unchecked((int)0x6ed9eba1), 13) + c; a = RL(a, 10);
-            c = RL(c + F3(d, e, a) + X[6] + unchecked((int)0x6ed9eba1), 6) + b; e = RL(e, 10);
-            b = RL(b + F3(c, d, e) + X[13] + unchecked((int)0x6ed9eba1), 5) + a; d = RL(d, 10);
-            a = RL(a + F3(b, c, d) + X[11] + unchecked((int)0x6ed9eba1), 12) + e; c = RL(c, 10);
-            e = RL(e + F3(a, b, c) + X[5] + unchecked((int)0x6ed9eba1), 7) + d; b = RL(b, 10);
-            d = RL(d + F3(e, a, b) + X[12] + unchecked((int)0x6ed9eba1), 5) + c; a = RL(a, 10);
+            d = RL(d + F3(e, a, b) + X[3] + unchecked(0x6ed9eba1), 11) + c; a = RL(a, 10);
+            c = RL(c + F3(d, e, a) + X[10] + unchecked(0x6ed9eba1), 13) + b; e = RL(e, 10);
+            b = RL(b + F3(c, d, e) + X[14] + unchecked(0x6ed9eba1), 6) + a; d = RL(d, 10);
+            a = RL(a + F3(b, c, d) + X[4] + unchecked(0x6ed9eba1), 7) + e; c = RL(c, 10);
+            e = RL(e + F3(a, b, c) + X[9] + unchecked(0x6ed9eba1), 14) + d; b = RL(b, 10);
+            d = RL(d + F3(e, a, b) + X[15] + unchecked(0x6ed9eba1), 9) + c; a = RL(a, 10);
+            c = RL(c + F3(d, e, a) + X[8] + unchecked(0x6ed9eba1), 13) + b; e = RL(e, 10);
+            b = RL(b + F3(c, d, e) + X[1] + unchecked(0x6ed9eba1), 15) + a; d = RL(d, 10);
+            a = RL(a + F3(b, c, d) + X[2] + unchecked(0x6ed9eba1), 14) + e; c = RL(c, 10);
+            e = RL(e + F3(a, b, c) + X[7] + unchecked(0x6ed9eba1), 8) + d; b = RL(b, 10);
+            d = RL(d + F3(e, a, b) + X[0] + unchecked(0x6ed9eba1), 13) + c; a = RL(a, 10);
+            c = RL(c + F3(d, e, a) + X[6] + unchecked(0x6ed9eba1), 6) + b; e = RL(e, 10);
+            b = RL(b + F3(c, d, e) + X[13] + unchecked(0x6ed9eba1), 5) + a; d = RL(d, 10);
+            a = RL(a + F3(b, c, d) + X[11] + unchecked(0x6ed9eba1), 12) + e; c = RL(c, 10);
+            e = RL(e + F3(a, b, c) + X[5] + unchecked(0x6ed9eba1), 7) + d; b = RL(b, 10);
+            d = RL(d + F3(e, a, b) + X[12] + unchecked(0x6ed9eba1), 5) + c; a = RL(a, 10);
 
             // right
-            dd = RL(dd + F3(ee, aa, bb) + X[15] + unchecked((int)0x6d703ef3), 9) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F3(dd, ee, aa) + X[5] + unchecked((int)0x6d703ef3), 7) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F3(cc, dd, ee) + X[1] + unchecked((int)0x6d703ef3), 15) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F3(bb, cc, dd) + X[3] + unchecked((int)0x6d703ef3), 11) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F3(aa, bb, cc) + X[7] + unchecked((int)0x6d703ef3), 8) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F3(ee, aa, bb) + X[14] + unchecked((int)0x6d703ef3), 6) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F3(dd, ee, aa) + X[6] + unchecked((int)0x6d703ef3), 6) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F3(cc, dd, ee) + X[9] + unchecked((int)0x6d703ef3), 14) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F3(bb, cc, dd) + X[11] + unchecked((int)0x6d703ef3), 12) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F3(aa, bb, cc) + X[8] + unchecked((int)0x6d703ef3), 13) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F3(ee, aa, bb) + X[12] + unchecked((int)0x6d703ef3), 5) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F3(dd, ee, aa) + X[2] + unchecked((int)0x6d703ef3), 14) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F3(cc, dd, ee) + X[10] + unchecked((int)0x6d703ef3), 13) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F3(bb, cc, dd) + X[0] + unchecked((int)0x6d703ef3), 13) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F3(aa, bb, cc) + X[4] + unchecked((int)0x6d703ef3), 7) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F3(ee, aa, bb) + X[13] + unchecked((int)0x6d703ef3), 5) + cc; aa = RL(aa, 10);
+            dd = RL(dd + F3(ee, aa, bb) + X[15] + unchecked(0x6d703ef3), 9) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F3(dd, ee, aa) + X[5] + unchecked(0x6d703ef3), 7) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F3(cc, dd, ee) + X[1] + unchecked(0x6d703ef3), 15) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F3(bb, cc, dd) + X[3] + unchecked(0x6d703ef3), 11) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F3(aa, bb, cc) + X[7] + unchecked(0x6d703ef3), 8) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F3(ee, aa, bb) + X[14] + unchecked(0x6d703ef3), 6) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F3(dd, ee, aa) + X[6] + unchecked(0x6d703ef3), 6) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F3(cc, dd, ee) + X[9] + unchecked(0x6d703ef3), 14) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F3(bb, cc, dd) + X[11] + unchecked(0x6d703ef3), 12) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F3(aa, bb, cc) + X[8] + unchecked(0x6d703ef3), 13) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F3(ee, aa, bb) + X[12] + unchecked(0x6d703ef3), 5) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F3(dd, ee, aa) + X[2] + unchecked(0x6d703ef3), 14) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F3(cc, dd, ee) + X[10] + unchecked(0x6d703ef3), 13) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F3(bb, cc, dd) + X[0] + unchecked(0x6d703ef3), 13) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F3(aa, bb, cc) + X[4] + unchecked(0x6d703ef3), 7) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F3(ee, aa, bb) + X[13] + unchecked(0x6d703ef3), 5) + cc; aa = RL(aa, 10);
 
             t = c; c = cc; cc = t;
 
@@ -360,22 +360,22 @@ namespace Org.BouncyCastle.Crypto.Digests
             c = RL(c + F4(d, e, a) + X[2] + unchecked((int)0x8f1bbcdc), 12) + b; e = RL(e, 10);
 
             // right
-            cc = RL(cc + F2(dd, ee, aa) + X[8] + unchecked((int)0x7a6d76e9), 15) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F2(cc, dd, ee) + X[6] + unchecked((int)0x7a6d76e9), 5) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F2(bb, cc, dd) + X[4] + unchecked((int)0x7a6d76e9), 8) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F2(aa, bb, cc) + X[1] + unchecked((int)0x7a6d76e9), 11) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F2(ee, aa, bb) + X[3] + unchecked((int)0x7a6d76e9), 14) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F2(dd, ee, aa) + X[11] + unchecked((int)0x7a6d76e9), 14) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F2(cc, dd, ee) + X[15] + unchecked((int)0x7a6d76e9), 6) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F2(bb, cc, dd) + X[0] + unchecked((int)0x7a6d76e9), 14) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F2(aa, bb, cc) + X[5] + unchecked((int)0x7a6d76e9), 6) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F2(ee, aa, bb) + X[12] + unchecked((int)0x7a6d76e9), 9) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F2(dd, ee, aa) + X[2] + unchecked((int)0x7a6d76e9), 12) + bb; ee = RL(ee, 10);
-            bb = RL(bb + F2(cc, dd, ee) + X[13] + unchecked((int)0x7a6d76e9), 9) + aa; dd = RL(dd, 10);
-            aa = RL(aa + F2(bb, cc, dd) + X[9] + unchecked((int)0x7a6d76e9), 12) + ee; cc = RL(cc, 10);
-            ee = RL(ee + F2(aa, bb, cc) + X[7] + unchecked((int)0x7a6d76e9), 5) + dd; bb = RL(bb, 10);
-            dd = RL(dd + F2(ee, aa, bb) + X[10] + unchecked((int)0x7a6d76e9), 15) + cc; aa = RL(aa, 10);
-            cc = RL(cc + F2(dd, ee, aa) + X[14] + unchecked((int)0x7a6d76e9), 8) + bb; ee = RL(ee, 10);
+            cc = RL(cc + F2(dd, ee, aa) + X[8] + unchecked(0x7a6d76e9), 15) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F2(cc, dd, ee) + X[6] + unchecked(0x7a6d76e9), 5) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F2(bb, cc, dd) + X[4] + unchecked(0x7a6d76e9), 8) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F2(aa, bb, cc) + X[1] + unchecked(0x7a6d76e9), 11) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F2(ee, aa, bb) + X[3] + unchecked(0x7a6d76e9), 14) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F2(dd, ee, aa) + X[11] + unchecked(0x7a6d76e9), 14) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F2(cc, dd, ee) + X[15] + unchecked(0x7a6d76e9), 6) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F2(bb, cc, dd) + X[0] + unchecked(0x7a6d76e9), 14) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F2(aa, bb, cc) + X[5] + unchecked(0x7a6d76e9), 6) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F2(ee, aa, bb) + X[12] + unchecked(0x7a6d76e9), 9) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F2(dd, ee, aa) + X[2] + unchecked(0x7a6d76e9), 12) + bb; ee = RL(ee, 10);
+            bb = RL(bb + F2(cc, dd, ee) + X[13] + unchecked(0x7a6d76e9), 9) + aa; dd = RL(dd, 10);
+            aa = RL(aa + F2(bb, cc, dd) + X[9] + unchecked(0x7a6d76e9), 12) + ee; cc = RL(cc, 10);
+            ee = RL(ee + F2(aa, bb, cc) + X[7] + unchecked(0x7a6d76e9), 5) + dd; bb = RL(bb, 10);
+            dd = RL(dd + F2(ee, aa, bb) + X[10] + unchecked(0x7a6d76e9), 15) + cc; aa = RL(aa, 10);
+            cc = RL(cc + F2(dd, ee, aa) + X[14] + unchecked(0x7a6d76e9), 8) + bb; ee = RL(ee, 10);
 
             t = d; d = dd; dd = t;
 

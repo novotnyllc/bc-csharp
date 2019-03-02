@@ -155,7 +155,7 @@ namespace Org.BouncyCastle.Crypto.Digests
             // Apply padding: terminator byte and 96-bit length field
             {
                 int inputBytes = bufOff;
-                buf[bufOff++] = (byte)0x80;
+                buf[bufOff++] = 0x80;
 
                 int lenPos = blockSize - 12;
                 if (bufOff > lenPos)
@@ -429,13 +429,13 @@ namespace Org.BouncyCastle.Crypto.Digests
                 byte t1 = S1[(lo >> 8) & 0xFF];
                 byte t2 = S2[(lo >> 16) & 0xFF];
                 byte t3 = S3[lo >> 24];
-                lo = (uint)t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
+                lo = t0 | ((uint)t1 << 8) | ((uint)t2 << 16) | ((uint)t3 << 24);
                 byte t4 = S0[hi & 0xFF];
                 byte t5 = S1[(hi >> 8) & 0xFF];
                 byte t6 = S2[(hi >> 16) & 0xFF];
                 byte t7 = S3[hi >> 24];
-                hi = (uint)t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
-                s[i] = (ulong)lo | ((ulong)hi << 32);
+                hi = t4 | ((uint)t5 << 8) | ((uint)t6 << 16) | ((uint)t7 << 24);
+                s[i] = lo | ((ulong)hi << 32);
             }
         }
 

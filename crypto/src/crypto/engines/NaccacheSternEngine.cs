@@ -52,7 +52,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 				lookup = new IList<BigInteger>[primes.Count];
 				for (int i = 0; i < primes.Count; i++)
 				{
-					BigInteger actualPrime = (BigInteger) primes[i];
+					BigInteger actualPrime = primes[i];
 					int actualPrimeValue = actualPrime.IntValue;
 
 					lookup[i] = Platform.CreateList<BigInteger>(actualPrimeValue);
@@ -159,14 +159,14 @@ namespace Org.BouncyCastle.Crypto.Engines
 				// Get Chinese Remainders of CipherText
 				for (int i = 0; i < primes.Count; i++)
 				{
-					BigInteger exp = input.ModPow(priv.PhiN.Divide((BigInteger)primes[i]), priv.Modulus);
+					BigInteger exp = input.ModPow(priv.PhiN.Divide(primes[i]), priv.Modulus);
 					var al = lookup[i];
-					if (lookup[i].Count != ((BigInteger)primes[i]).IntValue)
+					if (lookup[i].Count != primes[i].IntValue)
 					{
 						throw new InvalidCipherTextException("Error in lookup Array for "
-										+ ((BigInteger)primes[i]).IntValue
+										+ primes[i].IntValue
 										+ ": Size mismatch. Expected List with length "
-										+ ((BigInteger)primes[i]).IntValue + " but found List of length "
+										+ primes[i].IntValue + " but found List of length "
 										+ lookup[i].Count);
 					}
 					int lookedup = al.IndexOf(exp);
@@ -340,15 +340,15 @@ namespace Org.BouncyCastle.Crypto.Engines
 			BigInteger all = BigInteger.One;
 			for (int i = 0; i < primes.Count; i++)
 			{
-				all = all.Multiply((BigInteger)primes[i]);
+				all = all.Multiply(primes[i]);
 			}
 			for (int i = 0; i < primes.Count; i++)
 			{
-				BigInteger a = (BigInteger)primes[i];
+				BigInteger a = primes[i];
 				BigInteger b = all.Divide(a);
 				BigInteger b2 = b.ModInverse(a);
 				BigInteger tmp = b.Multiply(b2);
-				tmp = tmp.Multiply((BigInteger)congruences[i]);
+				tmp = tmp.Multiply(congruences[i]);
 				retval = retval.Add(tmp);
 			}
 

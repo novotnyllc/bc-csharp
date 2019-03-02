@@ -61,11 +61,11 @@ namespace Org.BouncyCastle.Crypto.Generators
 
 			for (int i = 0; i < smallPrimes.Count / 2; i++)
 			{
-				u = u.Multiply((BigInteger)smallPrimes[i]);
+				u = u.Multiply(smallPrimes[i]);
 			}
 			for (int i = smallPrimes.Count / 2; i < smallPrimes.Count; i++)
 			{
-				v = v.Multiply((BigInteger)smallPrimes[i]);
+				v = v.Multiply(smallPrimes[i]);
 			}
 
 			BigInteger sigma = u.Multiply(v);
@@ -138,7 +138,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 			    var gParts = Platform.CreateList<BigInteger>();
 				for (int ind = 0; ind != smallPrimes.Count; ind++)
 				{
-					BigInteger i = (BigInteger)smallPrimes[ind];
+					BigInteger i = smallPrimes[ind];
 					BigInteger e = phi_n.Divide(i);
 
 					for (;;)
@@ -157,8 +157,8 @@ namespace Org.BouncyCastle.Crypto.Generators
 				g = BigInteger.One;
 				for (int i = 0; i < smallPrimes.Count; i++)
 				{
-					BigInteger gPart = (BigInteger) gParts[i];
-					BigInteger smallPrime = (BigInteger) smallPrimes[i];
+					BigInteger gPart = gParts[i];
+					BigInteger smallPrime = smallPrimes[i];
 					g = g.Multiply(gPart.ModPow(sigma.Divide(smallPrime), n)).Mod(n);
 				}
 
@@ -166,7 +166,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 				bool divisible = false;
 				for (int i = 0; i < smallPrimes.Count; i++)
 				{
-					if (g.ModPow(phi_n.Divide((BigInteger)smallPrimes[i]), n).Equals(BigInteger.One))
+					if (g.ModPow(phi_n.Divide(smallPrimes[i]), n).Equals(BigInteger.One))
 					{
 						divisible = true;
 						break;

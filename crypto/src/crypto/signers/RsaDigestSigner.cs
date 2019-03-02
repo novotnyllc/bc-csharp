@@ -50,7 +50,7 @@ namespace Org.BouncyCastle.Crypto.Signers
         }
 
         public RsaDigestSigner(IDigest digest)
-            :   this(digest, (DerObjectIdentifier)oidMap[digest.AlgorithmName])
+            :   this(digest, oidMap[digest.AlgorithmName])
         {
         }
 

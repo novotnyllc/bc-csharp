@@ -14,7 +14,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 	public class PssSigner
 		: ISigner
 	{
-		public const byte TrailerImplicit = (byte)0xBC;
+		public const byte TrailerImplicit = 0xBC;
 
 		private readonly IDigest contentDigest1, contentDigest2;
 		private readonly IDigest mgfDigest;
@@ -241,7 +241,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 
 			contentDigest2.DoFinal(h, 0);
 
-			block[block.Length - sLen - 1 - hLen - 1] = (byte) (0x01);
+			block[block.Length - sLen - 1 - hLen - 1] = 0x01;
 			salt.CopyTo(block, block.Length - sLen - hLen - 1);
 
 			byte[] dbMask = MaskGeneratorFunction1(h, 0, h.Length, block.Length - hLen - 1);

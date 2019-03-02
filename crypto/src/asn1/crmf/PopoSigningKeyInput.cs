@@ -14,7 +14,7 @@ namespace Org.BouncyCastle.Asn1.Crmf
 
         private PopoSigningKeyInput(Asn1Sequence seq)
         {
-            Asn1Encodable authInfo = (Asn1Encodable)seq[0];
+            Asn1Encodable authInfo = seq[0];
 
             if (authInfo is Asn1TaggedObject)
             {

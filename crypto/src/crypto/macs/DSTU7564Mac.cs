@@ -43,7 +43,7 @@ namespace Org.BouncyCastle.Crypto.Macs
 
                 for (int byteIndex = 0; byteIndex < invertedKey.Length; byteIndex++)
                 {
-                    invertedKey[byteIndex] = (byte)(key[byteIndex] ^ (byte)0xFF);
+                    invertedKey[byteIndex] = (byte)(key[byteIndex] ^ 0xFF);
                 }
             }
             else
@@ -112,7 +112,7 @@ namespace Org.BouncyCastle.Crypto.Macs
 
             byte[] padded = new byte[extra];
 
-            padded[0] = (byte)0x80; // Defined in standard;
+            padded[0] = 0x80; // Defined in standard;
 
             // Defined in standard;
             Pack.UInt64_To_LE(inputLength * 8, padded, padded.Length - 12);
@@ -124,7 +124,7 @@ namespace Org.BouncyCastle.Crypto.Macs
         {
             int paddedLen = ((input.Length + engine.GetByteLength() - 1) / engine.GetByteLength()) * engine.GetByteLength();
 
-            int extra = engine.GetByteLength() - (int)(input.Length % engine.GetByteLength());
+            int extra = engine.GetByteLength() - input.Length % engine.GetByteLength();
             if (extra < 13)  // terminator byte + 96 bits of length
             {
                 paddedLen += engine.GetByteLength();
@@ -134,7 +134,7 @@ namespace Org.BouncyCastle.Crypto.Macs
 
             Array.Copy(input, 0, padded, 0, input.Length);
 
-            padded[input.Length] = (byte)0x80; // Defined in standard;
+            padded[input.Length] = 0x80; // Defined in standard;
             Pack.UInt32_To_LE((uint)(input.Length * 8), padded, padded.Length - 12); // Defined in standard;
 
             return padded;

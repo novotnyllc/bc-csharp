@@ -39,7 +39,7 @@ namespace Org.BouncyCastle.Crypto.Paddings
 
             while (inOff < input.Length)
             {
-                input[inOff] = (byte) 0;
+                input[inOff] = 0;
                 inOff++;
             }
 

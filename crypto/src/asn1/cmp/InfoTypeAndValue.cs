@@ -59,7 +59,7 @@ namespace Org.BouncyCastle.Asn1.Cmp
 
             if (seq.Count > 1)
             {
-                infoValue = (Asn1Encodable)seq[1];
+                infoValue = seq[1];
             }
         }
 

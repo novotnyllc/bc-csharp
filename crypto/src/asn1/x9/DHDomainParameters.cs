@@ -70,7 +70,7 @@ namespace Org.BouncyCastle.Asn1.X9
 
 		private static Asn1Encodable GetNext(IEnumerator<Asn1Encodable> e)
 		{
-			return e.MoveNext() ? (Asn1Encodable)e.Current : null;
+			return e.MoveNext() ? e.Current : null;
 		}
 
 		public DerInteger P

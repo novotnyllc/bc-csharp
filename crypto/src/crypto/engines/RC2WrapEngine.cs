@@ -34,10 +34,10 @@ namespace Org.BouncyCastle.Crypto.Engines
 		/** Field IV2           */
 		private static readonly byte[] IV2 =
 		{
-			(byte) 0x4a, (byte) 0xdd, (byte) 0xa2,
-			(byte) 0x2c, (byte) 0x79, (byte) 0xe8,
-			(byte) 0x21, (byte) 0x05
-		};
+             0x4a,  0xdd,  0xa2,
+             0x2c,  0x79,  0xe8,
+             0x21,  0x05
+        };
 
 		//
 		// checksum digest

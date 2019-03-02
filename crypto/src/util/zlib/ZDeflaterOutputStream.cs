@@ -107,7 +107,7 @@ namespace Org.BouncyCastle.Utilities.Zlib {
         }
     
         public override void WriteByte(byte b) {
-            buf1[0]=(byte)b;
+            buf1[0]= b;
             Write(buf1, 0, 1);
         }
 

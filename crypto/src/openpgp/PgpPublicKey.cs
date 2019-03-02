@@ -110,7 +110,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                     | ((ulong)fingerprint[fingerprint.Length - 4] << 24)
                     | ((ulong)fingerprint[fingerprint.Length - 3] << 16)
                     | ((ulong)fingerprint[fingerprint.Length - 2] << 8)
-                    | (ulong)fingerprint[fingerprint.Length - 1]);
+                    | fingerprint[fingerprint.Length - 1]);
 
                 if (key is RsaPublicBcpgKey)
                 {
@@ -682,7 +682,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
                     if (idTrusts[i] != null)
                     {
-                        bcpgOut.WritePacket((ContainedPacket)idTrusts[i]);
+                        bcpgOut.WritePacket(idTrusts[i]);
                     }
 
                     foreach (var sig in idSigs[i])
@@ -710,7 +710,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             {
                 while (!revoked && (ns < keySigs.Count))
                 {
-                    if (((PgpSignature)keySigs[ns++]).SignatureType == PgpSignature.KeyRevocation)
+                    if (keySigs[ns++].SignatureType == PgpSignature.KeyRevocation)
                     {
                         revoked = true;
                     }
@@ -720,7 +720,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             {
                 while (!revoked && (ns < subSigs.Count))
                 {
-                    if (((PgpSignature)subSigs[ns++]).SignatureType == PgpSignature.SubkeyRevocation)
+                    if (subSigs[ns++].SignatureType == PgpSignature.SubkeyRevocation)
                     {
                         revoked = true;
                     }

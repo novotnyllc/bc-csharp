@@ -13,7 +13,7 @@ namespace Org.BouncyCastle.Asn1.Crmf
         private AttributeTypeAndValue(Asn1Sequence seq)
         {
             type = (DerObjectIdentifier)seq[0];
-            value = (Asn1Encodable)seq[1];
+            value = seq[1];
         }
 
         public static AttributeTypeAndValue GetInstance(object obj)

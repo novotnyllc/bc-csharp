@@ -64,7 +64,7 @@ namespace Org.BouncyCastle.Asn1
 		public Asn1Encodable this[
 			int index]
 		{
-			get { return (Asn1Encodable) v[index]; }
+			get { return v[index]; }
 		}
 
 		[Obsolete("Use 'object[index]' syntax instead")]

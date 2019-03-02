@@ -89,7 +89,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                Asn1Sequence subtree = (Asn1Sequence)it.Current;
+                Asn1Sequence subtree = it.Current;
 
                 if (WithinDNSubtree(dns, subtree))
                 {
@@ -113,7 +113,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                Asn1Sequence subtree = (Asn1Sequence)it.Current;
+                Asn1Sequence subtree = it.Current;
 
                 if (WithinDNSubtree(dns, subtree))
                 {
@@ -128,8 +128,8 @@ namespace Org.BouncyCastle.Pkix
             var intersect = new HashSet<Asn1Sequence>();
             for (var it = dns.GetEnumerator(); it.MoveNext(); )
             {
-                Asn1Sequence dn = Asn1Sequence.GetInstance(((GeneralSubtree)it
-                    .Current).Base.Name.ToAsn1Object());
+                Asn1Sequence dn = Asn1Sequence.GetInstance(it
+                    .Current.Base.Name.ToAsn1Object());
                 if (permitted == null)
                 {
                     if (dn != null)
@@ -142,7 +142,7 @@ namespace Org.BouncyCastle.Pkix
                     var _iter = permitted.GetEnumerator();
                     while (_iter.MoveNext())
                     {
-                        Asn1Sequence subtree = (Asn1Sequence)_iter.Current;
+                        Asn1Sequence subtree = _iter.Current;
 
                         if (WithinDNSubtree(dn, subtree))
                         {
@@ -177,7 +177,7 @@ namespace Org.BouncyCastle.Pkix
                 var it = excluded.GetEnumerator();
                 while (it.MoveNext())
                 {
-                    Asn1Sequence subtree = (Asn1Sequence)it.Current;
+                    Asn1Sequence subtree = it.Current;
 
                     if (WithinDNSubtree(dn, subtree))
                     {
@@ -203,7 +203,7 @@ namespace Org.BouncyCastle.Pkix
             var intersect = new HashSet<string>();
             for (var it = emails.GetEnumerator(); it.MoveNext(); )
             {
-                String email = ExtractNameAsString(((GeneralSubtree)it.Current)
+                String email = ExtractNameAsString(it.Current
                     .Base);
 
                 if (permitted == null)
@@ -218,7 +218,7 @@ namespace Org.BouncyCastle.Pkix
                     var it2 = permitted.GetEnumerator();
                     while (it2.MoveNext())
                     {
-                        String _permitted = (String)it2.Current;
+                        String _permitted = it2.Current;
 
                         intersectEmail(email, _permitted, intersect);
                     }
@@ -245,7 +245,7 @@ namespace Org.BouncyCastle.Pkix
                 var it = excluded.GetEnumerator();
                 while (it.MoveNext())
                 {
-                    String _excluded = (String)it.Current;
+                    String _excluded = it.Current;
 
                     unionEmail(_excluded, email, union);
                 }
@@ -270,7 +270,7 @@ namespace Org.BouncyCastle.Pkix
             for (var it = ips.GetEnumerator(); it.MoveNext(); )
             {
                 byte[] ip = Asn1OctetString.GetInstance(
-                    ((GeneralSubtree)it.Current).Base.Name).GetOctets();
+                    it.Current.Base.Name).GetOctets();
                 if (permitted == null)
                 {
                     if (ip != null)
@@ -283,7 +283,7 @@ namespace Org.BouncyCastle.Pkix
                     var it2 = permitted.GetEnumerator();
                     while (it2.MoveNext())
                     {
-                        byte[] _permitted = (byte[])it2.Current;
+                        byte[] _permitted = it2.Current;
                         foreach (var bytearray in IntersectIPRange(_permitted, ip))
                         {
                             intersect.Add(bytearray);
@@ -323,7 +323,7 @@ namespace Org.BouncyCastle.Pkix
                 var it = excluded.GetEnumerator();
                 while (it.MoveNext())
                 {
-                    byte[] _excluded = (byte[])it.Current;
+                    byte[] _excluded = it.Current;
                     foreach (var bytearray in UnionIPRange(_excluded, ip))
                     {
                         union.Add(bytearray);
@@ -496,7 +496,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                String str = ((String)it.Current);
+                String str = it.Current;
 
                 if (EmailIsConstrained(email, str))
                 {
@@ -525,7 +525,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                String str = (String)it.Current;
+                String str = it.Current;
 
                 if (EmailIsConstrained(email, str))
                 {
@@ -557,7 +557,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                byte[] ipWithSubnet = (byte[])it.Current;
+                byte[] ipWithSubnet = it.Current;
 
                 if (IsIPConstrained(ip, ipWithSubnet))
                 {
@@ -594,7 +594,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                byte[] ipWithSubnet = (byte[])it.Current;
+                byte[] ipWithSubnet = it.Current;
 
                 if (IsIPConstrained(ip, ipWithSubnet))
                 {
@@ -713,7 +713,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                String str = ((String)it.Current);
+                String str = it.Current;
 
                 // is sub domain
                 if (WithinDomain(dns, str)
@@ -742,7 +742,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                String str = ((String)it.Current);
+                String str = it.Current;
 
                 // is sub domain or the same
 				if (WithinDomain(dns, str) || Platform.EqualsIgnoreCase(dns, str))
@@ -1042,7 +1042,7 @@ namespace Org.BouncyCastle.Pkix
             var intersect = new HashSet<string>();
             for (var it = dnss.GetEnumerator(); it.MoveNext(); )
             {
-                String dns = ExtractNameAsString(((GeneralSubtree)it.Current)
+                String dns = ExtractNameAsString(it.Current
                     .Base);
                 if (permitted == null)
                 {
@@ -1056,7 +1056,7 @@ namespace Org.BouncyCastle.Pkix
                     var _iter = permitted.GetEnumerator();
                     while (_iter.MoveNext())
                     {
-                        String _permitted = (String)_iter.Current;
+                        String _permitted = _iter.Current;
 
                         if (WithinDomain(_permitted, dns))
                         {
@@ -1092,7 +1092,7 @@ namespace Org.BouncyCastle.Pkix
                 var _iter = excluded.GetEnumerator();
                 while (_iter.MoveNext())
                 {
-                    String _permitted = (String)_iter.Current;
+                    String _permitted = _iter.Current;
 
                     if (WithinDomain(_permitted, dns))
                     {
@@ -1225,7 +1225,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                String str = ((String)it.Current);
+                String str = it.Current;
 
                 if (IsUriConstrained(uri, str))
                 {
@@ -1240,7 +1240,7 @@ namespace Org.BouncyCastle.Pkix
             var intersect = new HashSet<string>();
             for (var it = uris.GetEnumerator(); it.MoveNext(); )
             {
-                String uri = ExtractNameAsString(((GeneralSubtree)it.Current)
+                String uri = ExtractNameAsString(it.Current
                     .Base);
                 if (permitted == null)
                 {
@@ -1254,7 +1254,7 @@ namespace Org.BouncyCastle.Pkix
                     var _iter = permitted.GetEnumerator();
                     while (_iter.MoveNext())
                     {
-                        String _permitted = (String)_iter.Current;
+                        String _permitted = _iter.Current;
                         intersectURI(_permitted, uri, intersect);
                     }
                 }
@@ -1281,7 +1281,7 @@ namespace Org.BouncyCastle.Pkix
                 var _iter = excluded.GetEnumerator();
                 while (_iter.MoveNext())
                 {
-                    String _excluded = (String)_iter.Current;
+                    String _excluded = _iter.Current;
 
                     unionURI(_excluded, uri, union);
                 }
@@ -1394,7 +1394,7 @@ namespace Org.BouncyCastle.Pkix
 
             while (it.MoveNext())
             {
-                String str = ((String)it.Current);
+                String str = it.Current;
 
                 if (IsUriConstrained(uri, str))
                 {
@@ -1558,7 +1558,7 @@ namespace Org.BouncyCastle.Pkix
                 var entry = it.Current;
 
                 // go through all subtree groups
-                switch ((int)entry.Key )
+                switch (entry.Key)
                 {
                     case 1:
                         permittedSubtreesEmail = IntersectEmail(permittedSubtreesEmail,
@@ -1875,7 +1875,7 @@ namespace Org.BouncyCastle.Pkix
             temp += "[";
             for (var it = ips.GetEnumerator(); it.MoveNext(); )
             {
-                temp += StringifyIP((byte[])it.Current) + ",";
+                temp += StringifyIP(it.Current) + ",";
             }
             if (temp.Length > 1)
             {

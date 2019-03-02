@@ -236,7 +236,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			int n = certs.Count;
 			// i as defined in the algorithm description
 			int i = n - index;
@@ -332,7 +332,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			//
 			//
 			// (a) check the policy mappings
@@ -390,7 +390,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			int n = certs.Count;
 			// i as defined in the algorithm description
 			int i = n - index;
@@ -486,7 +486,7 @@ namespace Org.BouncyCastle.Pkix
 
 							for (int k = 0; k < _nodes.Count; k++)
 							{
-								PkixPolicyNode _node = (PkixPolicyNode)_nodes[k];
+								PkixPolicyNode _node = _nodes[k];
 
                                 var _policySetIter = _node.ExpectedPolicies.GetEnumerator();
 								while (_policySetIter.MoveNext())
@@ -544,7 +544,7 @@ namespace Org.BouncyCastle.Pkix
 
 					for (int k = 0; k < nodes.Count; k++)
 					{
-						PkixPolicyNode node = (PkixPolicyNode)nodes[k];
+						PkixPolicyNode node = nodes[k];
 						if (!node.HasChildren)
 						{
 							_validPolicyTree = PkixCertPathValidatorUtilities.RemovePolicyNode(_validPolicyTree, policyNodes,
@@ -569,7 +569,7 @@ namespace Org.BouncyCastle.Pkix
 					var nodes = policyNodes[i];
 					for (int j = 0; j < nodes.Count; j++)
 					{
-						PkixPolicyNode node = (PkixPolicyNode)nodes[j];
+						PkixPolicyNode node = nodes[j];
 						node.IsCritical = critical;
 					}
 				}
@@ -771,7 +771,7 @@ namespace Org.BouncyCastle.Pkix
 
 			while (cert_it.MoveNext())
 			{
-				X509Certificate signingCert = (X509Certificate)cert_it.Current;
+				X509Certificate signingCert = cert_it.Current;
 
 				/*
 				 * CA of the certificate, for which this CRL is checked, has also
@@ -793,8 +793,8 @@ namespace Org.BouncyCastle.Pkix
 					PkixParameters temp = (PkixParameters)paramsPKIX.Clone();
 					temp.SetTargetCertConstraints(selector);
 
-					PkixBuilderParameters parameters = (PkixBuilderParameters)
-						PkixBuilderParameters.GetInstance(temp);
+					PkixBuilderParameters parameters =
+                        PkixBuilderParameters.GetInstance(temp);
 
 					/*
 					 * if signingCert is placed not higher on the cert path a
@@ -836,7 +836,7 @@ namespace Org.BouncyCastle.Pkix
 			Exception lastException = null;
 			for (int i = 0; i < validCerts.Count; i++)
 			{
-				X509Certificate signCert = (X509Certificate)validCerts[i];
+				X509Certificate signCert = validCerts[i];
 				bool[] keyusage = signCert.GetKeyUsage();
 
 				if (keyusage != null && (keyusage.Length < 7 || !keyusage[CRL_SIGN]))
@@ -961,7 +961,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				try
 				{
-					X509Crl crl = (X509Crl)crl_iter.Current;
+					X509Crl crl = crl_iter.Current;
 
 					// (d)
 					ReasonsMask interimReasonsMask = Rfc3280CertPathUtilities.ProcessCrlD(crl, dp);
@@ -1232,7 +1232,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			int n = certs.Count;
 			// i as defined in the algorithm description
 			int i = n - index;
@@ -1241,7 +1241,7 @@ namespace Org.BouncyCastle.Pkix
 			Asn1Sequence pm = null;
 			try
 			{
-				pm = (Asn1Sequence)Asn1Sequence.GetInstance(PkixCertPathValidatorUtilities.GetExtensionValue(cert, X509Extensions.PolicyMappings));
+				pm = Asn1Sequence.GetInstance(PkixCertPathValidatorUtilities.GetExtensionValue(cert, X509Extensions.PolicyMappings));
 			}
 			catch (Exception ex)
 			{
@@ -1251,7 +1251,7 @@ namespace Org.BouncyCastle.Pkix
 			PkixPolicyNode _validPolicyTree = validPolicyTree;
 			if (pm != null)
 			{
-				Asn1Sequence mappings = (Asn1Sequence)pm;
+				Asn1Sequence mappings = pm;
 				IDictionary<string, ISet<string>> m_idp = Platform.CreateDictionary<string, ISet<string>>();
 				var s_idp = new HashSet<string>();
 
@@ -1279,7 +1279,7 @@ namespace Org.BouncyCastle.Pkix
 				var it_idp = s_idp.GetEnumerator();
 				while (it_idp.MoveNext())
 				{
-					string id_p = (string)it_idp.Current;
+					string id_p = it_idp.Current;
 
 					//
 					// (1)
@@ -1291,7 +1291,7 @@ namespace Org.BouncyCastle.Pkix
 
 						while (nodes_i.MoveNext())
 						{
-							PkixPolicyNode node = (PkixPolicyNode)nodes_i.Current;
+							PkixPolicyNode node = nodes_i.Current;
 							if (node.ValidPolicy.Equals(id_p))
 							{
 								idp_found = true;
@@ -1305,7 +1305,7 @@ namespace Org.BouncyCastle.Pkix
 							nodes_i = policyNodes[i].GetEnumerator();
 							while (nodes_i.MoveNext())
 							{
-								PkixPolicyNode node = (PkixPolicyNode)nodes_i.Current;
+								PkixPolicyNode node = nodes_i.Current;
 								if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(node.ValidPolicy))
 								{
                                     ISet<PolicyQualifierInfo> pq = null;
@@ -1356,7 +1356,7 @@ namespace Org.BouncyCastle.Pkix
 										ci = critExtOids.Contains(X509Extensions.CertificatePolicies.Id);
 									}
 
-									PkixPolicyNode p_node = (PkixPolicyNode)node.Parent;
+									PkixPolicyNode p_node = node.Parent;
 									if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(p_node.ValidPolicy))
 									{
 										PkixPolicyNode c_node = new PkixPolicyNode(Platform.CreateList<PkixPolicyNode>(), i,
@@ -1530,7 +1530,7 @@ namespace Org.BouncyCastle.Pkix
 			X509Certificate			sign)
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			//
 			// (a) verify
 			//
@@ -1604,7 +1604,7 @@ namespace Org.BouncyCastle.Pkix
 			int				explicitPolicy)
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			//
 			// (i)
 			//
@@ -1658,7 +1658,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (i)
@@ -1713,7 +1713,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (g) handle the name constraints extension
@@ -1783,7 +1783,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (j)
@@ -1816,7 +1816,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			//
 			// (k)
 			//
@@ -1849,7 +1849,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			//
 			// (l)
 			//
@@ -1872,7 +1872,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (m)
@@ -1911,7 +1911,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (n)
@@ -1934,7 +1934,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (o)
@@ -1944,7 +1944,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				try
 				{
-					((PkixCertPathChecker)tmpIter.Current).Check(cert, criticalExtensions);
+                    tmpIter.Current.Check(cert, criticalExtensions);
 				}
 				catch (PkixCertPathValidatorException e)
 				{
@@ -1964,7 +1964,7 @@ namespace Org.BouncyCastle.Pkix
 			int				explicitPolicy)
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (h)
@@ -1986,7 +1986,7 @@ namespace Org.BouncyCastle.Pkix
 			int				policyMapping)
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (h)
@@ -2009,7 +2009,7 @@ namespace Org.BouncyCastle.Pkix
 			int				inhibitAnyPolicy)
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (h)
@@ -2046,7 +2046,7 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (b)
@@ -2102,14 +2102,14 @@ namespace Org.BouncyCastle.Pkix
 			//throws CertPathValidatorException
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 			var tmpIter = pathCheckers.GetEnumerator();
 
 			while (tmpIter.MoveNext())
 			{
 				try
 				{
-					((PkixCertPathChecker)tmpIter.Current).Check(cert, criticalExtensions);
+                    tmpIter.Current.Check(cert, criticalExtensions);
 				}
 				catch (PkixCertPathValidatorException e)
 				{
@@ -2173,7 +2173,7 @@ namespace Org.BouncyCastle.Pkix
 
 							for (int k = 0; k < _nodeDepth.Count; k++)
 							{
-								PkixPolicyNode _node = (PkixPolicyNode)_nodeDepth[k];
+								PkixPolicyNode _node = _nodeDepth[k];
 
 								if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(_node.ValidPolicy))
 								{
@@ -2205,7 +2205,7 @@ namespace Org.BouncyCastle.Pkix
 
 								for (int k = 0; k < nodes.Count; k++)
 								{
-									PkixPolicyNode node = (PkixPolicyNode)nodes[k];
+									PkixPolicyNode node = nodes[k];
 									if (!node.HasChildren)
 									{
 										validPolicyTree = PkixCertPathValidatorUtilities.RemovePolicyNode(validPolicyTree,
@@ -2242,7 +2242,7 @@ namespace Org.BouncyCastle.Pkix
 
 					for (int k = 0; k < _nodeDepth.Count; k++)
 					{
-						PkixPolicyNode _node = (PkixPolicyNode)_nodeDepth[k];
+						PkixPolicyNode _node = _nodeDepth[k];
 
 						if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(_node.ValidPolicy))
 						{
@@ -2263,7 +2263,7 @@ namespace Org.BouncyCastle.Pkix
 				var _vpnsIter = _validPolicyNodeSet.GetEnumerator();
 				while (_vpnsIter.MoveNext())
 				{
-					PkixPolicyNode _node = (PkixPolicyNode)_vpnsIter.Current;
+					PkixPolicyNode _node = _vpnsIter.Current;
 					string _validPolicy = _node.ValidPolicy;
 
 					if (!userInitialPolicySet.Contains(_validPolicy))
@@ -2283,7 +2283,7 @@ namespace Org.BouncyCastle.Pkix
 
 						for (int k = 0; k < nodes.Count; k++)
 						{
-							PkixPolicyNode node = (PkixPolicyNode)nodes[k];
+							PkixPolicyNode node = nodes[k];
 							if (!node.HasChildren)
 							{
 								validPolicyTree = PkixCertPathValidatorUtilities.RemovePolicyNode(validPolicyTree, policyNodes,
@@ -2420,7 +2420,7 @@ namespace Org.BouncyCastle.Pkix
 			PkixPolicyNode	validPolicyTree)
 		{
 			var certs = certPath.Certificates;
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			//
 			// (e)

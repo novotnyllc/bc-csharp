@@ -457,7 +457,7 @@ namespace Org.BouncyCastle.Math
 
                     if (IsPrime32(c))
                     {
-                        return new STOutput(BigInteger.ValueOf((long)c), primeSeed, primeGenCounter);
+                        return new STOutput(BigInteger.ValueOf(c), primeSeed, primeGenCounter);
                     }
 
                     if (primeGenCounter > (4 * length))

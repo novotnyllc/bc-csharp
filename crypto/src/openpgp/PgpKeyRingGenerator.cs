@@ -382,12 +382,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             var enumerator = keys.GetEnumerator();
             enumerator.MoveNext();
 
-			PgpSecretKey pgpSecretKey = (PgpSecretKey) enumerator.Current;
+			PgpSecretKey pgpSecretKey = enumerator.Current;
 			pubKeys.Add(pgpSecretKey.PublicKey);
 
 			while (enumerator.MoveNext())
             {
-                pgpSecretKey = (PgpSecretKey) enumerator.Current;
+                pgpSecretKey = enumerator.Current;
 
 				PgpPublicKey k = new PgpPublicKey(pgpSecretKey.PublicKey);
 				k.publicPk = new PublicSubkeyPacket(

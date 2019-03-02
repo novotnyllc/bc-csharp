@@ -408,12 +408,12 @@ namespace Org.BouncyCastle.Security
                 throw new ArgumentNullException("mechanism");
 
             mechanism = Platform.ToUpperInvariant(mechanism);
-            string aliased = (string) algorithms[mechanism];
+            string aliased = algorithms[mechanism];
 
             if (aliased != null)
                 mechanism = aliased;
 
-            return (DerObjectIdentifier) oids[mechanism];
+            return oids[mechanism];
         }
 
         public static ICollection<string> Algorithms
@@ -435,7 +435,7 @@ namespace Org.BouncyCastle.Security
 
             algorithm = Platform.ToUpperInvariant(algorithm);
 
-            string mechanism = (string) algorithms[algorithm];
+            string mechanism = algorithms[algorithm];
 
             if (mechanism == null)
                 mechanism = algorithm;
@@ -620,7 +620,7 @@ namespace Org.BouncyCastle.Security
         public static string GetEncodingName(
             DerObjectIdentifier oid)
         {
-            return (string) algorithms[oid.Id];
+            return algorithms[oid.Id];
         }
 
         public static ISigner InitSigner(DerObjectIdentifier algorithmOid, bool forSigning, AsymmetricKeyParameter privateKey, SecureRandom random)

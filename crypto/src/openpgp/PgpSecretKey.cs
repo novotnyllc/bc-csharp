@@ -778,7 +778,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
                     if (pub.idTrusts[i] != null)
                     {
-                        bcpgOut.WritePacket((ContainedPacket)pub.idTrusts[i]);
+                        bcpgOut.WritePacket(pub.idTrusts[i]);
                     }
 
                     foreach (var sig in pub.idSigs[i])

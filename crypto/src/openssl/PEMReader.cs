@@ -255,7 +255,7 @@ namespace Org.BouncyCastle.OpenSsl
                 if (password == null)
                     throw new PasswordException("Password is null, but a password is required");
 
-                string dekInfo = (string) fields["DEK-Info"];
+                string dekInfo = fields["DEK-Info"];
                 string[] tknz = dekInfo.Split(',');
 
                 string dekAlgName = tknz[0].Trim();

@@ -100,7 +100,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// <returns>The key.</returns>
 		public byte[] GetKey()
 		{
-			return (byte[])parameters[PARAM_TYPE_KEY];
+			return parameters[PARAM_TYPE_KEY];
 		}
 
 		/// <summary>
@@ -109,7 +109,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// </summary>
 		public byte[] GetPersonalisation()
 		{
-			return (byte[])parameters[PARAM_TYPE_PERSONALISATION];
+			return parameters[PARAM_TYPE_PERSONALISATION];
 		}
 
 		/// <summary>
@@ -118,7 +118,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// </summary>
 		public byte[] GetPublicKey()
 		{
-			return (byte[])parameters[PARAM_TYPE_PUBLIC_KEY];
+			return parameters[PARAM_TYPE_PUBLIC_KEY];
 		}
 
 		/// <summary>
@@ -127,7 +127,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// </summary>
 		public byte[] GetKeyIdentifier()
 		{
-			return (byte[])parameters[PARAM_TYPE_KEY_IDENTIFIER];
+			return parameters[PARAM_TYPE_KEY_IDENTIFIER];
 		}
 
 		/// <summary>
@@ -136,7 +136,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// </summary>
 		public byte[] GetNonce()
 		{
-			return (byte[])parameters[PARAM_TYPE_NONCE];
+			return parameters[PARAM_TYPE_NONCE];
 		}
 
 		/// <summary>
@@ -155,7 +155,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 				var keys = paramsMap.Keys.GetEnumerator();
 				while (keys.MoveNext())
 				{
-					int key = (int)keys.Current;
+					int key = keys.Current;
 					parameters.Add(key, paramsMap[key]);
 				}
 			}
@@ -165,7 +165,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 				var keys = parameters.parameters.Keys.GetEnumerator();
 				while (keys.MoveNext())
 				{
-					int key = (int)keys.Current;
+					int key = keys.Current;
 					this.parameters.Add(key, parameters.parameters[key]);
 				}
 			}

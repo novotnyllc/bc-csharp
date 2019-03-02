@@ -182,8 +182,8 @@ namespace Org.BouncyCastle.Crypto.Encodings
 
 			if (maxBit != 8)
 			{
-				block[0] &= (byte) ((ushort) 0xff >> maxBit);
-				block[0] |= (byte) ((ushort) 0x80 >> maxBit);
+				block[0] &= (byte) (0xff >> maxBit);
+				block[0] |= (byte) (0x80 >> maxBit);
 			}
 			else
 			{

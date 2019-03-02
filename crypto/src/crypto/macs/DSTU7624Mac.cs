@@ -148,10 +148,10 @@ namespace Org.BouncyCastle.Crypto.Macs
 
           public void Reset()
           {
-            Arrays.Fill(c, (byte)0x00);
-            Arrays.Fill(cTemp, (byte)0x00);
-            Arrays.Fill(kDelta, (byte)0x00);
-            Arrays.Fill(buf, (byte)0x00);
+            Arrays.Fill(c, 0x00);
+            Arrays.Fill(cTemp, 0x00);
+            Arrays.Fill(kDelta, 0x00);
+            Arrays.Fill(buf, 0x00);
             engine.Reset();
             engine.ProcessBlock(kDelta, 0, kDelta, 0);
             bufOff = 0;

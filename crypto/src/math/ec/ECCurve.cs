@@ -173,7 +173,7 @@ namespace Org.BouncyCastle.Math.EC
 
             lock (table)
             {
-                return (PreCompInfo)table[name];
+                return table[name];
             }
         }
 

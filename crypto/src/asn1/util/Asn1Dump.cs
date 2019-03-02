@@ -78,7 +78,7 @@ namespace Org.BouncyCastle.Asn1.Utilities
 
                 DerTaggedObject o = (DerTaggedObject)obj;
 
-                buf.Append(((int)o.TagNo).ToString());
+                buf.Append(o.TagNo.ToString());
                 buf.Append(']');
 
                 if (!o.IsExplicit())

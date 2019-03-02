@@ -94,7 +94,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         public static short GetClientCertificateTypeExtensionServer(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.client_certificate_type);
-            return extensionData == null ? (short)-1 : (short)ReadCertificateTypeExtensionServer(extensionData);
+            return extensionData == null ? (short)-1 : ReadCertificateTypeExtensionServer(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
@@ -108,7 +108,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         public static short GetMaxFragmentLengthExtension(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.max_fragment_length);
-            return extensionData == null ? (short)-1 : (short)ReadMaxFragmentLengthExtension(extensionData);
+            return extensionData == null ? (short)-1 : ReadMaxFragmentLengthExtension(extensionData);
         }
 
         /// <exception cref="IOException"></exception>
@@ -129,7 +129,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         public static short GetServerCertificateTypeExtensionServer(IDictionary<int, byte[]> extensions)
         {
             byte[] extensionData = TlsUtilities.GetExtensionData(extensions, ExtensionType.server_certificate_type);
-            return extensionData == null ? (short)-1 : (short)ReadCertificateTypeExtensionServer(extensionData);
+            return extensionData == null ? (short)-1 : ReadCertificateTypeExtensionServer(extensionData);
         }
 
         /// <exception cref="IOException"></exception>

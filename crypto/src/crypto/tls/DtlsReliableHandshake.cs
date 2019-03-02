@@ -242,7 +242,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 }
                 else if (message_seq >= mNextReceiveSeq)
                 {
-                    DtlsReassembler reassembler = (DtlsReassembler)mCurrentInboundFlight[message_seq];
+                    DtlsReassembler reassembler = mCurrentInboundFlight[message_seq];
                     if (reassembler == null)
                     {
                         reassembler = new DtlsReassembler(msg_type, length);
@@ -259,7 +259,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                      * retransmit our last flight
                      */
 
-                    DtlsReassembler reassembler = (DtlsReassembler)mPreviousInboundFlight[message_seq];
+                    DtlsReassembler reassembler = mPreviousInboundFlight[message_seq];
                     if (reassembler != null)
                     {
                         reassembler.ContributeFragment(msg_type, length, buf, off + MessageHeaderLength, fragment_offset,
@@ -286,7 +286,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             mRecordLayer.ResetWriteEpoch();
             for (int i = 0; i < mOutboundFlight.Count; ++i)
             {
-                WriteMessage((Message)mOutboundFlight[i]);
+                WriteMessage(mOutboundFlight[i]);
             }
         }
 

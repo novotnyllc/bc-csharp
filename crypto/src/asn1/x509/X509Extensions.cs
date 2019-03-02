@@ -264,7 +264,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
             foreach (var oid in this.ordering)
             {
-                this.extensions.Add(oid, (X509Extension)extensions[oid]);
+                this.extensions.Add(oid, extensions[oid]);
             }
         }
 
@@ -283,7 +283,7 @@ namespace Org.BouncyCastle.Asn1.X509
             int count = 0;
             foreach (var oid in this.ordering)
             {
-                this.extensions.Add(oid, (X509Extension)values[count++]);
+                this.extensions.Add(oid, values[count++]);
             }
         }
 
@@ -325,7 +325,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 			foreach (var oid in ordering)
 			{
-                X509Extension ext = (X509Extension) extensions[oid];
+                X509Extension ext = extensions[oid];
                 Asn1EncodableVector	v = new Asn1EncodableVector(oid);
 
 				if (ext.IsCritical)
@@ -379,7 +379,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 			foreach (var oid in this.ordering)
             {
-				X509Extension ext = (X509Extension)extensions[oid];
+				X509Extension ext = extensions[oid];
 				if (ext.IsCritical == isCritical)
 				{
 					oids.Add(oid);

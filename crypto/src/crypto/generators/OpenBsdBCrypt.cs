@@ -47,7 +47,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 
             for (int i = 0; i < DecodingTable.Length; i++)
             {
-                DecodingTable[i] = (byte)0xff;
+                DecodingTable[i] = 0xff;
             }
 
             for (int i = 0; i < EncodingTable.Length; i++)
@@ -217,7 +217,7 @@ namespace Org.BouncyCastle.Crypto.Generators
             }
             else // key
             {
-                data[data.Length - 1] = (byte)0;
+                data[data.Length - 1] = 0;
             }
 
             MemoryStream mOut = new MemoryStream();

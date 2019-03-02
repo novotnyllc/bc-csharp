@@ -118,14 +118,14 @@ namespace Org.BouncyCastle.Crypto.Digests
         {
             base.Reset();
 
-            H0 = unchecked((int)0x67452301);
+            H0 = unchecked(0x67452301);
             H1 = unchecked((int)0xefcdab89);
             H2 = unchecked((int)0x98badcfe);
-            H3 = unchecked((int)0x10325476);
-            H4 = unchecked((int)0x76543210);
+            H3 = unchecked(0x10325476);
+            H4 = unchecked(0x76543210);
             H5 = unchecked((int)0xFEDCBA98);
             H6 = unchecked((int)0x89ABCDEF);
-            H7 = unchecked((int)0x01234567);
+            H7 = unchecked(0x01234567);
 
             xOff = 0;
 
@@ -188,12 +188,12 @@ namespace Org.BouncyCastle.Crypto.Digests
 
         private int F2(int a, int b, int c, int d, int x, int s)
         {
-            return RL(a + F2(b, c, d) + x + unchecked((int)0x5a827999), s);
+            return RL(a + F2(b, c, d) + x + unchecked(0x5a827999), s);
         }
 
         private int F3(int a, int b, int c, int d, int x, int s)
         {
-            return RL(a + F3(b, c, d) + x + unchecked((int)0x6ed9eba1), s);
+            return RL(a + F3(b, c, d) + x + unchecked(0x6ed9eba1), s);
         }
 
         private int F4(int a, int b, int c, int d, int x, int s)
@@ -208,17 +208,17 @@ namespace Org.BouncyCastle.Crypto.Digests
 
         private int FF2(int a, int b, int c, int d, int x, int s)
         {
-            return RL(a + F2(b, c, d) + x + unchecked((int)0x6d703ef3), s);
+            return RL(a + F2(b, c, d) + x + unchecked(0x6d703ef3), s);
         }
 
         private int FF3(int a, int b, int c, int d, int x, int s)
         {
-            return RL(a + F3(b, c, d) + x + unchecked((int)0x5c4dd124), s);
+            return RL(a + F3(b, c, d) + x + unchecked(0x5c4dd124), s);
         }
 
         private int FF4(int a, int b, int c, int d, int x, int s)
         {
-            return RL(a + F4(b, c, d) + x + unchecked((int)0x50a28be6), s);
+            return RL(a + F4(b, c, d) + x + unchecked(0x50a28be6), s);
         }
 
         internal override void ProcessBlock()

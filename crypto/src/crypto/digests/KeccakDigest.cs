@@ -141,7 +141,7 @@ namespace Org.BouncyCastle.Crypto.Digests
 
             this.rate = rate;
             Array.Clear(state, 0, state.Length);
-            Arrays.Fill(this.dataQueue, (byte)0);
+            Arrays.Fill(this.dataQueue, 0);
             this.bitsInQueue = 0;
             this.squeezing = false;
             this.fixedOutputLength = (1600 - rate) >> 1;
@@ -258,7 +258,7 @@ namespace Org.BouncyCastle.Crypto.Digests
                     KeccakExtract();
                     bitsInQueue = rate;
                 }
-                int partialBlock = (int)System.Math.Min((long)bitsInQueue, outputLength - i);
+                int partialBlock = (int)System.Math.Min(bitsInQueue, outputLength - i);
                 Array.Copy(dataQueue, (rate - bitsInQueue) >> 3, output, offset + (int)(i >> 3), partialBlock >> 3);
                 bitsInQueue -= partialBlock;
                 i += partialBlock;

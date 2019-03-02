@@ -46,7 +46,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			var list = table[selector];
 
-			return list == null ? null : (RecipientInformation) list[0];
+			return list == null ? null : list[0];
 		}
 
 		/**

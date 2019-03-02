@@ -83,7 +83,7 @@ namespace Org.BouncyCastle.Cms
 			if (oid == null)
 				throw new ArgumentNullException("oid");
 
-			string alg = (string) BaseCipherNames[oid];
+			string alg = BaseCipherNames[oid];
 
 			if (alg == null)
 				throw new ArgumentException("no name for " + oid, "oid");
@@ -99,7 +99,7 @@ namespace Org.BouncyCastle.Cms
 				throw new ArgumentException("no keysize for " + oid, "oid");
 			}
 
-			return (int) KeySizes[oid];
+			return KeySizes[oid];
 		}
 
 		internal static RecipientInformationStore BuildRecipientInformationStore(

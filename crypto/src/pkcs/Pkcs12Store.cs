@@ -493,16 +493,16 @@ namespace Org.BouncyCastle.Pkcs
                 X509CertificateEntry entryValue = (X509CertificateEntry) entry.Value;
                 if (entryValue.Certificate.Equals(cert))
                 {
-                    return (string) entry.Key;
+                    return entry.Key;
                 }
             }
 
             foreach (var entry in keyCerts)
             {
-                X509CertificateEntry entryValue = (X509CertificateEntry) entry.Value;
+                X509CertificateEntry entryValue = entry.Value;
                 if (entryValue.Certificate.Equals(cert))
                 {
-                    return (string) entry.Key;
+                    return entry.Key;
                 }
             }
 
@@ -555,7 +555,7 @@ namespace Org.BouncyCastle.Pkcs
                         {
                             foreach (var certId in chainCerts.Keys)
                             {
-                                X509CertificateEntry x509CertEntry = (X509CertificateEntry) chainCerts[certId];
+                                X509CertificateEntry x509CertEntry = chainCerts[certId];
 
                                 X509Certificate crt = x509CertEntry.Certificate;
 
@@ -592,7 +592,7 @@ namespace Org.BouncyCastle.Pkcs
                 X509CertificateEntry[] result = new X509CertificateEntry[cs.Count];
                 for (int i = 0; i < cs.Count; ++i)
                 {
-                    result[i] = (X509CertificateEntry)cs[i];
+                    result[i] = cs[i];
                 }
                 return result;
             }
@@ -663,11 +663,11 @@ namespace Org.BouncyCastle.Pkcs
 
             if (k != null)
             {
-                string id = (string)localIds[alias];
+                string id = localIds[alias];
                 if (id != null)
                 {
                     localIds.Remove(alias);
-                    c = (X509CertificateEntry)keyCerts[id];
+                    c = keyCerts[id];
                 }
                 if (c != null)
                 {
@@ -911,7 +911,7 @@ namespace Org.BouncyCastle.Pkcs
 
             foreach (var certId in chainCerts.Keys)
             {
-                X509CertificateEntry cert = (X509CertificateEntry)chainCerts[certId];
+                X509CertificateEntry cert = chainCerts[certId];
 
                 if (doneCerts.Contains(cert.Certificate))
                     continue;
@@ -1061,7 +1061,7 @@ namespace Org.BouncyCastle.Pkcs
                 string alias)
             {
                 string upper = Platform.ToUpperInvariant(alias);
-                string k = (string)keys[upper];
+                string k = keys[upper];
 
                 if (k == null)
                     return null;

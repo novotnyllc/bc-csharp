@@ -447,8 +447,8 @@ namespace Org.BouncyCastle.Crypto.Tls
             mPeer.NotifyAlertRaised(alertLevel, alertDescription, message, cause);
 
             byte[] error = new byte[2];
-            error[0] = (byte)alertLevel;
-            error[1] = (byte)alertDescription;
+            error[0] = alertLevel;
+            error[1] = alertDescription;
 
             SendRecord(ContentType.alert, error, 0, 2);
         }

@@ -52,7 +52,7 @@ namespace Org.BouncyCastle.Pkix
 
 			PkixCertPath holderCertPath = Rfc3281CertPathUtilities.ProcessAttrCert1(attrCert, pkixParams);
 			PkixCertPathValidatorResult result = Rfc3281CertPathUtilities.ProcessAttrCert2(certPath, pkixParams);
-			X509Certificate issuerCert = (X509Certificate)certPath.Certificates[0];
+			X509Certificate issuerCert = certPath.Certificates[0];
 			Rfc3281CertPathUtilities.ProcessAttrCert3(issuerCert, pkixParams);
 			Rfc3281CertPathUtilities.ProcessAttrCert4(issuerCert, pkixParams);
 			Rfc3281CertPathUtilities.ProcessAttrCert5(attrCert, pkixParams);

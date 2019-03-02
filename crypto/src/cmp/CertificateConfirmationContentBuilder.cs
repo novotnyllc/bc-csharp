@@ -44,8 +44,8 @@ namespace Org.BouncyCastle.Cmp
             Asn1EncodableVector v = new Asn1EncodableVector();
             for (int i = 0; i != acceptedCerts.Count; i++)
             {
-                X509Certificate cert = (X509Certificate)acceptedCerts[i];
-                BigInteger reqId = (BigInteger)acceptedReqIds[i];
+                X509Certificate cert = acceptedCerts[i];
+                BigInteger reqId = acceptedReqIds[i];
 
 
                 AlgorithmIdentifier algorithmIdentifier = sigAlgFinder.Find(cert.SigAlgName);

@@ -98,50 +98,50 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
 
             const long n = 1;
 
-            long t0 = (long)xx[12] + xx20 - n;
-            long t1 = (long)xx[13] + xx22;
-            long t2 = (long)xx[14] + xx22 + xx23;
-            long t3 = (long)xx[15] + xx23;
+            long t0 = xx[12] + xx20 - n;
+            long t1 = xx[13] + xx22;
+            long t2 = xx[14] + xx22 + xx23;
+            long t3 = xx[15] + xx23;
             long t4 = xx17 + xx21;
             long t5 = xx21 - xx23;
             long t6 = xx22 - xx23;
             long t7 = t0 + t5;
 
             long cc = 0;
-            cc += (long)xx[0] + t7;
+            cc += xx[0] + t7;
             z[0] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[1] + xx23 - t0 + t1;
+            cc += xx[1] + xx23 - t0 + t1;
             z[1] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[2] - xx21 - t1 + t2;
+            cc += xx[2] - xx21 - t1 + t2;
             z[2] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[3] - t2 + t3 + t7;
+            cc += xx[3] - t2 + t3 + t7;
             z[3] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[4] + xx16 + xx21 + t1 - t3 + t7;
+            cc += xx[4] + xx16 + xx21 + t1 - t3 + t7;
             z[4] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[5] - xx16 + t1 + t2 + t4;
+            cc += xx[5] - xx16 + t1 + t2 + t4;
             z[5] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[6] + xx18 - xx17 + t2 + t3;
+            cc += xx[6] + xx18 - xx17 + t2 + t3;
             z[6] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[7] + xx16 + xx19 - xx18 + t3;
+            cc += xx[7] + xx16 + xx19 - xx18 + t3;
             z[7] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[8] + xx16 + xx17 + xx20 - xx19;
+            cc += xx[8] + xx16 + xx17 + xx20 - xx19;
             z[8] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[9] + xx18 - xx20 + t4;
+            cc += xx[9] + xx18 - xx20 + t4;
             z[9] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[10] + xx18 + xx19 - t5 + t6;
+            cc += xx[10] + xx18 + xx19 - t5 + t6;
             z[10] = (uint)cc;
             cc >>= 32;
-            cc += (long)xx[11] + xx19 + xx20 - t6;
+            cc += xx[11] + xx19 + xx20 - t6;
             z[11] = (uint)cc;
             cc >>= 32;
             cc += n;
@@ -159,22 +159,22 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             {
                 long xx12 = x;
 
-                cc += (long)z[0] + xx12;
+                cc += z[0] + xx12;
                 z[0] = (uint)cc;
                 cc >>= 32;
-                cc += (long)z[1] - xx12;
+                cc += z[1] - xx12;
                 z[1] = (uint)cc;
                 cc >>= 32;
                 if (cc != 0)
                 {
-                    cc += (long)z[2];
+                    cc += z[2];
                     z[2] = (uint)cc;
                     cc >>= 32;
                 }
-                cc += (long)z[3] + xx12;
+                cc += z[3] + xx12;
                 z[3] = (uint)cc;
                 cc >>= 32;
-                cc += (long)z[4] + xx12;
+                cc += z[4] + xx12;
                 z[4] = (uint)cc;
                 cc >>= 32;
 
@@ -250,7 +250,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[2];
+                c += z[2];
                 z[2] = (uint)c;
                 c >>= 32;
             }
@@ -276,7 +276,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             c >>= 32;
             if (c != 0)
             {
-                c += (long)z[2];
+                c += z[2];
                 z[2] = (uint)c;
                 c >>= 32;
             }

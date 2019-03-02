@@ -739,7 +739,7 @@ namespace Org.BouncyCastle.Asn1.X9
         public static string GetName(
             DerObjectIdentifier oid)
         {
-            return (string)names[oid];
+            return names[oid];
         }
 
         /**

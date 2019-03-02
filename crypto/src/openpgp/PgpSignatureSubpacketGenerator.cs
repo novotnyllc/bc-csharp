@@ -202,7 +202,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             SignatureSubpacket[] a = new SignatureSubpacket[list.Count];
             for (int i = 0; i < list.Count; ++i)
             {
-                a[i] = (SignatureSubpacket)list[i];
+                a[i] = list[i];
             }
             return new PgpSignatureSubpacketVector(a);
         }

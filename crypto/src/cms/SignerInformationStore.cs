@@ -64,7 +64,7 @@ namespace Org.BouncyCastle.Cms
         {
             var list = table[selector];
 
-            return list == null ? null : (SignerInformation) list[0];
+            return list == null ? null : list[0];
         }
 
         /// <summary>The number of signers in the collection.</summary>

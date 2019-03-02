@@ -78,7 +78,7 @@ namespace Org.BouncyCastle.Bcpg
 
 				for (int i = 0; i != hashedData.Length; i++)
                 {
-                    SignatureSubpacket p = (SignatureSubpacket)v[i];
+                    SignatureSubpacket p = v[i];
                     if (p is IssuerKeyId)
                     {
                         keyId = ((IssuerKeyId)p).KeyId;
@@ -110,7 +110,7 @@ namespace Org.BouncyCastle.Bcpg
 
 				for (int i = 0; i != unhashedData.Length; i++)
                 {
-                    SignatureSubpacket p = (SignatureSubpacket)v[i];
+                    SignatureSubpacket p = v[i];
                     if (p is IssuerKeyId)
                     {
                         keyId = ((IssuerKeyId)p).KeyId;
@@ -312,7 +312,7 @@ namespace Org.BouncyCastle.Bcpg
 				byte[] hData = sOut.ToArray();
 
 				sOut.WriteByte((byte)this.Version);
-                sOut.WriteByte((byte)0xff);
+                sOut.WriteByte(0xff);
                 sOut.WriteByte((byte)(hData.Length>> 24));
                 sOut.WriteByte((byte)(hData.Length >> 16));
                 sOut.WriteByte((byte)(hData.Length >> 8));

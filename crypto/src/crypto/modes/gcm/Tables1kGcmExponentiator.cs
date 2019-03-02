@@ -15,7 +15,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
         public void Init(byte[] x)
         {
             uint[] y = GcmUtilities.AsUints(x);
-            if (lookupPowX2 != null && Arrays.AreEqual(y, (uint[])lookupPowX2[0]))
+            if (lookupPowX2 != null && Arrays.AreEqual(y, lookupPowX2[0]))
                 return;
 
             lookupPowX2 = Platform.CreateList<uint[]>(8);
@@ -31,7 +31,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
                 if ((pow & 1L) != 0)
                 {
                     EnsureAvailable(bit);
-                    GcmUtilities.Multiply(y, (uint[])lookupPowX2[bit]);
+                    GcmUtilities.Multiply(y, lookupPowX2[bit]);
                 }
                 ++bit;
                 pow >>= 1;
@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
             int count = lookupPowX2.Count;
             if (count <= bit)
             {
-                uint[] tmp = (uint[])lookupPowX2[count - 1];
+                uint[] tmp = lookupPowX2[count - 1];
                 do
                 {
                     tmp = Arrays.Clone(tmp);

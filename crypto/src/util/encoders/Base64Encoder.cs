@@ -31,7 +31,7 @@ namespace Org.BouncyCastle.Utilities.Encoders
 
         protected void InitialiseDecodingTable()
         {
-            Arrays.Fill(decodingTable, (byte)0xff);
+            Arrays.Fill(decodingTable, 0xff);
 
             for (int i = 0; i < encodingTable.Length; i++)
             {

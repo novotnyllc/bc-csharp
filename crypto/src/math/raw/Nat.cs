@@ -94,10 +94,10 @@ namespace Org.BouncyCastle.Math.Raw
         public static uint AddDWordAt(int len, ulong x, uint[] z, int zPos)
         {
             Debug.Assert(zPos <= (len - 2));
-            ulong c = (ulong)z[zPos + 0] + (x & M);
+            ulong c = z[zPos + 0] + (x & M);
             z[zPos + 0] = (uint)c;
             c >>= 32;
-            c += (ulong)z[zPos + 1] + (x >> 32);
+            c += z[zPos + 1] + (x >> 32);
             z[zPos + 1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : IncAt(len, z, zPos + 2);
@@ -106,10 +106,10 @@ namespace Org.BouncyCastle.Math.Raw
         public static uint AddDWordAt(int len, ulong x, uint[] z, int zOff, int zPos)
         {
             Debug.Assert(zPos <= (len - 2));
-            ulong c = (ulong)z[zOff + zPos] + (x & M);
+            ulong c = z[zOff + zPos] + (x & M);
             z[zOff + zPos] = (uint)c;
             c >>= 32;
-            c += (ulong)z[zOff + zPos + 1] + (x >> 32);
+            c += z[zOff + zPos + 1] + (x >> 32);
             z[zOff + zPos + 1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : IncAt(len, z, zOff, zPos + 2);
@@ -117,10 +117,10 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint AddDWordTo(int len, ulong x, uint[] z)
         {
-            ulong c = (ulong)z[0] + (x & M);
+            ulong c = z[0] + (x & M);
             z[0] = (uint)c;
             c >>= 32;
-            c += (ulong)z[1] + (x >> 32);
+            c += z[1] + (x >> 32);
             z[1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : IncAt(len, z, 2);
@@ -128,10 +128,10 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint AddDWordTo(int len, ulong x, uint[] z, int zOff)
         {
-            ulong c = (ulong)z[zOff + 0] + (x & M);
+            ulong c = z[zOff + 0] + (x & M);
             z[zOff + 0] = (uint)c;
             c >>= 32;
-            c += (ulong)z[zOff + 1] + (x >> 32);
+            c += z[zOff + 1] + (x >> 32);
             z[zOff + 1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : IncAt(len, z, zOff, 2);
@@ -545,7 +545,7 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint Mul31BothAdd(int len, uint a, uint[] x, uint b, uint[] y, uint[] z, int zOff)
         {
-            ulong c = 0, aVal = (ulong)a, bVal = (ulong)b;
+            ulong c = 0, aVal = a, bVal = b;
             int i = 0;
             do
             {
@@ -559,7 +559,7 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint MulWord(int len, uint x, uint[] y, uint[] z)
         {
-            ulong c = 0, xVal = (ulong)x;
+            ulong c = 0, xVal = x;
             int i = 0;
             do
             {
@@ -573,7 +573,7 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint MulWord(int len, uint x, uint[] y, int yOff, uint[] z, int zOff)
         {
-            ulong c = 0, xVal = (ulong)x;
+            ulong c = 0, xVal = x;
             int i = 0;
             do
             {
@@ -587,7 +587,7 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint MulWordAddTo(int len, uint x, uint[] y, int yOff, uint[] z, int zOff)
         {
-            ulong c = 0, xVal = (ulong)x;
+            ulong c = 0, xVal = x;
             int i = 0;
             do
             {
@@ -602,14 +602,14 @@ namespace Org.BouncyCastle.Math.Raw
         public static uint MulWordDwordAddAt(int len, uint x, ulong y, uint[] z, int zPos)
         {
             Debug.Assert(zPos <= (len - 3));
-            ulong c = 0, xVal = (ulong)x;
+            ulong c = 0, xVal = x;
             c += xVal * (uint)y + z[zPos + 0];
             z[zPos + 0] = (uint)c;
             c >>= 32;
             c += xVal * (y >> 32) + z[zPos + 1];
             z[zPos + 1] = (uint)c;
             c >>= 32;
-            c += (ulong)z[zPos + 2];
+            c += z[zPos + 2];
             z[zPos + 2] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : IncAt(len, z, zPos + 3);
@@ -861,7 +861,7 @@ namespace Org.BouncyCastle.Math.Raw
             int j = len, k = extLen;
             do
             {
-                ulong xVal = (ulong)x[--j];
+                ulong xVal = x[--j];
                 ulong p = xVal * xVal;
                 zz[--k] = (c << 31) | (uint)(p >> 33);
                 zz[--k] = (uint)(p >> 1);
@@ -885,7 +885,7 @@ namespace Org.BouncyCastle.Math.Raw
             int j = len, k = extLen;
             do
             {
-                ulong xVal = (ulong)x[xOff + --j];
+                ulong xVal = x[xOff + --j];
                 ulong p = xVal * xVal;
                 zz[zzOff + --k] = (c << 31) | (uint)(p >> 33);
                 zz[zzOff + --k] = (uint)(p >> 1);
@@ -904,7 +904,7 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint SquareWordAdd(uint[] x, int xPos, uint[] z)
         {
-            ulong c = 0, xVal = (ulong)x[xPos];
+            ulong c = 0, xVal = x[xPos];
             int i = 0;
             do
             {
@@ -918,7 +918,7 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static uint SquareWordAdd(uint[] x, int xOff, int xPos, uint[] z, int zOff)
         {
-            ulong c = 0, xVal = (ulong)x[xOff + xPos];
+            ulong c = 0, xVal = x[xOff + xPos];
             int i = 0;
             do
             {
@@ -1027,10 +1027,10 @@ namespace Org.BouncyCastle.Math.Raw
         public static int SubDWordAt(int len, ulong x, uint[] z, int zPos)
         {
             Debug.Assert(zPos <= (len - 2));
-            long c = (long)z[zPos + 0] - (long)(x & M);
+            long c = z[zPos + 0] - (long)(x & M);
             z[zPos + 0] = (uint)c;
             c >>= 32;
-            c += (long)z[zPos + 1] - (long)(x >> 32);
+            c += z[zPos + 1] - (long)(x >> 32);
             z[zPos + 1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : DecAt(len, z, zPos + 2);
@@ -1039,10 +1039,10 @@ namespace Org.BouncyCastle.Math.Raw
         public static int SubDWordAt(int len, ulong x, uint[] z, int zOff, int zPos)
         {
             Debug.Assert(zPos <= (len - 2));
-            long c = (long)z[zOff + zPos] - (long)(x & M);
+            long c = z[zOff + zPos] - (long)(x & M);
             z[zOff + zPos] = (uint)c;
             c >>= 32;
-            c += (long)z[zOff + zPos + 1] - (long)(x >> 32);
+            c += z[zOff + zPos + 1] - (long)(x >> 32);
             z[zOff + zPos + 1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : DecAt(len, z,  zOff, zPos + 2);
@@ -1050,10 +1050,10 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static int SubDWordFrom(int len, ulong x, uint[] z)
         {
-            long c = (long)z[0] - (long)(x & M);
+            long c = z[0] - (long)(x & M);
             z[0] = (uint)c;
             c >>= 32;
-            c += (long)z[1] - (long)(x >> 32);
+            c += z[1] - (long)(x >> 32);
             z[1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : DecAt(len, z, 2);
@@ -1061,10 +1061,10 @@ namespace Org.BouncyCastle.Math.Raw
 
         public static int SubDWordFrom(int len, ulong x, uint[] z, int zOff)
         {
-            long c = (long)z[zOff + 0] - (long)(x & M);
+            long c = z[zOff + 0] - (long)(x & M);
             z[zOff + 0] = (uint)c;
             c >>= 32;
-            c += (long)z[zOff + 1] - (long)(x >> 32);
+            c += z[zOff + 1] - (long)(x >> 32);
             z[zOff + 1] = (uint)c;
             c >>= 32;
             return c == 0 ? 0 : DecAt(len, z, zOff, 2);

@@ -111,7 +111,7 @@ namespace Org.BouncyCastle.Security
 		public static string GetAlgorithmName(
 			DerObjectIdentifier oid)
 		{
-			return (string)algorithms[oid.Id];
+			return algorithms[oid.Id];
 		}
 
         private static string GetMechanism(string algorithm)

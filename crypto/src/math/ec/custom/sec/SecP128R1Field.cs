@@ -118,16 +118,16 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             {
                 ulong c, x4 = x;
     
-                c = (ulong)z[0] + x4;
+                c = z[0] + x4;
                 z[0] = (uint)c; c >>= 32;
                 if (c != 0)
                 {
-                    c += (ulong)z[1];
+                    c += z[1];
                     z[1] = (uint)c; c >>= 32;
-                    c += (ulong)z[2];
+                    c += z[2];
                     z[2] = (uint)c; c >>= 32;
                 }
-                c += (ulong)z[3] + (x4 << 1);
+                c += z[3] + (x4 << 1);
                 z[3] = (uint)c; c >>= 32;
 
                 Debug.Assert(c >= 0 && c <= 2);
@@ -191,9 +191,9 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             z[0] = (uint)c; c >>= 32;
             if (c != 0)
             {
-                c += (long)z[1];
+                c += z[1];
                 z[1] = (uint)c; c >>= 32;
-                c += (long)z[2];
+                c += z[2];
                 z[2] = (uint)c; c >>= 32;
             }
             c += (long)z[3] + 2;
@@ -206,9 +206,9 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
             z[0] = (uint)c; c >>= 32;
             if (c != 0)
             {
-                c += (long)z[1];
+                c += z[1];
                 z[1] = (uint)c; c >>= 32;
-                c += (long)z[2];
+                c += z[2];
                 z[2] = (uint)c; c >>= 32;
             }
             c += (long)z[3] - 2;

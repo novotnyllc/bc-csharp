@@ -43,12 +43,12 @@ namespace Org.BouncyCastle.Crypto.Paddings
 		{
 			int added = (input.Length - inOff);
 
-			input[inOff]= (byte) 0x80;
+			input[inOff]= 0x80;
 			inOff ++;
 
 			while (inOff < input.Length)
 			{
-				input[inOff] = (byte) 0;
+				input[inOff] = 0;
 				inOff++;
 			}
 
@@ -68,7 +68,7 @@ namespace Org.BouncyCastle.Crypto.Paddings
 				count--;
 			}
 
-			if (input[count] != (byte)0x80)
+			if (input[count] != 0x80)
 			{
 				throw new InvalidCipherTextException("pad block corrupted");
 			}

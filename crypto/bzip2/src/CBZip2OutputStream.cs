@@ -1068,7 +1068,7 @@ namespace Org.BouncyCastle.Apache.Bzip2
                         if (unLo > unHi) {
                             break;
                         }
-                        n = ((int) block[zptr[unLo] + d + 1]) - med;
+                        n = block[zptr[unLo] + d + 1] - med;
                         if (n == 0) {
                             int temp = 0;
                             temp = zptr[unLo];
@@ -1087,7 +1087,7 @@ namespace Org.BouncyCastle.Apache.Bzip2
                         if (unLo > unHi) {
                             break;
                         }
-                        n = ((int) block[zptr[unHi] + d + 1]) - med;
+                        n = block[zptr[unHi] + d + 1] - med;
                         if (n == 0) {
                             int temp = 0;
                             temp = zptr[unHi];
@@ -1167,7 +1167,7 @@ namespace Org.BouncyCastle.Apache.Bzip2
                 quadrant[i] = 0;
             }
 
-            block[0] = (char) (block[last + 1]);
+            block[0] = block[last + 1];
 
             if (last < 4000) {
                 /*
@@ -1605,12 +1605,12 @@ namespace Org.BouncyCastle.Apache.Bzip2
                         while (true) {
                             switch (zPend % 2) {
                             case 0:
-                                szptr[wr] = (short) BZip2Constants.RUNA;
+                                szptr[wr] = BZip2Constants.RUNA;
                                 wr++;
                                 mtfFreq[BZip2Constants.RUNA]++;
                                 break;
                             case 1:
-                                szptr[wr] = (short) BZip2Constants.RUNB;
+                                szptr[wr] = BZip2Constants.RUNB;
                                 wr++;
                                 mtfFreq[BZip2Constants.RUNB]++;
                                 break;
@@ -1633,12 +1633,12 @@ namespace Org.BouncyCastle.Apache.Bzip2
                 while (true) {
                     switch (zPend % 2) {
                     case 0:
-                        szptr[wr] = (short) BZip2Constants.RUNA;
+                        szptr[wr] = BZip2Constants.RUNA;
                         wr++;
                         mtfFreq[BZip2Constants.RUNA]++;
                         break;
                     case 1:
-                        szptr[wr] = (short) BZip2Constants.RUNB;
+                        szptr[wr] = BZip2Constants.RUNB;
                         wr++;
                         mtfFreq[BZip2Constants.RUNB]++;
                         break;

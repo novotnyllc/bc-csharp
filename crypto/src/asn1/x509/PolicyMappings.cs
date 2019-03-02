@@ -44,7 +44,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 			foreach (var idp in mappings.Keys)
 			{
-				string sdp = (string) mappings[idp];
+				string sdp = mappings[idp];
 
 				v.Add(
 					new DerSequence(

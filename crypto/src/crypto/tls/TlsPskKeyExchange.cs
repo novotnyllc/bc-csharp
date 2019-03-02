@@ -285,7 +285,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             TlsUtilities.WriteOpaque16(other_secret, buf);
             TlsUtilities.WriteOpaque16(mPsk, buf);
 
-            Arrays.Fill(mPsk, (byte)0);
+            Arrays.Fill(mPsk, 0);
             this.mPsk = null;
 
             return buf.ToArray();

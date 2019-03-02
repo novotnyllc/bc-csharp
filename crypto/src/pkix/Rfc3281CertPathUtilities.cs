@@ -420,8 +420,8 @@ namespace Org.BouncyCastle.Pkix
 			}
 
 			// verify cert paths for PKCs
-			PkixBuilderParameters parameters = (PkixBuilderParameters)
-				PkixBuilderParameters.GetInstance(pkixParams);
+			PkixBuilderParameters parameters =
+                PkixBuilderParameters.GetInstance(pkixParams);
 
 			PkixCertPathValidatorException lastException = null;
 			foreach (var cert in holderPKCs)
@@ -515,7 +515,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				try
 				{
-					X509Crl crl = (X509Crl) crl_iter.Current;
+					X509Crl crl = crl_iter.Current;
 
 					// (d)
 					ReasonsMask interimReasonsMask = Rfc3280CertPathUtilities.ProcessCrlD(crl, dp);

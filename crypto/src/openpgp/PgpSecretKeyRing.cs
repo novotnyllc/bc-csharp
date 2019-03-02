@@ -116,13 +116,13 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         /// <summary>Return the public key for the master key.</summary>
         public PgpPublicKey GetPublicKey()
         {
-            return ((PgpSecretKey) keys[0]).PublicKey;
+            return keys[0].PublicKey;
         }
 
         /// <summary>Return the master private key.</summary>
         public PgpSecretKey GetSecretKey()
         {
-            return (PgpSecretKey) keys[0];
+            return keys[0];
         }
 
         /// <summary>Allows enumeration of the secret keys.</summary>
@@ -252,7 +252,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
             for (int i = 0; i != keys.Count; i++)
             {
-                PgpSecretKey key = (PgpSecretKey) keys[i];
+                PgpSecretKey key = keys[i];
 
                 if (key.KeyId == secKey.KeyId)
                 {
@@ -296,7 +296,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
             for (int i = 0; i < keys.Count; i++)
             {
-                PgpSecretKey key = (PgpSecretKey)keys[i];
+                PgpSecretKey key = keys[i];
 
                 if (key.KeyId == secKey.KeyId)
                 {

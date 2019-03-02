@@ -25,7 +25,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             UserAttributeSubpacket[] a = new UserAttributeSubpacket[list.Count];
             for (int i = 0; i < list.Count; ++i)
             {
-                a[i] = (UserAttributeSubpacket)list[i];
+                a[i] = list[i];
             }
             return new PgpUserAttributeSubpacketVector(a);
 		}

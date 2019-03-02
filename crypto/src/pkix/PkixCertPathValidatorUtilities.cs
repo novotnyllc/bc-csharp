@@ -85,7 +85,7 @@ namespace Org.BouncyCastle.Pkix
 
 			while (iter.MoveNext() && trust == null)
 			{
-				trust = (TrustAnchor) iter.Current;
+				trust = iter.Current;
 				if (trust.TrustedCert != null)
 				{
 					if (certSelectX509.Match(trust.TrustedCert))
@@ -336,7 +336,7 @@ namespace Org.BouncyCastle.Pkix
 			IList<PkixPolicyNode>[] policyNodes,
 			PkixPolicyNode _node)
 		{
-			PkixPolicyNode _parent = (PkixPolicyNode)_node.Parent;
+			PkixPolicyNode _parent = _node.Parent;
 
 			if (validPolicyTree == null)
 			{
@@ -385,7 +385,7 @@ namespace Org.BouncyCastle.Pkix
 			IEnumerator<PkixPolicyNode> nodes_i = policyNodes[i].GetEnumerator();
 			while (nodes_i.MoveNext())
 			{
-				PkixPolicyNode node = (PkixPolicyNode)nodes_i.Current;
+				PkixPolicyNode node = nodes_i.Current;
 				if (node.ValidPolicy.Equals(id_p))
 				{
 					idp_found = true;
@@ -399,7 +399,7 @@ namespace Org.BouncyCastle.Pkix
 				nodes_i = policyNodes[i].GetEnumerator();
 				while (nodes_i.MoveNext())
 				{
-					PkixPolicyNode node = (PkixPolicyNode)nodes_i.Current;
+					PkixPolicyNode node = nodes_i.Current;
 					if (ANY_POLICY.Equals(node.ValidPolicy))
 					{
 						ISet<PolicyQualifierInfo> pq = null;
@@ -448,7 +448,7 @@ namespace Org.BouncyCastle.Pkix
 							ci = critExtOids.Contains(X509Extensions.CertificatePolicies.Id);
 						}
 
-						PkixPolicyNode p_node = (PkixPolicyNode)node.Parent;
+						PkixPolicyNode p_node = node.Parent;
 						if (ANY_POLICY.Equals(p_node.ValidPolicy))
 						{
 							PkixPolicyNode c_node = new PkixPolicyNode(
@@ -477,7 +477,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				if (node.ValidPolicy.Equals(id_p))
 				{
-					PkixPolicyNode p_node = (PkixPolicyNode)node.Parent;
+					PkixPolicyNode p_node = node.Parent;
 					p_node.RemoveChild(node);
 
 					// Removal of element at current iterator position not supported in C#
@@ -489,7 +489,7 @@ namespace Org.BouncyCastle.Pkix
 						var nodes = policyNodes[k];
 						for (int l = 0; l < nodes.Count; l++)
 						{
-							PkixPolicyNode node2 = (PkixPolicyNode)nodes[l];
+							PkixPolicyNode node2 = nodes[l];
 							if (!node2.HasChildren)
 							{
 								validPolicyTree = RemovePolicyNode(validPolicyTree, policyNodes, node2);
@@ -524,7 +524,7 @@ namespace Org.BouncyCastle.Pkix
 				throw new Exception("Bouncy Castle X509Crl could not be created.", exception);
 			}
 
-			X509CrlEntry crl_entry = (X509CrlEntry)bcCRL.GetRevokedCertificate(GetSerialNumber(cert));
+			X509CrlEntry crl_entry = bcCRL.GetRevokedCertificate(GetSerialNumber(cert));
 
 			if (crl_entry == null)
 				return;
@@ -598,7 +598,7 @@ namespace Org.BouncyCastle.Pkix
 			int		index)
 		{
 			//Only X509Certificate
-			X509Certificate cert = (X509Certificate)certs[index];
+			X509Certificate cert = certs[index];
 
 			AsymmetricKeyParameter pubKey = cert.GetPublicKey();
 
@@ -612,7 +612,7 @@ namespace Org.BouncyCastle.Pkix
 
 			for (int i = index + 1; i < certs.Count; i++)
 			{
-				X509Certificate parentCert = (X509Certificate)certs[i];
+				X509Certificate parentCert = certs[i];
 				pubKey = parentCert.GetPublicKey();
 
 				if (!(pubKey is DsaPublicKeyParameters))
@@ -663,7 +663,7 @@ namespace Org.BouncyCastle.Pkix
 				DerGeneralizedTime dateOfCertgen = null;
 				try
 				{
-					X509Certificate cert = (X509Certificate)certPath.Certificates[index - 1];
+					X509Certificate cert = certPath.Certificates[index - 1];
 					Asn1OctetString extVal = cert.GetExtensionValue(
 						IsisMttObjectIdentifiers.IdIsisMttATDateOfCertGen);
 					dateOfCertgen = DerGeneralizedTime.GetInstance(extVal);
@@ -688,7 +688,7 @@ namespace Org.BouncyCastle.Pkix
 				}
 			}
 
-			return ((X509Certificate)certPath.Certificates[index - 1]).NotBefore;
+			return certPath.Certificates[index - 1].NotBefore;
 		}
 
 		/// <summary>
@@ -792,7 +792,7 @@ namespace Org.BouncyCastle.Pkix
 				// add and check issuer principals
 				for (var it = issuerPrincipals.GetEnumerator(); it.MoveNext(); )
 				{
-					issuers.Add((X509Name)it.Current);
+					issuers.Add(it.Current);
 				}
 			}
 			// TODO: is not found although this should correctly add the rel name. selector of Sun is buggy here or PKI test case is invalid
@@ -1091,7 +1091,7 @@ namespace Org.BouncyCastle.Pkix
 
 			for (int j = 0; j < policyNodeVec.Count; j++)
 			{
-				PkixPolicyNode node = (PkixPolicyNode)policyNodeVec[j];
+				PkixPolicyNode node = policyNodeVec[j];
 				var expectedPolicies = node.ExpectedPolicies;
 
 				if (expectedPolicies.Contains(pOid.Id))
@@ -1126,7 +1126,7 @@ namespace Org.BouncyCastle.Pkix
 
 			for (int j = 0; j < policyNodeVec.Count; j++)
 			{
-				PkixPolicyNode _node = (PkixPolicyNode)policyNodeVec[j];
+				PkixPolicyNode _node = policyNodeVec[j];
 
 				if (ANY_POLICY.Equals(_node.ValidPolicy))
 				{

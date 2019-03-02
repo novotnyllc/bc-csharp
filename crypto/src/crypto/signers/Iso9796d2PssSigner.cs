@@ -394,7 +394,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 
             int off = block.Length - messageLength - salt.Length - hLen - tLength - 1;
 
-            block[off] = (byte) (0x01);
+            block[off] = 0x01;
 
             Array.Copy(mBuf, 0, block, off + 1, messageLength);
             Array.Copy(salt, 0, block, off + 1 + messageLength, salt.Length);
@@ -409,7 +409,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 
             if (trailer == IsoTrailers.TRAILER_IMPLICIT)
             {
-                block[block.Length - 1] = (byte)IsoTrailers.TRAILER_IMPLICIT;
+                block[block.Length - 1] = IsoTrailers.TRAILER_IMPLICIT;
             }
             else
             {
@@ -417,7 +417,7 @@ namespace Org.BouncyCastle.Crypto.Signers
                 block[block.Length - 1] = (byte) trailer;
             }
 
-            block[0] &= (byte) (0x7f);
+            block[0] &= 0x7f;
 
             byte[] b = cipher.ProcessBlock(block, 0, block.Length);
 
