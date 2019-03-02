@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Reflection;
 using System.Text;
-
+using NUnit.Framework;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Utilities.Test
@@ -24,14 +24,14 @@ namespace Org.BouncyCastle.Utilities.Test
         internal void Fail(
             string message)
         {
-            throw new TestFailedException(SimpleTestResult.Failed(this, message));
+            Assert.Fail(message);
         }
 
         internal void Fail(
             string		message,
             Exception	throwable)
         {
-            throw new TestFailedException(SimpleTestResult.Failed(this, message, throwable));
+            Assert.Fail(message, throwable);
         }
 
 		internal void Fail(
@@ -39,56 +39,42 @@ namespace Org.BouncyCastle.Utilities.Test
             object expected,
             object found)
         {
-            throw new TestFailedException(SimpleTestResult.Failed(this, message, expected, found));
+            Assert.Fail(message, expected, found);
         }
 
         internal void IsTrue(bool value)
         {
-            if (!value)
-                throw new TestFailedException(SimpleTestResult.Failed(this, "no message"));
+            Assert.IsTrue(value, "no message");
         }
 
         internal void IsTrue(string message, bool value)
         {
-            if (!value)
-                throw new TestFailedException(SimpleTestResult.Failed(this, message));
+            Assert.IsTrue(value, message);
         }
 
         internal void IsEquals(object a, object b)
         {
-            if (!a.Equals(b))
-                throw new TestFailedException(SimpleTestResult.Failed(this, "no message"));
+            Assert.AreEqual(a, b, "no message");
         }
 
         internal void IsEquals(int a, int b)
         {
-            if (a != b)
-                throw new TestFailedException(SimpleTestResult.Failed(this, "no message"));
+            Assert.AreEqual(a, b, "no message");
         }
 
         internal void IsEquals(string message, bool a, bool b)
         {
-            if (a != b)
-                throw new TestFailedException(SimpleTestResult.Failed(this, message));
+            Assert.AreEqual(a, b, message);
         }
 
         internal void IsEquals(string message, long a, long b)
         {
-            if (a != b)
-                throw new TestFailedException(SimpleTestResult.Failed(this, message));
+            Assert.AreEqual(a, b, message);
         }
 
         internal void IsEquals(string message, object a, object b)
         {
-            if (a == null && b == null)
-                return;
-
-            if (a == null)
-                throw new TestFailedException(SimpleTestResult.Failed(this, message));
-            if (b == null)
-                throw new TestFailedException(SimpleTestResult.Failed(this, message));
-            if (!a.Equals(b))
-                throw new TestFailedException(SimpleTestResult.Failed(this, message));
+            Assert.AreEqual(a, b, message);
         }
 
         internal bool AreEqual(
@@ -100,20 +86,9 @@ namespace Org.BouncyCastle.Utilities.Test
 
 		public virtual ITestResult Perform()
         {
-            try
-            {
-                PerformTest();
+            PerformTest();
 
-				return Success();
-            }
-            catch (TestFailedException e)
-            {
-                return e.GetResult();
-            }
-            catch (Exception e)
-            {
-                return SimpleTestResult.Failed(this, "Exception: " +  e, e);
-            }
+			return Success();
         }
 
 		internal static void RunTest(

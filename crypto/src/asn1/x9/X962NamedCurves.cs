@@ -714,7 +714,8 @@ namespace Org.BouncyCastle.Asn1.X9
         public static X9ECParameters GetByOid(
             DerObjectIdentifier oid)
         {
-            X9ECParametersHolder holder = (X9ECParametersHolder)curves[oid];
+            X9ECParametersHolder holder;
+            curves.TryGetValue(oid, out holder);
             return holder == null ? null : holder.Parameters;
         }
 
@@ -727,7 +728,9 @@ namespace Org.BouncyCastle.Asn1.X9
         public static DerObjectIdentifier GetOid(
             string name)
         {
-            return (DerObjectIdentifier)objIds[Platform.ToUpperInvariant(name)];
+            DerObjectIdentifier oid;
+            objIds.TryGetValue(Platform.ToUpperInvariant(name), out oid);
+            return oid;
         }
 
         /**

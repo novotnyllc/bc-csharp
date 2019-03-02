@@ -213,7 +213,9 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         public static ECDomainParameters GetByOid(
             DerObjectIdentifier oid)
         {
-            return (ECDomainParameters)parameters[oid];
+            ECDomainParameters parameter;
+            parameters.TryGetValue(oid, out parameter);
+            return parameter;
         }
 
         /**
@@ -228,9 +230,9 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         public static ECDomainParameters GetByName(
             string name)
         {
-            DerObjectIdentifier oid = (DerObjectIdentifier)objIds[name];
+            DerObjectIdentifier oid;
 
-            if (oid != null)
+            if (objIds.TryGetValue(name, out oid))
             {
                 return (ECDomainParameters)parameters[oid];
             }

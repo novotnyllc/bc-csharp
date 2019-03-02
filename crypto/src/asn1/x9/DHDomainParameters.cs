@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Asn1.X9
@@ -68,7 +68,7 @@ namespace Org.BouncyCastle.Asn1.X9
 			}
 		}
 
-		private static Asn1Encodable GetNext(IEnumerator e)
+		private static Asn1Encodable GetNext(IEnumerator<Asn1Encodable> e)
 		{
 			return e.MoveNext() ? (Asn1Encodable)e.Current : null;
 		}

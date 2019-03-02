@@ -264,7 +264,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
 			sGen.InitSign(PgpSignature.CanonicalTextDocument, pgpPrivKey);
 
-			IEnumerator    it = pgpSecKey.PublicKey.GetUserIds().GetEnumerator();
+            var it = pgpSecKey.PublicKey.GetUserIds().GetEnumerator();
 			if (it.MoveNext())
 			{
 				spGen.SetSignerUserId(false, (string)it.Current);

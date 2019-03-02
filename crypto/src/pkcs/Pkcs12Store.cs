@@ -429,7 +429,9 @@ namespace Org.BouncyCastle.Pkcs
 
             foreach (string a in keys.Keys)
             {
-                if (tab[a] == null)
+                string t;
+                tab.TryGetValue(a, out t);
+                if (t == null)
                 {
                     tab[a] = "key";
                 }
@@ -465,14 +467,15 @@ namespace Org.BouncyCastle.Pkcs
             //
             if (c == null)
             {
-                string id = (string)localIds[alias];
+                string id;
+                localIds.TryGetValue(alias, out id);
                 if (id != null)
                 {
-                    c = (X509CertificateEntry)keyCerts[id];
+                    keyCerts.TryGetValue(id, out c);
                 }
                 else
                 {
-                    c = (X509CertificateEntry)keyCerts[alias];
+                    keyCerts.TryGetValue(alias, out c);
                 }
             }
 
@@ -536,7 +539,7 @@ namespace Org.BouncyCastle.Pkcs
 
                         if (id.GetKeyIdentifier() != null)
                         {
-                            nextC = (X509CertificateEntry) chainCerts[new CertId(id.GetKeyIdentifier())];
+                            chainCerts.TryGetValue(new CertId(id.GetKeyIdentifier()), out nextC);
                         }
                     }
 
@@ -1081,8 +1084,8 @@ namespace Org.BouncyCastle.Pkcs
                 get
                 {
                     string upper = Platform.ToUpperInvariant(alias);
-                    string k = (string)keys[upper];
-
+                    string k;
+                    keys.TryGetValue(upper, out k);
                     if (k == null)
                         return null;
 
@@ -1091,7 +1094,8 @@ namespace Org.BouncyCastle.Pkcs
                 set
                 {
                     string upper = Platform.ToUpperInvariant(alias);
-                    string k = (string)keys[upper];
+                    string k;
+                    keys.TryGetValue(upper, out k);
                     if (k != null)
                     {
                         orig.Remove(k);

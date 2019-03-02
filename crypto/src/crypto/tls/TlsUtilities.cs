@@ -634,7 +634,10 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public static byte[] GetExtensionData(IDictionary<int, byte[]> extensions, int extensionType)
         {
-            return extensions == null ? null : (byte[])extensions[extensionType];
+            if (extensions == null) return null;
+            byte[] extension;
+            extensions.TryGetValue(extensionType, out extension);
+            return extension;
         }
 
         public static IList<SignatureAndHashAlgorithm> GetDefaultSupportedSignatureAlgorithms()
@@ -692,7 +695,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /**
          * Add a 'signature_algorithms' extension to existing extensions.
          *
-         * @param extensions                   A {@link Hashtable} to add the extension to.
+         * @param extensions                   A {@link Dictionary} to add the extension to.
          * @param supportedSignatureAlgorithms {@link Vector} containing at least 1 {@link SignatureAndHashAlgorithm}.
          * @throws IOException
          */
@@ -704,7 +707,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /**
          * Get a 'signature_algorithms' extension from extensions.
          *
-         * @param extensions A {@link Hashtable} to get the extension from, if it is present.
+         * @param extensions A {@link Dictionary} to get the extension from, if it is present.
          * @return A {@link Vector} containing at least 1 {@link SignatureAndHashAlgorithm}, or null.
          * @throws IOException
          */

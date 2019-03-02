@@ -188,9 +188,9 @@ namespace Org.BouncyCastle.Security
             string algorithm)
         {
             string upper = Platform.ToUpperInvariant(algorithm);
-            string mechanism = (string) algorithms[upper];
+            string mechanism;
 
-            if (mechanism == null)
+            if (!algorithms.TryGetValue(upper, out mechanism))
             {
                 mechanism = upper;
             }

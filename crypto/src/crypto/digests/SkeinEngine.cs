@@ -655,7 +655,8 @@ namespace Org.BouncyCastle.Crypto.Digests
          */
         private void CreateInitialState()
         {
-            ulong[] precalc = (ulong[])INITIAL_STATES[VariantIdentifier(BlockSize, OutputSize)];
+            ulong[] precalc;
+            INITIAL_STATES.TryGetValue(VariantIdentifier(BlockSize, OutputSize), out precalc);
             if ((key == null) && (precalc != null))
             {
                 // Precalculated UBI(CFG)

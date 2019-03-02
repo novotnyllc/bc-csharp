@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -82,28 +83,33 @@ namespace Org.BouncyCastle.Asn1.X509
         : Asn1Encodable
     {
 		private class RevokedCertificatesEnumeration
-			: IEnumerable
+			: IEnumerable<Asn1Encodable>
 		{
-			private readonly IEnumerable en;
+			private readonly IEnumerable<Asn1Encodable> en;
 
 			internal RevokedCertificatesEnumeration(
-				IEnumerable en)
+				IEnumerable<Asn1Encodable> en)
 			{
 				this.en = en;
 			}
 
-			public IEnumerator GetEnumerator()
+			public IEnumerator<Asn1Encodable> GetEnumerator()
 			{
 				return new RevokedCertificatesEnumerator(en.GetEnumerator());
 			}
 
-			private class RevokedCertificatesEnumerator
-				: IEnumerator
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+
+            private class RevokedCertificatesEnumerator
+				: IEnumerator<Asn1Encodable>
 			{
-				private readonly IEnumerator e;
+				private readonly IEnumerator<Asn1Encodable> e;
 
 				internal RevokedCertificatesEnumerator(
-					IEnumerator e)
+					IEnumerator<Asn1Encodable> e)
 				{
 					this.e = e;
 				}
@@ -118,11 +124,24 @@ namespace Org.BouncyCastle.Asn1.X509
 					e.Reset();
 				}
 
-				public object Current
+                public void Dispose()
+                {
+                    e.Dispose();
+                }
+
+                public Asn1Encodable Current
 				{
 					get { return new CrlEntry(Asn1Sequence.GetInstance(e.Current)); }
 				}
-			}
+
+                object IEnumerator.Current
+                {
+                    get
+                    {
+                        return Current;
+                    }
+                }
+            }
 		}
 
 		internal Asn1Sequence			seq;
@@ -252,11 +271,11 @@ namespace Org.BouncyCastle.Asn1.X509
 			return entries;
 		}
 
-		public IEnumerable GetRevokedCertificateEnumeration()
+		public IEnumerable<Asn1Encodable> GetRevokedCertificateEnumeration()
 		{
 			if (revokedCertificates == null)
 			{
-				return EmptyEnumerable.Instance;
+                return Enumerable.Empty<Asn1Encodable>();
 			}
 
 			return new RevokedCertificatesEnumeration(revokedCertificates);

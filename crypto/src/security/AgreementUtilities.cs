@@ -117,7 +117,8 @@ namespace Org.BouncyCastle.Security
         private static string GetMechanism(string algorithm)
         {
             string upper = Platform.ToUpperInvariant(algorithm);
-            string mechanism = (string)algorithms[upper];
+            string mechanism;
+            algorithms.TryGetValue(upper, out mechanism);
             return mechanism == null ? upper : mechanism;
         }
 	}

@@ -544,7 +544,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             AsymmetricKeyParameter pubKey = pgpPub.GetPublicKey().GetKey();
 
-            IEnumerator enumerator = pgpPub.GetPublicKey().GetUserIds().GetEnumerator();
+            var enumerator = pgpPub.GetPublicKey().GetUserIds().GetEnumerator();
             enumerator.MoveNext();
             string uid = (string) enumerator.Current;
 
@@ -888,7 +888,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             key = tmpRing.GetPublicKey();
 
-            IEnumerator sgEnum = key.GetSignaturesOfType(PgpSignature.KeyRevocation).GetEnumerator();
+            var sgEnum = key.GetSignaturesOfType(PgpSignature.KeyRevocation).GetEnumerator();
             sgEnum.MoveNext();
             sig = (PgpSignature) sgEnum.Current;
 

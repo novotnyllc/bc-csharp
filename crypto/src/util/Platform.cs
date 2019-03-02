@@ -92,10 +92,6 @@ namespace Org.BouncyCastle.Utilities
         {
             return new List<T>(capacity);
         }
-        internal static IList<T> CreateArrayList<T>(ICollection<T> collection)
-        {
-            return collection.ToList();
-        }
         internal static IList<T> CreateArrayList<T>(IEnumerable<T> collection)
         {
             return collection.ToList();

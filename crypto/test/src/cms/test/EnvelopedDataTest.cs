@@ -714,7 +714,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			Assert.AreEqual("1.2.840.113549.3.2", ed.EncryptionAlgOid);
 
 			var c = recipients.GetRecipients();
-			IEnumerator e = c.GetEnumerator();
+            var e = c.GetEnumerator();
 
 			if (e.MoveNext())
 			{

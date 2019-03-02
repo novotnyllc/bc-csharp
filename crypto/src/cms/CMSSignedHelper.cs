@@ -173,9 +173,9 @@ namespace Org.BouncyCastle.Cms
         internal string GetEncryptionAlgName(
             string encryptionAlgOid)
         {
-			string algName = (string) encryptionAlgs[encryptionAlgOid];
-
-			if (algName != null)
+            string algName;
+            
+			if (encryptionAlgs.TryGetValue(encryptionAlgOid, out algName))
 			{
 				return algName;
 			}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Store;
@@ -16,11 +17,11 @@ namespace Org.BouncyCastle.Pkix
 			// get complete CRL(s)
 			try
 			{
-                foreach (var crl in FindCrls(crlselect, paramsPkix.GetAdditionalStores()))
+                foreach (var crl in FindCrls(crlselect, paramsPkix.GetAdditionalStores<X509Crl>()))
                 {
                     initialSet.Add(crl);
                 }
-                foreach (var crl in FindCrls(crlselect, paramsPkix.GetStores()))
+                foreach (var crl in FindCrls(crlselect, paramsPkix.GetStores<X509Crl>()))
                 {
                     initialSet.Add(crl);
                 }
@@ -69,7 +70,7 @@ namespace Org.BouncyCastle.Pkix
 			// get complete CRL(s)
 			try
 			{
-                foreach (var crl in FindCrls(crlselect, paramsPkix.GetStores()))
+                foreach (var crl in FindCrls(crlselect, paramsPkix.GetStores<X509Crl>()))
                 {
                     completeSet.Add(crl);
                 }
@@ -94,7 +95,7 @@ namespace Org.BouncyCastle.Pkix
 		/// <returns>a Collection of all found {@link X509CRL X509CRL} objects. May be
 		/// empty but never <code>null</code>.
 		/// </returns>
-		private ICollection<X509Crl> FindCrls(X509CrlStoreSelector crlSelect, IList<IX509Store<object>> crlStores)
+		private ICollection<X509Crl> FindCrls(X509CrlStoreSelector crlSelect, IList<IX509Store<X509Crl>> crlStores)
 		{
 		 var crls = new HashSet<X509Crl>();
 

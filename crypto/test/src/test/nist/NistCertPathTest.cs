@@ -678,8 +678,8 @@ namespace Org.BouncyCastle.Tests.Nist
 			PkixCertPathValidator validator = new PkixCertPathValidator();
 			PkixParameters parameters = new PkixParameters(trustedSet);
 
-			parameters.AddStore((IX509Store<object>)x509CertStore);
-			parameters.AddStore((IX509Store<object>)x509CrlStore);
+			parameters.AddStore(x509CertStore);
+			parameters.AddStore(x509CrlStore);
 			parameters.IsRevocationEnabled = true;
 
 			if (policies != null)
@@ -751,8 +751,8 @@ namespace Org.BouncyCastle.Tests.Nist
 				builderParams.IsAnyPolicyInhibited = anyPolicyInhibited;
 			}
 
-			builderParams.AddStore((IX509Store<object>)x509CertStore);
-			builderParams.AddStore((IX509Store<object>)x509CrlStore);
+			builderParams.AddStore(x509CertStore);
+			builderParams.AddStore(x509CrlStore);
 
 			// Perform validation as of this date since test certs expired
 			builderParams.Date = new DateTimeObject(DateTime.Parse("1/1/2011"));
@@ -770,7 +770,8 @@ namespace Org.BouncyCastle.Tests.Nist
 		private X509Certificate LoadCert(
 			string certName)
 		{
-			X509Certificate cert = (X509Certificate)certs[certName];
+            X509Certificate cert;
+            certs.TryGetValue(certName, out cert);
 
 			if (cert != null)
 			{
@@ -803,7 +804,8 @@ namespace Org.BouncyCastle.Tests.Nist
 			string crlName)
 			//throws Exception
 		{
-			X509Crl crl = (X509Crl)crls[crlName];
+            X509Crl crl;
+            crls.TryGetValue(crlName, out crl);
         
 			if (crl != null)
 			{

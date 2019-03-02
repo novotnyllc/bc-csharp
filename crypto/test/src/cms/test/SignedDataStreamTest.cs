@@ -793,7 +793,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			sd = new CmsSignedData(new CmsProcessableByteArray(data), newOut.ToArray());
 
-			IEnumerator signerEnum = sd.GetSignerInfos().GetSigners().GetEnumerator();
+            var signerEnum = sd.GetSignerInfos().GetSigners().GetEnumerator();
 			signerEnum.MoveNext();
 			SignerInformation signer = (SignerInformation)signerEnum.Current;
 
@@ -850,7 +850,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			sd = new CmsSignedData(newOut.ToArray());
 
-			IEnumerator signerEnum = sd.GetSignerInfos().GetSigners().GetEnumerator();
+            var signerEnum = sd.GetSignerInfos().GetSigners().GetEnumerator();
 			signerEnum.MoveNext();
 			SignerInformation signer = (SignerInformation) signerEnum.Current;
 

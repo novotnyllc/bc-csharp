@@ -152,7 +152,7 @@ namespace Org.BouncyCastle.X509
 		private ISet<X509CrlEntry> LoadCrlEntries()
 		{
 		 var entrySet = new HashSet<X509CrlEntry>();
-			IEnumerable certs = c.GetRevokedCertificateEnumeration();
+			var certs = c.GetRevokedCertificateEnumeration();
 
 			X509Name previousCertificateIssuer = IssuerDN;
 			foreach (CrlEntry entry in certs)
@@ -168,7 +168,7 @@ namespace Org.BouncyCastle.X509
 		public virtual X509CrlEntry GetRevokedCertificate(
 			BigInteger serialNumber)
 		{
-			IEnumerable certs = c.GetRevokedCertificateEnumeration();
+			var certs = c.GetRevokedCertificateEnumeration();
 
 			X509Name previousCertificateIssuer = IssuerDN;
 			foreach (CrlEntry entry in certs)
@@ -284,7 +284,7 @@ namespace Org.BouncyCastle.X509
 
 			if (extensions != null)
 			{
-				IEnumerator e = extensions.ExtensionOids.GetEnumerator();
+                var e = extensions.ExtensionOids.GetEnumerator();
 
 				if (e.MoveNext())
 				{

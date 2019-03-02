@@ -8,7 +8,7 @@ namespace Org.BouncyCastle.Cms
 	public class RecipientInformationStore
 	{
 		private readonly IList<RecipientInformation> all; //ArrayList[RecipientInformation]
-		private readonly IDictionary<RecipientID, IList<RecipientInformation>> table = new Dictionary<RecipientID, IList<RecipientInformation>>(); // Hashtable[RecipientID, ArrayList[RecipientInformation]]
+		private readonly IDictionary<RecipientID, IList<RecipientInformation>> table = new Dictionary<RecipientID, IList<RecipientInformation>>();
 
 		public RecipientInformationStore(
 			ICollection<RecipientInformation> recipientInfos)
@@ -16,9 +16,9 @@ namespace Org.BouncyCastle.Cms
 			foreach (RecipientInformation recipientInformation in recipientInfos)
 			{
 				RecipientID rid = recipientInformation.RecipientID;
-                var list = table[rid];
+                IList<RecipientInformation> list;
 
-				if (list == null)
+				if (!table.TryGetValue(rid, out list))
 				{
 					table[rid] = list = Platform.CreateArrayList<RecipientInformation>(1);
 				}

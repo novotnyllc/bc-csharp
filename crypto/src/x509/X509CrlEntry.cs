@@ -145,7 +145,7 @@ namespace Org.BouncyCastle.X509
 
 			if (extensions != null)
 			{
-				IEnumerator e = extensions.ExtensionOids.GetEnumerator();
+                var e = extensions.ExtensionOids.GetEnumerator();
 				if (e.MoveNext())
 				{
 					buf.Append("   crlEntryExtensions:").Append(nl);

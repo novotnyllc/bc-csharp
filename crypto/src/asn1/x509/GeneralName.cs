@@ -366,7 +366,7 @@ namespace Org.BouncyCastle.Asn1.X509
 				ip = ip.Substring(0, ip.Length - 1);
 			}
 
-			IEnumerator sEnum = ip.Split(':').GetEnumerator();
+            var sEnum = ip.Split(':').GetEnumerator();
 
 			int index = 0;
 			int[] val = new int[8];

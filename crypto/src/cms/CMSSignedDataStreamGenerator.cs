@@ -259,11 +259,11 @@ namespace Org.BouncyCastle.Cms
 		public void AddDigests(
        		params string[] digestOids)
 		{
-       		AddDigests((IEnumerable) digestOids);
+       		AddDigests(digestOids);
 		}
 
 		public void AddDigests(
-			IEnumerable digestOids)
+			IEnumerable<string> digestOids)
 		{
 			foreach (string digestOid in digestOids)
 			{
@@ -613,8 +613,8 @@ namespace Org.BouncyCastle.Cms
        		RegisterDigestOid(digestOid);
 
        		string digestName = Helper.GetDigestAlgName(digestOid);
-			IDigest dig = (IDigest)_messageDigests[digestName];
-			if (dig == null)
+            IDigest dig;
+			if (!_messageDigests.TryGetValue(digestName, out dig))
 			{
 				if (_messageDigestsLocked)
 					throw new InvalidOperationException("Cannot configure new digests after the data stream is opened");

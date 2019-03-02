@@ -22,22 +22,6 @@ namespace Org.BouncyCastle.Tests
     public class NamedCurveTest
         : SimpleTest
     {
-//		private static readonly Hashtable CurveNames = new Hashtable();
-//		private static readonly Hashtable CurveAliases = new Hashtable();
-//
-//		static NamedCurveTest()
-//		{
-//			CurveNames.Add("prime192v1", "prime192v1"); // X9.62
-//			CurveNames.Add("sect571r1", "sect571r1"); // sec
-//			CurveNames.Add("secp224r1", "secp224r1");
-//			CurveNames.Add("B-409", SecNamedCurves.GetName(NistNamedCurves.GetOid("B-409")));   // nist
-//			CurveNames.Add("P-521", SecNamedCurves.GetName(NistNamedCurves.GetOid("P-521")));
-//			CurveNames.Add("brainpoolp160r1", "brainpoolp160r1");         // TeleTrusT
-//
-//			CurveAliases.Add("secp192r1", "prime192v1");
-//			CurveAliases.Add("secp256r1", "prime256v1");
-//		}
-
         private static ECDomainParameters GetCurveParameters(
             string name)
         {

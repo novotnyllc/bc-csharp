@@ -424,7 +424,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
             CmsSignedData s = gen.Generate(msg);
 
-			var hashes = new Hashtable();
+			var hashes = new Dictionary<string, byte[]>();
 			hashes.Add(CmsSignedDataGenerator.DigestSha1, DigestUtilities.CalculateDigest("SHA1", data));
             hashes.Add(CmsSignedDataGenerator.DigestMD5, DigestUtilities.CalculateDigest("MD5", data));
 

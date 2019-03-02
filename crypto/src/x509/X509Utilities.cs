@@ -153,7 +153,7 @@ namespace Org.BouncyCastle.X509
 			return new AlgorithmIdentifier(sigOid, DerNull.Instance);
 		}
 
-		internal static IEnumerable GetAlgNames()
+		internal static IEnumerable<string> GetAlgNames()
 		{
 			return new EnumerableProxy<string>(algorithms.Keys);
 		}

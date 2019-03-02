@@ -15,7 +15,7 @@ namespace Org.BouncyCastle.Utilities.Collections
             }
         }
 
-        public static bool CheckElementsAreOfType(IEnumerable e, Type t)
+        public static bool CheckElementsAreOfType(IEnumerable<object> e, Type t)
         {
             foreach (object o in e)
             {
@@ -48,7 +48,7 @@ namespace Org.BouncyCastle.Utilities.Collections
             return e.Current;
         }
 
-        public static string ToString(IEnumerable c)
+        public static string ToString(IEnumerable<object> c)
         {
             StringBuilder sb = new StringBuilder("[");
 

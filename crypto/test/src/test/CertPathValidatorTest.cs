@@ -175,8 +175,8 @@ namespace Org.BouncyCastle.Tests
 //			CertPathValidator cpv = CertPathValidator.GetInstance("PKIX");
             PkixCertPathValidator cpv = new PkixCertPathValidator();
             PkixParameters param = new PkixParameters(trust);
-            param.AddStore((IX509Store<object>)x509CertStore);
-            param.AddStore((IX509Store<object>)x509CrlStore);
+            param.AddStore(x509CertStore);
+            param.AddStore(x509CrlStore);
             param.Date = new DateTimeObject(validDate);
             MyChecker checker = new MyChecker();
             param.AddCertPathChecker(checker);
@@ -207,8 +207,8 @@ namespace Org.BouncyCastle.Tests
 
             cpv = new PkixCertPathValidator();
             param = new PkixParameters(trust);
-            param.AddStore((IX509Store<object>)x509CertStore);
-            param.AddStore((IX509Store<object>)x509CrlStore);
+            param.AddStore(x509CertStore);
+            param.AddStore(x509CrlStore);
             param.Date = new DateTimeObject(validDate);
             checker = new MyChecker();
             param.AddCertPathChecker(checker);
@@ -256,7 +256,7 @@ namespace Org.BouncyCastle.Tests
 //				cpv = CertPathValidator.GetInstance("PKIX");
                 cpv = new PkixCertPathValidator();
                 param = new PkixParameters(trust);
-                param.AddStore((IX509Store<object>)x509CertStore);
+                param.AddStore(x509CertStore);
                 param.IsRevocationEnabled = false;
                 param.Date = new DateTimeObject(validDate);
 

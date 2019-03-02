@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Pkix
             //
             // (e), (f), (g) are part of the paramsPkix object.
             //
-            IEnumerator certIter;
+            IEnumerator< PkixCertPathChecker> certIter;
             int index = 0;
             int i;
             // Certificate for each interation of the validation loop

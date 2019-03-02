@@ -154,7 +154,7 @@ namespace Org.BouncyCastle.Tests
 				new X509CollectionStoreParameters<X509Certificate>(certCol));
 
 			PkixBuilderParameters parameters = new PkixBuilderParameters(trustanchors, select);
-			parameters.AddStore((IX509Store<object>)x509CertStore);
+			parameters.AddStore(x509CertStore);
 
 			try
 			{

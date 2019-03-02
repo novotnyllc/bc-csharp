@@ -323,7 +323,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			RecipientInformationStore	recipients = ep.GetRecipientInfos();
 			var					c = recipients.GetRecipients();
 
-			IEnumerator e = c.GetEnumerator();
+            var e = c.GetEnumerator();
 
 			if (e.MoveNext())
 			{

@@ -42,7 +42,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         }
 
 		public PgpSecretKeyRingBundle(
-            IEnumerable e)
+            IEnumerable<object> e)
         {
 			this.secretRings = Platform.CreateHashtable<long, PgpSecretKeyRing>();
             this.order = Platform.CreateArrayList<long>();
@@ -83,7 +83,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// <summary>Allow enumeration of the key rings associated with the passed in userId.</summary>
 		/// <param name="userId">The user ID to be matched.</param>
 		/// <returns>An <c>IEnumerable</c> of key rings which matched (possibly none).</returns>
-		public IEnumerable GetKeyRings(
+		public IEnumerable<PgpSecretKeyRing> GetKeyRings(
 			string userId)
 		{
 			return GetKeyRings(userId, false, false);
@@ -93,7 +93,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// <param name="userId">The user ID to be matched.</param>
 		/// <param name="matchPartial">If true, userId need only be a substring of an actual ID string to match.</param>
 		/// <returns>An <c>IEnumerable</c> of key rings which matched (possibly none).</returns>
-		public IEnumerable GetKeyRings(
+		public IEnumerable<PgpSecretKeyRing> GetKeyRings(
             string	userId,
             bool	matchPartial)
         {

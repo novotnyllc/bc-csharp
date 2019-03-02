@@ -205,7 +205,8 @@ namespace Org.BouncyCastle.Math.EC
 
             lock (table)
             {
-                PreCompInfo existing = (PreCompInfo)table[name];
+                PreCompInfo existing;
+                table.TryGetValue(name, out existing);
                 PreCompInfo result = callback.Precompute(existing);
 
                 if (result != existing)

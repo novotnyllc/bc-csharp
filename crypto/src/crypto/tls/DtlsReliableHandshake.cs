@@ -181,8 +181,9 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         private Message GetPendingMessage()
         {
-            DtlsReassembler next = (DtlsReassembler)mCurrentInboundFlight[mNextReceiveSeq];
-            if (next != null)
+            DtlsReassembler next;
+            
+            if (mCurrentInboundFlight.TryGetValue(mNextReceiveSeq, out next))
             {
                 byte[] body = next.GetBodyIfComplete();
                 if (body != null)

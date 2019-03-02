@@ -290,7 +290,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		/**
 		 * return an Enumeration of the extension field's object ids.
 		 */
-		public IEnumerable ExtensionOids
+		public IEnumerable<DerObjectIdentifier> ExtensionOids
         {
 			get { return new EnumerableProxy<DerObjectIdentifier>(ordering.Cast<DerObjectIdentifier>()); }
         }
@@ -304,7 +304,9 @@ namespace Org.BouncyCastle.Asn1.X509
         public X509Extension GetExtension(
             DerObjectIdentifier oid)
         {
-             return (X509Extension) extensions[oid];
+            X509Extension extension;
+            if (extensions.TryGetValue(oid, out extension)) return extension;
+            return null;
         }
 
 		/**
@@ -347,7 +349,9 @@ namespace Org.BouncyCastle.Asn1.X509
 
 			foreach (DerObjectIdentifier oid in extensions.Keys)
 			{
-				if (!extensions[oid].Equals(other.extensions[oid]))
+                X509Extension extension;
+                other.extensions.TryGetValue(oid, out extension);
+                if (!extensions[oid].Equals(extension))
 					return false;
 			}
 

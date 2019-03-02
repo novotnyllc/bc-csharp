@@ -38,7 +38,7 @@ namespace Org.BouncyCastle.Pkix
 			try
 			{
 				targets = PkixCertPathValidatorUtilities.FindCertificates(
-					(X509AttrCertStoreSelector)certSelect, pkixParams.GetStores());
+					(X509AttrCertStoreSelector)certSelect, pkixParams.GetStores<X509V2AttributeCertificate>());
 			}
 			catch (Exception e)
 			{
@@ -58,13 +58,13 @@ namespace Org.BouncyCastle.Pkix
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
 				X509Name[] principals = cert.Issuer.GetPrincipals();
-			 var issuers = new HashSet<X509ExtensionBase>();
+			 var issuers = new HashSet<X509Certificate>();
 				for (int i = 0; i < principals.Length; i++)
 				{
 					try
 					{
 						selector.Subject = principals[i];
-                        foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates(selector, pkixParams.GetStores()))
+                        foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates(selector, pkixParams.GetStores<X509Certificate>()))
                         {
                             issuers.Add(certificate);
                         }

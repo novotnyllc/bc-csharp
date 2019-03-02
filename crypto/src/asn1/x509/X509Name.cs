@@ -940,9 +940,9 @@ namespace Org.BouncyCastle.Asn1.X509
             DerObjectIdentifier	oid,
             string				val)
         {
-            string sym = (string)oidSymbols[oid];
+            string sym;
 
-            if (sym != null)
+            if (oidSymbols.TryGetValue(oid, out sym))
             {
                 buf.Append(sym);
             }

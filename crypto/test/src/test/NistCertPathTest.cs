@@ -360,8 +360,8 @@ namespace Org.BouncyCastle.Tests
 				PkixBuilderParameters _param = new PkixBuilderParameters(
 					trustedSet, _select);
 				_param.IsExplicitPolicyRequired = _explicit;
-				_param.AddStore((IX509Store<object>)certStore);
-				_param.AddStore((IX509Store<object>)crlStore);
+				_param.AddStore(certStore);
+				_param.AddStore(crlStore);
 				_param.IsRevocationEnabled = true;
 
 				if (_ipolset != null)

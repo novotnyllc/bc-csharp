@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -176,9 +177,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
             }
         }
 
-        private static object First(IEnumerable e)
+        private static T First<T>(IEnumerable<T> e)
         {
-            IEnumerator n = e.GetEnumerator();
+            IEnumerator<T> n = e.GetEnumerator();
             Assert.IsTrue(n.MoveNext());
             return n.Current;
         }

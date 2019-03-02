@@ -96,7 +96,7 @@ namespace Org.BouncyCastle.Pkix
 						Asn1EncodableVector vec = new Asn1EncodableVector();
 						try
 						{
-							IEnumerator e = Asn1Sequence.GetInstance(
+							var e = Asn1Sequence.GetInstance(
 								Asn1Sequence.FromByteArray(crl.IssuerDN.GetEncoded())).GetEnumerator();
 							while (e.MoveNext())
 							{
@@ -142,7 +142,7 @@ namespace Org.BouncyCastle.Pkix
 							}
 							for (int j = 0; j < genNames.Length; j++)
 							{
-								IEnumerator e = Asn1Sequence.GetInstance(genNames[j].Name.ToAsn1Object()).GetEnumerator();
+								var e = Asn1Sequence.GetInstance(genNames[j].Name.ToAsn1Object()).GetEnumerator();
 								Asn1EncodableVector vec = new Asn1EncodableVector();
 								while (e.MoveNext())
 								{
@@ -488,7 +488,7 @@ namespace Org.BouncyCastle.Pkix
 							{
 								PkixPolicyNode _node = (PkixPolicyNode)_nodes[k];
 
-								IEnumerator  _policySetIter = _node.ExpectedPolicies.GetEnumerator();
+                                var _policySetIter = _node.ExpectedPolicies.GetEnumerator();
 								while (_policySetIter.MoveNext())
 								{
 									object _tmp = _policySetIter.Current;
@@ -750,12 +750,12 @@ namespace Org.BouncyCastle.Pkix
 			}
 
 			// get CRL signing certs
-			var coll = Platform.CreateArrayList<X509ExtensionBase>();
+			var coll = Platform.CreateArrayList<X509Certificate>();
 
 			try
 			{
-                CollectionUtilities.AddRange(coll, PkixCertPathValidatorUtilities.FindCertificates(selector, paramsPKIX.GetStores()));
-                CollectionUtilities.AddRange(coll, PkixCertPathValidatorUtilities.FindCertificates(selector, paramsPKIX.GetAdditionalStores()));
+                CollectionUtilities.AddRange(coll, PkixCertPathValidatorUtilities.FindCertificates(selector, paramsPKIX.GetStores<X509Certificate>()));
+                CollectionUtilities.AddRange(coll, PkixCertPathValidatorUtilities.FindCertificates(selector, paramsPKIX.GetAdditionalStores<X509Certificate>()));
 			}
 			catch (Exception e)
 			{
@@ -1287,7 +1287,7 @@ namespace Org.BouncyCastle.Pkix
 					if (policyMapping > 0)
 					{
 						bool idp_found = false;
-						IEnumerator nodes_i = policyNodes[i].GetEnumerator();
+                        var nodes_i = policyNodes[i].GetEnumerator();
 
 						while (nodes_i.MoveNext())
 						{

@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Cms
     public class SignerInformationStore
     {
         private readonly IList<SignerInformation> all; //ArrayList[SignerInformation]
-        private readonly IDictionary<SignerID, IList<SignerInformation>> table = Platform.CreateHashtable<SignerID, IList<SignerInformation>>(); // Hashtable[SignerID, ArrayList[SignerInformation]]
+        private readonly IDictionary<SignerID, IList<SignerInformation>> table = Platform.CreateHashtable<SignerID, IList<SignerInformation>>();
 
         /**
          * Create a store containing a single SignerInformation object.
@@ -39,9 +39,9 @@ namespace Org.BouncyCastle.Cms
             foreach (SignerInformation signer in signerInfos)
             {
                 SignerID sid = signer.SignerID;
-                var list = table[sid];
+                IList<SignerInformation> list;
 
-                if (list == null)
+                if (!table.TryGetValue(sid, out list))
                 {
                     table[sid] = list = Platform.CreateArrayList<SignerInformation>(1);
                 }

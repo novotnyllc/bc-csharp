@@ -47,10 +47,10 @@ namespace Org.BouncyCastle.Pkix
 					+ Platform.GetTypeName(this) + " class.");
 			}
 
-		 var targets = new HashSet<X509ExtensionBase>();
+		 var targets = new HashSet<X509Certificate>();
 			try
 			{
-				foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates((X509CertStoreSelector)certSelect, pkixParams.GetStores()))
+				foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates((X509CertStoreSelector)certSelect, pkixParams.GetStores<X509Certificate>()))
                 {
                     targets.Add(certificate);
                 }

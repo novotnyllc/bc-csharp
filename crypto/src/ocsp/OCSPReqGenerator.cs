@@ -236,7 +236,7 @@ namespace Org.BouncyCastle.Ocsp
 		 *
 		 * @return an IEnumerable containing recognised names.
 		 */
-		public IEnumerable SignatureAlgNames
+		public IEnumerable<string> SignatureAlgNames
 		{
 			get { return OcspUtilities.AlgNames; }
 		}

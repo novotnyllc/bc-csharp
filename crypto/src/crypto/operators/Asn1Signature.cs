@@ -300,7 +300,7 @@ namespace Org.BouncyCastle.Crypto.Operators
         /// <summary>
         /// Allows enumeration of the signature names supported by the verifier provider.
         /// </summary>
-        public static IEnumerable SignatureAlgNames
+        public static IEnumerable<string> SignatureAlgNames
         {
             get { return X509Utilities.GetAlgNames(); }
         }
@@ -380,7 +380,7 @@ namespace Org.BouncyCastle.Crypto.Operators
 		/// <summary>
 		/// Allows enumeration of the signature names supported by the verifier provider.
 		/// </summary>
-		public IEnumerable SignatureAlgNames
+		public IEnumerable<string> SignatureAlgNames
 		{
 			get { return X509Utilities.GetAlgNames(); }
 		}

@@ -47,16 +47,26 @@ namespace Org.BouncyCastle.Pkcs
 		public Asn1Encodable this[
 			DerObjectIdentifier oid]
 		{
-			get { return (Asn1Encodable) this.attributes[oid.Id]; }
+            get
+            {
+                Asn1Encodable attribute;
+                this.attributes.TryGetValue(oid.Id, out attribute);
+                return attribute;
+            }
 		}
 
 		public Asn1Encodable this[
 			string oid]
 		{
-			get { return (Asn1Encodable) this.attributes[oid]; }
-		}
+            get
+            {
+                Asn1Encodable attribute;
+                this.attributes.TryGetValue(oid, out attribute);
+                return attribute;
+            }
+        }
 
-		public IEnumerable<string> BagAttributeKeys
+        public IEnumerable<string> BagAttributeKeys
 		{
 			get { return new EnumerableProxy<string>(this.attributes.Keys); }
 		}

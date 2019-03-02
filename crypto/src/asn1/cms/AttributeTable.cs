@@ -52,13 +52,9 @@ namespace Org.BouncyCastle.Asn1.Cms
             Attribute a)
         {
 			DerObjectIdentifier oid = a.AttrType;
-            object obj = attributes[oid];
+            object obj;
 
-            if (obj == null)
-            {
-                attributes[oid] = a;
-            }
-            else
+            if (attributes.TryGetValue(oid, out obj))
             {
                 IList<Attribute> v;
 
@@ -71,12 +67,16 @@ namespace Org.BouncyCastle.Asn1.Cms
                 }
                 else
                 {
-                    v = (IList<Attribute>) obj;
+                    v = (IList<Attribute>)obj;
 
                     v.Add(a);
                 }
 
                 attributes[oid] = v;
+            }
+            else
+            {
+                attributes[oid] = a;
             }
         }
 
@@ -85,7 +85,8 @@ namespace Org.BouncyCastle.Asn1.Cms
 		{
 			get
 			{
-				object obj = attributes[oid];
+                object obj;
+                attributes.TryGetValue(oid, out obj);
 
 				if (obj is IList<Attribute>)
 				{
@@ -115,9 +116,10 @@ namespace Org.BouncyCastle.Asn1.Cms
         {
             Asn1EncodableVector v = new Asn1EncodableVector();
 
-            object obj = attributes[oid];
+            object obj;
+            attributes.TryGetValue(oid, out obj);
 
-			if (obj is IList)
+            if (obj is IList)
             {
                 foreach (Attribute a in (IList)obj)
                 {

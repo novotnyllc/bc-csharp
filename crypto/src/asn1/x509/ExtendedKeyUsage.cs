@@ -71,15 +71,6 @@ namespace Org.BouncyCastle.Asn1.X509
             }
         }
 
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete]
-        public ExtendedKeyUsage(
-            ArrayList usages)
-            : this((IEnumerable)usages)
-        {
-        }
-#endif
-
         public ExtendedKeyUsage(
             IEnumerable usages)
         {

@@ -218,7 +218,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 		private SignerInformation GetFirstSignerInfo(SignerInformationStore store)
 		{
-			IEnumerator e = store.GetSigners().GetEnumerator();
+            var e = store.GetSigners().GetEnumerator();
 			e.MoveNext();
 			return (SignerInformation)e.Current;
 		}
@@ -257,7 +257,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			{
 				var certCollection = x509Certs.GetMatches(signer.SignerID);
 
-				IEnumerator certEnum = certCollection.GetEnumerator();
+                var certEnum = certCollection.GetEnumerator();
 
 				certEnum.MoveNext();
 				X509Certificate cert = (X509Certificate) certEnum.Current;
@@ -297,7 +297,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			{
 				var certCollection = x509Certs.GetMatches(signer.SignerID);
 
-				IEnumerator certEnum = certCollection.GetEnumerator();
+                var certEnum = certCollection.GetEnumerator();
 				certEnum.MoveNext();
 				X509Certificate cert = (X509Certificate)certEnum.Current;
 

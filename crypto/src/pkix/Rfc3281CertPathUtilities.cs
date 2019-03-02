@@ -354,7 +354,7 @@ namespace Org.BouncyCastle.Pkix
 		{
 			PkixCertPathBuilderResult result = null;
 			// find holder PKCs
-		 var holderPKCs = new HashSet<X509ExtensionBase>();
+		 var holderPKCs = new HashSet<X509Certificate>();
 			if (attrCert.Holder.GetIssuer() != null)
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
@@ -369,7 +369,7 @@ namespace Org.BouncyCastle.Pkix
 							selector.Issuer = principals[i];
 						}
 						foreach(var certificate in PkixCertPathValidatorUtilities
-							.FindCertificates(selector, pkixParams.GetStores()))
+							.FindCertificates(selector, pkixParams.GetStores<X509Certificate>()))
                         {
                             holderPKCs.Add(certificate);
                         }
@@ -400,7 +400,7 @@ namespace Org.BouncyCastle.Pkix
 							selector.Issuer = principals[i];
 						}
 						foreach(var certificate in PkixCertPathValidatorUtilities
-							.FindCertificates(selector, pkixParams.GetStores()))
+							.FindCertificates(selector, pkixParams.GetStores<X509Certificate>()))
                         {
                             holderPKCs.Add(certificate);
                         }

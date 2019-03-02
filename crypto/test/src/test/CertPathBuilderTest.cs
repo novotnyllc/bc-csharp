@@ -63,8 +63,8 @@ namespace Org.BouncyCastle.Tests
             targetConstraints.Subject = finalCert.SubjectDN;
             PkixBuilderParameters parameters = new PkixBuilderParameters(trust, targetConstraints);
 //			parameters.addCertStore(store);
-            parameters.AddStore((IX509Store<object>)x509CertStore);
-            parameters.AddStore((IX509Store<object>)x509CrlStore);
+            parameters.AddStore(x509CertStore);
+            parameters.AddStore(x509CrlStore);
             parameters.Date = new DateTimeObject(validDate);
             PkixCertPathBuilderResult result = cpb.Build(parameters);
             PkixCertPath path = result.CertPath;
@@ -121,8 +121,8 @@ namespace Org.BouncyCastle.Tests
 
             PkixBuilderParameters buildParams = new PkixBuilderParameters(trust, pathConstraints);
 //			buildParams.addCertStore(store);
-            buildParams.AddStore((IX509Store<object>)x509CertStore);
-            buildParams.AddStore((IX509Store<object>)x509CrlStore);
+            buildParams.AddStore(x509CertStore);
+            buildParams.AddStore(x509CrlStore);
 
             buildParams.Date = new DateTimeObject(DateTime.UtcNow);
 

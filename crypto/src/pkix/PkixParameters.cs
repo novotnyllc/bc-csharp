@@ -51,10 +51,10 @@ namespace Org.BouncyCastle.Pkix
 		private bool policyMappingInhibited = false;
 		private bool policyQualifiersRejected = true;
 		private IX509Selector certSelector;
-		private IList<IX509Store<object>> stores;
+		private IList<object> stores;
 		private IX509Selector selector;
 		private bool additionalLocationsEnabled;
-		private IList<IX509Store<object>> additionalStores;
+		private IList<object> additionalStores;
 		private ISet<TrustAnchor> trustedACIssuers;
 		private ISet<string> necessaryACAttributes;
 		private ISet<string> prohibitedACAttributes;
@@ -87,8 +87,8 @@ namespace Org.BouncyCastle.Pkix
 
 			this.initialPolicies = new HashSet<string>();
 			this.certPathCheckers = Platform.CreateArrayList<PkixCertPathChecker>();
-            this.stores = Platform.CreateArrayList<IX509Store<object>>();
-			this.additionalStores = Platform.CreateArrayList<IX509Store<object>>();
+            this.stores = Platform.CreateArrayList<object>();
+			this.additionalStores = Platform.CreateArrayList<object>();
 			this.trustedACIssuers = new HashSet<TrustAnchor>();
 			this.necessaryACAttributes = new HashSet<string>();
 			this.prohibitedACAttributes = new HashSet<string>();
@@ -508,24 +508,16 @@ namespace Org.BouncyCastle.Pkix
 		* @throws ClassCastException if an element of <code>stores</code> is not
 		*             a {@link Store}.
 		*/
-		public virtual void SetStores(
-			IList<IX509Store<object>> stores)
+		public virtual void SetStores<T>(
+			IList<IX509Store<T>> stores)
 		{
 			if (stores == null)
 			{
-                this.stores = Platform.CreateArrayList<IX509Store<object>>();
+                this.stores = Platform.CreateArrayList<object>();
 			}
 			else
 			{
-				foreach (var obj in stores)
-				{
-					if (!(obj is IX509Store<object>))
-					{
-						throw new InvalidCastException(
-							"All elements of list must be of type " + typeof(IX509Store<object>).FullName);
-					}
-				}
-                this.stores = Platform.CreateArrayList(stores);
+                this.stores = Platform.CreateArrayList(stores.Cast<object>());
 			}
 		}
 
@@ -544,8 +536,8 @@ namespace Org.BouncyCastle.Pkix
 		* @param store The store to add.
 		* @see #getStores
 		*/
-		public virtual void AddStore(
-			IX509Store<object> store)
+		public virtual void AddStore<T>(
+			IX509Store<T> store)
 		{
 			if (store != null)
 			{
@@ -568,8 +560,8 @@ namespace Org.BouncyCastle.Pkix
 		* @param store The store to add.
 		* @see #getStores()
 		*/
-		public virtual void AddAdditionalStore(
-			IX509Store<object> store)
+		public virtual void AddAdditionalStore<T>(
+			IX509Store<T> store)
 		{
 			if (store != null)
 			{
@@ -587,9 +579,9 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @see #addAddionalStore(Store)
 		*/
-		public virtual IList<IX509Store<object>> GetAdditionalStores()
+		public virtual IList<IX509Store<T>> GetAdditionalStores<T>()
 		{
-            return Platform.CreateArrayList(additionalStores);
+            return Platform.CreateArrayList(additionalStores.OfType<IX509Store<T>>());
 		}
 
 		/**
@@ -602,9 +594,9 @@ namespace Org.BouncyCastle.Pkix
 		*
 		* @see #setStores(IList)
 		*/
-		public virtual IList<IX509Store<object>> GetStores()
+		public virtual IList<IX509Store<T>> GetStores<T>()
 		{
-            return Platform.CreateArrayList(stores);
+            return Platform.CreateArrayList(stores.OfType<IX509Store<T>>());
 		}
 
 		/**

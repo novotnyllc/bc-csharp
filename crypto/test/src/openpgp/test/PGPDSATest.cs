@@ -289,7 +289,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             PgpSignatureSubpacketGenerator spGen = new PgpSignatureSubpacketGenerator();
 
-            IEnumerator enumerator = sKey.GetSecretKey().PublicKey.GetUserIds().GetEnumerator();
+            var enumerator = sKey.GetSecretKey().PublicKey.GetUserIds().GetEnumerator();
             enumerator.MoveNext();
             string primaryUserId = (string) enumerator.Current;
 

@@ -865,7 +865,8 @@ namespace Org.BouncyCastle.Crypto.EC
 
         public static X9ECParameters GetByName(string name)
         {
-            X9ECParametersHolder holder = (X9ECParametersHolder)nameToCurve[Platform.ToUpperInvariant(name)];
+            X9ECParametersHolder holder;
+            nameToCurve.TryGetValue(Platform.ToUpperInvariant(name), out holder);
             return holder == null ? null : holder.Parameters;
         }
 
@@ -877,7 +878,8 @@ namespace Org.BouncyCastle.Crypto.EC
          */
         public static X9ECParameters GetByOid(DerObjectIdentifier oid)
         {
-            X9ECParametersHolder holder = (X9ECParametersHolder)oidToCurve[oid];
+            X9ECParametersHolder holder;
+            oidToCurve.TryGetValue(oid, out holder);
             return holder == null ? null : holder.Parameters;
         }
 

@@ -1544,7 +1544,8 @@ namespace Org.BouncyCastle.Pkix
                 GeneralSubtree subtree = GeneralSubtree.GetInstance(e.Current);
 
                 int tagNo = subtree.Base.TagNo;
-                if (subtreesMap[tagNo] == null)
+                ISet<GeneralSubtree> subtreeSet;
+                if (!subtreesMap.TryGetValue(tagNo, out subtreeSet))
                 {
                     subtreesMap[tagNo] = new HashSet<GeneralSubtree>();
                 }

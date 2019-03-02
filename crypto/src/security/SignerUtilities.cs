@@ -485,7 +485,8 @@ namespace Org.BouncyCastle.Security
 
             algorithm = Platform.ToUpperInvariant(algorithm);
 
-            string mechanism = (string) algorithms[algorithm];
+            string mechanism;
+            algorithms.TryGetValue(algorithm, out mechanism);
 
             if (mechanism == null)
                 mechanism = algorithm;

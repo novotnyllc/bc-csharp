@@ -133,7 +133,9 @@ namespace Org.BouncyCastle.Asn1.GM
         public static DerObjectIdentifier GetOid(
             string name)
         {
-            return (DerObjectIdentifier)objIds[Platform.ToUpperInvariant(name)];
+            DerObjectIdentifier oid;
+            objIds.TryGetValue(Platform.ToUpperInvariant(name), out oid);
+            return oid;
         }
 
         /**

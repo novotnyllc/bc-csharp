@@ -88,8 +88,8 @@ namespace Org.BouncyCastle.Tests
 
 			X509CertStoreSelector targetConstraints = new X509CertStoreSelector();
 			targetConstraints.Subject = PrincipalUtilities.GetSubjectX509Principal(rootCert);
-			var certs = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
-			if (certs.Count != 1 || !certs.Contains(rootCert))
+			var certs1 = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
+			if (certs1.Count != 1 || !certs1.Contains(rootCert))
 			{
 				Fail("rootCert not found by subjectDN");
 			}
@@ -97,8 +97,8 @@ namespace Org.BouncyCastle.Tests
 			// Searching for rootCert by subjectDN encoded as byte
 			targetConstraints = new X509CertStoreSelector();
 			targetConstraints.Subject = PrincipalUtilities.GetSubjectX509Principal(rootCert);
-			certs = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
-			if (certs.Count != 1 || !certs.Contains(rootCert))
+			certs1 = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
+			if (certs1.Count != 1 || !certs1.Contains(rootCert))
 			{
 				Fail("rootCert not found by encoded subjectDN");
 			}
@@ -109,8 +109,8 @@ namespace Org.BouncyCastle.Tests
 			targetConstraints = new X509CertStoreSelector();
 			targetConstraints.SubjectPublicKey =
 				SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(rootCert.GetPublicKey());
-			certs = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
-			if (certs.Count != 1 || !certs.Contains(rootCert))
+			certs1 = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
+			if (certs1.Count != 1 || !certs1.Contains(rootCert))
 			{
 				Fail("rootCert not found by encoded public key");
 			}
@@ -118,16 +118,16 @@ namespace Org.BouncyCastle.Tests
 			// Searching for interCert by issuerDN
 			targetConstraints = new X509CertStoreSelector();
 			targetConstraints.Issuer = PrincipalUtilities.GetSubjectX509Principal(rootCert);
-			certs = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
-			if (certs.Count != 2)
+			certs1 = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
+			if (certs1.Count != 2)
 			{
 				Fail("did not found 2 certs");
 			}
-			if (!certs.Contains(rootCert))
+			if (!certs1.Contains(rootCert))
 			{
 				Fail("rootCert not found");
 			}
-			if (!certs.Contains(interCert))
+			if (!certs1.Contains(interCert))
 			{
 				Fail("interCert not found");
 			}
@@ -146,19 +146,19 @@ namespace Org.BouncyCastle.Tests
 			issuers.Add(rootCrl.IssuerDN);
 			targetConstraintsCRL.Issuers = issuers;
 
-			var crls = new List<X509Crl>(store1.GetMatches(targetConstraintsCRL));
-			if (crls.Count != 1 || !crls.Contains(rootCrl))
+			var crls1 = new List<X509Crl>(store1.GetMatches(targetConstraintsCRL));
+			if (crls1.Count != 1 || !crls1.Contains(rootCrl))
 			{
 				Fail("rootCrl not found");
 			}
 
-			crls = new List<X509Crl>(store1.GetMatches(targetConstraintsCRL));
-			if (crls.Count != 0)
+			var crls2 = new List<X509Certificate>(certStore.GetMatches(targetConstraintsCRL));
+			if (crls2.Count != 0)
 			{
 				Fail("error using wrong selector (CRL)");
 			}
-			certs = new List<X509Certificate>(certStore.GetMatches(targetConstraints));
-			if (certs.Count != 0)
+			var certs2 = new List<X509Crl>(store1.GetMatches(targetConstraints));
+			if (certs2.Count != 0)
 			{
 				Fail("error using wrong selector (certs)");
 			}

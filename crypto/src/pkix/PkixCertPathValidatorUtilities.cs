@@ -167,7 +167,7 @@ namespace Org.BouncyCastle.Pkix
 			// is given, add an additinal X.509 store
 			if (cert.GetIssuerAlternativeNames() != null)
 			{
-				IEnumerator it = cert.GetIssuerAlternativeNames().GetEnumerator();
+				var it = cert.GetIssuerAlternativeNames().GetEnumerator();
 				while (it.MoveNext())
 				{
 					// look for URI
@@ -703,18 +703,18 @@ namespace Org.BouncyCastle.Pkix
 		/// <see cref="Org.BouncyCastle.X509.IX509AttributeCertificate"/> objects.
 		/// May be empty but never <code>null</code>.</returns>
 		/// <exception cref="Exception"></exception>
-		internal static ICollection<X509ExtensionBase> FindCertificates(
+		internal static ICollection<T> FindCertificates<T>(
 			X509CertStoreSelector	certSelect,
-			IList<IX509Store<object>>                    certStores)
+			IList<IX509Store<T>>                    certStores)
 		{
-			var certs = new HashSet<X509ExtensionBase>();
+			var certs = new HashSet<T>();
 
 			foreach (var certStore in certStores)
 			{
 				try
 				{
 //					certs.AddAll(certStore.GetMatches(certSelect));
-					foreach (X509ExtensionBase c in certStore.GetMatches(certSelect))
+					foreach (T c in certStore.GetMatches(certSelect))
 					{
 						certs.Add(c);
 					}
@@ -1014,7 +1014,7 @@ namespace Org.BouncyCastle.Pkix
 
 		internal static ICollection<X509V2AttributeCertificate> FindCertificates(
 			X509AttrCertStoreSelector	certSelect,
-			IList<IX509Store<object>>                        certStores)
+			IList<IX509Store<X509V2AttributeCertificate>>                        certStores)
 		{
 		 var certs = new HashSet<X509V2AttributeCertificate>();
 
@@ -1023,7 +1023,7 @@ namespace Org.BouncyCastle.Pkix
 				try
 				{
 //					certs.AddAll(certStore.GetMatches(certSelect));
-					foreach (X509V2AttributeCertificate ac in certStore.GetMatches(certSelect))
+					foreach (var ac in certStore.GetMatches(certSelect))
 					{
 						certs.Add(ac);
 					}
@@ -1159,12 +1159,12 @@ namespace Org.BouncyCastle.Pkix
 		* @exception Exception
 		*                if an error occurs.
 		*/
-		internal static ICollection<X509ExtensionBase> FindIssuerCerts(
+		internal static ICollection<X509Certificate> FindIssuerCerts(
 			X509Certificate			cert,
 			PkixBuilderParameters	pkixParams)
 		{
 			X509CertStoreSelector certSelect = new X509CertStoreSelector();
-		 var certs = new HashSet<X509ExtensionBase>();
+		 var certs = new HashSet<X509Certificate>();
 			try
 			{
 				certSelect.Subject = cert.IssuerDN;
@@ -1177,11 +1177,11 @@ namespace Org.BouncyCastle.Pkix
 
 			try
 			{
-                foreach(var localcert in PkixCertPathValidatorUtilities.FindCertificates(certSelect, pkixParams.GetStores()))
+                foreach(var localcert in PkixCertPathValidatorUtilities.FindCertificates(certSelect, pkixParams.GetStores<X509Certificate>()))
                 {
                     certs.Add(localcert);
                 }
-                foreach (var localcert in PkixCertPathValidatorUtilities.FindCertificates(certSelect, pkixParams.GetAdditionalStores()))
+                foreach (var localcert in PkixCertPathValidatorUtilities.FindCertificates(certSelect, pkixParams.GetAdditionalStores<X509Certificate>()))
                 {
                     certs.Add(localcert);
                 }

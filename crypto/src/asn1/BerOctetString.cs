@@ -8,7 +8,7 @@ using Org.BouncyCastle.Utilities;
 namespace Org.BouncyCastle.Asn1
 {
     public class BerOctetString
-        : DerOctetString, IEnumerable
+        : DerOctetString, IEnumerable<DerOctetString>
     {
 		public static BerOctetString FromSequence(Asn1Sequence seq)
 		{
@@ -39,7 +39,7 @@ namespace Org.BouncyCastle.Asn1
 			return bOut.ToArray();
         }
 
-		private readonly IEnumerable octs;
+		private readonly IEnumerable<DerOctetString> octs;
 
 		/// <param name="str">The octets making up the octet string.</param>
 		public BerOctetString(
@@ -75,7 +75,7 @@ namespace Org.BouncyCastle.Asn1
         /**
          * return the DER octets that make up this string.
          */
-		public IEnumerator GetEnumerator()
+		public IEnumerator<DerOctetString> GetEnumerator()
 		{
 			if (octs == null)
 			{
@@ -83,12 +83,6 @@ namespace Org.BouncyCastle.Asn1
 			}
 
 			return octs.GetEnumerator();
-		}
-
-		[Obsolete("Use GetEnumerator() instead")]
-        public IEnumerator GetObjects()
-        {
-			return GetEnumerator();
 		}
 
 		private IList<DerOctetString> GenerateOcts()
@@ -131,6 +125,11 @@ namespace Org.BouncyCastle.Asn1
             {
                 base.Encode(derOut);
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

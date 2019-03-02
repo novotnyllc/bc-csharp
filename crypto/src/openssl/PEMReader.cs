@@ -242,7 +242,8 @@ namespace Org.BouncyCastle.OpenSsl
                 fields[header.Name] = header.Value;
             }
 
-            string procType = (string) fields["Proc-Type"];
+            string procType;
+            fields.TryGetValue("Proc-Type", out procType); ;
 
             if (procType == "4,ENCRYPTED")
             {

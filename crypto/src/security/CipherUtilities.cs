@@ -254,7 +254,8 @@ namespace Org.BouncyCastle.Security
             algorithm = Platform.ToUpperInvariant(algorithm);
 
             {
-                string aliased = (string) algorithms[algorithm];
+                string aliased;
+                algorithms.TryGetValue(algorithm, out aliased);
 
                 if (aliased != null)
                     algorithm = aliased;
@@ -340,7 +341,9 @@ namespace Org.BouncyCastle.Security
             string algorithmName = parts[0];
 
             {
-                string aliased = (string)algorithms[algorithmName];
+                string aliased;
+                algorithms.TryGetValue(algorithmName, out aliased);
+
 
                 if (aliased != null)
                     algorithmName = aliased;

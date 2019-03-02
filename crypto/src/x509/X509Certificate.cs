@@ -28,8 +28,6 @@ namespace Org.BouncyCastle.X509
 //		, PKCS12BagAttributeCarrier
     {
         private readonly X509CertificateStructure c;
-        //private Hashtable pkcs12Attributes = Platform.CreateHashtable();
-        //private ArrayList pkcs12Ordering = Platform.CreateArrayList();
 		private readonly BasicConstraints basicConstraints;
 		private readonly bool[] keyUsage;
 
@@ -477,7 +475,7 @@ namespace Org.BouncyCastle.X509
 
 			if (extensions != null)
 			{
-				IEnumerator e = extensions.ExtensionOids.GetEnumerator();
+                var e = extensions.ExtensionOids.GetEnumerator();
 
 				if (e.MoveNext())
 				{

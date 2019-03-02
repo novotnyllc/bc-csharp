@@ -118,12 +118,6 @@ namespace Org.BouncyCastle.Asn1
             return seq.GetEnumerator();
         }
 
-        [Obsolete("Use GetEnumerator() instead")]
-        public IEnumerator GetObjects()
-        {
-            return GetEnumerator();
-        }
-
         private class Asn1SequenceParserImpl
             : Asn1SequenceParser
         {
@@ -229,7 +223,7 @@ namespace Org.BouncyCastle.Asn1
             if (Count != other.Count)
                 return false;
 
-            IEnumerator s1 = GetEnumerator();
+            var s1 = GetEnumerator();
             var s2 = other.GetEnumerator();
 
             while (s1.MoveNext() && s2.MoveNext())
@@ -244,7 +238,7 @@ namespace Org.BouncyCastle.Asn1
             return true;
         }
 
-        private Asn1Encodable GetCurrent(IEnumerator e)
+        private Asn1Encodable GetCurrent(IEnumerator<Asn1Encodable> e)
         {
             Asn1Encodable encObj = (Asn1Encodable)e.Current;
 
