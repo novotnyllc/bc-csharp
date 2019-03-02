@@ -24,8 +24,8 @@ namespace Org.BouncyCastle.Crypto.Operators
 	{
         private static readonly Asn1Null derNull = DerNull.Instance;
 
-        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
-		private static readonly IDictionary<string, RsassaPssParameters> exParams = Platform.CreateHashtable<string, RsassaPssParameters>();
+        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateDictionary<string, DerObjectIdentifier>();
+		private static readonly IDictionary<string, RsassaPssParameters> exParams = Platform.CreateDictionary<string, RsassaPssParameters>();
 		private static readonly ISet<DerObjectIdentifier>        noParams = new HashSet<DerObjectIdentifier>();
 
 		static X509Utilities()

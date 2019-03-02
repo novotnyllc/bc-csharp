@@ -13,13 +13,13 @@ namespace Org.BouncyCastle.Asn1.Cms
         public AttributeTable(
             IDictionary<DerObjectIdentifier, object> attrs)
         {
-            this.attributes = Platform.CreateHashtable(attrs);
+            this.attributes = Platform.CreateDictionary(attrs);
         }
 
         public AttributeTable(
             Asn1EncodableVector v)
         {
-            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, object>(v.Count);
+            this.attributes = Platform.CreateDictionary<DerObjectIdentifier, object>(v.Count);
 
 			foreach (Asn1Encodable o in v)
             {
@@ -32,7 +32,7 @@ namespace Org.BouncyCastle.Asn1.Cms
         public AttributeTable(
             Asn1Set s)
         {
-            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, object>(s.Count);
+            this.attributes = Platform.CreateDictionary<DerObjectIdentifier, object>(s.Count);
 
 			for (int i = 0; i != s.Count; i++)
             {
@@ -158,7 +158,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
         public IDictionary<DerObjectIdentifier, object> ToDictionary()
         {
-            return Platform.CreateHashtable(attributes);
+            return Platform.CreateDictionary(attributes);
         }
 
 		public Asn1EncodableVector ToAsn1EncodableVector()

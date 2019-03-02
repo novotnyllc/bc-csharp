@@ -76,7 +76,7 @@ namespace Org.BouncyCastle.Tsp
 			}
 			else
 			{
-				signedAttrs = Platform.CreateHashtable<DerObjectIdentifier, object>();
+				signedAttrs = Platform.CreateDictionary<DerObjectIdentifier, object>();
 			}
 
 			try

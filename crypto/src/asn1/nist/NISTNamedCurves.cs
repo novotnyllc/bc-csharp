@@ -18,8 +18,8 @@ namespace Org.BouncyCastle.Asn1.Nist
         {
         }
 
-        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateHashtable<string, DerObjectIdentifier>();
-        private static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateDictionary<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateDictionary<DerObjectIdentifier, string>();
 
         private static void DefineCurveAlias(
             string				name,

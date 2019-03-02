@@ -42,7 +42,7 @@ namespace Org.BouncyCastle.Crypto.Operators
         //
         // Provider 
         //
-        private static readonly IDictionary<string, RsaOaepWrapperProvider> providerMap = Platform.CreateHashtable<string, RsaOaepWrapperProvider>();
+        private static readonly IDictionary<string, RsaOaepWrapperProvider> providerMap = Platform.CreateDictionary<string, RsaOaepWrapperProvider>();
 
         static KeyWrapperUtil()
         {

@@ -17,8 +17,8 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
 		{
 		}
 
-        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateHashtable<string, DerObjectIdentifier>();
-        private static readonly IDictionary<DerObjectIdentifier, Gost3410ParamSetParameters> parameters = Platform.CreateHashtable<DerObjectIdentifier, Gost3410ParamSetParameters>();
+        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateDictionary<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, Gost3410ParamSetParameters> parameters = Platform.CreateDictionary<DerObjectIdentifier, Gost3410ParamSetParameters>();
 
         private static readonly Gost3410ParamSetParameters cryptoProA = new Gost3410ParamSetParameters(
             1024,

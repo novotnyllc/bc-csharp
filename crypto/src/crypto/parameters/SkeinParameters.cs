@@ -75,7 +75,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		private IDictionary<int, byte[]> parameters;
 
 		public SkeinParameters()
-			: this(Platform.CreateHashtable<int, byte[]>())
+			: this(Platform.CreateDictionary<int, byte[]>())
 
 		{
 		}
@@ -144,7 +144,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 		/// </summary>
 		public class Builder
 		{
-			private IDictionary<int, byte[]> parameters = Platform.CreateHashtable<int, byte[]>();
+			private IDictionary<int, byte[]> parameters = Platform.CreateDictionary<int, byte[]>();
 
 			public Builder()
 			{

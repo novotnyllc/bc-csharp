@@ -19,7 +19,7 @@ namespace Org.BouncyCastle.Operators
 {
     public class CmsContentEncryptorBuilder
     {
-        private static readonly IDictionary<DerObjectIdentifier, int> KeySizes = Platform.CreateHashtable<DerObjectIdentifier, int>();
+        private static readonly IDictionary<DerObjectIdentifier, int> KeySizes = Platform.CreateDictionary<DerObjectIdentifier, int>();
 
         static CmsContentEncryptorBuilder()
         {

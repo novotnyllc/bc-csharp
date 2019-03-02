@@ -16,7 +16,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         private TlsHandshakeHash mHandshakeHash;
 
-        private IDictionary<int, DtlsReassembler> mCurrentInboundFlight = Platform.CreateHashtable<int, DtlsReassembler>();
+        private IDictionary<int, DtlsReassembler> mCurrentInboundFlight = Platform.CreateDictionary<int, DtlsReassembler>();
         private IDictionary<int, DtlsReassembler> mPreviousInboundFlight = null;
         private IList<Message> mOutboundFlight = Platform.CreateList<Message>();
         private bool mSending = true;
@@ -80,7 +80,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             if (mSending)
             {
                 mSending = false;
-                PrepareInboundFlight(Platform.CreateHashtable<int, DtlsReassembler>());
+                PrepareInboundFlight(Platform.CreateDictionary<int, DtlsReassembler>());
             }
 
             byte[] buf = null;

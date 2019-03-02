@@ -170,7 +170,7 @@ namespace Org.BouncyCastle.Asn1.X509
          */
         public static readonly DerObjectIdentifier ExpiredCertsOnCrl = new DerObjectIdentifier("2.5.29.60");
 
-        private readonly IDictionary<DerObjectIdentifier, X509Extension> extensions = Platform.CreateHashtable<DerObjectIdentifier, X509Extension>();
+        private readonly IDictionary<DerObjectIdentifier, X509Extension> extensions = Platform.CreateDictionary<DerObjectIdentifier, X509Extension>();
         private readonly IList<DerObjectIdentifier> ordering;
 
 		public static X509Extensions GetInstance(

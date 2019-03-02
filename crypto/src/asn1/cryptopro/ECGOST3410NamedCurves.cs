@@ -19,9 +19,9 @@ namespace Org.BouncyCastle.Asn1.CryptoPro
         {
         }
 
-        internal static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateHashtable<string, DerObjectIdentifier>();
-        internal static readonly IDictionary<DerObjectIdentifier, ECDomainParameters> parameters = Platform.CreateHashtable<DerObjectIdentifier, ECDomainParameters>();
-        internal static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        internal static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateDictionary<string, DerObjectIdentifier>();
+        internal static readonly IDictionary<DerObjectIdentifier, ECDomainParameters> parameters = Platform.CreateDictionary<DerObjectIdentifier, ECDomainParameters>();
+        internal static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateDictionary<DerObjectIdentifier, string>();
 
         static ECGost3410NamedCurves()
         {

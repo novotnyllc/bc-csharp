@@ -46,8 +46,8 @@ namespace Org.BouncyCastle.Cms
 
 		private readonly IList<DigestAndSignerInfoGeneratorHolder>      _signerInfs = Platform.CreateList<DigestAndSignerInfoGeneratorHolder>();
 		private readonly ISet<string>       _messageDigestOids = new HashSet<string>();
-        private readonly IDictionary<string, IDigest> _messageDigests = Platform.CreateHashtable<string, IDigest>();
-        private readonly IDictionary<string, byte[]> _messageHashes = Platform.CreateHashtable<string, byte[]>();
+        private readonly IDictionary<string, IDigest> _messageDigests = Platform.CreateDictionary<string, IDigest>();
+        private readonly IDictionary<string, byte[]> _messageHashes = Platform.CreateDictionary<string, byte[]>();
 		private bool				_messageDigestsLocked;
         private int					_bufferSize;
 

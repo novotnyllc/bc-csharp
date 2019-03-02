@@ -34,12 +34,12 @@ namespace Org.BouncyCastle.Cms
         private static readonly string EncryptionECDsaWithSha384 = X9ObjectIdentifiers.ECDsaWithSha384.Id;
         private static readonly string EncryptionECDsaWithSha512 = X9ObjectIdentifiers.ECDsaWithSha512.Id;
 
-        private static readonly IDictionary<string, string> encryptionAlgs = Platform.CreateHashtable<string, string>();
-        private static readonly IDictionary<string, string> digestAlgs = Platform.CreateHashtable<string, string>();
-        private static readonly IDictionary<string, string[]> digestAliases = Platform.CreateHashtable<string, string[]>();
+        private static readonly IDictionary<string, string> encryptionAlgs = Platform.CreateDictionary<string, string>();
+        private static readonly IDictionary<string, string> digestAlgs = Platform.CreateDictionary<string, string>();
+        private static readonly IDictionary<string, string[]> digestAliases = Platform.CreateDictionary<string, string[]>();
 
         private static readonly ISet<string> noParams = new HashSet<string>();
-        private static readonly IDictionary<string, string> ecAlgorithms = Platform.CreateHashtable<string, string>();
+        private static readonly IDictionary<string, string> ecAlgorithms = Platform.CreateDictionary<string, string>();
 
         private static void AddEntries(DerObjectIdentifier oid, string digest, string encryption)
 		{

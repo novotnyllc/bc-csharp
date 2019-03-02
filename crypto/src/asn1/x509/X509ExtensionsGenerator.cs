@@ -8,13 +8,13 @@ namespace Org.BouncyCastle.Asn1.X509
 	/// <remarks>Generator for X.509 extensions</remarks>
 	public class X509ExtensionsGenerator
 	{
-		private IDictionary<DerObjectIdentifier, X509Extension> extensions = Platform.CreateHashtable<DerObjectIdentifier, X509Extension>();
+		private IDictionary<DerObjectIdentifier, X509Extension> extensions = Platform.CreateDictionary<DerObjectIdentifier, X509Extension>();
         private IList<DerObjectIdentifier> extOrdering = Platform.CreateList<DerObjectIdentifier>();
 
 		/// <summary>Reset the generator</summary>
 		public void Reset()
 		{
-            extensions = Platform.CreateHashtable<DerObjectIdentifier, X509Extension>();
+            extensions = Platform.CreateDictionary<DerObjectIdentifier, X509Extension>();
             extOrdering = Platform.CreateList<DerObjectIdentifier>();
 		}
 

@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Cms
 		 */
 		public DefaultAuthenticatedAttributeTableGenerator()
 		{
-			table = Platform.CreateHashtable<DerObjectIdentifier, object>();
+			table = Platform.CreateDictionary<DerObjectIdentifier, object>();
 		}
 
 		/**
@@ -37,7 +37,7 @@ namespace Org.BouncyCastle.Cms
 			}
 			else
 			{
-				table = Platform.CreateHashtable<DerObjectIdentifier, object>();
+				table = Platform.CreateDictionary<DerObjectIdentifier, object>();
 			}
 		}
 
@@ -54,7 +54,7 @@ namespace Org.BouncyCastle.Cms
 		protected virtual IDictionary<DerObjectIdentifier, object> CreateStandardAttributeTable(
 			IDictionary<CmsAttributeTableParameter, object> parameters)
 		{
-            var std = Platform.CreateHashtable(table);
+            var std = Platform.CreateDictionary(table);
 
 			if (!std.ContainsKey(CmsAttributes.ContentType))
             {

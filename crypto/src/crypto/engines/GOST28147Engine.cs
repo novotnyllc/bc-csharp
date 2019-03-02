@@ -117,7 +117,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 		//
 		// pre-defined sbox table
 		//
-		private static readonly IDictionary<string, byte[]> sBoxes = Platform.CreateHashtable<string, byte[]>();
+		private static readonly IDictionary<string, byte[]> sBoxes = Platform.CreateDictionary<string, byte[]>();
 
 		static Gost28147Engine()
 		{

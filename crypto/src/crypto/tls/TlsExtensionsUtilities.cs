@@ -11,7 +11,7 @@ namespace Org.BouncyCastle.Crypto.Tls
     {
         public static IDictionary<TKey, TValue> EnsureExtensionsInitialised<TKey, TValue>(IDictionary<TKey, TValue> extensions)
         {
-            return extensions == null ? Platform.CreateHashtable<TKey, TValue>() : extensions;
+            return extensions == null ? Platform.CreateDictionary<TKey, TValue>() : extensions;
         }
 
         /// <exception cref="IOException"></exception>

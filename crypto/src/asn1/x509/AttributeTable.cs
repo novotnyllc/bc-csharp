@@ -13,13 +13,13 @@ namespace Org.BouncyCastle.Asn1.X509
         public AttributeTable(
             IDictionary<DerObjectIdentifier, AttributeX509> attrs)
         {
-            this.attributes = Platform.CreateHashtable(attrs);
+            this.attributes = Platform.CreateDictionary(attrs);
         }
 
 		public AttributeTable(
             Asn1EncodableVector v)
         {
-            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, AttributeX509>(v.Count);
+            this.attributes = Platform.CreateDictionary<DerObjectIdentifier, AttributeX509>(v.Count);
 
 			for (int i = 0; i != v.Count; i++)
             {
@@ -32,7 +32,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		public AttributeTable(
             Asn1Set s)
         {
-            this.attributes = Platform.CreateHashtable<DerObjectIdentifier, AttributeX509>(s.Count);
+            this.attributes = Platform.CreateDictionary<DerObjectIdentifier, AttributeX509>(s.Count);
 
 			for (int i = 0; i != s.Count; i++)
             {
@@ -50,7 +50,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
         public IDictionary<DerObjectIdentifier, AttributeX509> ToDictionary()
         {
-            return Platform.CreateHashtable(attributes);
+            return Platform.CreateDictionary(attributes);
         }
     }
 }

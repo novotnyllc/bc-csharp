@@ -48,10 +48,10 @@ namespace Org.BouncyCastle.Pkcs
 	public class Pkcs10CertificationRequest
 		: CertificationRequest
 	{
-		protected static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
-        protected static readonly IDictionary<string, RsassaPssParameters> exParams = Platform.CreateHashtable<string, RsassaPssParameters>();
-        protected static readonly IDictionary<DerObjectIdentifier, string> keyAlgorithms = Platform.CreateHashtable<DerObjectIdentifier, string>();
-        protected static readonly IDictionary<DerObjectIdentifier, string> oids = Platform.CreateHashtable<DerObjectIdentifier, string>();
+		protected static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateDictionary<string, DerObjectIdentifier>();
+        protected static readonly IDictionary<string, RsassaPssParameters> exParams = Platform.CreateDictionary<string, RsassaPssParameters>();
+        protected static readonly IDictionary<DerObjectIdentifier, string> keyAlgorithms = Platform.CreateDictionary<DerObjectIdentifier, string>();
+        protected static readonly IDictionary<DerObjectIdentifier, string> oids = Platform.CreateDictionary<DerObjectIdentifier, string>();
 		protected static readonly ISet<DerObjectIdentifier> noParams = new HashSet<DerObjectIdentifier>();
 
 		static Pkcs10CertificationRequest()

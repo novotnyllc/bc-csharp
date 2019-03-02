@@ -44,7 +44,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		public PgpSecretKeyRingBundle(
             IEnumerable<object> e)
         {
-			this.secretRings = Platform.CreateHashtable<long, PgpSecretKeyRing>();
+			this.secretRings = Platform.CreateDictionary<long, PgpSecretKeyRing>();
             this.order = Platform.CreateList<long>();
 
 			foreach (object obj in e)
@@ -241,7 +241,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 throw new ArgumentException("Collection already contains a key with a keyId for the passed in ring.");
             }
 
-            var newSecretRings = Platform.CreateHashtable(bundle.secretRings);
+            var newSecretRings = Platform.CreateDictionary(bundle.secretRings);
             var newOrder = Platform.CreateList(bundle.order);
 
             newSecretRings[key] = secretKeyRing;
@@ -269,7 +269,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 throw new ArgumentException("Collection does not contain a key with a keyId for the passed in ring.");
             }
 
-            var newSecretRings = Platform.CreateHashtable(bundle.secretRings);
+            var newSecretRings = Platform.CreateDictionary(bundle.secretRings);
             var newOrder = Platform.CreateList(bundle.order);
 
 			newSecretRings.Remove(key);

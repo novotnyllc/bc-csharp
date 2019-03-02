@@ -21,8 +21,8 @@ namespace Org.BouncyCastle.X509
 {
 	internal class X509Utilities
 	{
-        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
-        private static readonly IDictionary<string, Asn1Encodable> exParams = Platform.CreateHashtable<string, Asn1Encodable>();
+        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateDictionary<string, DerObjectIdentifier>();
+        private static readonly IDictionary<string, Asn1Encodable> exParams = Platform.CreateDictionary<string, Asn1Encodable>();
 		private static readonly ISet<DerObjectIdentifier> noParams = new HashSet<DerObjectIdentifier>();
 
 		static X509Utilities()

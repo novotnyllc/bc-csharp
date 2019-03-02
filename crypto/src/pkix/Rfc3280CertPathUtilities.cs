@@ -1252,7 +1252,7 @@ namespace Org.BouncyCastle.Pkix
 			if (pm != null)
 			{
 				Asn1Sequence mappings = (Asn1Sequence)pm;
-				IDictionary<string, ISet<string>> m_idp = Platform.CreateHashtable<string, ISet<string>>();
+				IDictionary<string, ISet<string>> m_idp = Platform.CreateDictionary<string, ISet<string>>();
 				var s_idp = new HashSet<string>();
 
 				for (int j = 0; j < mappings.Count; j++)

@@ -209,23 +209,23 @@ namespace Org.BouncyCastle.Asn1.X509
         * default look up table translating OID values into their common symbols following
         * the convention in RFC 2253 with a few extras
         */
-        public static readonly IDictionary<DerObjectIdentifier, string> DefaultSymbols = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        public static readonly IDictionary<DerObjectIdentifier, string> DefaultSymbols = Platform.CreateDictionary<DerObjectIdentifier, string>();
 
         /**
          * look up table translating OID values into their common symbols following the convention in RFC 2253
          */
-        public static readonly IDictionary<DerObjectIdentifier, string> RFC2253Symbols = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        public static readonly IDictionary<DerObjectIdentifier, string> RFC2253Symbols = Platform.CreateDictionary<DerObjectIdentifier, string>();
 
         /**
          * look up table translating OID values into their common symbols following the convention in RFC 1779
          *
          */
-        public static readonly IDictionary<DerObjectIdentifier, string> RFC1779Symbols = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        public static readonly IDictionary<DerObjectIdentifier, string> RFC1779Symbols = Platform.CreateDictionary<DerObjectIdentifier, string>();
 
         /**
         * look up table translating common symbols into their OIDS.
         */
-        public static readonly IDictionary<string, DerObjectIdentifier> DefaultLookup = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        public static readonly IDictionary<string, DerObjectIdentifier> DefaultLookup = Platform.CreateDictionary<string, DerObjectIdentifier>();
 
         static X509Name()
         {

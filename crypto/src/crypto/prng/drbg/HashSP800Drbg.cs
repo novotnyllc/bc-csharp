@@ -16,7 +16,7 @@ namespace Org.BouncyCastle.Crypto.Prng.Drbg
 		private readonly static long RESEED_MAX = 1L << (48 - 1);
 		private readonly static int MAX_BITS_REQUEST = 1 << (19 - 1);
 
-		private static readonly IDictionary<string, int> seedlens = Platform.CreateHashtable<string, int>();
+		private static readonly IDictionary<string, int> seedlens = Platform.CreateDictionary<string, int>();
 
 		static HashSP800Drbg()
 	    {

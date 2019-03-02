@@ -29,11 +29,11 @@ namespace Org.BouncyCastle.Cms
 {
     public class DefaultSignatureAlgorithmIdentifierFinder
     {
-        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateDictionary<string, DerObjectIdentifier>();
         private static readonly ISet<object> noParams = new HashSet<object>();
-        private static readonly IDictionary<string, RsassaPssParameters> _params = Platform.CreateHashtable<string, RsassaPssParameters>();
+        private static readonly IDictionary<string, RsassaPssParameters> _params = Platform.CreateDictionary<string, RsassaPssParameters>();
         private static readonly ISet<object> pkcs15RsaEncryption = new HashSet<object>();
-        private static readonly IDictionary<DerObjectIdentifier, DerObjectIdentifier> digestOids = Platform.CreateHashtable<DerObjectIdentifier, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, DerObjectIdentifier> digestOids = Platform.CreateDictionary<DerObjectIdentifier, DerObjectIdentifier>();
 
         private static readonly DerObjectIdentifier ENCRYPTION_RSA = PkcsObjectIdentifiers.RsaEncryption;
         private static readonly DerObjectIdentifier ENCRYPTION_DSA = X9ObjectIdentifiers.IdDsaWithSha1;
@@ -350,8 +350,8 @@ namespace Org.BouncyCastle.Cms
 
     public class DefaultDigestAlgorithmIdentifierFinder
     {
-        private static readonly IDictionary<DerObjectIdentifier, DerObjectIdentifier> digestOids = Platform.CreateHashtable<DerObjectIdentifier, DerObjectIdentifier>();
-        private static readonly IDictionary<string, DerObjectIdentifier> digestNameToOids = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, DerObjectIdentifier> digestOids = Platform.CreateDictionary<DerObjectIdentifier, DerObjectIdentifier>();
+        private static readonly IDictionary<string, DerObjectIdentifier> digestNameToOids = Platform.CreateDictionary<string, DerObjectIdentifier>();
 
         static DefaultDigestAlgorithmIdentifierFinder()
         {
@@ -473,7 +473,7 @@ namespace Org.BouncyCastle.Cms
         internal IList<Asn1Encodable> _certs = Platform.CreateList<Asn1Encodable>();
         internal IList<Asn1Encodable> _crls = Platform.CreateList<Asn1Encodable>();
         internal IList<SignerInformation> _signers = Platform.CreateList<SignerInformation>();
-        internal IDictionary<string, byte[]> _digests = Platform.CreateHashtable<string, byte[]>();
+        internal IDictionary<string, byte[]> _digests = Platform.CreateDictionary<string, byte[]>();
         internal bool _useDerForCerts = false;
         internal bool _useDerForCrls = false;
 
@@ -497,7 +497,7 @@ namespace Org.BouncyCastle.Cms
             AlgorithmIdentifier digAlgId,
             byte[] hash)
         {
-            var param = Platform.CreateHashtable<CmsAttributeTableParameter, object>();
+            var param = Platform.CreateDictionary<CmsAttributeTableParameter, object>();
 
             if (contentType != null)
             {
@@ -577,7 +577,7 @@ namespace Org.BouncyCastle.Cms
 		 */
         public IDictionary<string, byte[]> GetGeneratedDigests()
         {
-            return Platform.CreateHashtable(_digests);
+            return Platform.CreateDictionary(_digests);
         }
 
         public bool UseDerForCerts

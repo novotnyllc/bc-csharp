@@ -47,8 +47,8 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
-        private static readonly IDictionary<string, DerObjectIdentifier> oids = Platform.CreateHashtable<string, DerObjectIdentifier>();
+        private static readonly IDictionary<string, string> algorithms = Platform.CreateDictionary<string, string>();
+        private static readonly IDictionary<string, DerObjectIdentifier> oids = Platform.CreateDictionary<string, DerObjectIdentifier>();
 
         static DigestUtilities()
         {

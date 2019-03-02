@@ -19,8 +19,8 @@ namespace Org.BouncyCastle.Cms
 	{
 		internal static readonly CmsEnvelopedHelper Instance = new CmsEnvelopedHelper();
 
-		private static readonly IDictionary<string, int> KeySizes = Platform.CreateHashtable<string, int>();
-		private static readonly IDictionary<string, string> BaseCipherNames = Platform.CreateHashtable<string, string>();
+		private static readonly IDictionary<string, int> KeySizes = Platform.CreateDictionary<string, int>();
+		private static readonly IDictionary<string, string> BaseCipherNames = Platform.CreateDictionary<string, string>();
 
 		static CmsEnvelopedHelper()
 		{

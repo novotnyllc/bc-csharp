@@ -15,7 +15,7 @@ namespace Org.BouncyCastle.Asn1.X509
     public class ExtendedKeyUsage
         : Asn1Encodable
     {
-        internal readonly IDictionary<object, object> usageTable = Platform.CreateHashtable<object, object>();
+        internal readonly IDictionary<object, object> usageTable = Platform.CreateDictionary<object, object>();
         internal readonly Asn1Sequence seq;
 
         public static ExtendedKeyUsage GetInstance(

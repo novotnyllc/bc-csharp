@@ -24,9 +24,9 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary<string, string> kgAlgorithms = Platform.CreateHashtable<string, string>();
-        private static readonly IDictionary<string, string> kpgAlgorithms = Platform.CreateHashtable<string, string>();
-        private static readonly IDictionary<string, int> defaultKeySizes = Platform.CreateHashtable<string, int>();
+        private static readonly IDictionary<string, string> kgAlgorithms = Platform.CreateDictionary<string, string>();
+        private static readonly IDictionary<string, string> kpgAlgorithms = Platform.CreateDictionary<string, string>();
+        private static readonly IDictionary<string, int> defaultKeySizes = Platform.CreateDictionary<string, int>();
 
         static GeneratorUtilities()
         {

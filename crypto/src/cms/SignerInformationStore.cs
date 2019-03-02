@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Cms
     public class SignerInformationStore
     {
         private readonly IList<SignerInformation> all; //ArrayList[SignerInformation]
-        private readonly IDictionary<SignerID, IList<SignerInformation>> table = Platform.CreateHashtable<SignerID, IList<SignerInformation>>();
+        private readonly IDictionary<SignerID, IList<SignerInformation>> table = Platform.CreateDictionary<SignerID, IList<SignerInformation>>();
 
         /**
          * Create a store containing a single SignerInformation object.

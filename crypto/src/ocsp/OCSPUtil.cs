@@ -16,8 +16,8 @@ namespace Org.BouncyCastle.Ocsp
 {
 	class OcspUtilities
 	{
-		private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateHashtable<string, DerObjectIdentifier>();
-        private static readonly IDictionary<DerObjectIdentifier, string> oids = Platform.CreateHashtable<DerObjectIdentifier, string>();
+		private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateDictionary<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, string> oids = Platform.CreateDictionary<DerObjectIdentifier, string>();
 		private static readonly ISet<DerObjectIdentifier> noParams = new HashSet<DerObjectIdentifier>();
 
 		static OcspUtilities()

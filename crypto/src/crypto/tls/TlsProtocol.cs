@@ -1134,7 +1134,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             MemoryStream buf = new MemoryStream(extBytes, false);
 
             // Integer -> byte[]
-            var extensions = Platform.CreateHashtable<int, byte[]>();
+            var extensions = Platform.CreateDictionary<int, byte[]>();
 
             while (buf.Position < buf.Length)
             {

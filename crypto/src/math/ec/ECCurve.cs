@@ -199,7 +199,7 @@ namespace Org.BouncyCastle.Math.EC
                 table = point.m_preCompTable;
                 if (null == table)
                 {
-                    point.m_preCompTable = table = Platform.CreateHashtable<string, PreCompInfo>(4);
+                    point.m_preCompTable = table = Platform.CreateDictionary<string, PreCompInfo>(4);
                 }
             }
 

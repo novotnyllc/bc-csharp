@@ -131,7 +131,7 @@ namespace Org.BouncyCastle.Crypto.Digests
          * Precalculated UBI(CFG) states for common state/output combinations without key or other
          * pre-message params.
          */
-        private static readonly IDictionary<int, ulong[]> INITIAL_STATES = Platform.CreateHashtable<int, ulong[]>();
+        private static readonly IDictionary<int, ulong[]> INITIAL_STATES = Platform.CreateDictionary<int, ulong[]>();
 
         static SkeinEngine()
         {

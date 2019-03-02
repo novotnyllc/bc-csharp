@@ -21,8 +21,8 @@ namespace Org.BouncyCastle.Security
         {
         }
 
-        private static readonly IDictionary<string, string> algorithms = Platform.CreateHashtable<string, string>();
-        private static readonly IDictionary<string, int> basicIVSizes = Platform.CreateHashtable<string, int>();
+        private static readonly IDictionary<string, string> algorithms = Platform.CreateDictionary<string, string>();
+        private static readonly IDictionary<string, int> basicIVSizes = Platform.CreateDictionary<string, int>();
 
         static ParameterUtilities()
         {

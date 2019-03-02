@@ -8,7 +8,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 	public class LinkedDictionary
 		: IDictionary
 	{
-		internal readonly IDictionary<object, object> hash = Platform.CreateHashtable<object, object>();
+		internal readonly IDictionary<object, object> hash = Platform.CreateDictionary<object, object>();
 		internal readonly IList<object> keys = Platform.CreateList<object>();
 
 		public LinkedDictionary()

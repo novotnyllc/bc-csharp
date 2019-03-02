@@ -1536,7 +1536,7 @@ namespace Org.BouncyCastle.Pkix
 
         public void IntersectPermittedSubtree(Asn1Sequence permitted)
         {
-            var subtreesMap = Platform.CreateHashtable<int, ISet<GeneralSubtree>>();
+            var subtreesMap = Platform.CreateDictionary<int, ISet<GeneralSubtree>>();
 
             // group in ISets in a map ordered by tag no.
             for (var e = permitted.GetEnumerator(); e.MoveNext(); )

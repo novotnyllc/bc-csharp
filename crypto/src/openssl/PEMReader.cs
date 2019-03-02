@@ -236,7 +236,7 @@ namespace Org.BouncyCastle.OpenSsl
             string type = pemObject.Type.Substring(0, pemObject.Type.Length - "PRIVATE KEY".Length).Trim();
             byte[] keyBytes = pemObject.Content;
 
-            var fields = Platform.CreateHashtable<string, string>();
+            var fields = Platform.CreateDictionary<string, string>();
             foreach (PemHeader header in pemObject.Headers)
             {
                 fields[header.Name] = header.Value;

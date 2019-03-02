@@ -96,15 +96,15 @@ namespace Org.BouncyCastle.Utilities
         {
             return collection.ToList();
         }
-        internal static IDictionary<TKey, TValue> CreateHashtable<TKey, TValue>()
+        internal static IDictionary<TKey, TValue> CreateDictionary<TKey, TValue>()
         {
             return new Dictionary<TKey, TValue>();
         }
-        internal static IDictionary<TKey, TValue> CreateHashtable<TKey, TValue>(int capacity)
+        internal static IDictionary<TKey, TValue> CreateDictionary<TKey, TValue>(int capacity)
         {
             return new Dictionary<TKey, TValue>(capacity);
         }
-        internal static IDictionary<TKey, TValue> CreateHashtable<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
+        internal static IDictionary<TKey, TValue> CreateDictionary<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
         {
             return dictionary.ToDictionary(t => t.Key, t => t.Value);
         }

@@ -111,7 +111,7 @@ namespace Org.BouncyCastle.Cms
 			{
 				this._signedContent = signedContent;
 				this._signedData = SignedDataParser.GetInstance(this.contentInfo.GetContent(Asn1Tags.Sequence));
-				this._digests = Platform.CreateHashtable<string, IDigest>();
+				this._digests = Platform.CreateDictionary<string, IDigest>();
 				this._digestOids = new HashSet<string>();
 
 				Asn1SetParser digAlgs = _signedData.GetDigestAlgorithms();
@@ -200,7 +200,7 @@ namespace Org.BouncyCastle.Cms
 				PopulateCertCrlSets();
 
                 var signerInfos = Platform.CreateList<SignerInformation>();
-                var hashes = Platform.CreateHashtable<object, byte[]>();
+                var hashes = Platform.CreateDictionary<object, byte[]>();
 
 				foreach (var digestKey in _digests.Keys)
 				{

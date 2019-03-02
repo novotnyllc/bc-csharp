@@ -21,10 +21,10 @@ namespace Org.BouncyCastle.Pkcs
     public class Pkcs12Store
     {
         private readonly IgnoresCaseHashtable	keys = new IgnoresCaseHashtable();
-        private readonly IDictionary<string, string> localIds = Platform.CreateHashtable<string, string>();
+        private readonly IDictionary<string, string> localIds = Platform.CreateDictionary<string, string>();
         private readonly IgnoresCaseHashtable	certs = new IgnoresCaseHashtable();
-        private readonly IDictionary<CertId, X509CertificateEntry> chainCerts = Platform.CreateHashtable<CertId, X509CertificateEntry>();
-        private readonly IDictionary<string, X509CertificateEntry> keyCerts = Platform.CreateHashtable<string, X509CertificateEntry>();
+        private readonly IDictionary<CertId, X509CertificateEntry> chainCerts = Platform.CreateDictionary<CertId, X509CertificateEntry>();
+        private readonly IDictionary<string, X509CertificateEntry> keyCerts = Platform.CreateDictionary<string, X509CertificateEntry>();
         private readonly DerObjectIdentifier	keyAlgorithm;
         private readonly DerObjectIdentifier	certAlgorithm;
         private readonly bool					useDerEncoding;

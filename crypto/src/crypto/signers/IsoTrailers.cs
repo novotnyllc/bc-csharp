@@ -23,7 +23,7 @@ namespace Org.BouncyCastle.Crypto.Signers
 
         private static IDictionary<string, int> CreateTrailerMap()
         {
-            IDictionary<string, int> trailers = Platform.CreateHashtable<string, int>();
+            IDictionary<string, int> trailers = Platform.CreateDictionary<string, int>();
 
             trailers.Add("RIPEMD128", TRAILER_RIPEMD128);
             trailers.Add("RIPEMD160", TRAILER_RIPEMD160);

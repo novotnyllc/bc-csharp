@@ -657,9 +657,9 @@ namespace Org.BouncyCastle.Asn1.X9
             }
         }
 
-        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateHashtable<string, DerObjectIdentifier>();
-        private static readonly IDictionary<DerObjectIdentifier, X9ECParametersHolder> curves = Platform.CreateHashtable<DerObjectIdentifier, X9ECParametersHolder>();
-        private static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        private static readonly IDictionary<string, DerObjectIdentifier> objIds = Platform.CreateDictionary<string, DerObjectIdentifier>();
+        private static readonly IDictionary<DerObjectIdentifier, X9ECParametersHolder> curves = Platform.CreateDictionary<DerObjectIdentifier, X9ECParametersHolder>();
+        private static readonly IDictionary<DerObjectIdentifier, string> names = Platform.CreateDictionary<DerObjectIdentifier, string>();
 
         private static void DefineCurve(
             string					name,

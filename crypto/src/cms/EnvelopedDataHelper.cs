@@ -19,8 +19,8 @@ namespace Org.BouncyCastle.Cms
 {
     internal class EnvelopedDataHelper
     {
-        private static readonly IDictionary<DerObjectIdentifier, string> BaseCipherNames = Platform.CreateHashtable<DerObjectIdentifier, string>();
-        private static readonly IDictionary<DerObjectIdentifier, string> MacAlgNames = Platform.CreateHashtable<DerObjectIdentifier, string>();
+        private static readonly IDictionary<DerObjectIdentifier, string> BaseCipherNames = Platform.CreateDictionary<DerObjectIdentifier, string>();
+        private static readonly IDictionary<DerObjectIdentifier, string> MacAlgNames = Platform.CreateDictionary<DerObjectIdentifier, string>();
         //private static readonly IDictionary PrfDigests = Platform.CreateHashtable();
 
         static EnvelopedDataHelper()
