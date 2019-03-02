@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Math;
@@ -213,7 +214,7 @@ namespace Org.BouncyCastle.X509.Store
 
 				if (eku != null)
 				{
-					foreach (DerObjectIdentifier oid in extendedKeyUsage)
+					foreach (var oid in extendedKeyUsage)
 					{
 						if (!eku.Contains(oid.Id))
 							return false;
@@ -253,7 +254,7 @@ namespace Org.BouncyCastle.X509.Store
 					return false;
 
 				bool found = false;
-				foreach (PolicyInformation pi in certPolicies)
+				foreach (var pi in certPolicies.Cast<PolicyInformation>())
 				{
 					if (policy.Contains(pi.PolicyIdentifier))
 					{

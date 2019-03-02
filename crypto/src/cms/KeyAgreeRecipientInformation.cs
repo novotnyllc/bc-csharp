@@ -34,7 +34,7 @@ namespace Org.BouncyCastle.Cms
         {
             try
             {
-                foreach (Asn1Encodable rek in info.RecipientEncryptedKeys)
+                foreach (var rek in info.RecipientEncryptedKeys)
                 {
                     RecipientEncryptedKey id = RecipientEncryptedKey.GetInstance(rek.ToAsn1Object());
 

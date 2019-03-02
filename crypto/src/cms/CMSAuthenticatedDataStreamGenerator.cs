@@ -101,7 +101,7 @@ namespace Org.BouncyCastle.Cms
 
 			Asn1EncodableVector recipientInfos = new Asn1EncodableVector();
 
-			foreach (RecipientInfoGenerator rig in recipientInfoGenerators)
+			foreach (var rig in recipientInfoGenerators)
 			{
 				try
 				{
@@ -150,7 +150,7 @@ namespace Org.BouncyCastle.Cms
 					?	(Asn1Generator) new BerSetGenerator(authRaw)
 					:	new DerSetGenerator(authRaw);
 
-				foreach (Asn1Encodable ae in recipientInfos)
+				foreach (var ae in recipientInfos)
 				{
 					recipGen.AddObject(ae);
 				}

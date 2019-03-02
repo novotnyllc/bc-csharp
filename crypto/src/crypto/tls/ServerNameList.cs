@@ -43,7 +43,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             MemoryStream buf = new MemoryStream();
 
             byte[] nameTypesSeen = TlsUtilities.EmptyBytes;
-            foreach (ServerName entry in ServerNames)
+            foreach (var entry in ServerNames)
             {
                 nameTypesSeen = CheckNameType(nameTypesSeen, entry.NameType);
                 if (nameTypesSeen == null)

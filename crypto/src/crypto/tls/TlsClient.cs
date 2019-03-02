@@ -134,7 +134,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         /// <returns>A <see cref="IList">list</see> of <see cref="SupplementalDataEntry"/></returns>
         /// <exception cref="IOException"/>
-        IList GetClientSupplementalData();
+        IList<SupplementalDataEntry> GetClientSupplementalData();
 
         /// <summary>RFC 5077 3.3. NewSessionTicket Handshake Message</summary>
         /// <remarks>

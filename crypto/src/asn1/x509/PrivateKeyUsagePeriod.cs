@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Asn1.X509
@@ -41,7 +41,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		private PrivateKeyUsagePeriod(
 			Asn1Sequence seq)
 		{
-			foreach (Asn1TaggedObject tObj in seq)
+			foreach (var tObj in seq.Cast<Asn1TaggedObject>())
 			{
 				if (tObj.TagNo == 0)
 				{

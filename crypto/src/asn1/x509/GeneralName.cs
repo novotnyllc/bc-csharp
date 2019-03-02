@@ -328,7 +328,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 		private void parseIPv4(string ip, byte[] addr, int offset)
 		{
-			foreach (string token in ip.Split('.', '/'))
+			foreach (var token in ip.Split('.', '/'))
 			{
 				addr[offset++] = (byte)Int32.Parse(token);
 			}

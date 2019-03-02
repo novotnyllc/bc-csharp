@@ -77,7 +77,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         public virtual PgpPublicKey GetPublicKey(
             long keyId)
         {
-            foreach (PgpPublicKey k in keys)
+            foreach (var k in keys)
             {
                 if (keyId == k.KeyId)
                 {
@@ -110,7 +110,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             if (outStr == null)
                 throw new ArgumentNullException("outStr");
 
-            foreach (PgpPublicKey k in keys)
+            foreach (var k in keys)
             {
                 k.Encode(outStr);
             }

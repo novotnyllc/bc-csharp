@@ -481,7 +481,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         /// <summary>Allows enumeration of any user IDs associated with the key.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>string</c> objects.</returns>
-        public IEnumerable<object> UserIds
+        public IEnumerable<string> UserIds
         {
             get { return pub.GetUserIds(); }
         }
@@ -757,7 +757,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
             if (pub.subSigs == null) // is not a sub key
             {
-                foreach (PgpSignature keySig in pub.keySigs)
+                foreach (var keySig in pub.keySigs)
                 {
                     keySig.Encode(bcpgOut);
                 }
@@ -781,7 +781,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                         bcpgOut.WritePacket((ContainedPacket)pub.idTrusts[i]);
                     }
 
-                    foreach (PgpSignature sig in (IList) pub.idSigs[i])
+                    foreach (var sig in pub.idSigs[i])
                     {
                         sig.Encode(bcpgOut);
                     }
@@ -789,7 +789,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
             else
             {
-                foreach (PgpSignature subSig in pub.subSigs)
+                foreach (var subSig in pub.subSigs)
                 {
                     subSig.Encode(bcpgOut);
                 }

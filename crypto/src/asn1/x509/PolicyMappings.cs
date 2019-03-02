@@ -42,7 +42,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		{
 			Asn1EncodableVector v = new Asn1EncodableVector();
 
-			foreach (string idp in mappings.Keys)
+			foreach (var idp in mappings.Keys)
 			{
 				string sdp = (string) mappings[idp];
 

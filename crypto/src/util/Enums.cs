@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Utilities
 #if NETCF_1_0 || NETCF_2_0 || SILVERLIGHT
             var result = Platform.CreateList();
             FieldInfo[] fields = enumType.GetFields(BindingFlags.Static | BindingFlags.Public);
-            foreach (FieldInfo field in fields)
+            foreach (var field in fields)
             {
                 // Note: Argument to GetValue() ignored since the fields are static,
                 //     but Silverlight for Windows Phone throws exception if we pass null

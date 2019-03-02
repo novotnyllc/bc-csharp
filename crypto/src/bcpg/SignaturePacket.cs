@@ -357,7 +357,7 @@ namespace Org.BouncyCastle.Bcpg
 			MemoryStream bOut = new MemoryStream();
 			BcpgOutputStream bcOut = new BcpgOutputStream(bOut);
 
-			foreach (MPInteger sigObj in signature)
+			foreach (var sigObj in signature)
 			{
 				try
 				{
@@ -453,7 +453,7 @@ namespace Org.BouncyCastle.Bcpg
 		{
 			MemoryStream sOut = new MemoryStream();
 
-			foreach (SignatureSubpacket p in ps)
+			foreach (var p in ps)
 			{
 				p.Encode(sOut);
 			}
@@ -463,7 +463,7 @@ namespace Org.BouncyCastle.Bcpg
 
 		private void setCreationTime()
 		{
-			foreach (SignatureSubpacket p in hashedData)
+			foreach (var p in hashedData)
 			{
 				if (p is SignatureCreationTime)
 				{

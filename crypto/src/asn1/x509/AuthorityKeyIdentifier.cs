@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Linq;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Math;
@@ -60,7 +60,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		protected internal AuthorityKeyIdentifier(
             Asn1Sequence seq)
         {
-			foreach (Asn1TaggedObject o in seq)
+			foreach (var o in seq.Cast<Asn1TaggedObject>())
 			{
 				switch (o.TagNo)
                 {

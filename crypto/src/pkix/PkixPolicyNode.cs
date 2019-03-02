@@ -119,7 +119,7 @@ namespace Org.BouncyCastle.Pkix
 			buf.Append(" {");
 			buf.Append(Platform.NewLine);
 
-			foreach (PkixPolicyNode child in mChildren)
+			foreach (var child in mChildren)
 			{
 				buf.Append(child.ToString(indent + "    "));
 			}
@@ -146,7 +146,7 @@ namespace Org.BouncyCastle.Pkix
 				mValidPolicy,
 				mCritical);
 
-			foreach (PkixPolicyNode child in mChildren)
+			foreach (var child in mChildren)
 			{
 				PkixPolicyNode copy = child.Copy();
 				copy.Parent = node;

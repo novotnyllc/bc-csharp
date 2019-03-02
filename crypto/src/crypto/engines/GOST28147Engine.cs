@@ -367,7 +367,7 @@ namespace Org.BouncyCastle.Crypto.Engines
 
         public static string GetSBoxName(byte[] sBox)
         {
-            foreach (string name in sBoxes.Keys)
+            foreach (var name in sBoxes.Keys)
             {
                 byte[] sb = (byte[])sBoxes[name];
                 if (Arrays.AreEqual(sb, sBox))

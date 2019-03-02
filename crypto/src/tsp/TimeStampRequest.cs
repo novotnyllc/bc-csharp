@@ -127,8 +127,8 @@ namespace Org.BouncyCastle.Tsp
 		*/
 		public void Validate(
 			IList<string> algorithms,
-			IList policies,
-			IList extensions)
+			IList<string> policies,
+			IList<string> extensions)
 		{
 			if (!algorithms.Contains(this.MessageImprintAlgOid))
 				throw new TspValidationException("request contains unknown algorithm", PkiFailureInfo.BadAlg);
@@ -138,7 +138,7 @@ namespace Org.BouncyCastle.Tsp
 
             if (this.Extensions != null && extensions != null)
 			{
-				foreach (DerObjectIdentifier oid in this.Extensions.ExtensionOids)
+				foreach (var oid in this.Extensions.ExtensionOids)
 				{
 					if (!extensions.Contains(oid.Id))
 						throw new TspValidationException("request contains unknown extension", PkiFailureInfo.UnacceptedExtension);

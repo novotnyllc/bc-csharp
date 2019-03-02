@@ -166,7 +166,7 @@ namespace Org.BouncyCastle.Ocsp
 
 			if (s != null)
 			{
-				foreach (Asn1Encodable ae in s)
+				foreach (var ae in s)
 				{
 					try
 					{

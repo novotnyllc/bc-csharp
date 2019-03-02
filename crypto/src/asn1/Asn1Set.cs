@@ -112,7 +112,7 @@ namespace Org.BouncyCastle.Asn1
                 Asn1EncodableVector v = new Asn1EncodableVector();
                 Asn1Sequence s = (Asn1Sequence) inner;
 
-                foreach (Asn1Encodable ae in s)
+                foreach (var ae in s)
                 {
                     v.Add(ae);
                 }
@@ -222,7 +222,7 @@ namespace Org.BouncyCastle.Asn1
         {
             int hc = Count;
 
-            foreach (object o in this)
+            foreach (var o in this)
             {
                 hc *= 17;
                 if (o == null)

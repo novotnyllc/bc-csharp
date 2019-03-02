@@ -352,13 +352,13 @@ namespace Org.BouncyCastle.X509.Store
 		}
 
 		private ISet<GeneralName> ExtractGeneralNames(
-			IEnumerable<GeneralName> names)
+			IEnumerable<object> names)
 		{
 			var result = new HashSet<GeneralName>();
 
 			if (names != null)
 			{
-				foreach (object o in names)
+				foreach (var o in names)
 				{
                     var generalName = o as GeneralName;
 					if (generalName != null)

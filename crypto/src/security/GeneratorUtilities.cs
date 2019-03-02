@@ -219,7 +219,7 @@ namespace Org.BouncyCastle.Security
 
         private static void AddDefaultKeySizeEntries(int size, params string[] algorithms)
         {
-            foreach (string algorithm in algorithms)
+            foreach (var algorithm in algorithms)
             {
                 defaultKeySizes.Add(algorithm, size);
             }
@@ -231,7 +231,7 @@ namespace Org.BouncyCastle.Security
         {
             kgAlgorithms[Platform.ToUpperInvariant(canonicalName)] = canonicalName;
 
-            foreach (object alias in aliases)
+            foreach (var alias in aliases)
             {
                 kgAlgorithms[Platform.ToUpperInvariant(alias.ToString())] = canonicalName;
             }
@@ -243,7 +243,7 @@ namespace Org.BouncyCastle.Security
         {
             kpgAlgorithms[Platform.ToUpperInvariant(canonicalName)] = canonicalName;
 
-            foreach (object alias in aliases)
+            foreach (var alias in aliases)
             {
                 kpgAlgorithms[Platform.ToUpperInvariant(alias.ToString())] = canonicalName;
             }
@@ -259,7 +259,7 @@ namespace Org.BouncyCastle.Security
             kgAlgorithms["HMAC-" + algorithm] = mainName;
             kgAlgorithms["HMAC/" + algorithm] = mainName;
 
-            foreach (object alias in aliases)
+            foreach (var alias in aliases)
             {
                 kgAlgorithms[Platform.ToUpperInvariant(alias.ToString())] = mainName;
             }

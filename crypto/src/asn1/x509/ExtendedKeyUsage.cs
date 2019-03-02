@@ -51,7 +51,7 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             this.seq = seq;
 
-            foreach (object o in seq)
+            foreach (var o in seq)
             {
                 if (!(o is DerObjectIdentifier))
                     throw new ArgumentException("Only DerObjectIdentifier instances allowed in ExtendedKeyUsage.");
@@ -65,7 +65,7 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             this.seq = new DerSequence(usages);
 
-            foreach (KeyPurposeID usage in usages)
+            foreach (var usage in usages)
             {
                 this.usageTable[usage] = usage;
             }
@@ -76,7 +76,7 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             Asn1EncodableVector v = new Asn1EncodableVector();
 
-            foreach (object usage in usages)
+            foreach (var usage in usages)
             {
                 Asn1Encodable o = KeyPurposeID.GetInstance(usage);
 
@@ -92,14 +92,6 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             return usageTable.ContainsKey(keyPurposeId);
         }
-
-#if !(SILVERLIGHT || PORTABLE)
-        [Obsolete("Use 'GetAllUsages'")]
-        public ArrayList GetUsages()
-        {
-            return new ArrayList(usageTable.Values.ToList());
-        }
-#endif
 
         /**
          * Returns all extended key usages.

@@ -279,7 +279,7 @@ namespace Org.BouncyCastle.Cms
 					// TODO Throw an appropriate exception?
 				}
 
-				foreach (Asn1Encodable asn1Obj in values)
+				foreach (var asn1Obj in values)
 				{
 					/*
 					Countersignature values have the same meaning as SignerInfo values
@@ -770,7 +770,7 @@ namespace Org.BouncyCastle.Cms
 
 			Asn1EncodableVector sigs = new Asn1EncodableVector();
 
-			foreach (SignerInformation sigInf in counterSigners.GetSigners())
+			foreach (var sigInf in counterSigners.GetSigners())
 			{
 				sigs.Add(sigInf.ToSignerInfo());
 			}

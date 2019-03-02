@@ -116,7 +116,7 @@ namespace Org.BouncyCastle.X509
 
 			if (revocations != null)
 			{
-				foreach (X509CrlEntry entry in revocations)
+				foreach (var entry in revocations)
 				{
 					try
 					{

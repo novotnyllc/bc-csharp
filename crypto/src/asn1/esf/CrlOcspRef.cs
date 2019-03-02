@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Asn1.Esf
@@ -42,7 +42,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 			if (seq == null)
 				throw new ArgumentNullException("seq");
 
-			foreach (Asn1TaggedObject taggedObj in seq)
+			foreach (var taggedObj in seq.Cast<Asn1TaggedObject>())
 			{
 				Asn1Object asn1Obj = taggedObj.GetObject();
 

@@ -360,7 +360,7 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             this.seq = seq;
 
-            foreach (Asn1Encodable asn1Obj in seq)
+            foreach (var asn1Obj in seq)
             {
                 Asn1Set asn1Set = Asn1Set.GetInstance(asn1Obj.ToAsn1Object());
 
@@ -427,7 +427,7 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             this.converter = converter;
 
-            foreach (DerObjectIdentifier oid in ordering)
+            foreach (var oid in ordering)
             {
                 string attribute = attributes[oid];
                 if (attribute == null)

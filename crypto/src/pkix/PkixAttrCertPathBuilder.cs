@@ -54,7 +54,7 @@ namespace Org.BouncyCastle.Pkix
 			PkixCertPathBuilderResult result = null;
 
 			// check all potential target certificates
-			foreach (IX509AttributeCertificate cert in targets)
+			foreach (var cert in targets)
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
 				X509Name[] principals = cert.Issuer.GetPrincipals();
@@ -64,7 +64,7 @@ namespace Org.BouncyCastle.Pkix
 					try
 					{
 						selector.Subject = principals[i];
-                        foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates(selector, pkixParams.GetStores<X509Certificate>()))
+                        foreach (var certificate in PkixCertPathValidatorUtilities.FindCertificates(selector, pkixParams.GetStores<X509Certificate>()))
                         {
                             issuers.Add(certificate);
                         }
@@ -82,7 +82,7 @@ namespace Org.BouncyCastle.Pkix
 
                 var certPathList = Platform.CreateList<X509Certificate>();
 
-				foreach (X509Certificate issuer in issuers)
+				foreach (var issuer in issuers)
 				{
 					result = Build(cert, issuer, pkixParams, certPathList);
 
@@ -176,10 +176,10 @@ namespace Org.BouncyCastle.Pkix
 					}
 
 					// try to get the issuer certificate from one of the stores
-				 var issuers = new HashSet<X509ExtensionBase>();
+				 var issuers = new HashSet<X509Certificate>();
 					try
 					{
-						foreach(var certificate in PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams))
+						foreach (var certificate in PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams))
                         {
                             issuers.Add(certificate);
                         }
@@ -192,7 +192,7 @@ namespace Org.BouncyCastle.Pkix
 					if (!issuers.Any())
 						throw new Exception("No issuer certificate for certificate in certification path found.");
 
-					foreach (X509Certificate issuer in issuers)
+					foreach (var issuer in issuers)
 					{
 						// if untrusted self signed certificate continue
 						if (PkixCertPathValidatorUtilities.IsSelfIssued(issuer))

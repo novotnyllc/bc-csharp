@@ -380,7 +380,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             long expiryTime = -1;
             long lastDate = -1;
 
-            foreach (PgpSignature sig in GetSignaturesOfType(signatureType))
+            foreach (var sig in GetSignaturesOfType(signatureType))
             {
                 if (selfSigned && sig.KeyId != this.KeyId)
                     continue;
@@ -515,36 +515,36 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         /// <summary>Allows enumeration of any user IDs associated with the key.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>string</c> objects.</returns>
-        public IEnumerable<object> GetUserIds()
+        public IEnumerable<string> GetUserIds()
         {
-            var temp = Platform.CreateList<object>();
+            var temp = Platform.CreateList<string>();
 
-            foreach (object o in ids)
+            foreach (var o in ids)
             {
                 if (o is string)
                 {
-                    temp.Add(o);
+                    temp.Add((string)o);
                 }
             }
 
-            return new EnumerableProxy<object>(temp);
+            return new EnumerableProxy<string>(temp);
         }
 
         /// <summary>Allows enumeration of any user attribute vectors associated with the key.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>PgpUserAttributeSubpacketVector</c> objects.</returns>
-        public IEnumerable<object> GetUserAttributes()
+        public IEnumerable<PgpUserAttributeSubpacketVector> GetUserAttributes()
         {
-            var temp = Platform.CreateList<object>();
+            var temp = Platform.CreateList<PgpUserAttributeSubpacketVector>();
 
-            foreach (object o in ids)
+            foreach (var o in ids)
             {
                 if (o is PgpUserAttributeSubpacketVector)
                 {
-                    temp.Add(o);
+                    temp.Add((PgpUserAttributeSubpacketVector)o);
                 }
             }
 
-            return new EnumerableProxy<object>(temp);
+            return new EnumerableProxy<PgpUserAttributeSubpacketVector>(temp);
         }
 
         /// <summary>Allows enumeration of any signatures associated with the passed in id.</summary>
@@ -592,7 +592,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
             var temp = Platform.CreateList<PgpSignature>();
 
-            foreach (PgpSignature sig in GetSignatures())
+            foreach (var sig in GetSignatures())
             {
                 if (sig.SignatureType == signatureType)
                 {
@@ -661,7 +661,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
             if (subSigs == null)    // not a sub-key
             {
-                foreach (PgpSignature keySig in keySigs)
+                foreach (var keySig in keySigs)
                 {
                     keySig.Encode(bcpgOut);
                 }
@@ -685,7 +685,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                         bcpgOut.WritePacket((ContainedPacket)idTrusts[i]);
                     }
 
-                    foreach (PgpSignature sig in (IList) idSigs[i])
+                    foreach (var sig in idSigs[i])
                     {
                         sig.Encode(bcpgOut);
                     }
@@ -693,7 +693,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
             else
             {
-                foreach (PgpSignature subSig in subSigs)
+                foreach (var subSig in subSigs)
                 {
                     subSig.Encode(bcpgOut);
                 }
@@ -872,7 +872,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             {
                 if (id.Equals(returnKey.ids[i]))
                 {
-                    IList certs = (IList) returnKey.idSigs[i];
+                    var certs = returnKey.idSigs[i];
                     found = certs.Contains(certification);
 
                     if (found)
@@ -945,9 +945,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             }
             else
             {
-                foreach (String id in key.GetUserIds())
+                foreach (var id in key.GetUserIds())
                 {
-                    foreach (object sig in key.GetSignaturesForId(id))
+                    foreach (var sig in key.GetSignaturesForId(id))
                     {
                         // TODO Is this the right type of equality test?
                         if (certification == sig)
@@ -960,9 +960,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
                 if (!found)
                 {
-                    foreach (PgpUserAttributeSubpacketVector id in key.GetUserAttributes())
+                    foreach (var id in key.GetUserAttributes())
                     {
-                        foreach (object sig in key.GetSignaturesForUserAttribute(id))
+                        foreach (var sig in key.GetSignaturesForUserAttribute(id))
                         {
                             // TODO Is this the right type of equality test?
                             if (certification == sig)

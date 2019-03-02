@@ -70,7 +70,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
             int code = 0;
 
-			foreach (object o in packets)
+			foreach (var o in packets)
 			{
 				code ^= o.GetHashCode();
 			}

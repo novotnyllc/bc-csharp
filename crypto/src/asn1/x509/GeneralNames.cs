@@ -82,7 +82,7 @@ namespace Org.BouncyCastle.Asn1.X509
 			buf.Append("GeneralNames:");
 			buf.Append(sep);
 
-			foreach (GeneralName name in names)
+			foreach (var name in names)
 			{
 				buf.Append("    ");
 				buf.Append(name);

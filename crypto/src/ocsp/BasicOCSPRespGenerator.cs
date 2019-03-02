@@ -195,7 +195,7 @@ namespace Org.BouncyCastle.Ocsp
 
 			Asn1EncodableVector responses = new Asn1EncodableVector();
 
-			foreach (ResponseObject respObj in list)
+			foreach (var respObj in list)
 			{
 				try
 				{

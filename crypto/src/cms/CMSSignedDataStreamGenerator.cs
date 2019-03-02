@@ -265,7 +265,7 @@ namespace Org.BouncyCastle.Cms
 		public void AddDigests(
 			IEnumerable<string> digestOids)
 		{
-			foreach (string digestOid in digestOids)
+			foreach (var digestOid in digestOids)
 			{
 				ConfigureDigest(digestOid);
 			}
@@ -565,7 +565,7 @@ namespace Org.BouncyCastle.Cms
 
 			Asn1EncodableVector digestAlgs = new Asn1EncodableVector();
 
-			foreach (string digestOid in _messageDigestOids)
+			foreach (var digestOid in _messageDigestOids)
             {
 				digestAlgs.Add(
             		new AlgorithmIdentifier(new DerObjectIdentifier(digestOid), DerNull.Instance));
@@ -668,7 +668,7 @@ namespace Org.BouncyCastle.Cms
 
 			if (_certs != null)
 			{
-				foreach (object obj in _certs)
+				foreach (var obj in _certs)
 				{
 					if (obj is Asn1TaggedObject)
 					{
@@ -698,7 +698,7 @@ namespace Org.BouncyCastle.Cms
 
 			if (_crls != null)
 			{
-				foreach (object obj in _crls)
+				foreach (var obj in _crls)
 				{
 					if (obj is Asn1TaggedObject)
 					{
@@ -729,7 +729,7 @@ namespace Org.BouncyCastle.Cms
 		private bool CheckForVersion3(
 			IList<SignerInformation> signerInfos)
 		{
-			foreach (SignerInformation si in signerInfos)
+			foreach (var si in signerInfos)
 			{
 				SignerInfo s = SignerInfo.GetInstance(si.ToSignerInfo());
 
@@ -745,7 +745,7 @@ namespace Org.BouncyCastle.Cms
 		private static Stream AttachDigestsToOutputStream(ICollection<IDigest> digests, Stream s)
 		{
 			Stream result = s;
-			foreach (IDigest digest in digests)
+			foreach (var digest in digests)
 			{
 				result = GetSafeTeeOutputStream(result, new DigestSink(digest));
 			}
@@ -875,7 +875,7 @@ namespace Org.BouncyCastle.Cms
                 // add the generated SignerInfo objects
                 //
                 {
-                    foreach (DigestAndSignerInfoGeneratorHolder holder in outer._signerInfs)
+                    foreach (var holder in outer._signerInfs)
                     {
                         AlgorithmIdentifier digestAlgorithm = holder.DigestAlgorithm;
 
@@ -891,7 +891,7 @@ namespace Org.BouncyCastle.Cms
                 // add the precalculated SignerInfo objects.
                 //
                 {
-                    foreach (SignerInformation signer in outer._signers)
+                    foreach (var signer in outer._signers)
                     {
                         // TODO Verify the content type and calculated digest match the precalculated SignerInfo
 //						if (!signer.ContentType.Equals(_contentOID))

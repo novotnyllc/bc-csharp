@@ -48,7 +48,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         /// A <see cref="IList"/> (<see cref="SupplementalDataEntry"/>). May be null.
         /// </returns>
         /// <exception cref="IOException"></exception>
-        IList GetServerSupplementalData();
+        IList<SupplementalDataEntry> GetServerSupplementalData();
 
         /// <exception cref="IOException"></exception>
         TlsCredentials GetCredentials();

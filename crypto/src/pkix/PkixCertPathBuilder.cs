@@ -50,7 +50,7 @@ namespace Org.BouncyCastle.Pkix
 		 var targets = new HashSet<X509Certificate>();
 			try
 			{
-				foreach(var certificate in PkixCertPathValidatorUtilities.FindCertificates((X509CertStoreSelector)certSelect, pkixParams.GetStores<X509Certificate>()))
+				foreach (var certificate in PkixCertPathValidatorUtilities.FindCertificates((X509CertStoreSelector)certSelect, pkixParams.GetStores<X509Certificate>()))
                 {
                     targets.Add(certificate);
                 }
@@ -69,7 +69,7 @@ namespace Org.BouncyCastle.Pkix
 			var certPathList = Platform.CreateList<X509Certificate>();
 
 			// check all potential target certificates
-			foreach (X509Certificate cert in targets)
+			foreach (var cert in targets)
 			{
 				result = Build(cert, pkixParams, certPathList);
 
@@ -170,10 +170,10 @@ namespace Org.BouncyCastle.Pkix
 					}
 
 					// try to get the issuer certificate from one of the stores
-					var issuers = new HashSet<X509ExtensionBase>();
+					var issuers = new HashSet<X509Certificate>();
 					try
 					{
-						foreach(var certificate in PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams))
+						foreach (var certificate in PkixCertPathValidatorUtilities.FindIssuerCerts(tbvCert, pkixParams))
                         {
                             issuers.Add(certificate);
                         }
@@ -188,7 +188,7 @@ namespace Org.BouncyCastle.Pkix
 					if (!issuers.Any())
 						throw new Exception("No issuer certificate for certificate in certification path found.");
 
-					foreach (X509Certificate issuer in issuers)
+					foreach (var issuer in issuers)
 					{
 						builderResult = Build(issuer, pkixParams, tbvPath);
 

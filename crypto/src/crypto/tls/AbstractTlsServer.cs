@@ -285,7 +285,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             return mServerExtensions;
         }
 
-        public virtual IList GetServerSupplementalData()
+        public virtual IList<SupplementalDataEntry> GetServerSupplementalData()
         {
             return null;
         }

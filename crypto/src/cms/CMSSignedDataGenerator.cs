@@ -469,7 +469,7 @@ namespace Org.BouncyCastle.Cms
 			//
             // add the precalculated SignerInfo objects.
             //
-            foreach (SignerInformation signer in _signers)
+            foreach (var signer in _signers)
             {
 				digestAlgs.Add(Helper.FixAlgID(signer.DigestAlgorithmID));
 
@@ -486,7 +486,7 @@ namespace Org.BouncyCastle.Cms
                 ?   null
 				:	new DerObjectIdentifier(signedContentType);
 
-            foreach (SignerInf signer in signerInfs)
+            foreach (var signer in signerInfs)
             {
 				try
                 {

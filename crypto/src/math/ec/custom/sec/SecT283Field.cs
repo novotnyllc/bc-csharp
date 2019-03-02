@@ -219,7 +219,7 @@ namespace Org.BouncyCastle.Math.EC.Custom.Sec
         //protected static void AddMs(ulong[] zz, int zOff, ulong[] p, params int[] ms)
         //{
         //    ulong t0 = 0, t1 = 0;
-        //    foreach (int m in ms)
+        //    foreach (var m in ms)
         //    {
         //        int i = (m - 1) << 1;
         //        t0 ^= p[i    ];

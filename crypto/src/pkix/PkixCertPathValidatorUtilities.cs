@@ -171,7 +171,7 @@ namespace Org.BouncyCastle.Pkix
 				while (it.MoveNext())
 				{
 					// look for URI
-					IList list = (IList)it.Current;
+					var list = it.Current;
 					//if (list[0].Equals(new Integer(GeneralName.UniformResourceIdentifier)))
 					if (list[0].Equals(GeneralName.UniformResourceIdentifier))
 					{
@@ -315,7 +315,7 @@ namespace Org.BouncyCastle.Pkix
 				return pq;
 			}
 
-			foreach (Asn1Encodable ae in qualifiers)
+			foreach (var ae in qualifiers)
 			{
 				try
 				{
@@ -367,7 +367,7 @@ namespace Org.BouncyCastle.Pkix
 
 			if (_node.HasChildren)
 			{
-				foreach (PkixPolicyNode _child in _node.Children)
+				foreach (var _child in _node.Children)
 				{
 					RemovePolicyNodeRecurse(policyNodes, _child);
 				}
@@ -473,7 +473,7 @@ namespace Org.BouncyCastle.Pkix
 			int pos = 0;
 
 			// Copy to avoid RemoveAt calls interfering with enumeration
-            foreach (PkixPolicyNode node in Platform.CreateList(policyNodes[i]))
+            foreach (var node in Platform.CreateList(policyNodes[i]))
 			{
 				if (node.ValidPolicy.Equals(id_p))
 				{
@@ -714,7 +714,7 @@ namespace Org.BouncyCastle.Pkix
 				try
 				{
 //					certs.AddAll(certStore.GetMatches(certSelect));
-					foreach (T c in certStore.GetMatches(certSelect))
+					foreach (var c in certStore.GetMatches(certSelect))
 					{
 						certs.Add(c);
 					}
@@ -993,7 +993,7 @@ namespace Org.BouncyCastle.Pkix
 
 		 var result = new HashSet<X509Crl>();
 
-			foreach (X509Crl crl in temp)
+			foreach (var crl in temp)
 			{
 				if (isDeltaCrl(crl))
 				{
@@ -1177,7 +1177,7 @@ namespace Org.BouncyCastle.Pkix
 
 			try
 			{
-                foreach(var localcert in PkixCertPathValidatorUtilities.FindCertificates(certSelect, pkixParams.GetStores<X509Certificate>()))
+                foreach (var localcert in PkixCertPathValidatorUtilities.FindCertificates(certSelect, pkixParams.GetStores<X509Certificate>()))
                 {
                     certs.Add(localcert);
                 }

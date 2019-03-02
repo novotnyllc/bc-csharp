@@ -165,7 +165,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 
 		private static void ClearAll(params Array[] arrays)
 		{
-			foreach (Array array in arrays)
+			foreach (var array in arrays)
 			{
 				Clear(array);
 			}

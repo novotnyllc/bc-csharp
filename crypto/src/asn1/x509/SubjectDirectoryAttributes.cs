@@ -71,7 +71,7 @@ namespace Org.BouncyCastle.Asn1.X509
 			Asn1Sequence seq)
 		{
             this.attributes = Platform.CreateList<AttributeX509>();
-            foreach (object o in seq)
+            foreach (var o in seq)
 			{
 				Asn1Sequence s = Asn1Sequence.GetInstance(o);
 				attributes.Add(AttributeX509.GetInstance(s));

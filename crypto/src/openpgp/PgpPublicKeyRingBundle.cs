@@ -47,7 +47,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			this.pubRings = Platform.CreateDictionary<long, PgpPublicKeyRing>();
 			this.order = Platform.CreateList<long>();
 
-			foreach (object obj in e)
+			foreach (var obj in e)
             {
 				PgpPublicKeyRing pgpPub = obj as PgpPublicKeyRing;
 
@@ -117,9 +117,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 userId = Platform.ToUpperInvariant(userId);
 			}
 
-			foreach (PgpPublicKeyRing pubRing in GetKeyRings())
+			foreach (var pubRing in GetKeyRings())
 			{
-				foreach (string nextUserID in pubRing.GetPublicKey().GetUserIds())
+				foreach (var nextUserID in pubRing.GetPublicKey().GetUserIds())
 				{
 					string next = nextUserID;
 					if (ignoreCase)
@@ -152,7 +152,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         public PgpPublicKey GetPublicKey(
             long keyId)
         {
-            foreach (PgpPublicKeyRing pubRing in GetKeyRings())
+            foreach (var pubRing in GetKeyRings())
             {
                 PgpPublicKey pub = pubRing.GetPublicKey(keyId);
 
@@ -175,7 +175,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
                 return (PgpPublicKeyRing)pubRings[keyId];
             }
 
-			foreach (PgpPublicKeyRing pubRing in GetKeyRings())
+			foreach (var pubRing in GetKeyRings())
             {
                 PgpPublicKey pub = pubRing.GetPublicKey(keyId);
 
@@ -212,7 +212,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         {
 			BcpgOutputStream bcpgOut = BcpgOutputStream.Wrap(outStr);
 
-			foreach (long key in order)
+			foreach (var key in order)
             {
                 PgpPublicKeyRing sec = (PgpPublicKeyRing) pubRings[key];
 

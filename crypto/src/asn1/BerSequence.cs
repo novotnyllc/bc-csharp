@@ -52,7 +52,7 @@ namespace Org.BouncyCastle.Asn1
 				derOut.WriteByte(Asn1Tags.Sequence | Asn1Tags.Constructed);
 				derOut.WriteByte(0x80);
 
-				foreach (Asn1Encodable o in this)
+				foreach (var o in this)
 				{
 					derOut.WriteObject(o);
 				}

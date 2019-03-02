@@ -83,7 +83,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         protected virtual bool CheckGroup(DHParameters dhParameters)
         {
-            foreach (DHParameters group in mGroups)
+            foreach (var group in mGroups)
             {
                 if (AreGroupsEqual(dhParameters, group))
                 {

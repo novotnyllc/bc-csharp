@@ -137,7 +137,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 return;
             }
 
-            foreach (IDigest hash in mHashes.Values)
+            foreach (var hash in mHashes.Values)
             {
                 hash.Update(input);
             }
@@ -151,7 +151,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 return;
             }
 
-            foreach (IDigest hash in mHashes.Values)
+            foreach (var hash in mHashes.Values)
             {
                 hash.BlockUpdate(input, inOff, len);
             }
@@ -170,7 +170,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 return;
             }
 
-            foreach (IDigest hash in mHashes.Values)
+            foreach (var hash in mHashes.Values)
             {
                 hash.Reset();
             }
@@ -180,7 +180,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
             if (mBuf != null && mHashes.Count <= BUFFERING_HASH_LIMIT)
             {
-                foreach (IDigest hash in mHashes.Values)
+                foreach (var hash in mHashes.Values)
                 {
                     mBuf.UpdateDigest(hash);
                 }

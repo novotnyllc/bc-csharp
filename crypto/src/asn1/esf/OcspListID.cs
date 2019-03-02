@@ -44,7 +44,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 
 			this.ocspResponses = (Asn1Sequence) seq[0].ToAsn1Object();
 
-			foreach (Asn1Encodable ae in this.ocspResponses)
+			foreach (var ae in this.ocspResponses)
 			{
 				OcspResponsesID.GetInstance(ae.ToAsn1Object());
 			}

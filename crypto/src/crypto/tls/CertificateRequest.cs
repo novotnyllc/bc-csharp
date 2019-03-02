@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 var derEncodings = Platform.CreateList<byte[]>(mCertificateAuthorities.Count);
 
                 int totalLength = 0;
-                foreach (Asn1Encodable certificateAuthority in mCertificateAuthorities)
+                foreach (var certificateAuthority in mCertificateAuthorities)
                 {
                     byte[] derEncoding = certificateAuthority.GetEncoded(Asn1Encodable.Der);
                     derEncodings.Add(derEncoding);

@@ -15,7 +15,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public HashSet(IEnumerable s)
 		{
-			foreach (object o in s)
+			foreach (var o in s)
 			{
 				Add(o);
 			}
@@ -28,7 +28,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual void AddAll(IEnumerable e)
 		{
-			foreach (object o in e)
+			foreach (var o in e)
 			{
 				Add(o);
 			}
@@ -86,7 +86,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual void RemoveAll(IEnumerable e)
 		{
-			foreach (object o in e)
+			foreach (var o in e)
 			{
 				Remove(o);
 			}

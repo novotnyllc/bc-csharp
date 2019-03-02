@@ -46,7 +46,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 			seq = (Asn1Sequence) seq[i];
 
-			foreach (Asn1Object obj in seq)
+			foreach (var obj in seq)
 			{
                 int type;
 

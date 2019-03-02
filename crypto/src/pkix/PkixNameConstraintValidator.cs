@@ -284,7 +284,7 @@ namespace Org.BouncyCastle.Pkix
                     while (it2.MoveNext())
                     {
                         byte[] _permitted = (byte[])it2.Current;
-                        foreach(var bytearray in IntersectIPRange(_permitted, ip))
+                        foreach (var bytearray in IntersectIPRange(_permitted, ip))
                         {
                             intersect.Add(bytearray);
                         }

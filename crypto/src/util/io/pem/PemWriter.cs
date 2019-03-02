@@ -50,7 +50,7 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 
 			if (obj.Headers.Count > 0)
 			{
-				foreach (PemHeader header in obj.Headers)
+				foreach (var header in obj.Headers)
 				{
 					size += header.Name.Length + ": ".Length + header.Value.Length + nlLength;
 				}
@@ -74,7 +74,7 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 
 			if (obj.Headers.Count > 0)
 			{
-				foreach (PemHeader header in obj.Headers)
+				foreach (var header in obj.Headers)
 				{
 					writer.Write(header.Name);
 					writer.Write(": ");

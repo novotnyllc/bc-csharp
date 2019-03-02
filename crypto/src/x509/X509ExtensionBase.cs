@@ -18,7 +18,7 @@ namespace Org.BouncyCastle.X509
 			if (extensions != null)
 			{
 				var set = new HashSet<string>();
-				foreach (DerObjectIdentifier oid in extensions.ExtensionOids)
+				foreach (var oid in extensions.ExtensionOids)
 				{
 					X509Extension ext = extensions.GetExtension(oid);
 					if (ext.IsCritical == critical)

@@ -41,7 +41,7 @@ namespace Org.BouncyCastle.Cms
 	*      IX509Store              certs = sp.GetCertificates();
 	*      SignerInformationStore  signers = sp.GetSignerInfos();
 	*
-	*      foreach (SignerInformation signer in signers.GetSigners())
+	*      foreach (var signer in signers.GetSigners())
 	*      {
 	*          ArrayList       certList = new ArrayList(certs.GetMatches(signer.SignerID));
 	*          X509Certificate cert = (X509Certificate) certList[0];
@@ -338,7 +338,7 @@ namespace Org.BouncyCastle.Cms
 
 			Stream digStream = _signedContent.ContentStream;
 
-			foreach (IDigest digest in _digests.Values)
+			foreach (var digest in _digests.Values)
 			{
 				digStream = new DigestStream(digStream, digest, null);
 			}

@@ -194,7 +194,7 @@ namespace Org.BouncyCastle.Cms
 			{
 				// This is probably superfluous on C#, since no provider infrastructure,
 				// assuming DigestUtilities already knows all the aliases
-				foreach (string alias in GetDigestAliases(algorithm))
+				foreach (var alias in GetDigestAliases(algorithm))
 				{
 					try { return DigestUtilities.GetDigest(alias); }
 					catch (SecurityUtilityException) {}
@@ -306,7 +306,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			X509CertificateParser cf = new X509CertificateParser();
 
-			foreach (Asn1Encodable ae in certSet)
+			foreach (var ae in certSet)
 			{
 				try
 				{
@@ -331,7 +331,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			X509CrlParser cf = new X509CrlParser();
 
-			foreach (Asn1Encodable ae in crlSet)
+			foreach (var ae in crlSet)
 			{
 				try
 				{

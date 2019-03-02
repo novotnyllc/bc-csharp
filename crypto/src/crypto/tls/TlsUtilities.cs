@@ -769,7 +769,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             CheckUint16(length);
             WriteUint16(length, output);
 
-            foreach (SignatureAndHashAlgorithm entry in supportedSignatureAlgorithms)
+            foreach (var entry in supportedSignatureAlgorithms)
             {
                 if (!allowAnonymous && entry.Signature == SignatureAlgorithm.anonymous)
                 {
@@ -819,7 +819,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             if (signatureAlgorithm.Signature != SignatureAlgorithm.anonymous)
             {
-                foreach (SignatureAndHashAlgorithm entry in supportedSignatureAlgorithms)
+                foreach (var entry in supportedSignatureAlgorithms)
                 {
                     if (entry.Hash == signatureAlgorithm.Hash && entry.Signature == signatureAlgorithm.Signature)
                         return;
@@ -1199,7 +1199,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         {
             if (supportedSignatureAlgorithms != null)
             {
-                foreach (SignatureAndHashAlgorithm signatureAndHashAlgorithm in supportedSignatureAlgorithms)
+                foreach (var signatureAndHashAlgorithm in supportedSignatureAlgorithms)
                 {
                     byte hashAlgorithm = signatureAndHashAlgorithm.Hash;
 
@@ -2388,7 +2388,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             var v = Platform.CreateList<byte>(4);
             v.Add(SignatureAlgorithm.anonymous);
-            foreach (SignatureAndHashAlgorithm sigHashAlg in sigHashAlgs)
+            foreach (var sigHashAlg in sigHashAlgs)
             {
                 //if (sigHashAlg.Hash >= MINIMUM_HASH_STRICT)
                 {

@@ -35,7 +35,7 @@ namespace Org.BouncyCastle.Asn1.Cmp
 		public PkiFreeText(
 			Asn1Sequence seq)
 		{
-			foreach (object o in seq)
+			foreach (var o in seq)
 			{
 				if (!(o is DerUtf8String))
 				{

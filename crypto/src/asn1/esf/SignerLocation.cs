@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1.X500;
 
 namespace Org.BouncyCastle.Asn1.Esf
@@ -27,7 +27,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 		public SignerLocation(
 			Asn1Sequence seq)
 		{
-			foreach (Asn1TaggedObject obj in seq)
+			foreach (var obj in seq.Cast<Asn1TaggedObject>())
 			{
 				switch (obj.TagNo)
 				{

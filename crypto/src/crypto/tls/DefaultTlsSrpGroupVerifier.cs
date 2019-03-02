@@ -47,7 +47,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public virtual bool Accept(Srp6GroupParameters group)
         {
-            foreach (Srp6GroupParameters entry in mGroups)
+            foreach (var entry in mGroups)
             {
                 if (AreGroupsEqual(group, entry))
                 {

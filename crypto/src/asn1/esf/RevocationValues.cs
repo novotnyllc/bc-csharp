@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities.Collections;
@@ -41,14 +42,14 @@ namespace Org.BouncyCastle.Asn1.Esf
 			if (seq.Count > 3)
 				throw new ArgumentException("Bad sequence size: " + seq.Count, "seq");
 
-			foreach (Asn1TaggedObject taggedObj in seq)
+			foreach (var taggedObj in seq.Cast<Asn1TaggedObject>())
 			{
 				Asn1Object asn1Obj = taggedObj.GetObject();
 				switch (taggedObj.TagNo)
 				{
 					case 0:
 						Asn1Sequence crlValsSeq = (Asn1Sequence) asn1Obj;
-						foreach (Asn1Encodable ae in crlValsSeq)
+						foreach (var ae in crlValsSeq)
 						{
 							CertificateList.GetInstance(ae.ToAsn1Object());
 						}
@@ -56,7 +57,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 						break;
 					case 1:
 						Asn1Sequence ocspValsSeq = (Asn1Sequence) asn1Obj;
-						foreach (Asn1Encodable ae in ocspValsSeq)
+						foreach (var ae in ocspValsSeq)
 						{
 							BasicOcspResponse.GetInstance(ae.ToAsn1Object());
 						}

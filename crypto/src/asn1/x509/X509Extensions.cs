@@ -211,7 +211,7 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             this.ordering = Platform.CreateList<DerObjectIdentifier>();
 
-			foreach (Asn1Encodable ae in seq)
+			foreach (var ae in seq)
 			{
 				Asn1Sequence s = Asn1Sequence.GetInstance(ae.ToAsn1Object());
 
@@ -262,7 +262,7 @@ namespace Org.BouncyCastle.Asn1.X509
                 this.ordering = Platform.CreateList(ordering);
             }
 
-            foreach (DerObjectIdentifier oid in this.ordering)
+            foreach (var oid in this.ordering)
             {
                 this.extensions.Add(oid, (X509Extension)extensions[oid]);
             }
@@ -281,7 +281,7 @@ namespace Org.BouncyCastle.Asn1.X509
             this.ordering = Platform.CreateList(oids);
 
             int count = 0;
-            foreach (DerObjectIdentifier oid in this.ordering)
+            foreach (var oid in this.ordering)
             {
                 this.extensions.Add(oid, (X509Extension)values[count++]);
             }
@@ -323,7 +323,7 @@ namespace Org.BouncyCastle.Asn1.X509
         {
             Asn1EncodableVector	vec = new Asn1EncodableVector();
 
-			foreach (DerObjectIdentifier oid in ordering)
+			foreach (var oid in ordering)
 			{
                 X509Extension ext = (X509Extension) extensions[oid];
                 Asn1EncodableVector	v = new Asn1EncodableVector(oid);
@@ -347,7 +347,7 @@ namespace Org.BouncyCastle.Asn1.X509
 			if (extensions.Count != other.extensions.Count)
 				return false;
 
-			foreach (DerObjectIdentifier oid in extensions.Keys)
+			foreach (var oid in extensions.Keys)
 			{
                 X509Extension extension;
                 other.extensions.TryGetValue(oid, out extension);
@@ -377,7 +377,7 @@ namespace Org.BouncyCastle.Asn1.X509
 		{
 			var oids = Platform.CreateList<DerObjectIdentifier>();
 
-			foreach (DerObjectIdentifier oid in this.ordering)
+			foreach (var oid in this.ordering)
             {
 				X509Extension ext = (X509Extension)extensions[oid];
 				if (ext.IsCritical == isCritical)

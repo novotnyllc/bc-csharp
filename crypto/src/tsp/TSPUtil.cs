@@ -90,7 +90,7 @@ namespace Org.BouncyCastle.Tsp
 				foreach (Asn1.Cms.Attribute tsAttr in unsignedAttrs.GetAll(
 					PkcsObjectIdentifiers.IdAASignatureTimeStampToken))
 				{
-					foreach (Asn1Encodable asn1 in tsAttr.AttrValues)
+					foreach (var asn1 in tsAttr.AttrValues)
 					{
 						try
 						{

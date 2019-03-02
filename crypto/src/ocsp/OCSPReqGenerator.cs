@@ -102,7 +102,7 @@ namespace Org.BouncyCastle.Ocsp
 		{
 			Asn1EncodableVector requests = new Asn1EncodableVector();
 
-			foreach (RequestObject reqObj in list)
+			foreach (var reqObj in list)
 			{
 				try
 				{

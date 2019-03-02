@@ -106,7 +106,7 @@ namespace Org.BouncyCastle.Cms
 
 			Asn1EncodableVector recipientInfos = new Asn1EncodableVector();
 
-			foreach (RecipientInfoGenerator rig in recipientInfoGenerators) 
+			foreach (var rig in recipientInfoGenerators) 
 			{
 				try
 				{

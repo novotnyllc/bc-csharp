@@ -130,7 +130,7 @@ namespace Org.BouncyCastle.Security
         {
             algorithms[canonicalName] = canonicalName;
 
-            foreach (object alias in aliases)
+            foreach (var alias in aliases)
             {
                 algorithms[alias.ToString()] = canonicalName;
             }
@@ -138,7 +138,7 @@ namespace Org.BouncyCastle.Security
 
         private static void AddBasicIVSizeEntries(int size, params string[] algorithms)
         {
-            foreach (string algorithm in algorithms)
+            foreach (var algorithm in algorithms)
             {
                 basicIVSizes.Add(algorithm, size);
             }

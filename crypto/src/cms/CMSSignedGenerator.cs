@@ -542,7 +542,7 @@ namespace Org.BouncyCastle.Cms
         {
             try
             {
-                foreach (IX509AttributeCertificate attrCert in store.GetMatches(null))
+                foreach (var attrCert in store.GetMatches(null))
                 {
                     _certs.Add(new DerTaggedObject(false, 2,
                         AttributeCertificate.GetInstance(Asn1Object.FromByteArray(attrCert.GetEncoded()))));
@@ -562,7 +562,7 @@ namespace Org.BouncyCastle.Cms
         public void AddSigners(
             SignerInformationStore signerStore)
         {
-            foreach (SignerInformation o in signerStore.GetSigners())
+            foreach (var o in signerStore.GetSigners())
             {
                 _signers.Add(o);
                 AddSignerCallback(o);

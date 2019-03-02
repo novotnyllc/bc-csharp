@@ -48,7 +48,7 @@ namespace Org.BouncyCastle.Asn1
 			params Asn1Encodable[] v)
 			: base(v.Length)
 		{
-			foreach (Asn1Encodable o in v)
+			foreach (var o in v)
 			{
 				AddObject(o);
 			}
@@ -70,7 +70,7 @@ namespace Org.BouncyCastle.Asn1
 			bool				needsSorting)
 			: base(v.Count)
 		{
-			foreach (Asn1Encodable o in v)
+			foreach (var o in v)
 			{
 				AddObject(o);
 			}
@@ -96,7 +96,7 @@ namespace Org.BouncyCastle.Asn1
 			MemoryStream bOut = new MemoryStream();
 			DerOutputStream dOut = new DerOutputStream(bOut);
 
-			foreach (Asn1Encodable obj in this)
+			foreach (var obj in this)
 			{
 				dOut.WriteObject(obj);
 			}

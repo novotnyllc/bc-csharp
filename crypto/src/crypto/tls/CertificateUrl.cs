@@ -60,7 +60,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             TlsUtilities.WriteUint8(this.mType, output);
 
             ListBuffer16 buf = new ListBuffer16();
-            foreach (UrlAndHash urlAndHash in this.mUrlAndHashList)
+            foreach (var urlAndHash in this.mUrlAndHashList)
             {
                 urlAndHash.Encode(buf);
             }

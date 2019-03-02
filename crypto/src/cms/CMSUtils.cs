@@ -92,7 +92,7 @@ namespace Org.BouncyCastle.Cms
 
 				if (certStore != null)
 				{
-					foreach (X509Certificate c in certStore.GetMatches(null))
+					foreach (var c in certStore.GetMatches(null))
 					{
 						certs.Add(
 							X509CertificateStructure.GetInstance(
@@ -121,7 +121,7 @@ namespace Org.BouncyCastle.Cms
 
 				if (crlStore != null)
 				{
-					foreach (X509Crl c in crlStore.GetMatches(null))
+					foreach (var c in crlStore.GetMatches(null))
 					{
 						crls.Add(
 							CertificateList.GetInstance(
@@ -146,7 +146,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			Asn1EncodableVector v = new Asn1EncodableVector();
 
-			foreach (Asn1Encodable ae in berObjects)
+			foreach (var ae in berObjects)
 			{
 				v.Add(ae);
 			}
@@ -159,7 +159,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			Asn1EncodableVector v = new Asn1EncodableVector();
 
-			foreach (Asn1Encodable ae in derObjects)
+			foreach (var ae in derObjects)
 			{
 				v.Add(ae);
 			}

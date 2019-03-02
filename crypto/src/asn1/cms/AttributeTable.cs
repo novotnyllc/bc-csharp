@@ -21,7 +21,7 @@ namespace Org.BouncyCastle.Asn1.Cms
         {
             this.attributes = Platform.CreateDictionary<DerObjectIdentifier, object>(v.Count);
 
-			foreach (Asn1Encodable o in v)
+			foreach (var o in v)
             {
                 Attribute a = Attribute.GetInstance(o);
 
@@ -119,9 +119,9 @@ namespace Org.BouncyCastle.Asn1.Cms
             object obj;
             attributes.TryGetValue(oid, out obj);
 
-            if (obj is IList)
+            if (obj is IList<Attribute>)
             {
-                foreach (Attribute a in (IList)obj)
+                foreach (var a in (IList<Attribute>)obj)
                 {
                     v.Add(a);
                 }
@@ -140,11 +140,11 @@ namespace Org.BouncyCastle.Asn1.Cms
 			{
 				int total = 0;
 
-				foreach (object o in attributes.Values)
+				foreach (var o in attributes.Values)
 				{
-					if (o is IList)
+					if (o is IList<Attribute>)
 					{
-						total += ((IList)o).Count;
+						total += ((IList<Attribute>)o).Count;
 					}
 					else
 					{
@@ -165,11 +165,11 @@ namespace Org.BouncyCastle.Asn1.Cms
         {
             Asn1EncodableVector v = new Asn1EncodableVector();
 
-			foreach (object obj in attributes.Values)
+			foreach (var obj in attributes.Values)
             {
-                if (obj is IList)
+                if (obj is IList<Attribute>)
                 {
-                    foreach (object el in (IList)obj)
+                    foreach (var el in (IList<Attribute>)obj)
                     {
                         v.Add(Attribute.GetInstance(el));
                     }

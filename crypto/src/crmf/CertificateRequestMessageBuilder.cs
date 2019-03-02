@@ -199,7 +199,7 @@ namespace Org.BouncyCastle.Crmf
             {
                 Asn1EncodableVector controlV = new Asn1EncodableVector();
 
-                foreach (object item in _controls)
+                foreach (var item in _controls)
                 {
                     IControl control = (IControl)item;
                     controlV.Add(new AttributeTypeAndValue(control.Type, control.Value));

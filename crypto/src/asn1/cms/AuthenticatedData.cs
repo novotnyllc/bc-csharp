@@ -233,7 +233,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
 			int ver = 0;
 
-			foreach (object obj in origInfo.Certificates)
+			foreach (var obj in origInfo.Certificates)
 			{
 				if (obj is Asn1TaggedObject)
 				{
@@ -251,19 +251,19 @@ namespace Org.BouncyCastle.Asn1.Cms
 				}
 			}
 
-			foreach (object obj in origInfo.Crls)
-			{
-				if (obj is Asn1TaggedObject)
-				{
-					Asn1TaggedObject tag = (Asn1TaggedObject)obj;
+            foreach (var obj in origInfo.Crls)
+            {
+                if (obj is Asn1TaggedObject)
+                {
+                    Asn1TaggedObject tag = (Asn1TaggedObject)obj;
 
-					if (tag.TagNo == 1)
-					{
-						ver = 3;
-						break;
-					}
-				}
-			}
+                    if (tag.TagNo == 1)
+                    {
+                        ver = 3;
+                        break;
+                    }
+                }
+            }
 
 			return ver;
 		}

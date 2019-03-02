@@ -38,7 +38,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 			if (seq == null)
 				throw new ArgumentNullException("seq");
 
-			foreach (Asn1Encodable ae in seq)
+			foreach (var ae in seq)
 			{
 				OtherCertID.GetInstance(ae.ToAsn1Object());
 			}

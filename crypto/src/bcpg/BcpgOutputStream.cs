@@ -358,7 +358,7 @@ namespace Org.BouncyCastle.Bcpg
 		public void WriteObjects(
 			params BcpgObject[] v)
 		{
-			foreach (BcpgObject o in v)
+			foreach (var o in v)
 			{
 				o.Encode(this);
 			}

@@ -237,7 +237,7 @@ namespace Org.BouncyCastle.OpenSsl
             byte[] keyBytes = pemObject.Content;
 
             var fields = Platform.CreateDictionary<string, string>();
-            foreach (PemHeader header in pemObject.Headers)
+            foreach (var header in pemObject.Headers)
             {
                 fields[header.Name] = header.Value;
             }

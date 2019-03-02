@@ -15,6 +15,7 @@ using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.Utilities.Encoders;
 using Org.BouncyCastle.X509;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Org.BouncyCastle.Pkcs
 {
@@ -122,8 +123,7 @@ namespace Org.BouncyCastle.Pkcs
 
             if (bagAttributes != null)
                                 {
-                foreach (Asn1Sequence sq in bagAttributes)
-                                    {
+                foreach (var sq in bagAttributes.Cast<Asn1Sequence>())                                    {
                     DerObjectIdentifier aOid = DerObjectIdentifier.GetInstance(sq[0]);
                     Asn1Set attrSet = Asn1Set.GetInstance(sq[1]);
                                         Asn1Encodable attr = null;
@@ -245,7 +245,7 @@ namespace Org.BouncyCastle.Pkcs
                     (Asn1Sequence) Asn1OctetString.FromByteArray(octs));
                 ContentInfo[] cis = authSafe.GetContentInfo();
 
-                foreach (ContentInfo ci in cis)
+                foreach (var ci in cis)
                                 {
                     DerObjectIdentifier oid = ci.ContentType;
 
@@ -272,7 +272,7 @@ namespace Org.BouncyCastle.Pkcs
                                         {
                         Asn1Sequence seq = (Asn1Sequence)Asn1Object.FromByteArray(octets);
 
-                        foreach (Asn1Sequence subSeq in seq)
+                        foreach (var subSeq in seq.Cast<Asn1Sequence>())
                         {
                             SafeBag b = new SafeBag(subSeq);
 
@@ -302,7 +302,7 @@ namespace Org.BouncyCastle.Pkcs
             chainCerts.Clear();
             keyCerts.Clear();
 
-            foreach (SafeBag b in certBags)
+            foreach (var b in certBags)
             {
                 CertBag certBag = new CertBag((Asn1Sequence)b.BagValue);
                 byte[] octets = ((Asn1OctetString)certBag.CertValue).GetOctets();
@@ -317,7 +317,7 @@ namespace Org.BouncyCastle.Pkcs
 
                 if (b.BagAttributes != null)
                 {
-                    foreach (Asn1Sequence sq in b.BagAttributes)
+                    foreach (var sq in b.BagAttributes.Cast<Asn1Sequence>())
                     {
                         DerObjectIdentifier aOid = DerObjectIdentifier.GetInstance(sq[0]);
                         Asn1Set attrSet = Asn1Set.GetInstance(sq[1]);
@@ -422,12 +422,12 @@ namespace Org.BouncyCastle.Pkcs
         {
             IDictionary<string, string> tab = Platform.CreateDictionary<string, string>();
 
-            foreach (string key in certs.Keys)
+            foreach (var key in certs.Keys)
             {
                 tab[key] = "cert";
             }
 
-            foreach (string a in keys.Keys)
+            foreach (var a in keys.Keys)
             {
                 string t;
                 tab.TryGetValue(a, out t);
@@ -553,7 +553,7 @@ namespace Org.BouncyCastle.Pkcs
 
                         if (!i.Equivalent(s))
                         {
-                            foreach (CertId certId in chainCerts.Keys)
+                            foreach (var certId in chainCerts.Keys)
                             {
                                 X509CertificateEntry x509CertEntry = (X509CertificateEntry) chainCerts[certId];
 
@@ -721,7 +721,7 @@ namespace Org.BouncyCastle.Pkcs
             // handle the keys
             //
             Asn1EncodableVector keyBags = new Asn1EncodableVector();
-            foreach (string name in keys.Keys)
+            foreach (var name in keys.Keys)
             {
                 byte[] kSalt = new byte[SaltSize];
                 random.NextBytes(kSalt);
@@ -745,7 +745,7 @@ namespace Org.BouncyCastle.Pkcs
 
                 Asn1EncodableVector kName = new Asn1EncodableVector();
 
-                foreach (string oid in privKey.BagAttributeKeys)
+                foreach (var oid in privKey.BagAttributeKeys)
                 {
                     Asn1Encodable entry = privKey[oid];
 
@@ -804,7 +804,7 @@ namespace Org.BouncyCastle.Pkcs
             AlgorithmIdentifier	cAlgId = new AlgorithmIdentifier(certAlgorithm, cParams.ToAsn1Object());
             ISet<X509Certificate>               doneCerts = new HashSet<X509Certificate>();
 
-            foreach (string name in keys.Keys)
+            foreach (var name in keys.Keys)
             {
                 X509CertificateEntry certEntry = GetCertificate(name);
                 CertBag cBag = new CertBag(
@@ -813,7 +813,7 @@ namespace Org.BouncyCastle.Pkcs
 
                 Asn1EncodableVector fName = new Asn1EncodableVector();
 
-                foreach (string oid in certEntry.BagAttributeKeys)
+                foreach (var oid in certEntry.BagAttributeKeys)
                 {
                     Asn1Encodable entry = certEntry[oid];
 
@@ -858,7 +858,7 @@ namespace Org.BouncyCastle.Pkcs
                 doneCerts.Add(certEntry.Certificate);
             }
 
-            foreach (string certId in certs.Keys)
+            foreach (var certId in certs.Keys)
             {
                 X509CertificateEntry cert = (X509CertificateEntry)certs[certId];
 
@@ -871,7 +871,7 @@ namespace Org.BouncyCastle.Pkcs
 
                 Asn1EncodableVector fName = new Asn1EncodableVector();
 
-                foreach (string oid in cert.BagAttributeKeys)
+                foreach (var oid in cert.BagAttributeKeys)
                 {
                     // a certificate not immediately linked to a key doesn't require
                     // a localKeyID and will confuse some PKCS12 implementations.
@@ -909,7 +909,7 @@ namespace Org.BouncyCastle.Pkcs
                 doneCerts.Add(cert.Certificate);
             }
 
-            foreach (CertId certId in chainCerts.Keys)
+            foreach (var certId in chainCerts.Keys)
             {
                 X509CertificateEntry cert = (X509CertificateEntry)chainCerts[certId];
 
@@ -922,7 +922,7 @@ namespace Org.BouncyCastle.Pkcs
 
                 Asn1EncodableVector fName = new Asn1EncodableVector();
 
-                foreach (string oid in cert.BagAttributeKeys)
+                foreach (var oid in cert.BagAttributeKeys)
                 {
                     // a certificate not immediately linked to a key doesn't require
                     // a localKeyID and will confuse some PKCS12 implementations.

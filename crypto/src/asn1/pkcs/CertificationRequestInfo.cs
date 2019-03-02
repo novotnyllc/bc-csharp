@@ -122,7 +122,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
             if (attributes == null)
                 return;
 
-            foreach (Asn1Encodable ae in attributes)
+            foreach (var ae in attributes)
             {
                 Asn1Object obj = ae.ToAsn1Object();
                 AttributePkcs attr = AttributePkcs.GetInstance(obj);

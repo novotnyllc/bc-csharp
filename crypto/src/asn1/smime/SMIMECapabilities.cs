@@ -88,7 +88,7 @@ namespace Org.BouncyCastle.Asn1.Smime
         {
 			if (capability == null)
             {
-				foreach (object o in capabilities)
+				foreach (var o in capabilities)
 				{
                     SmimeCapability cap = SmimeCapability.GetInstance(o);
 
@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Asn1.Smime
             }
             else
             {
-				foreach (object o in capabilities)
+				foreach (var o in capabilities)
 				{
                     SmimeCapability cap = SmimeCapability.GetInstance(o);
 

@@ -205,7 +205,7 @@ namespace Org.BouncyCastle.X509.Store
 
 				bool found = false;
 
-				foreach (X509Name issuer in issuers)
+				foreach (var issuer in issuers)
 				{
 					if (issuer.Equivalent(i, true))
 					{

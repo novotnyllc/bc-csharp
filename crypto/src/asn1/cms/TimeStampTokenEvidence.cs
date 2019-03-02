@@ -23,7 +23,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
 			int count = 0;
 
-			foreach (Asn1Encodable ae in seq)
+			foreach (var ae in seq)
 			{
 				this.timeStampAndCrls[count++] = TimeStampAndCrl.GetInstance(ae.ToAsn1Object());
 			}

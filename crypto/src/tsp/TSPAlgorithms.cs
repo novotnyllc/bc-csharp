@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Tsp
 			};
 
 			Allowed = Platform.CreateList<string>();
-			foreach (string alg in algs)
+			foreach (var alg in algs)
 			{
 				Allowed.Add(alg);
 			}

@@ -80,7 +80,7 @@ namespace Org.BouncyCastle.Asn1.X509
 				throw new ArgumentException("Bad sequence size: " + seq.Count, "seq");
 			}
 
-			foreach (object obj in seq)
+			foreach (var obj in seq)
 			{
 				Asn1TaggedObject o = Asn1TaggedObject.GetInstance(obj);
 				if (o.TagNo == 0)

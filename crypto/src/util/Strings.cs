@@ -33,7 +33,7 @@ namespace Org.BouncyCastle.Utilities
 
         internal static bool IsOneOf(string s, params string[] candidates)
         {
-            foreach (string candidate in candidates)
+            foreach (var candidate in candidates)
             {
                 if (s == candidate)
                     return true;

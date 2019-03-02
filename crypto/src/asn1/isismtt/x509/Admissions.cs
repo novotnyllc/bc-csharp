@@ -141,7 +141,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.X509
 		{
 			ProfessionInfo[] infos = new ProfessionInfo[professionInfos.Count];
 			int count = 0;
-			foreach (Asn1Encodable ae in professionInfos)
+			foreach (var ae in professionInfos)
 			{
 				infos[count++] = ProfessionInfo.GetInstance(ae);
 			}

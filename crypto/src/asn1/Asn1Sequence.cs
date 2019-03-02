@@ -196,7 +196,7 @@ namespace Org.BouncyCastle.Asn1
         {
             int hc = Count;
 
-            foreach (object o in this)
+            foreach (var o in this)
             {
                 hc *= 17;
                 if (o == null)

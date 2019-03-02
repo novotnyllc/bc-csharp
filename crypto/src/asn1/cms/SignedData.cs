@@ -85,7 +85,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
             if (certs != null)
             {
-                foreach (object obj in certs)
+                foreach (var obj in certs)
                 {
                     if (obj is Asn1TaggedObject)
                     {
@@ -115,7 +115,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
             if (crls != null)
             {
-                foreach (object obj in crls)
+                foreach (var obj in crls)
                 {
                     if (obj is Asn1TaggedObject)
                     {
@@ -146,7 +146,7 @@ namespace Org.BouncyCastle.Asn1.Cms
         private bool CheckForVersion3(
             Asn1Set signerInfs)
         {
-            foreach (object obj in signerInfs)
+            foreach (var obj in signerInfs)
             {
                 SignerInfo s = SignerInfo.GetInstance(obj);
 

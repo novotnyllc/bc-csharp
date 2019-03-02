@@ -113,7 +113,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             handshake.NotifyHelloComplete();
 
-            IList serverSupplementalData = state.server.GetServerSupplementalData();
+            var serverSupplementalData = state.server.GetServerSupplementalData();
             if (serverSupplementalData != null)
             {
                 byte[] supplementalDataBody = GenerateSupplementalData(serverSupplementalData);

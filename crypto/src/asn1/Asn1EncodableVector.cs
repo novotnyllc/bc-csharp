@@ -14,7 +14,7 @@ namespace Org.BouncyCastle.Asn1
 			IEnumerable<Asn1Encodable> e)
 		{
 			Asn1EncodableVector v = new Asn1EncodableVector();
-			foreach (Asn1Encodable obj in e)
+			foreach (var obj in e)
 			{
 				v.Add(obj);
 			}
@@ -40,7 +40,7 @@ namespace Org.BouncyCastle.Asn1
 		public void Add(
 			params Asn1Encodable[] objs)
 		{
-			foreach (Asn1Encodable obj in objs)
+			foreach (var obj in objs)
 			{
 				v.Add(obj);
 			}
@@ -51,7 +51,7 @@ namespace Org.BouncyCastle.Asn1
 		{
 			if (objs != null)
 			{
-				foreach (Asn1Encodable obj in objs)
+				foreach (var obj in objs)
 				{
 					if (obj != null)
 					{

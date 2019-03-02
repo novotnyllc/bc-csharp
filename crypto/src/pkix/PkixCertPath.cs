@@ -135,7 +135,7 @@ namespace Org.BouncyCastle.Pkix
 				bool           found = false;
 
 				X509Name subject = cert.SubjectDN;
-				foreach (X509Certificate c in certs)
+				foreach (var c in certs)
 				{
 					if (c.IssuerDN.Equivalent(subject, true))
 					{
@@ -226,7 +226,7 @@ namespace Org.BouncyCastle.Pkix
 
                     certs = Platform.CreateList<X509Certificate>();
 
-                    foreach (Asn1Encodable ae in (Asn1Sequence)derObject)
+                    foreach (var ae in (Asn1Sequence)derObject)
                     {
                         byte[] derBytes = ae.GetEncoded(Asn1Encodable.Der);
                         Stream certInStream = new MemoryStream(derBytes, false);
@@ -335,7 +335,7 @@ namespace Org.BouncyCastle.Pkix
 		 **/
 		public virtual byte[] GetEncoded()
 		{
-			foreach (object enc in Encodings)
+			foreach (var enc in Encodings)
 			{
 				if (enc is string)
 				{

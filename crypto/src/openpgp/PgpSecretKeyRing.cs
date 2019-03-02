@@ -19,17 +19,17 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
     public class PgpSecretKeyRing
         : PgpKeyRing
     {
-        private readonly IList<object> keys;
+        private readonly IList<PgpSecretKey> keys;
         private readonly IList<PgpPublicKey> extraPubKeys;
 
         internal PgpSecretKeyRing(
-            IList<object> keys)
+            IList<PgpSecretKey> keys)
             : this(keys, Platform.CreateList<PgpPublicKey>())
         {
         }
 
         private PgpSecretKeyRing(
-            IList<object> keys,
+            IList<PgpSecretKey> keys,
             IList<PgpPublicKey> extraPubKeys)
         {
             this.keys = keys;
@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         public PgpSecretKeyRing(
             Stream inputStream)
         {
-            this.keys = Platform.CreateList<object>();
+            this.keys = Platform.CreateList<PgpSecretKey>();
             this.extraPubKeys = Platform.CreateList<PgpPublicKey>();
 
             BcpgInputStream bcpgInput = BcpgInputStream.Wrap(inputStream);
@@ -127,15 +127,15 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         /// <summary>Allows enumeration of the secret keys.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>PgpSecretKey</c> objects.</returns>
-        public IEnumerable<object> GetSecretKeys()
+        public IEnumerable<PgpSecretKey> GetSecretKeys()
         {
-            return new EnumerableProxy<object>(keys);
+            return new EnumerableProxy<PgpSecretKey>(keys);
         }
 
         public PgpSecretKey GetSecretKey(
             long keyId)
         {
-            foreach (PgpSecretKey k in keys)
+            foreach (var k in keys)
             {
                 if (keyId == k.KeyId)
                 {
@@ -172,11 +172,11 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             if (outStr == null)
                 throw new ArgumentNullException("outStr");
 
-            foreach (PgpSecretKey key in keys)
+            foreach (var key in keys)
             {
                 key.Encode(outStr);
             }
-            foreach (PgpPublicKey extraPubKey in extraPubKeys)
+            foreach (var extraPubKey in extraPubKeys)
             {
                 extraPubKey.Encode(outStr);
             }
@@ -191,9 +191,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             PgpSecretKeyRing	secretRing,
             PgpPublicKeyRing	publicRing)
         {
-            var newList = Platform.CreateList<object>(secretRing.keys.Count);
+            var newList = Platform.CreateList<PgpSecretKey>(secretRing.keys.Count);
 
-            foreach (PgpSecretKey sk in secretRing.keys)
+            foreach (var sk in secretRing.keys)
             {
                 PgpPublicKey pk = publicRing.GetPublicKey(sk.KeyId);
 
@@ -219,8 +219,8 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
             SymmetricKeyAlgorithmTag	newEncAlgorithm,
             SecureRandom				rand)
         {
-            var newKeys = Platform.CreateList<object>(ring.keys.Count);
-            foreach (PgpSecretKey secretKey in ring.GetSecretKeys())
+            var newKeys = Platform.CreateList<PgpSecretKey>(ring.keys.Count);
+            foreach (var secretKey in ring.GetSecretKeys())
             {
                 if (secretKey.IsPrivateKeyEmpty)
                 {

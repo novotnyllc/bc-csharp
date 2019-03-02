@@ -283,7 +283,7 @@ namespace Org.BouncyCastle.Pkix
 				}
 
 				var emails = X509Name.GetInstance(dns).GetValueList(X509Name.EmailAddress);
-				foreach (string email in emails)
+				foreach (var email in emails)
 				{
 					GeneralName emailAsGeneralName = new GeneralName(GeneralName.Rfc822Name, email);
 					try
@@ -309,7 +309,7 @@ namespace Org.BouncyCastle.Pkix
 						throw new PkixCertPathValidatorException(
 							"Subject alternative name contents could not be decoded.", e, certPath, index);
 					}
-					foreach (GeneralName genName in genNames)
+					foreach (var genName in genNames)
 					{
 						try
 						{
@@ -416,7 +416,7 @@ namespace Org.BouncyCastle.Pkix
 				//
 			 var pols = new HashSet<string>();
 
-				foreach (Asn1Encodable ae in certPolicies)
+				foreach (var ae in certPolicies)
 				{
 					PolicyInformation pInfo = PolicyInformation.GetInstance(ae.ToAsn1Object());
 					DerObjectIdentifier pOid = pInfo.PolicyIdentifier;
@@ -448,7 +448,7 @@ namespace Org.BouncyCastle.Pkix
 				if (!acceptablePolicies.Any() || acceptablePolicies.Contains(Rfc3280CertPathUtilities.ANY_POLICY))
 				{
 					acceptablePolicies.Clear();
-                    foreach(var pol in pols)
+                    foreach (var pol in pols)
                     {
                         acceptablePolicies.Add(pol);
                     }
@@ -465,7 +465,7 @@ namespace Org.BouncyCastle.Pkix
 						}
 					}
 					acceptablePolicies.Clear();
-                    foreach(var t in t1)
+                    foreach (var t in t1)
                     {
                         acceptablePolicies.Add(t);
                     }
@@ -476,7 +476,7 @@ namespace Org.BouncyCastle.Pkix
 				//
 				if ((inhibitAnyPolicy > 0) || ((i < n) && PkixCertPathValidatorUtilities.IsSelfIssued(cert)))
 				{
-					foreach (Asn1Encodable ae in certPolicies)
+					foreach (var ae in certPolicies)
 					{
 						PolicyInformation pInfo = PolicyInformation.GetInstance(ae.ToAsn1Object());
 						if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(pInfo.PolicyIdentifier.Id))
@@ -509,7 +509,7 @@ namespace Org.BouncyCastle.Pkix
 
 									bool _found = false;
 
-									foreach (PkixPolicyNode _child in _node.Children)
+									foreach (var _child in _node.Children)
 									{
 										if (_policy.Equals(_child.ValidPolicy))
 										{
@@ -867,7 +867,7 @@ namespace Org.BouncyCastle.Pkix
 			ISet<AsymmetricKeyParameter> keys)
 		{
 			Exception lastException = null;
-			foreach (AsymmetricKeyParameter key in keys)
+			foreach (var key in keys)
 			{
 				try
 				{
@@ -887,7 +887,7 @@ namespace Org.BouncyCastle.Pkix
 			AsymmetricKeyParameter	key)
 		{
 			Exception lastException = null;
-			foreach (X509Crl crl in deltaCrls)
+			foreach (var crl in deltaCrls)
 			{
 				try
 				{
@@ -1321,7 +1321,7 @@ namespace Org.BouncyCastle.Pkix
 											"Certificate policies extension could not be decoded.", e, certPath, index);
 									}
 
-									foreach (Asn1Encodable ae in policies)
+									foreach (var ae in policies)
 									{
 										PolicyInformation pinfo = null;
 										try
@@ -1375,7 +1375,7 @@ namespace Org.BouncyCastle.Pkix
 					}
 					else if (policyMapping <= 0)
 					{
-                        foreach (PkixPolicyNode node in Platform.CreateList<PkixPolicyNode>(policyNodes[i]))
+                        foreach (var node in Platform.CreateList<PkixPolicyNode>(policyNodes[i]))
                         {
 							if (node.ValidPolicy.Equals(id_p))
 							{
@@ -1383,7 +1383,7 @@ namespace Org.BouncyCastle.Pkix
 
                                 for (int k = i - 1; k >= 0; k--)
 								{
-                                    foreach (PkixPolicyNode node2 in Platform.CreateList<PkixPolicyNode>(policyNodes[k]))
+                                    foreach (var node2 in Platform.CreateList<PkixPolicyNode>(policyNodes[k]))
 									{
 										if (!node2.HasChildren)
 										{
@@ -2185,7 +2185,7 @@ namespace Org.BouncyCastle.Pkix
 							}
 						}
 
-						foreach (PkixPolicyNode _node in _validPolicyNodeSet)
+						foreach (var _node in _validPolicyNodeSet)
 						{
 							string _validPolicy = _node.ValidPolicy;
 
@@ -2246,7 +2246,7 @@ namespace Org.BouncyCastle.Pkix
 
 						if (Rfc3280CertPathUtilities.ANY_POLICY.Equals(_node.ValidPolicy))
 						{
-							foreach (PkixPolicyNode _c_node in _node.Children)
+							foreach (var _c_node in _node.Children)
 							{
 								if (!Rfc3280CertPathUtilities.ANY_POLICY.Equals(_c_node.ValidPolicy))
 								{

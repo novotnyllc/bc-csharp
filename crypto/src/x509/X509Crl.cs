@@ -16,6 +16,7 @@ using Org.BouncyCastle.Utilities.Encoders;
 using Org.BouncyCastle.X509.Extension;
 using Org.BouncyCastle.Crypto.Operators;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Org.BouncyCastle.X509
 {
@@ -155,7 +156,7 @@ namespace Org.BouncyCastle.X509
 			var certs = c.GetRevokedCertificateEnumeration();
 
 			X509Name previousCertificateIssuer = IssuerDN;
-			foreach (CrlEntry entry in certs)
+			foreach (var entry in certs.Cast<CrlEntry>())
 			{
 				X509CrlEntry crlEntry = new X509CrlEntry(entry, isIndirect, previousCertificateIssuer);
 				entrySet.Add(crlEntry);
@@ -171,7 +172,7 @@ namespace Org.BouncyCastle.X509
 			var certs = c.GetRevokedCertificateEnumeration();
 
 			X509Name previousCertificateIssuer = IssuerDN;
-			foreach (CrlEntry entry in certs)
+			foreach (var entry in certs.Cast<CrlEntry>())
 			{
 				X509CrlEntry crlEntry = new X509CrlEntry(entry, isIndirect, previousCertificateIssuer);
 
@@ -352,7 +353,7 @@ namespace Org.BouncyCastle.X509
 			var certSet = GetRevokedCertificates();
 			if (certSet != null)
 			{
-				foreach (X509CrlEntry entry in certSet)
+				foreach (var entry in certSet)
 				{
 					buf.Append(entry);
 					buf.Append(nl);

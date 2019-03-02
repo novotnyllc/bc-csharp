@@ -49,7 +49,7 @@ namespace Org.BouncyCastle.Asn1.Utilities
 
                 buf.Append(NewLine);
 
-                foreach (Asn1Encodable o in ((Asn1Sequence)obj))
+                foreach (var o in ((Asn1Sequence)obj))
                 {
                     if (o == null || o is Asn1Null)
                     {
@@ -107,7 +107,7 @@ namespace Org.BouncyCastle.Asn1.Utilities
                 buf.Append("BER Set");
                 buf.Append(NewLine);
 
-                foreach (Asn1Encodable o in ((Asn1Set)obj))
+                foreach (var o in ((Asn1Set)obj))
                 {
                     if (o == null)
                     {
@@ -129,7 +129,7 @@ namespace Org.BouncyCastle.Asn1.Utilities
                 buf.Append("DER Set");
                 buf.Append(NewLine);
 
-                foreach (Asn1Encodable o in ((Asn1Set)obj))
+                foreach (var o in ((Asn1Set)obj))
                 {
                     if (o == null)
                     {
@@ -268,7 +268,7 @@ namespace Org.BouncyCastle.Asn1.Utilities
                 {
                     Asn1Sequence s = Asn1Sequence.GetInstance(app.GetObject(Asn1Tags.Sequence));
                     buf.Append(indent + type + " ApplicationSpecific[" + app.ApplicationTag + "]" + NewLine);
-                    foreach (Asn1Encodable ae in s)
+                    foreach (var ae in s)
                     {
                         AsString(indent + Tab, verbose, ae.ToAsn1Object(), buf);
                     }

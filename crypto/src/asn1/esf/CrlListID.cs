@@ -45,7 +45,7 @@ namespace Org.BouncyCastle.Asn1.Esf
 
 			this.crls = (Asn1Sequence) seq[0].ToAsn1Object();
 
-			foreach (Asn1Encodable ae in this.crls)
+			foreach (var ae in this.crls)
 			{
 				CrlValidatedID.GetInstance(ae.ToAsn1Object());
 			}

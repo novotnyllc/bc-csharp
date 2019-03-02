@@ -7,13 +7,13 @@ namespace Org.BouncyCastle.Cms
 {
 	public class RecipientInformationStore
 	{
-		private readonly IList<RecipientInformation> all; //ArrayList[RecipientInformation]
+		private readonly IList<RecipientInformation> all;
 		private readonly IDictionary<RecipientID, IList<RecipientInformation>> table = Platform.CreateDictionary<RecipientID, IList<RecipientInformation>>();
 
 		public RecipientInformationStore(
 			ICollection<RecipientInformation> recipientInfos)
 		{
-			foreach (RecipientInformation recipientInformation in recipientInfos)
+			foreach (var recipientInformation in recipientInfos)
 			{
 				RecipientID rid = recipientInformation.RecipientID;
                 IList<RecipientInformation> list;
@@ -44,7 +44,7 @@ namespace Org.BouncyCastle.Cms
 		public RecipientInformation GetFirstRecipient(
 			RecipientID selector)
 		{
-			IList list = (IList) table[selector];
+			var list = table[selector];
 
 			return list == null ? null : (RecipientInformation) list[0];
 		}

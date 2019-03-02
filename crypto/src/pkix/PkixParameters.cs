@@ -117,7 +117,7 @@ namespace Org.BouncyCastle.Pkix
 //			if (keystore == null)
 //				throw new ArgumentNullException("keystore");
 //		 var trustAnchors = new HashSet();
-//			foreach (string alias in keystore.Aliases)
+//			foreach (var alias in keystore.Aliases)
 //			{
 //				if (keystore.IsCertificateEntry(alias))
 //				{
@@ -197,7 +197,7 @@ namespace Org.BouncyCastle.Pkix
 
 			// Explicit copy to enforce type-safety
 			this.trustAnchors = new HashSet<TrustAnchor>();
-			foreach (TrustAnchor ta in tas)
+			foreach (var ta in tas)
 			{
 				if (ta != null)
 				{
@@ -309,7 +309,7 @@ namespace Org.BouncyCastle.Pkix
 			this.initialPolicies = new HashSet<string>();
 			if (initialPolicies != null)
 			{
-				foreach (string obj in initialPolicies)
+				foreach (var obj in initialPolicies)
 				{
 					if (obj != null)
 					{
@@ -359,7 +359,7 @@ namespace Org.BouncyCastle.Pkix
             certPathCheckers = Platform.CreateList<PkixCertPathChecker>();
 			if (checkers != null)
 			{
-				foreach (PkixCertPathChecker obj in checkers)
+				foreach (var obj in checkers)
 				{
 					certPathCheckers.Add((PkixCertPathChecker)obj.Clone());
 				}
@@ -378,7 +378,7 @@ namespace Org.BouncyCastle.Pkix
 		public virtual IList<PkixCertPathChecker> GetCertPathCheckers()
 		{
 			var checkers = Platform.CreateList<PkixCertPathChecker>();
-			foreach (PkixCertPathChecker obj in certPathCheckers)
+			foreach (var obj in certPathCheckers)
 			{
 				checkers.Add((PkixCertPathChecker)obj.Clone());
 			}
@@ -412,33 +412,6 @@ namespace Org.BouncyCastle.Pkix
 			PkixParameters parameters = new PkixParameters(GetTrustAnchors());
 			parameters.SetParams(this);
 			return parameters;
-
-
-//			PkixParameters obj = new PkixParameters(new HashSet());
-////			(PkixParameters) this.MemberwiseClone();
-//			obj.x509Stores = new ArrayList(x509Stores);
-//			obj.certPathCheckers = new ArrayList(certPathCheckers);
-//
-//			//Iterator iter = certPathCheckers.iterator();
-//			//obj.certPathCheckers = new ArrayList();
-//			//while (iter.hasNext())
-//			//{
-//			//	obj.certPathCheckers.add(((PKIXCertPathChecker)iter.next())
-//			//		.clone());
-//			//}
-//			//if (initialPolicies != null)
-//			//{
-//			//	obj.initialPolicies = new HashSet(initialPolicies);
-//			//}
-////			if (trustAnchors != null)
-////			{
-////				obj.trustAnchors = new HashSet(trustAnchors);
-////			}
-////			if (certSelector != null)
-////			{
-////				obj.certSelector = (X509CertStoreSelector) certSelector.Clone();
-////			}
-//			return obj;
 		}
 
 		/**
@@ -725,7 +698,7 @@ namespace Org.BouncyCastle.Pkix
 			}
 			else
 			{
-				foreach (object obj in trustedACIssuers)
+				foreach (var obj in trustedACIssuers)
 				{
 					if (!(obj is TrustAnchor))
 					{
@@ -775,7 +748,7 @@ namespace Org.BouncyCastle.Pkix
 			}
 			else
 			{
-				foreach (object obj in necessaryACAttributes)
+				foreach (var obj in necessaryACAttributes)
 				{
 					if (!(obj is string))
 					{
@@ -824,7 +797,7 @@ namespace Org.BouncyCastle.Pkix
 			}
 			else
 			{
-				foreach (object obj in prohibitedACAttributes)
+				foreach (var obj in prohibitedACAttributes)
 				{
 					if (!(obj is String))
 					{
@@ -871,7 +844,7 @@ namespace Org.BouncyCastle.Pkix
 			}
 			else
 			{
-				foreach (object obj in attrCertCheckers)
+				foreach (var obj in attrCertCheckers)
 				{
 					if (!(obj is PkixAttrCertChecker))
 					{

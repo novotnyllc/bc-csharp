@@ -34,7 +34,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
 		public virtual void CopyTo(Array array, int index)
 		{
-			foreach (object k in keys)
+			foreach (var k in keys)
 			{
 				array.SetValue(hash[k], index++);
 			}
@@ -92,7 +92,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 			get
 			{
                 var values = Platform.CreateList<object>(keys.Count);
-				foreach (object k in keys)
+				foreach (var k in keys)
 				{
 					values.Add(hash[k]);
 				}

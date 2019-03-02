@@ -85,7 +85,7 @@ namespace Org.BouncyCastle.Asn1.X509
             buf.Append("AuthorityInformationAccess:");
             buf.Append(sep);
 
-            foreach (AccessDescription description in descriptions)
+            foreach (var description in descriptions)
             {
                 buf.Append("    ");
                 buf.Append(description);

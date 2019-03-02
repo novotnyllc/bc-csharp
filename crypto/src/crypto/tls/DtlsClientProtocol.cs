@@ -252,7 +252,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
             handshake.HandshakeHash.SealHashAlgorithms();
 
-            IList clientSupplementalData = state.client.GetClientSupplementalData();
+            var clientSupplementalData = state.client.GetClientSupplementalData();
             if (clientSupplementalData != null)
             {
                 byte[] supplementalDataBody = GenerateSupplementalData(clientSupplementalData);
@@ -661,7 +661,7 @@ namespace Org.BouncyCastle.Crypto.Tls
              */
             if (state.serverExtensions != null)
             {
-                foreach (int extType in state.serverExtensions.Keys)
+                foreach (var extType in state.serverExtensions.Keys)
                 {
                     /*
                      * RFC 5746 3.6. Note that sending a "renegotiation_info" extension in response to a

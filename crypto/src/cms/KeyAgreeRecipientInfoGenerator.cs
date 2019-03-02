@@ -109,7 +109,7 @@ namespace Org.BouncyCastle.Cms
 
 
 			Asn1EncodableVector recipientEncryptedKeys = new Asn1EncodableVector();
-			foreach (X509Certificate recipientCert in recipientCerts)
+			foreach (var recipientCert in recipientCerts)
 			{
 				TbsCertificateStructure tbsCert;
 				try

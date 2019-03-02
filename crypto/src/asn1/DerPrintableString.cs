@@ -126,7 +126,7 @@ namespace Org.BouncyCastle.Asn1
 		public static bool IsPrintableString(
 			string str)
 		{
-			foreach (char ch in str)
+			foreach (var ch in str)
 			{
 				if (ch > 0x007f)
 					return false;

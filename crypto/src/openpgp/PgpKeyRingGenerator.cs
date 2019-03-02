@@ -12,7 +12,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 	/// </remarks>
     public class PgpKeyRingGenerator
     {
-        private IList<object>					    keys = Platform.CreateList<object>();
+        private IList<PgpSecretKey>					    keys = Platform.CreateList<PgpSecretKey>();
         private string                      id;
         private SymmetricKeyAlgorithmTag	encAlgorithm;
         private HashAlgorithmTag            hashAlgorithm;

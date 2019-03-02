@@ -165,8 +165,8 @@ namespace Org.BouncyCastle.Crypto.Engines
 					{
 						throw new InvalidCipherTextException("Error in lookup Array for "
 										+ ((BigInteger)primes[i]).IntValue
-										+ ": Size mismatch. Expected ArrayList with length "
-										+ ((BigInteger)primes[i]).IntValue + " but found ArrayList of length "
+										+ ": Size mismatch. Expected List with length "
+										+ ((BigInteger)primes[i]).IntValue + " but found List of length "
 										+ lookup[i].Count);
 					}
 					int lookedup = al.IndexOf(exp);

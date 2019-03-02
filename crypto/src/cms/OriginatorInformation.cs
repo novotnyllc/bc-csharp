@@ -32,7 +32,7 @@ namespace Org.BouncyCastle.Cms
 			{
 				var certList = Platform.CreateList<X509Certificate>(certSet.Count);
 
-				foreach (Asn1Encodable enc in certSet)
+				foreach (var enc in certSet)
 				{
 					Asn1Object obj = enc.ToAsn1Object();
 					if (obj is Asn1Sequence)
@@ -64,7 +64,7 @@ namespace Org.BouncyCastle.Cms
 			{
                 var crlList = Platform.CreateList<X509Crl>(crlSet.Count);
 
-				foreach (Asn1Encodable enc in crlSet)
+				foreach (var enc in crlSet)
 				{
 					Asn1Object obj = enc.ToAsn1Object();
 					if (obj is Asn1Sequence)

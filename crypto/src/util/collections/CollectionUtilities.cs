@@ -9,7 +9,7 @@ namespace Org.BouncyCastle.Utilities.Collections
     {
         public static void AddRange<T>(IList<T> to, IEnumerable<T> range)
         {
-            foreach (T o in range)
+            foreach (var o in range)
             {
                 to.Add(o);
             }
@@ -17,7 +17,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 
         public static bool CheckElementsAreOfType(IEnumerable<object> e, Type t)
         {
-            foreach (object o in e)
+            foreach (var o in e)
             {
                 if (!t.IsInstanceOfType(o))
                     return false;

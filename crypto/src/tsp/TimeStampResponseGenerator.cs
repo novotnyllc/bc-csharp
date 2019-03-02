@@ -24,8 +24,8 @@ namespace Org.BouncyCastle.Tsp
         private int failInfo;
         private TimeStampTokenGenerator tokenGenerator;
         private IList<string> acceptedAlgorithms;
-        private IList acceptedPolicies;
-        private IList acceptedExtensions;
+        private IList<string> acceptedPolicies;
+        private IList<string> acceptedExtensions;
 
         public TimeStampResponseGenerator(
             TimeStampTokenGenerator tokenGenerator,
@@ -37,7 +37,7 @@ namespace Org.BouncyCastle.Tsp
         public TimeStampResponseGenerator(
             TimeStampTokenGenerator tokenGenerator,
             IList<string> acceptedAlgorithms,
-            IList acceptedPolicy)
+            IList<string> acceptedPolicy)
             : this(tokenGenerator, acceptedAlgorithms, acceptedPolicy, null)
         {
         }
@@ -45,8 +45,8 @@ namespace Org.BouncyCastle.Tsp
         public TimeStampResponseGenerator(
             TimeStampTokenGenerator tokenGenerator,
             IList<string> acceptedAlgorithms,
-            IList acceptedPolicies,
-            IList acceptedExtensions)
+            IList<string> acceptedPolicies,
+            IList<string> acceptedExtensions)
         {
             this.tokenGenerator = tokenGenerator;
             this.acceptedAlgorithms = acceptedAlgorithms;

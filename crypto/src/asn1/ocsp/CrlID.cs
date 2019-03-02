@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 
 namespace Org.BouncyCastle.Asn1.Ocsp
 {
@@ -14,7 +15,7 @@ namespace Org.BouncyCastle.Asn1.Ocsp
 		public CrlID(
             Asn1Sequence seq)
         {
-			foreach (Asn1TaggedObject o in seq)
+			foreach (var o in seq.Cast<Asn1TaggedObject>())
 			{
 				switch (o.TagNo)
                 {

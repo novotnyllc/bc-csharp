@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 using Org.BouncyCastle.Asn1;
@@ -312,7 +313,7 @@ namespace Org.BouncyCastle.X509
 
                 var list = Platform.CreateList<string>();
 
-				foreach (DerObjectIdentifier oid in seq)
+				foreach (var oid in seq.Cast<DerObjectIdentifier>())
 				{
 					list.Add(oid.Id);
 				}
@@ -363,7 +364,7 @@ namespace Org.BouncyCastle.X509
 			GeneralNames gns = GeneralNames.GetInstance(asn1Object);
 
             var result = Platform.CreateList<IList<object>>();
-			foreach (GeneralName gn in gns.GetNames())
+			foreach (var gn in gns.GetNames())
 			{
                 var entry = Platform.CreateList<object>();
 				entry.Add(gn.TagNo);

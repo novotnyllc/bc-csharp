@@ -142,7 +142,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
                     mRecordStream.NotifyHelloComplete();
 
-                    IList serverSupplementalData = mTlsServer.GetServerSupplementalData();
+                    var serverSupplementalData = mTlsServer.GetServerSupplementalData();
                     if (serverSupplementalData != null)
                     {
                         SendSupplementalDataMessage(serverSupplementalData);

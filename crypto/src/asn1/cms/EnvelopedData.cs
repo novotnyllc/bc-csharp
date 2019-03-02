@@ -160,7 +160,7 @@ namespace Org.BouncyCastle.Asn1.Cms
                 return 2;
             }
 
-            foreach (object o in recipientInfos)
+            foreach (var o in recipientInfos)
             {
                 RecipientInfo ri = RecipientInfo.GetInstance(o);
 

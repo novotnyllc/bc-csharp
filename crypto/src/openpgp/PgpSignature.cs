@@ -227,7 +227,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 			try
 			{
 				MemoryStream bOut = new MemoryStream();
-				foreach (UserAttributeSubpacket packet in userAttributes.ToSubpacketArray())
+				foreach (var packet in userAttributes.ToSubpacketArray())
 				{
 					packet.Encode(bOut);
 				}

@@ -46,7 +46,7 @@ namespace Org.BouncyCastle.Pkix
 				}
 			}
 			critExtOids.Remove(X509Extensions.TargetInformation.Id);
-			foreach (PkixAttrCertChecker checker in pkixParams.GetAttrCertCheckers())
+			foreach (var checker in pkixParams.GetAttrCertCheckers())
 			{
 				checker.Check(attrCert, certPath, holderCertPath, critExtOids);
 			}
@@ -234,7 +234,7 @@ namespace Org.BouncyCastle.Pkix
 			PkixParameters				pkixParams)
 		{
 			// 1
-			foreach (string oid in pkixParams.GetProhibitedACAttributes())
+			foreach (var oid in pkixParams.GetProhibitedACAttributes())
 			{
 				if (attrCert.GetAttributes(oid) != null)
 				{
@@ -243,7 +243,7 @@ namespace Org.BouncyCastle.Pkix
 							+ oid + ".");
 				}
 			}
-			foreach (string oid in pkixParams.GetNecessaryACAttributes())
+			foreach (var oid in pkixParams.GetNecessaryACAttributes())
 			{
 				if (attrCert.GetAttributes(oid) == null)
 				{
@@ -280,7 +280,7 @@ namespace Org.BouncyCastle.Pkix
 		{
 			var set = pkixParams.GetTrustedACIssuers();
 			bool trusted = false;
-			foreach (TrustAnchor anchor in set)
+			foreach (var anchor in set)
 			{
                 var symbols = X509Name.RFC2253Symbols;
                 if (acIssuerCert.SubjectDN.ToString(false, symbols).Equals(anchor.CAName)
@@ -368,7 +368,7 @@ namespace Org.BouncyCastle.Pkix
 						{
 							selector.Issuer = principals[i];
 						}
-						foreach(var certificate in PkixCertPathValidatorUtilities
+						foreach (var certificate in PkixCertPathValidatorUtilities
 							.FindCertificates(selector, pkixParams.GetStores<X509Certificate>()))
                         {
                             holderPKCs.Add(certificate);
@@ -399,7 +399,7 @@ namespace Org.BouncyCastle.Pkix
 						{
 							selector.Issuer = principals[i];
 						}
-						foreach(var certificate in PkixCertPathValidatorUtilities
+						foreach (var certificate in PkixCertPathValidatorUtilities
 							.FindCertificates(selector, pkixParams.GetStores<X509Certificate>()))
                         {
                             holderPKCs.Add(certificate);
@@ -424,7 +424,7 @@ namespace Org.BouncyCastle.Pkix
 				PkixBuilderParameters.GetInstance(pkixParams);
 
 			PkixCertPathValidatorException lastException = null;
-			foreach (X509Certificate cert in holderPKCs)
+			foreach (var cert in holderPKCs)
 			{
 				X509CertStoreSelector selector = new X509CertStoreSelector();
 				selector.Certificate = cert;

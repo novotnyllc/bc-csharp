@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Asn1
@@ -14,7 +14,7 @@ namespace Org.BouncyCastle.Asn1
 		{
 		    var v = Platform.CreateList<DerOctetString>();
 
-			foreach (DerOctetString obj in seq)
+			foreach (var obj in seq.Cast<DerOctetString>())
 			{
 				v.Add(obj);
 			}
@@ -31,7 +31,7 @@ namespace Org.BouncyCastle.Asn1
             IEnumerable<DerOctetString> octs)
         {
             MemoryStream bOut = new MemoryStream();
-			foreach (DerOctetString o in octs)
+			foreach (var o in octs)
 			{
                 byte[] octets = o.GetOctets();
                 bOut.Write(octets, 0, octets.Length);
@@ -113,7 +113,7 @@ namespace Org.BouncyCastle.Asn1
                 //
                 // write out the octet array
                 //
-                foreach (DerOctetString oct in this)
+                foreach (var oct in this)
                 {
                     derOut.WriteObject(oct);
                 }

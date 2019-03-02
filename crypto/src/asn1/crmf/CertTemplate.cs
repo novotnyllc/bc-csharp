@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1.X509;
 
 namespace Org.BouncyCastle.Asn1.Crmf
@@ -24,7 +24,7 @@ namespace Org.BouncyCastle.Asn1.Crmf
         {
             this.seq = seq;
 
-            foreach (Asn1TaggedObject tObj in seq)
+            foreach (var tObj in seq.Cast<Asn1TaggedObject>())
             {
                 switch (tObj.TagNo)
                 {

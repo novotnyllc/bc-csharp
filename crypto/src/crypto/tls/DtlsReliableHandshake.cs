@@ -170,7 +170,7 @@ namespace Org.BouncyCastle.Crypto.Tls
          */
         private void CheckInboundFlight()
         {
-            foreach (int key in mCurrentInboundFlight.Keys)
+            foreach (var key in mCurrentInboundFlight.Keys)
             {
                 if (key >= mNextReceiveSeq)
                 {
@@ -347,7 +347,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         private static bool CheckAll(IDictionary<int, DtlsReassembler> inboundFlight)
         {
-            foreach (DtlsReassembler r in inboundFlight.Values)
+            foreach (var r in inboundFlight.Values)
             {
                 if (r.GetBodyIfComplete() == null)
                 {
@@ -359,7 +359,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         private static void ResetAll(IDictionary<int, DtlsReassembler> inboundFlight)
         {
-            foreach (DtlsReassembler r in inboundFlight.Values)
+            foreach (var r in inboundFlight.Values)
             {
                 r.Reset();
             }

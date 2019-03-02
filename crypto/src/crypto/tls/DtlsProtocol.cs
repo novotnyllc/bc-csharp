@@ -72,7 +72,7 @@ namespace Org.BouncyCastle.Crypto.Tls
         }
 
         /// <exception cref="IOException"/>
-        protected static byte[] GenerateSupplementalData(IList supplementalData)
+        protected static byte[] GenerateSupplementalData(IList<SupplementalDataEntry> supplementalData)
         {
             MemoryStream buf = new MemoryStream();
             TlsProtocol.WriteSupplementalData(buf, supplementalData);

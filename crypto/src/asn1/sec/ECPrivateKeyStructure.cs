@@ -143,7 +143,7 @@ namespace Org.BouncyCastle.Asn1.Sec
 
         private Asn1Object GetObjectInTag(int tagNo)
         {
-            foreach (Asn1Encodable ae in seq)
+            foreach (var ae in seq)
             {
                 Asn1Object obj = ae.ToAsn1Object();
 

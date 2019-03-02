@@ -9,7 +9,7 @@ namespace Org.BouncyCastle.Cms
 {
     public class SignerInformationStore
     {
-        private readonly IList<SignerInformation> all; //ArrayList[SignerInformation]
+        private readonly IList<SignerInformation> all;
         private readonly IDictionary<SignerID, IList<SignerInformation>> table = Platform.CreateDictionary<SignerID, IList<SignerInformation>>();
 
         /**
@@ -36,7 +36,7 @@ namespace Org.BouncyCastle.Cms
         public SignerInformationStore(
             ICollection<SignerInformation> signerInfos)
         {
-            foreach (SignerInformation signer in signerInfos)
+            foreach (var signer in signerInfos)
             {
                 SignerID sid = signer.SignerID;
                 IList<SignerInformation> list;
@@ -62,7 +62,7 @@ namespace Org.BouncyCastle.Cms
         public SignerInformation GetFirstSigner(
             SignerID selector)
         {
-            IList list = (IList) table[selector];
+            var list = table[selector];
 
             return list == null ? null : (SignerInformation) list[0];
         }

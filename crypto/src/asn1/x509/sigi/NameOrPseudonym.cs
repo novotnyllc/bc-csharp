@@ -141,7 +141,7 @@ namespace Org.BouncyCastle.Asn1.X509.SigI
 		{
 			DirectoryString[] items = new DirectoryString[givenName.Count];
 			int count = 0;
-			foreach (object o in givenName)
+			foreach (var o in givenName)
 			{
 				items[count++] = DirectoryString.GetInstance(o);
 			}

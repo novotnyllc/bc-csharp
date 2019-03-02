@@ -989,7 +989,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             message.WriteToRecordStream(this);
         }
 
-        protected virtual void SendSupplementalDataMessage(IList supplementalData)
+        protected virtual void SendSupplementalDataMessage(IList<SupplementalDataEntry> supplementalData)
         {
             HandshakeMessage message = new HandshakeMessage(HandshakeType.supplemental_data);
 
@@ -1192,7 +1192,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         protected internal static void WriteSelectedExtensions(Stream output, IDictionary<int, byte[]> extensions, bool selectEmpty)
         {
-            foreach (int extension_type in extensions.Keys)
+            foreach (var extension_type in extensions.Keys)
             {
                 byte[] extension_data = (byte[])extensions[extension_type];
                 if (selectEmpty == (extension_data.Length == 0))
@@ -1204,11 +1204,11 @@ namespace Org.BouncyCastle.Crypto.Tls
             }
         }
 
-        protected internal static void WriteSupplementalData(Stream output, IList supplementalData)
+        protected internal static void WriteSupplementalData(Stream output, IList<SupplementalDataEntry> supplementalData)
         {
             MemoryStream buf = new MemoryStream();
 
-            foreach (SupplementalDataEntry entry in supplementalData)
+            foreach (var entry in supplementalData)
             {
                 int supp_data_type = entry.DataType;
                 TlsUtilities.CheckUint16(supp_data_type);

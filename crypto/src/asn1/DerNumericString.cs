@@ -126,7 +126,7 @@ namespace Org.BouncyCastle.Asn1
 		public static bool IsNumericString(
 			string str)
 		{
-			foreach (char ch in str)
+			foreach (var ch in str)
 			{
 				if (ch > 0x007f || (ch != ' ' && !char.IsDigit(ch)))
 					return false;

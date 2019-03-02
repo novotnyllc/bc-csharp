@@ -85,7 +85,7 @@ namespace Org.BouncyCastle.Asn1
 							throw Platform.CreateNotImplementedException(Platform.GetTypeName(obj));
 						}
 
-						foreach (Asn1Encodable o in eObj)
+						foreach (var o in eObj)
 						{
 							derOut.WriteObject(o);
 						}

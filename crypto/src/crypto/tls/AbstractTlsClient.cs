@@ -227,7 +227,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         public abstract TlsAuthentication GetAuthentication();
 
-        public virtual IList GetClientSupplementalData()
+        public virtual IList<SupplementalDataEntry> GetClientSupplementalData()
         {
             return null;
         }

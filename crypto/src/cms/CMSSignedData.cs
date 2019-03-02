@@ -23,7 +23,7 @@ namespace Org.BouncyCastle.Cms
 	*  IX509Store              certs = s.GetCertificates();
 	*  SignerInformationStore  signers = s.GetSignerInfos();
 	*
-	*  foreach (SignerInformation signer in signers.GetSigners())
+	*  foreach (var signer in signers.GetSigners())
 	*  {
 	*      ArrayList       certList = new ArrayList(certs.GetMatches(signer.SignerID));
 	*      X509Certificate cert = (X509Certificate) certList[0];
@@ -161,7 +161,7 @@ namespace Org.BouncyCastle.Cms
                 var signerInfos = Platform.CreateList<SignerInformation>();
 				Asn1Set s = signedData.SignerInfos;
 
-				foreach (object obj in s)
+				foreach (var obj in s)
 				{
 					SignerInfo info = SignerInfo.GetInstance(obj);
 					DerObjectIdentifier contentType = signedData.EncapContentInfo.ContentType;
@@ -310,7 +310,7 @@ namespace Org.BouncyCastle.Cms
 			Asn1EncodableVector digestAlgs = new Asn1EncodableVector();
 			Asn1EncodableVector vec = new Asn1EncodableVector();
 
-			foreach (SignerInformation signer in signerInformationStore.GetSigners())
+			foreach (var signer in signerInformationStore.GetSigners())
 			{
 				digestAlgs.Add(Helper.FixAlgID(signer.DigestAlgorithmID));
 				vec.Add(signer.ToSignerInfo());

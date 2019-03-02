@@ -40,7 +40,7 @@ namespace Org.BouncyCastle.Pkix
 			}
 
 			// based on RFC 5280 6.3.3
-			foreach (X509Crl crl in initialSet)
+			foreach (var crl in initialSet)
 			{
 				if (crl.NextUpdate.Value.CompareTo(validityDate) > 0)
 				{
@@ -106,7 +106,7 @@ namespace Org.BouncyCastle.Pkix
 			{
 				try
 				{
-                    foreach(X509Crl crl in store.GetMatches(crlSelect))
+                    foreach (var crl in store.GetMatches(crlSelect))
                     {
                         crls.Add(crl);
                     }
