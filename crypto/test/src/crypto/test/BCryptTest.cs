@@ -74,7 +74,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 
             // Check BCrypt isn't padding too small (32 bit) keys
             byte[] hashA = BCrypt.Generate(new byte[]{(byte)'a'}, salt, 4);
-            byte[] hashA0 = BCrypt.Generate(new byte[]{(byte)'a', (byte)0}, salt, 4);
+            byte[] hashA0 = BCrypt.Generate(new byte[]{(byte)'a', 0 }, salt, 4);
             if (Arrays.AreEqual(hashA, hashA0))
             {
                 Fail("Small keys should not be 0 padded.");

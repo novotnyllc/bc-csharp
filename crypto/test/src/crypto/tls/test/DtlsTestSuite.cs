@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Org.BouncyCastle.Crypto.Tls.Tests
@@ -14,9 +14,9 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
         {
         }
 
-        public static IEnumerable Suite()
+        public static IEnumerable<TestCaseData> Suite()
         {
-            var testSuite = new ArrayList();
+            var testSuite = new List<TestCaseData>();
 
             AddFallbackTests(testSuite);
             AddVersionTests(testSuite, ProtocolVersion.DTLSv10);
@@ -25,7 +25,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             return testSuite;
         }
 
-        private static void AddFallbackTests(ArrayList testSuite)
+        private static void AddFallbackTests(List<TestCaseData> testSuite)
         {
             {
                 TlsTestConfig c = CreateDtlsTestConfig(ProtocolVersion.DTLSv12);
@@ -59,7 +59,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             }
         }
 
-        private static void AddVersionTests(ArrayList testSuite, ProtocolVersion version)
+        private static void AddVersionTests(List<TestCaseData> testSuite, ProtocolVersion version)
         {
             string prefix = version.ToString()
                 .Replace(" ", "")
@@ -201,7 +201,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             }
         }
 
-        private static void AddTestCase(ArrayList testSuite, TlsTestConfig config, String name)
+        private static void AddTestCase(List<TestCaseData> testSuite, TlsTestConfig config, String name)
         {
             testSuite.Add(new TestCaseData(config).SetName(name));
         }
@@ -218,7 +218,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
 
         public static void RunTests()
         {
-            foreach (TestCaseData data in Suite())
+            foreach (var data in Suite())
             {
                 Console.WriteLine(data.TestName);
                 new DtlsTestCase().RunTest((TlsTestConfig)data.Arguments[0]);

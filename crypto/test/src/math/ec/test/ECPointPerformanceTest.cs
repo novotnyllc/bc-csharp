@@ -52,7 +52,7 @@ namespace Org.BouncyCastle.Math.EC.Tests
         private void RandMult(string label, X9ECParameters spec)
         {
             ECCurve C = spec.Curve;
-            ECPoint G = (ECPoint)spec.G;
+            ECPoint G = spec.G;
             BigInteger n = spec.N;
 
             SecureRandom random = new SecureRandom();
@@ -162,7 +162,7 @@ namespace Org.BouncyCastle.Math.EC.Tests
                 }
                 while (endTime < goalTime);
 
-                double roundElapsed = (double)(endTime - startTime);
+                double roundElapsed = endTime - startTime;
                 double roundRate = count * MULTS_PER_CHECK * 1000L / roundElapsed;
 
                 minRate = System.Math.Min(minRate, roundRate);
@@ -180,10 +180,10 @@ namespace Org.BouncyCastle.Math.EC.Tests
             CollectionUtilities.AddRange(nameList, ECNamedCurveTable.Names);
             CollectionUtilities.AddRange(nameList, CustomNamedCurves.Names);
 
-            string[] names = (string[])nameList.ToArray();
+            string[] names = nameList.ToArray();
             Array.Sort(names);
             var oids = new HashSet<DerObjectIdentifier>();
-            foreach (string name in names)
+            foreach (var name in names)
             {
                 DerObjectIdentifier oid = ECNamedCurveTable.GetOid(name);
                 if (oid == null)

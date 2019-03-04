@@ -74,7 +74,7 @@ namespace Org.BouncyCastle.Tests
 		private X509Crl trustedCRL;
 		private ISet<TrustAnchor> trustedSet;
 		private int testCount;
-		private ArrayList testFail;
+		private List<string> testFail;
 		private StringBuilder resultBuf;
 
 		public override string Name
@@ -270,7 +270,7 @@ namespace Org.BouncyCastle.Tests
 
 				trustedSet.Add(new TrustAnchor(trustedCert, _ncBytes));
 				testCount = 0;
-				testFail = new ArrayList();
+				testFail = new List<string>();
 				resultBuf = new StringBuilder("\n");
 			}
 			catch (Exception ex)
@@ -312,7 +312,7 @@ namespace Org.BouncyCastle.Tests
 			}
 
 			// Insert elements backwards to muck up forward ordering dependency
-//            var _vec2 = new ArrayList();
+//            var _vec2 = new List<string>();
 //            for (int i = _vec.Count - 1; i >= 0; i--)
 //            {
 //                _vec2.Add(_vec[i]);

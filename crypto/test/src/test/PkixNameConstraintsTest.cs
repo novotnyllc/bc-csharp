@@ -119,52 +119,52 @@ namespace Org.BouncyCastle.Tests
 			new string[] { "test1.de" },
 			new string[] { ".test.de" } };
 
-		private readonly byte[] testIP = { (byte)192, (byte)168, 1, 2 };
+		private readonly byte[] testIP = { 192, 168, 1, 2 };
 
 		private readonly byte[][] testIPIsConstraint = new byte[2][] {
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, 0 },
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, 4 } };
+			new byte[] { 192, 168, 1, 1, 0xFF, 0xFF, 0xFF, 0 },
+			new byte[] { 192, 168, 1, 1, 0xFF, 0xFF, 0xFF, 4 } };
 
 		private readonly byte[][] testIPIsNotConstraint = new byte[2][] {
-			new byte[] { (byte) 192, (byte) 168, 3, 1, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, 2 },
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, 3 } };
+			new byte[] { 192, 168, 3, 1, 0xFF, 0xFF, 0xFF, 2 },
+			new byte[] { 192, 168, 1, 1, 0xFF, 0xFF, 0xFF, 3 } };
 
 		private readonly byte[][] ip1 = new byte[3][] {
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFE, (byte) 0xFF },
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFF, (byte) 0xFF },
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFF, (byte) 0x00 } };
+			new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                         0xFE,  0xFF },
+			new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                         0xFF,  0xFF },
+			new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                         0xFF,  0x00 } };
 
 		private readonly byte[][] ip2 = new byte[3][] {
-			new byte[] { (byte) 192, (byte) 168, 0, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFC, 3 },
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFF, (byte) 0xFF },
-			new byte[] { (byte) 192, (byte) 168, 0, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFF, (byte) 0x00 } };
+			new byte[] {  192,  168, 0, 1,  0xFF,  0xFF,
+                         0xFC, 3 },
+			new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                         0xFF,  0xFF },
+			new byte[] {  192,  168, 0, 1,  0xFF,  0xFF,
+                         0xFF,  0x00 } };
 
 		private readonly byte[][] ipintersect = new byte[3][] {
-			new byte[] { (byte) 192, (byte) 168, 0, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFE, (byte) 0xFF },
-			new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-						(byte) 0xFF, (byte) 0xFF }, null };
+			new byte[] {  192,  168, 0, 1,  0xFF,  0xFF,
+                         0xFE,  0xFF },
+			new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                         0xFF,  0xFF }, null };
 
 		private readonly byte[][][] ipunion = new byte[3][][] {
 			new byte[2][] {
-							new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-											(byte) 0xFE, (byte) 0xFF },
-							new byte[] { (byte) 192, (byte) 168, 0, 1, (byte) 0xFF, (byte) 0xFF,
-											(byte) 0xFC, 3 } },
+							new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                                             0xFE,  0xFF },
+							new byte[] {  192,  168, 0, 1,  0xFF,  0xFF,
+                                             0xFC, 3 } },
 			new byte[1][] {
-							new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-											(byte) 0xFF, (byte) 0xFF } },
+							new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                                             0xFF,  0xFF } },
 			new byte[2][] {
-							new byte[] { (byte) 192, (byte) 168, 1, 1, (byte) 0xFF, (byte) 0xFF,
-											(byte) 0xFF, (byte) 0x00 },
-							new byte[] { (byte) 192, (byte) 168, 0, 1, (byte) 0xFF, (byte) 0xFF,
-											(byte) 0xFF, (byte) 0x00 } } };
+							new byte[] {  192,  168, 1, 1,  0xFF,  0xFF,
+                                             0xFF,  0x00 },
+							new byte[] {  192,  168, 0, 1,  0xFF,  0xFF,
+                                             0xFF,  0x00 } } };
 
 		public override string Name
 		{

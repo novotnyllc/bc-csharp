@@ -99,7 +99,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(1, c.Count);
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, PkcsObjectIdentifiers.RsaEncryption.Id);
 

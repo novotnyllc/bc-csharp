@@ -119,7 +119,7 @@ namespace Org.BouncyCastle.X509.Tests
 
             //if (dummySet != null)
             //{
-            //    foreach (string key in dummySet)
+            //    foreach (var key in dummySet)
             //    {
             //        Console.WriteLine("\t{0}:\t{1}", key);
             //    }
@@ -130,7 +130,7 @@ namespace Org.BouncyCastle.X509.Tests
             //dummySet = cert.GetNonCriticalExtensionOids();
             //if (dummySet != null)
             //{
-            //    foreach (string key in dummySet)
+            //    foreach (var key in dummySet)
             //    {
             //        Console.WriteLine("\t{0}:\t{1}", key);
             //    }
@@ -194,7 +194,7 @@ namespace Org.BouncyCastle.X509.Tests
 
             //if (dummySet != null)
             //{
-            //    foreach (string key in dummySet)
+            //    foreach (var key in dummySet)
             //    {
             //        Console.WriteLine("\t{0}:\t{1}", key);
             //    }
@@ -205,7 +205,7 @@ namespace Org.BouncyCastle.X509.Tests
             //dummySet = cert.GetNonCriticalExtensionOids();
             //if (dummySet != null)
             //{
-            //    foreach (string key in dummySet)
+            //    foreach (var key in dummySet)
             //    {
             //        Console.WriteLine("\t{0}:\t{1}", key);
             //    }
@@ -281,7 +281,7 @@ namespace Org.BouncyCastle.X509.Tests
             }
             //if (dummySet != null)
             //{
-            //    foreach (string key in dummySet)
+            //    foreach (var key in dummySet)
             //    {
             //        Console.WriteLine("\t{0}:\t{1}", key);
             //    }
@@ -293,7 +293,7 @@ namespace Org.BouncyCastle.X509.Tests
 
             //if (dummySet != null)
             //{
-            //    foreach (string key in dummySet)
+            //    foreach (var key in dummySet)
             //    {
             //        Console.WriteLine("\t{0}:\t{1}", key);
             //    }

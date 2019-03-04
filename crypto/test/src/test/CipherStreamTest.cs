@@ -160,21 +160,21 @@ namespace Org.BouncyCastle.Tests
 			try
 			{
 				byte[] key128 = {
-					(byte)128, (byte)131, (byte)133, (byte)134,
-					(byte)137, (byte)138, (byte)140, (byte)143,
-					(byte)128, (byte)131, (byte)133, (byte)134,
-					(byte)137, (byte)138, (byte)140, (byte)143
-				};
+                    128, 131, 133, 134,
+                    137, 138, 140, 143,
+                    128, 131, 133, 134,
+                    137, 138, 140, 143
+                };
 
 				byte[] key256 = {
-					(byte)128, (byte)131, (byte)133, (byte)134,
-					(byte)137, (byte)138, (byte)140, (byte)143,
-					(byte)128, (byte)131, (byte)133, (byte)134,
-					(byte)137, (byte)138, (byte)140, (byte)143,
-					(byte)128, (byte)131, (byte)133, (byte)134,
-					(byte)137, (byte)138, (byte)140, (byte)143,
-					(byte)128, (byte)131, (byte)133, (byte)134,
-					(byte)137, (byte)138, (byte)140, (byte)143 };
+                    128, 131, 133, 134,
+                    137, 138, 140, 143,
+                    128, 131, 133, 134,
+                    137, 138, 140, 143,
+                    128, 131, 133, 134,
+                    137, 138, 140, 143,
+                    128, 131, 133, 134,
+                    137, 138, 140, 143 };
 
 				byte[] keyBytes;
 				if (name.Equals("HC256"))

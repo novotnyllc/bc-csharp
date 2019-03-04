@@ -43,7 +43,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 
 		private void parserTest()
 		{
-			foreach (string stream in streams)
+			foreach (var stream in streams)
 			{
 				Asn1StreamParser aIn = new Asn1StreamParser(Base64.Decode(stream));
 
@@ -70,7 +70,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 
 		private void inputStreamTest()
 		{
-			foreach (string stream in streams)
+			foreach (var stream in streams)
 			{
 				Asn1InputStream aIn = new Asn1InputStream(Base64.Decode(stream));
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 
 using Org.BouncyCastle.Utilities;
@@ -15,8 +16,8 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
         {
             this.mtu = mtu;
 
-            var clientQueue = new ArrayList();
-            var serverQueue = new ArrayList();
+            var clientQueue = new List<byte[]>();
+            var serverQueue = new List<byte[]>();
 
             this.client = new MockDatagramTransport(this, clientQueue, serverQueue);
             this.server = new MockDatagramTransport(this, serverQueue, clientQueue);
@@ -37,9 +38,9 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
         {
             private readonly MockDatagramAssociation mOuter;
 
-            private IList receiveQueue, sendQueue;
+            private IList<byte[]> receiveQueue, sendQueue;
 
-            internal MockDatagramTransport(MockDatagramAssociation outer, IList receiveQueue, IList sendQueue)
+            internal MockDatagramTransport(MockDatagramAssociation outer, IList<byte[]> receiveQueue, IList<byte[]> sendQueue)
             {
                 this.mOuter = outer;
                 this.receiveQueue = receiveQueue;
@@ -79,7 +80,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
                             return -1;
                         }
                     }
-                    byte[] packet = (byte[])receiveQueue[0];
+                    byte[] packet = receiveQueue[0];
                     receiveQueue.RemoveAt(0);
                     int copyLength = System.Math.Min(len, packet.Length);
                     Array.Copy(packet, 0, buf, off, copyLength);

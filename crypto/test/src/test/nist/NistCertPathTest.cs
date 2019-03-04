@@ -759,7 +759,7 @@ namespace Org.BouncyCastle.Tests.Nist
 
 			try
 			{
-				return (PkixCertPathBuilderResult) builder.Build(builderParams);
+				return builder.Build(builderParams);
 			}
 			catch (PkixCertPathBuilderException e)
 			{               

@@ -26,7 +26,6 @@ namespace Org.BouncyCastle.Security
         }
 
         private static readonly IDictionary<string, string> algorithms = Platform.CreateDictionary<string, string>();
-        //private static readonly IDictionary oids = Platform.CreateHashtable();
 
         static MacUtilities()
         {

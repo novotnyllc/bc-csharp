@@ -102,7 +102,7 @@ namespace Org.BouncyCastle.Crypto.Tls.Tests
             SignatureAndHashAlgorithm signatureAndHashAlgorithm = null;
             if (supportedSignatureAlgorithms != null)
             {
-                foreach (SignatureAndHashAlgorithm alg in supportedSignatureAlgorithms)
+                foreach (var alg in supportedSignatureAlgorithms)
                 {
                     if (alg.Signature == signatureAlgorithm)
                     {

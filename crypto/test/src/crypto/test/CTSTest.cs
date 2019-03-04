@@ -132,8 +132,8 @@ namespace Org.BouncyCastle.Crypto.Tests
 
         public virtual ITestResult Perform()
         {
-            byte[] key1 = new byte[]{(byte) 0x01, (byte) 0x23, (byte) 0x45, (byte) 0x67, (byte) 0x89, (byte) 0xAB, (byte) 0xCD, (byte) 0xEF};
-            byte[] key2 = new byte[]{(byte) 0x01, (byte) 0x23, (byte) 0x45, (byte) 0x67, (byte) 0x89, (byte) 0xAB, (byte) 0xCD, (byte) 0xEF, (byte) 0xee, (byte) 0xff };
+            byte[] key1 = new byte[]{ 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF };
+            byte[] key2 = new byte[]{ 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF, 0xee, 0xff };
             byte[] iv = new byte[]{1, 2, 3, 4, 5, 6, 7, 8};
 
             ITest test = new CTSTester(this, 1, new DesEngine(), new KeyParameter(key1), in1, out1);

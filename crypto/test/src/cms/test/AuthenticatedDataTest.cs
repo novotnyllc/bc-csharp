@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
@@ -176,7 +177,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(1, c.Count);
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				byte[] recData = recipient.GetContent(ReciECKP.Private);
 
@@ -208,7 +209,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(1, c.Count);
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, PkcsObjectIdentifiers.RsaEncryption.Id);
 
@@ -239,7 +240,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(1, c.Count);
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, PkcsObjectIdentifiers.RsaEncryption.Id);
 
@@ -275,7 +276,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(1, c.Count);
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, algOid.Id);
 
@@ -306,7 +307,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			Assert.AreEqual(1, c.Count);
 
-			foreach (PasswordRecipientInformation recipient in c)
+			foreach (var recipient in c.Cast<PasswordRecipientInformation>())
 			{
 				CmsPbeKey key = new Pkcs5Scheme2PbeKey("password".ToCharArray(), recipient.KeyDerivationAlgorithm);
 

@@ -20,7 +20,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 		/**
 		 * U+10400 coded in UTF-8
 		 */
-		private readonly static byte[] glyph1_utf8 = { (byte)0xF0, (byte)0x90, (byte)0x90, (byte)0x80 };
+		private readonly static byte[] glyph1_utf8 = { 0xF0, 0x90, 0x90, 0x80 };
 
 		/**
 		 * Unicode code point U+6771 in native Java UTF-16
@@ -30,7 +30,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 		/**
 		 * U+6771 coded in UTF-8
 		 */
-		private readonly static byte[] glyph2_utf8 = { (byte)0xE6, (byte)0x9D, (byte)0xB1 };
+		private readonly static byte[] glyph2_utf8 = { 0xE6, 0x9D, 0xB1 };
 
 		/**
 		 * Unicode code point U+00DF in native Java UTF-16
@@ -40,7 +40,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 		/**
 		 * U+00DF coded in UTF-8
 		 */
-		private readonly static byte[] glyph3_utf8 = { (byte)0xC3, (byte)0x9f };
+		private readonly static byte[] glyph3_utf8 = { 0xC3, 0x9f };
 
 		/**
 		 * Unicode code point U+0041 in native Java UTF-16

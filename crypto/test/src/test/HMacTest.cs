@@ -115,7 +115,7 @@ namespace Org.BouncyCastle.Tests
         {
             IMac mac = MacUtilities.GetMac("HmacSHA1");
 
-            byte [] b = {(byte)1, (byte)2, (byte)3, (byte)4, (byte)5};
+            byte [] b = { 1, 2, 3, 4, 5 };
 //			KeyParameter sks = new KeyParameter(b); //, "HmacSHA1");
 //			RC5ParameterSpec algPS = new RC5ParameterSpec(100, 100, 100);
             RC5Parameters rc5Parameters = new RC5Parameters(b, 100);

@@ -143,7 +143,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 
         public static void MainOld(string[] args)
         {
-            foreach (ITest test in tests)
+            foreach (var test in tests)
             {
                 SimpleTest.RunTest(test);
             }

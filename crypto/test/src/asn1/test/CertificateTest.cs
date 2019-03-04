@@ -217,7 +217,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 				X509Extensions ext = tbsCert.Extensions;
 				if (ext != null)
 				{
-					foreach (DerObjectIdentifier oid in ext.ExtensionOids)
+					foreach (var oid in ext.ExtensionOids)
 					{
 						X509Extension extVal = ext.GetExtension(oid);
 						Asn1Object extObj = Asn1Object.FromByteArray(extVal.Value.GetOctets());
@@ -359,7 +359,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 			X509Extensions ext = acInfo.Extensions;
 			if (ext != null)
 			{
-				foreach (DerObjectIdentifier oid in ext.ExtensionOids)
+				foreach (var oid in ext.ExtensionOids)
 				{
 					X509Extension extVal = ext.GetExtension(oid);
 				}

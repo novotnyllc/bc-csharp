@@ -29,7 +29,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
         public static void MainOld(
             string[] args)
         {
-            foreach (ITest test in tests)
+            foreach (var test in tests)
             {
                 ITestResult result = test.Perform();
                 Console.WriteLine(result);

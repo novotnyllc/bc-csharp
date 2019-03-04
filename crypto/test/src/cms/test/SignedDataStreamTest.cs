@@ -100,14 +100,14 @@ namespace Org.BouncyCastle.Cms.Tests
 			var certStore = sp.GetCertificates("Collection");
 			SignerInformationStore signers = sp.GetSignerInfos();
 
-			foreach (SignerInformation signer in signers.GetSigners())
+			foreach (var signer in signers.GetSigners())
 			{
 				var certCollection = certStore.GetMatches(signer.SignerID);
 
 				var certEnum = certCollection.GetEnumerator();
 
 				certEnum.MoveNext();
-				X509Certificate	cert = (X509Certificate) certEnum.Current;
+				X509Certificate	cert = certEnum.Current;
 
 				Assert.IsTrue(signer.Verify(cert));
 
@@ -543,11 +543,11 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			VerifySignatures(sp);
 
-            byte[] contentDigest = (byte[])gen.GetGeneratedDigests()[CmsSignedGenerator.DigestSha1];
+            byte[] contentDigest = gen.GetGeneratedDigests()[CmsSignedGenerator.DigestSha1];
 
             var signers = new List<SignerInformation>(sp.GetSignerInfos().GetSigners());
 
-			AttributeTable table = ((SignerInformation) signers[0]).SignedAttributes;
+			AttributeTable table = signers[0].SignedAttributes;
 			Asn1.Cms.Attribute hash = table[CmsAttributes.MessageDigest];
 
 			Assert.IsTrue(Arrays.AreEqual(contentDigest, ((Asn1OctetString)hash.AttrValues[0]).GetOctets()));
@@ -632,11 +632,11 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			VerifySignatures(sp);
 
-			byte[] contentDigest = (byte[])gen.GetGeneratedDigests()[CmsSignedGenerator.DigestSha1];
+			byte[] contentDigest = gen.GetGeneratedDigests()[CmsSignedGenerator.DigestSha1];
 
 			var signers = new List<SignerInformation>(sp.GetSignerInfos().GetSigners());
 
-			AttributeTable table = ((SignerInformation) signers[0]).SignedAttributes;
+			AttributeTable table = signers[0].SignedAttributes;
 			Asn1.Cms.Attribute hash = table[CmsAttributes.MessageDigest];
 
 			Assert.IsTrue(Arrays.AreEqual(contentDigest, ((Asn1OctetString)hash.AttrValues[0]).GetOctets()));
@@ -694,7 +694,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			//
 			SignerInformationStore signers = sp.GetSignerInfos();
 
-			foreach (SignerInformation signer in signers.GetSigners())
+			foreach (var signer in signers.GetSigners())
 			{
 				CheckAttribute(signer.GetContentDigest(), signer.SignedAttributes[dummyOid1]);
 				CheckAttribute(signer.GetSignature(), signer.UnsignedAttributes[dummyOid2]);
@@ -795,7 +795,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
             var signerEnum = sd.GetSignerInfos().GetSigners().GetEnumerator();
 			signerEnum.MoveNext();
-			SignerInformation signer = (SignerInformation)signerEnum.Current;
+			SignerInformation signer = signerEnum.Current;
 
 			Assert.AreEqual(signer.DigestAlgOid, CmsSignedDataStreamGenerator.DigestSha224);
 
@@ -852,7 +852,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
             var signerEnum = sd.GetSignerInfos().GetSigners().GetEnumerator();
 			signerEnum.MoveNext();
-			SignerInformation signer = (SignerInformation) signerEnum.Current;
+			SignerInformation signer = signerEnum.Current;
 
 			Assert.AreEqual(signer.DigestAlgOid, CmsSignedDataStreamGenerator.DigestSha224);
 

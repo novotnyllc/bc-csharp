@@ -680,7 +680,7 @@ namespace Org.BouncyCastle.Tests
             BigInteger[] weakPublicKeys = { BigInteger.Zero, BigInteger.One, p.Subtract(BigInteger.One), p,
                 p.Add(BigInteger.One), BigInteger.One.Negate() };
 
-            foreach (BigInteger weakKey in weakPublicKeys)
+            foreach (var weakKey in weakPublicKeys)
             {
                 try
                 {

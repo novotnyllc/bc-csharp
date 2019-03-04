@@ -67,7 +67,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 			//
 			// ff test
 			//
-			byte[]    data = { (byte)0xff, (byte)0xff, (byte)0xff, (byte)0, (byte)0, (byte)0, (byte)0, (byte)0 };
+			byte[]    data = { 0xff, 0xff, 0xff, 0, 0, 0, 0, 0 };
 
 			if (ffVector != null)
 			{

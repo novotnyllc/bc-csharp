@@ -173,7 +173,7 @@ namespace Org.BouncyCastle.Tests
             string algorithm,
             string hash)
         {
-            byte[] abc = { (byte)0x61, (byte)0x62, (byte)0x63 };
+            byte[] abc = { 0x61, 0x62, 0x63 };
 
             IDigest digest = DigestUtilities.GetDigest(algorithm);
 

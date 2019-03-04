@@ -165,7 +165,8 @@ namespace Org.BouncyCastle.Security
                 throw new System.ArgumentNullException("mechanism");
 
             mechanism = Platform.ToUpperInvariant(mechanism);
-            string aliased = algorithms[mechanism];
+            string aliased;
+            algorithms.TryGetValue(mechanism, out aliased);
 
             if (aliased != null)
                 mechanism = aliased;

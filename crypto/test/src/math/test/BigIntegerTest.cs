@@ -444,7 +444,7 @@ namespace Org.BouncyCastle.Math.Tests
         {
             int[] tests = new int[]{ int.MinValue, -1234, -10, -1, 0, ~0, 1, 10, 5678, int.MaxValue };
 
-            foreach (int test in tests)
+            foreach (var test in tests)
             {
                 Assert.AreEqual(test, val(test).IntValue);
             }
@@ -465,25 +465,25 @@ namespace Org.BouncyCastle.Math.Tests
             Assert.IsTrue(val(67).IsProbablePrime(100));
             Assert.IsTrue(val(773).IsProbablePrime(100));
 
-            foreach (int p in firstPrimes)
+            foreach (var p in firstPrimes)
             {
                 Assert.IsTrue(val(p).IsProbablePrime(100));
                 Assert.IsTrue(val(-p).IsProbablePrime(100));
             }
 
-            foreach (int c in nonPrimes)
+            foreach (var c in nonPrimes)
             {
                 Assert.IsFalse(val(c).IsProbablePrime(100));
                 Assert.IsFalse(val(-c).IsProbablePrime(100));
             }
 
-            foreach (int e in mersennePrimeExponents)
+            foreach (var e in mersennePrimeExponents)
             {
                 Assert.IsTrue(mersenne(e).IsProbablePrime(100));
                 Assert.IsTrue(mersenne(e).Negate().IsProbablePrime(100));
             }
 
-            foreach (int e in nonPrimeExponents)
+            foreach (var e in nonPrimeExponents)
             {
                 Assert.IsFalse(mersenne(e).IsProbablePrime(100));
                 Assert.IsFalse(mersenne(e).Negate().IsProbablePrime(100));
@@ -497,7 +497,7 @@ namespace Org.BouncyCastle.Math.Tests
         {
             long[] tests = new long[]{ long.MinValue, -1234, -10, -1, 0L, ~0L, 1, 10, 5678, long.MaxValue };
 
-            foreach (long test in tests)
+            foreach (var test in tests)
             {
                 Assert.AreEqual(test, val(test).LongValue);
             }
@@ -982,7 +982,7 @@ namespace Org.BouncyCastle.Math.Tests
                 tests[i] = new BigInteger(len, random);
             }
 
-            foreach (int radix in radices)
+            foreach (var radix in radices)
             {
                 for (int i = 0; i < trials; ++i)
                 {

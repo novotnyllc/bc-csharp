@@ -100,14 +100,14 @@ namespace Org.BouncyCastle.Cms.Tests
 			var certStore = sp.GetCertificates("Collection");
 			SignerInformationStore signers = sp.GetSignerInfos();
 
-			foreach (SignerInformation signer in signers.GetSigners())
+			foreach (var signer in signers.GetSigners())
 			{
 				var certCollection = certStore.GetMatches(signer.SignerID);
 
 				var certEnum = certCollection.GetEnumerator();
 
 				certEnum.MoveNext();
-				X509Certificate	cert = (X509Certificate) certEnum.Current;
+				X509Certificate	cert = certEnum.Current;
 
 				Assert.IsTrue(signer.Verify(cert));
 

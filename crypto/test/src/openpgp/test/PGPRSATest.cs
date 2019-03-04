@@ -449,10 +449,10 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
             PgpPublicKey pubKey = pgpPub.GetPublicKey();
 
             int count = 0;
-            foreach (PgpUserAttributeSubpacketVector attributes in pubKey.GetUserAttributes())
+            foreach (var attributes in pubKey.GetUserAttributes())
             {
                 int sigCount = 0;
-                foreach (PgpSignature sig in pubKey.GetSignaturesForUserAttribute(attributes))
+                foreach (var sig in pubKey.GetSignaturesForUserAttribute(attributes))
                 {
                     sig.InitVerify(pubKey);
 
@@ -500,10 +500,10 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
             PgpPublicKey nKey = PgpPublicKey.AddCertification(pubKey, uVec, sig);
 
             int count = 0;
-            foreach (PgpUserAttributeSubpacketVector attributes in nKey.GetUserAttributes())
+            foreach (var attributes in nKey.GetUserAttributes())
             {
                 int sigCount = 0;
-                foreach (PgpSignature s in nKey.GetSignaturesForUserAttribute(attributes))
+                foreach (var s in nKey.GetSignaturesForUserAttribute(attributes))
                 {
                     s.InitVerify(pubKey);
 
@@ -546,12 +546,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             var enumerator1 = pgpPub.GetPublicKey().GetUserIds().GetEnumerator();
             enumerator1.MoveNext();
-            string uid = (string) enumerator1.Current;
+            string uid = enumerator1.Current;
 
 
             var enumerator2 = pgpPub.GetPublicKey().GetSignaturesForId(uid).GetEnumerator();
             enumerator2.MoveNext();
-            PgpSignature sig = (PgpSignature) enumerator2.Current;
+            PgpSignature sig = enumerator2.Current;
 
             sig.InitVerify(pgpPub.GetPublicKey());
 
@@ -845,12 +845,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             var enumerator3 = key.GetUserIds().GetEnumerator();
             enumerator3.MoveNext();
-            uid = (string) enumerator3.Current;
+            uid = enumerator3.Current;
 
 
             var enumerator4 = key.GetSignaturesForId(uid).GetEnumerator();
             enumerator4.MoveNext();
-            sig = (PgpSignature) enumerator4.Current;
+            sig = enumerator4.Current;
 
             sig.InitVerify(key);
 
@@ -890,7 +890,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             var sgEnum = key.GetSignaturesOfType(PgpSignature.KeyRevocation).GetEnumerator();
             sgEnum.MoveNext();
-            sig = (PgpSignature) sgEnum.Current;
+            sig = sgEnum.Current;
 
             sig.InitVerify(key);
 
@@ -941,12 +941,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             var enumerator5 = key.GetUserIds().GetEnumerator();
             enumerator5.MoveNext();
-            uid = (string) enumerator5.Current;
+            uid = enumerator5.Current;
 
 
             var enumerator6 = key.GetSignaturesForId(uid).GetEnumerator();
             enumerator6.MoveNext();
-            sig = (PgpSignature) enumerator6.Current;
+            sig = enumerator6.Current;
 
             sig.InitVerify(key);
 

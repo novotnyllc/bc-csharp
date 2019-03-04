@@ -75,22 +75,22 @@ namespace Org.BouncyCastle.Crypto.Tests
 			byte[] output = new byte[input.Length];
 			engine.ProcessBytes(input, 0, output.Length, output, 0);
 
-			checkByte(output, 0, (byte) 0xB6);
-			checkByte(output, 1, (byte) 0xEB);
-			checkByte(output, 2, (byte) 0xAE);
-			checkByte(output, 3, (byte) 0xFE);
-			checkByte(output, 252, (byte) 0x48);
-			checkByte(output, 253, (byte) 0x17);
-			checkByte(output, 254, (byte) 0x24);
-			checkByte(output, 255, (byte) 0x73);
-			checkByte(output, 1020, (byte) 0x1D);
-			checkByte(output, 1021, (byte) 0xAE);
-			checkByte(output, 1022, (byte) 0xC3);
-			checkByte(output, 1023, (byte) 0x5A);
-			checkByte(output, 102396, (byte) 0x1D);
-			checkByte(output, 102397, (byte) 0xA7);
-			checkByte(output, 102398, (byte) 0xE1);
-			checkByte(output, 102399, (byte) 0xDC);
+			checkByte(output, 0, 0xB6);
+			checkByte(output, 1, 0xEB);
+			checkByte(output, 2, 0xAE);
+			checkByte(output, 3, 0xFE);
+			checkByte(output, 252, 0x48);
+			checkByte(output, 253, 0x17);
+			checkByte(output, 254, 0x24);
+			checkByte(output, 255, 0x73);
+			checkByte(output, 1020, 0x1D);
+			checkByte(output, 1021, 0xAE);
+			checkByte(output, 1022, 0xC3);
+			checkByte(output, 1023, 0x5A);
+			checkByte(output, 102396, 0x1D);
+			checkByte(output, 102397, 0xA7);
+			checkByte(output, 102398, 0xE1);
+			checkByte(output, 102399, 0xDC);
 
 			return output;
 		}

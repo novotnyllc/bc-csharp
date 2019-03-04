@@ -51,7 +51,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 
             try
             {
-                new DerInteger(new byte[] {(byte)0xff, (byte)0x80, 0, 1});
+                new DerInteger(new byte[] { 0xff, 0x80, 0, 1});
             }
             catch (ArgumentException e)
             {
@@ -69,7 +69,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 
             try
             {
-                new DerEnumerated(new byte[] {(byte)0xff, (byte)0x80, 0, 1});
+                new DerEnumerated(new byte[] { 0xff, 0x80, 0, 1});
             }
             catch (ArgumentException e)
             {

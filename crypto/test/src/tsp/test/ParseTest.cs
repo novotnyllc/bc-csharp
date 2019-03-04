@@ -377,8 +377,8 @@ namespace Org.BouncyCastle.Tsp.Tests
 			TimeStampResponse response = new TimeStampResponse(encoded);
 
 		    var store = response.TimeStampToken.GetCertificates("Collection");
-			X509Certificate cert = (X509Certificate)
-				new List<X509Certificate>(store.GetMatches(response.TimeStampToken.SignerID))[0];
+			X509Certificate cert =
+                new List<X509Certificate>(store.GetMatches(response.TimeStampToken.SignerID))[0];
 
 			response.TimeStampToken.Validate(cert);
 		}

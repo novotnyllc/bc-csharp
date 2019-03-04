@@ -223,7 +223,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
         private void DoBasicKeyRingCheck(PgpPublicKeyRing pubKeyRing)
         {
-            foreach (PgpPublicKey pubKey in pubKeyRing.GetPublicKeys())
+            foreach (var pubKey in pubKeyRing.GetPublicKeys())
             {
                 if (pubKey.IsMasterKey)
                 {
@@ -239,11 +239,11 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
                         Fail("sub key not encryption key!");
                     }
 
-                    foreach (PgpSignature certification in pubKeyRing.GetPublicKey().GetSignatures())
+                    foreach (var certification in pubKeyRing.GetPublicKey().GetSignatures())
                     {
                         certification.InitVerify(pubKeyRing.GetPublicKey());
 
-                        if (!certification.VerifyCertification((string)First(pubKeyRing.GetPublicKey().GetUserIds()), pubKeyRing.GetPublicKey()))
+                        if (!certification.VerifyCertification(First(pubKeyRing.GetPublicKey().GetUserIds()), pubKeyRing.GetPublicKey()))
                         {
                             Fail("subkey certification does not verify");
                         }

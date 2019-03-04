@@ -1914,7 +1914,7 @@ namespace Org.BouncyCastle.Tests
             bool oneFound = false;
             bool twoFound = false;
 
-            foreach (X509CrlEntry crlEnt in newCrl.GetRevokedCertificates())
+            foreach (var crlEnt in newCrl.GetRevokedCertificates())
             {
                 if (crlEnt.SerialNumber.IntValue == 1)
                 {
@@ -2407,7 +2407,7 @@ namespace Org.BouncyCastle.Tests
 
             x509.Verify(x509.GetPublicKey());
 
-            x509 = (X509Certificate)certFact.ReadCertificate(new MemoryStream(gostRFC4491_2001, false));
+            x509 = certFact.ReadCertificate(new MemoryStream(gostRFC4491_2001, false));
 
             x509.Verify(x509.GetPublicKey());
         }

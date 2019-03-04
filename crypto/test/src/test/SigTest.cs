@@ -29,7 +29,7 @@ namespace Org.BouncyCastle.Tests
 
 			byte[] block = new byte[signer.GetBlockSize()];
 
-			sha1.Update((byte)0);
+			sha1.Update(0);
 
 			byte[] sigHeader = Hex.Decode("3021300906052b0e03021a05000414");
 			Array.Copy(sigHeader, 0, block, 0, sigHeader.Length);
@@ -48,7 +48,7 @@ namespace Org.BouncyCastle.Tests
 
 			verifier.Init(false, pub);
 
-			verifier.Update((byte)0);
+			verifier.Update(0);
 
 			if (verifier.VerifySignature(sig))
 			{

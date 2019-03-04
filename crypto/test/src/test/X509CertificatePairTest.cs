@@ -17,9 +17,9 @@ namespace Org.BouncyCastle.Tests
 			//CertificateFactory cf = CertificateFactory.getInstance("X.509");
 			X509CertificateParser cf = new X509CertificateParser();
 
-			X509Certificate rootCert = (X509Certificate) cf.ReadCertificate(CertPathTest.rootCertBin);
-			X509Certificate interCert = (X509Certificate) cf.ReadCertificate(CertPathTest.interCertBin);
-			X509Certificate finalCert = (X509Certificate) cf.ReadCertificate(CertPathTest.finalCertBin);
+			X509Certificate rootCert = cf.ReadCertificate(CertPathTest.rootCertBin);
+			X509Certificate interCert = cf.ReadCertificate(CertPathTest.interCertBin);
+			X509Certificate finalCert = cf.ReadCertificate(CertPathTest.finalCertBin);
 
 			X509CertificatePair pair1 = new X509CertificatePair(rootCert, interCert);
 			X509CertificatePair pair2 = new X509CertificatePair(rootCert, interCert);

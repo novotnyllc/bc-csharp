@@ -133,7 +133,7 @@ namespace Org.BouncyCastle.Tests
 
 			try
 			{
-				result = (PkixCertPathBuilderResult)cpb.Build(pbParams);
+				result = cpb.Build(pbParams);
 
 				if (!okay)
 				{

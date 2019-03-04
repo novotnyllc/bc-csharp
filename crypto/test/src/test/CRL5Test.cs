@@ -219,7 +219,7 @@ namespace Org.BouncyCastle.Tests
 		{
 			X509Crl crl = new X509CrlParser().ReadCrl(indirectCrl);
 
-			foreach (X509CrlEntry crlEntry in crl.GetRevokedCertificates())
+			foreach (var crlEntry in crl.GetRevokedCertificates())
 			{
 				if (crlEntry.GetCertificateIssuer() == null)
 				{
@@ -233,7 +233,7 @@ namespace Org.BouncyCastle.Tests
 		{
 			X509Crl crl = new X509CrlParser().ReadCrl(directCrl);
 
-			foreach (X509CrlEntry crlEntry in crl.GetRevokedCertificates())
+			foreach (var crlEntry in crl.GetRevokedCertificates())
 			{
 				if (crlEntry.GetCertificateIssuer() != null)
 				{

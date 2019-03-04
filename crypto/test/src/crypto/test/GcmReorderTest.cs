@@ -330,7 +330,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 					{
 						// R = new byte[]{ 0xe1, ... };
 						//GcmUtilities.Xor(tmp, R);
-						tmp[0] ^= (byte)0xe1;
+						tmp[0] ^= 0xe1;
 					}
 				}
 			}

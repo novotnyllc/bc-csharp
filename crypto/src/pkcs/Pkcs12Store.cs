@@ -21,9 +21,9 @@ namespace Org.BouncyCastle.Pkcs
 {
     public class Pkcs12Store
     {
-        private readonly IgnoresCaseHashtable<AsymmetricKeyEntry>    keys = new IgnoresCaseHashtable<AsymmetricKeyEntry>();
+        private readonly IgnoresCaseDictionary<AsymmetricKeyEntry>    keys = new IgnoresCaseDictionary<AsymmetricKeyEntry>();
         private readonly IDictionary<string, string> localIds = Platform.CreateDictionary<string, string>();
-        private readonly IgnoresCaseHashtable<X509CertificateEntry>  certs = new IgnoresCaseHashtable<X509CertificateEntry>();
+        private readonly IgnoresCaseDictionary<X509CertificateEntry>  certs = new IgnoresCaseDictionary<X509CertificateEntry>();
         private readonly IDictionary<CertId, X509CertificateEntry> chainCerts = Platform.CreateDictionary<CertId, X509CertificateEntry>();
         private readonly IDictionary<string, X509CertificateEntry> keyCerts = Platform.CreateDictionary<string, X509CertificateEntry>();
         private readonly DerObjectIdentifier	keyAlgorithm;
@@ -1035,7 +1035,7 @@ namespace Org.BouncyCastle.Pkcs
             return cipher.DoFinal(data);
         }
 
-        private class IgnoresCaseHashtable<T>
+        private class IgnoresCaseDictionary<T>
             : IEnumerable<KeyValuePair<string, T>>
         {
             private readonly IDictionary<string, T> orig = Platform.CreateDictionary<string, T>();

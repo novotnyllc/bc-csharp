@@ -22,7 +22,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 		public override void PerformTest()
 		{
 			DerBitString bs = new DerBitString(
-				new byte[] { (byte)0x01,(byte)0x23,(byte)0x45,(byte)0x67,(byte)0x89,(byte)0xab,(byte)0xcd,(byte)0xef });
+				new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef });
 
 			if (!bs.GetString().Equals("#0309000123456789ABCDEF"))
 			{
@@ -35,7 +35,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 			}
 
 			bs = new DerBitString(
-				new byte[] { (byte)0xfe,(byte)0xdc,(byte)0xba,(byte)0x98,(byte)0x76,(byte)0x54,(byte)0x32,(byte)0x10 });
+				new byte[] { 0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10 });
 
 			if (!bs.GetString().Equals("#030900FEDCBA9876543210"))
 			{
@@ -48,7 +48,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 			}
 
 			DerUniversalString us = new DerUniversalString(
-				new byte[] { (byte)0x01,(byte)0x23,(byte)0x45,(byte)0x67,(byte)0x89,(byte)0xab,(byte)0xcd,(byte)0xef });
+				new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef });
 
 			if (!us.GetString().Equals("#1C080123456789ABCDEF"))
 			{
@@ -61,7 +61,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 			}
 
 			us = new DerUniversalString(
-				new byte[] { (byte)0xfe,(byte)0xdc,(byte)0xba,(byte)0x98,(byte)0x76,(byte)0x54,(byte)0x32,(byte)0x10 });
+				new byte[] { 0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10 });
 
 			if (!us.GetString().Equals("#1C08FEDCBA9876543210"))
 			{

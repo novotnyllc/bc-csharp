@@ -78,7 +78,7 @@ namespace Org.BouncyCastle.Asn1.Tests
 
 			if (t.Count != 2)
             {
-                Fail("hashtable wrong size.");
+                Fail("dictionary wrong size.");
             }
 
             // multiple

@@ -111,31 +111,31 @@ namespace Org.BouncyCastle.Asn1.Tests
         public override void PerformTest()
         {
             KeyUsage k = new KeyUsage(KeyUsage.DigitalSignature);
-            if ((k.GetBytes()[0] != (byte)KeyUsage.DigitalSignature) || (k.PadBits != 7))
+            if ((k.GetBytes()[0] != KeyUsage.DigitalSignature) || (k.PadBits != 7))
             {
                 Fail("failed digitalSignature");
             }
 
             k = new KeyUsage(KeyUsage.NonRepudiation);
-            if ((k.GetBytes()[0] != (byte)KeyUsage.NonRepudiation) || (k.PadBits != 6))
+            if ((k.GetBytes()[0] != KeyUsage.NonRepudiation) || (k.PadBits != 6))
             {
                 Fail("failed nonRepudiation");
             }
 
             k = new KeyUsage(KeyUsage.KeyEncipherment);
-            if ((k.GetBytes()[0] != (byte)KeyUsage.KeyEncipherment) || (k.PadBits != 5))
+            if ((k.GetBytes()[0] != KeyUsage.KeyEncipherment) || (k.PadBits != 5))
             {
                 Fail("failed keyEncipherment");
             }
 
             k = new KeyUsage(KeyUsage.CrlSign);
-            if ((k.GetBytes()[0] != (byte)KeyUsage.CrlSign)  || (k.PadBits != 1))
+            if ((k.GetBytes()[0] != KeyUsage.CrlSign)  || (k.PadBits != 1))
             {
                 Fail("failed cRLSign");
             }
 
             k = new KeyUsage(KeyUsage.DecipherOnly);
-            if ((k.GetBytes()[1] != (byte)(KeyUsage.DecipherOnly >> 8))  || (k.PadBits != 7))
+            if ((k.GetBytes()[1] != KeyUsage.DecipherOnly >> 8)  || (k.PadBits != 7))
             {
                 Fail("failed decipherOnly");
             }

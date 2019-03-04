@@ -122,7 +122,7 @@ namespace Org.BouncyCastle.Security.Tests
             byte[] longMsg = new byte[100];
             new SecureRandom().NextBytes(longMsg);
 
-            foreach (string algorithm in SignerUtilities.Algorithms)
+            foreach (var algorithm in SignerUtilities.Algorithms)
             {
                 ISigner signer = SignerUtilities.GetSigner(algorithm);
 
@@ -178,7 +178,7 @@ namespace Org.BouncyCastle.Security.Tests
                 }
 
                 signer.Init(true, signParams);
-                foreach (byte b in shortMsg)
+                foreach (var b in shortMsg)
                 {
                     signer.Update(b);
                 }
@@ -186,7 +186,7 @@ namespace Org.BouncyCastle.Security.Tests
                 byte[] sig = signer.GenerateSignature();
 
                 signer.Init(false, verifyParams);
-                foreach (byte b in shortMsg)
+                foreach (var b in shortMsg)
                 {
                     signer.Update(b);
                 }

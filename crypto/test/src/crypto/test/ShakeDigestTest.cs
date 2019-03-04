@@ -217,7 +217,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 
                 try
                 {
-                    d.Update((byte)0x01);
+                    d.Update(0x01);
                     Fail("no exception");
                 }
                 catch (InvalidOperationException e)
@@ -241,7 +241,7 @@ namespace Org.BouncyCastle.Crypto.Tests
                     Fail(v.Algorithm + " " + v.Bits + "-bit test vector extended doFinal hash mismatch");
                 }
 
-                d.Update((byte)0x01); // this should be okay as we've reset on DoFinal()
+                d.Update(0x01); // this should be okay as we've reset on DoFinal()
             }
         }
 

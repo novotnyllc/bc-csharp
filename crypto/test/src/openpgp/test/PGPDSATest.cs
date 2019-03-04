@@ -291,7 +291,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             var enumerator = sKey.GetSecretKey().PublicKey.GetUserIds().GetEnumerator();
             enumerator.MoveNext();
-            string primaryUserId = (string) enumerator.Current;
+            string primaryUserId = enumerator.Current;
 
             spGen.SetSignerUserId(true, primaryUserId);
 
@@ -493,10 +493,10 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
             pubKey = pgpPub.GetPublicKey();
 
             int count = 0;
-            foreach (PgpUserAttributeSubpacketVector attributes in pubKey.GetUserAttributes())
+            foreach (var attributes in pubKey.GetUserAttributes())
             {
                 int sigCount = 0;
-                foreach (object sigs in pubKey.GetSignaturesForUserAttribute(attributes))
+                foreach (var sigs in pubKey.GetSignaturesForUserAttribute(attributes))
                 {
 					if (sigs == null)
 						Fail("null signature found");
@@ -522,7 +522,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
             pubKey = pgpPub.GetPublicKey();
             count = 0;
 
-			foreach (object ua in pubKey.GetUserAttributes())
+			foreach (var ua in pubKey.GetUserAttributes())
             {
 				if (ua == null)
 					Fail("null user attribute found");

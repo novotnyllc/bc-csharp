@@ -117,7 +117,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			AsymmetricKeyParameter priKey = PrivateKeyFactory.CreateKey(keyData);
             byte[] data = Hex.Decode("57616c6c6157616c6c6157617368696e67746f6e");
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, PkcsObjectIdentifiers.RsaEncryption.Id);
 
@@ -140,7 +140,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			var c = recipients.GetRecipients();
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, PkcsObjectIdentifiers.RsaEncryption.Id);
 
@@ -327,7 +327,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			if (e.MoveNext())
 			{
-				RecipientInformation recipient = (RecipientInformation) e.Current;
+				RecipientInformation recipient = e.Current;
 
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, PkcsObjectIdentifiers.RsaEncryption.Id);
 
@@ -384,7 +384,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			var c = recipients.GetRecipients();
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, PkcsObjectIdentifiers.RsaEncryption.Id);
 
@@ -425,7 +425,7 @@ namespace Org.BouncyCastle.Cms.Tests
 
 			var c = recipients.GetRecipients();
 
-			foreach (RecipientInformation recipient in c)
+			foreach (var recipient in c)
 			{
 				Assert.AreEqual(recipient.KeyEncryptionAlgOid, "2.16.840.1.101.3.4.1.25");
 

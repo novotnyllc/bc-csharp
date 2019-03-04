@@ -398,10 +398,10 @@ namespace Org.BouncyCastle.Tests
             : SecureRandom
         {
             byte[] seed = {
-                    (byte)0xaa, (byte)0xfd, (byte)0x12, (byte)0xf6, (byte)0x59,
-                    (byte)0xca, (byte)0xe6, (byte)0x34, (byte)0x89, (byte)0xb4,
-                    (byte)0x79, (byte)0xe5, (byte)0x07, (byte)0x6d, (byte)0xde,
-                    (byte)0xc2, (byte)0xf0, (byte)0x6c, (byte)0xb5, (byte)0x8f
+                    0xaa, 0xfd, 0x12, 0xf6, 0x59,
+                    0xca, 0xe6, 0x34, 0x89, 0xb4,
+                    0x79, 0xe5, 0x07, 0x6d, 0xde,
+                    0xc2, 0xf0, 0x6c, 0xb5, 0x8f
             };
 
             public override void NextBytes(
@@ -863,8 +863,8 @@ namespace Org.BouncyCastle.Tests
 
             try
             {
-                byte[] rawDESKey = { (byte)128, (byte)131, (byte)133, (byte)134,
-                    (byte)137, (byte)138, (byte)140, (byte)143 };
+                byte[] rawDESKey = { 128, 131, 133, 134,
+                    137, 138, 140, 143 };
 
 //				SecretKeySpec cipherKey = new SecretKeySpec(rawDESKey, "DES");
                 KeyParameter cipherKey = new DesParameters(rawDESKey);

@@ -289,7 +289,7 @@ namespace Org.BouncyCastle.Utilities.Test
             return (uint)bs[off] << 24
                 | (uint)bs[off + 1] << 16
                 | (uint)bs[off + 2] << 8
-                | (uint)bs[off + 3];
+                | bs[off + 3];
         }
 
         internal static void UInt32_To_BE(uint n, byte[] bs, int off)

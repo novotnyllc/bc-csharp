@@ -119,7 +119,7 @@ namespace Org.BouncyCastle.OpenSsl.Tests
 			AsymmetricKeyParameter	akp,
 			string[]				algorithms)
 		{
-			foreach (string algorithm in algorithms)
+			foreach (var algorithm in algorithms)
 			{
 				DoWriteReadTest(akp, algorithm);
 			}

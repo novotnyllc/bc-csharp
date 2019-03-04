@@ -163,11 +163,11 @@ namespace Org.BouncyCastle.Cms.Tests
             Assert.LessOrEqual(1, c.Count);
 			Assert.GreaterOrEqual(2, c.Count);
 
-			VerifyRecipient((RecipientInformation)c[0], privKey);
+			VerifyRecipient(c[0], privKey);
 
 			if (c.Count == 2)
 			{
-				RecipientInformation recInfo = (RecipientInformation)c[1];
+				RecipientInformation recInfo = c[1];
 
 				Assert.AreEqual(PkcsObjectIdentifiers.IdAlgCmsRC2Wrap.Id, recInfo.KeyEncryptionAlgOid);
 			}
@@ -188,11 +188,11 @@ namespace Org.BouncyCastle.Cms.Tests
 			Assert.LessOrEqual(1, c.Count);
 			Assert.GreaterOrEqual(2, c.Count);
 
-			VerifyRecipient((RecipientInformation)c[0], privKey);
+			VerifyRecipient(c[0], privKey);
 
 			if (c.Count == 2)
 			{
-				RecipientInformation recInfo = (RecipientInformation)c[1];
+				RecipientInformation recInfo = c[1];
 
 				Assert.AreEqual(PkcsObjectIdentifiers.IdAlgCmsRC2Wrap.Id, recInfo.KeyEncryptionAlgOid);
 			}
@@ -220,7 +220,7 @@ namespace Org.BouncyCastle.Cms.Tests
 		{
             var e = store.GetSigners().GetEnumerator();
 			e.MoveNext();
-			return (SignerInformation)e.Current;
+			return e.Current;
 		}
 
 		private void VerifyCounterSignature(SignerInformation signInfo, byte[] certificate)
@@ -253,14 +253,14 @@ namespace Org.BouncyCastle.Cms.Tests
 			var x509Crls = s.GetCrls("Collection");
 			SignerInformationStore signers = s.GetSignerInfos();
 
-			foreach (SignerInformation signer in signers.GetSigners())
+			foreach (var signer in signers.GetSigners())
 			{
 				var certCollection = x509Certs.GetMatches(signer.SignerID);
 
                 var certEnum = certCollection.GetEnumerator();
 
 				certEnum.MoveNext();
-				X509Certificate cert = (X509Certificate) certEnum.Current;
+				X509Certificate cert = certEnum.Current;
 
 				VerifySigner(signer, cert);
 
@@ -293,13 +293,13 @@ namespace Org.BouncyCastle.Cms.Tests
 			var x509Certs = sp.GetCertificates("Collection");
 			SignerInformationStore signers = sp.GetSignerInfos();
 
-			foreach (SignerInformation signer in signers.GetSigners())
+			foreach (var signer in signers.GetSigners())
 			{
 				var certCollection = x509Certs.GetMatches(signer.SignerID);
 
                 var certEnum = certCollection.GetEnumerator();
 				certEnum.MoveNext();
-				X509Certificate cert = (X509Certificate)certEnum.Current;
+				X509Certificate cert = certEnum.Current;
 
 				VerifySigner(signer, cert);
 			}

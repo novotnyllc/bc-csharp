@@ -62,7 +62,7 @@ namespace Org.BouncyCastle.Pkcs.Tests
         private void doOpensslTestKeys()
 		{
 			string[] names = GetTestDataEntries("keys");
-			foreach (string name in names)
+			foreach (var name in names)
 			{
                 if (!name.EndsWith(".key"))
                     continue;

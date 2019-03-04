@@ -27,7 +27,7 @@ namespace Org.BouncyCastle.Math.EC.Tests
         [Test, Explicit]
         public void TestSumOfMultipliesComplete()
         {
-            foreach (X9ECParameters x9 in GetTestCurves())
+            foreach (var x9 in GetTestCurves())
             {
                 DoTestSumOfMultiplies(x9);
             }
@@ -44,7 +44,7 @@ namespace Org.BouncyCastle.Math.EC.Tests
         [Test, Explicit]
         public void TestSumOfTwoMultipliesComplete()
         {
-            foreach (X9ECParameters x9 in GetTestCurves())
+            foreach (var x9 in GetTestCurves())
             {
                 DoTestSumOfTwoMultiplies(x9);
             }
@@ -128,16 +128,16 @@ namespace Org.BouncyCastle.Math.EC.Tests
             return new BigInteger(x9.N.BitLength, Random);
         }
 
-        private IList GetTestCurves()
+        private IList<X9ECParameters> GetTestCurves()
         {
-            var x9s = new ArrayList();
+            var x9s = new List<X9ECParameters>();
             var names = new HashSet<string>(ECNamedCurveTable.Names);
-            foreach(var name in CustomNamedCurves.Names)
+            foreach (var name in CustomNamedCurves.Names)
             {
                 names.Add(name);
             }
 
-            foreach (string name in names)
+            foreach (var name in names)
             {
                 X9ECParameters x9 = ECNamedCurveTable.GetByName(name);
                 if (x9 != null)
@@ -154,7 +154,7 @@ namespace Org.BouncyCastle.Math.EC.Tests
             return x9s;
         }
 
-        private void AddTestCurves(IList x9s, X9ECParameters x9)
+        private void AddTestCurves(IList<X9ECParameters> x9s, X9ECParameters x9)
         {
             ECCurve curve = x9.Curve;
 

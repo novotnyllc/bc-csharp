@@ -181,7 +181,7 @@ namespace Org.BouncyCastle.Tests
             MyChecker checker = new MyChecker();
             param.AddCertPathChecker(checker);
 
-            PkixCertPathValidatorResult result = (PkixCertPathValidatorResult)cpv.Validate(cp, param);
+            PkixCertPathValidatorResult result = cpv.Validate(cp, param);
             PkixPolicyNode policyTree = result.PolicyTree;
             AsymmetricKeyParameter subjectPublicKey = result.SubjectPublicKey;
 
@@ -213,7 +213,7 @@ namespace Org.BouncyCastle.Tests
             checker = new MyChecker();
             param.AddCertPathChecker(checker);
 
-            result = (PkixCertPathValidatorResult)cpv.Validate(cp, param);
+            result = cpv.Validate(cp, param);
 
             IsTrue(result.TrustAnchor.TrustedCert.Equals(rootCert));
 
@@ -260,7 +260,7 @@ namespace Org.BouncyCastle.Tests
                 param.IsRevocationEnabled = false;
                 param.Date = new DateTimeObject(validDate);
 
-                result =(PkixCertPathValidatorResult) cpv.Validate(cp, param);
+                result = cpv.Validate(cp, param);
                 policyTree = result.PolicyTree;
                 subjectPublicKey = result.SubjectPublicKey;
 

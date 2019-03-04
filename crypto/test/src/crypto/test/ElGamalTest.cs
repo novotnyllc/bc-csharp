@@ -105,7 +105,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 
 			try
 			{
-				bytes[0] = (byte)0xff;
+				bytes[0] = 0xff;
 
 				e.ProcessBlock(bytes, 0, bytes.Length - 1);
 
@@ -118,7 +118,7 @@ namespace Org.BouncyCastle.Crypto.Tests
 
 			try
 			{
-				bytes[0] = (byte)0x7f;
+				bytes[0] = 0x7f;
 
 				e.ProcessBlock(bytes, 0, bytes.Length - 1);
 			}

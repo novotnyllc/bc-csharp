@@ -356,7 +356,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
             PgpPublicKeyRing pgpPub = (PgpPublicKeyRing)pgpFact.NextPgpObject();
 
-            foreach (PgpSignature sig in pgpPub.GetPublicKey().GetSignatures())
+            foreach (var sig in pgpPub.GetPublicKey().GetSignatures())
             { 
                 if (sig.SignatureType == PgpSignature.PositiveCertification)
                 {
@@ -697,9 +697,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 
         //private void CheckUserAttribute(String type, PgpPublicKeyRing pkr, PgpPublicKey masterPk)
         //{
-        //    foreach (PgpUserAttributeSubpacketVector attr in pkr.GetPublicKey().GetUserAttributes())
+        //    foreach (var attr in pkr.GetPublicKey().GetUserAttributes())
         //    {
-        //        foreach (PgpSignature sig in masterPk.GetSignaturesForUserAttribute(attr))
+        //        foreach (var sig in masterPk.GetSignaturesForUserAttribute(attr))
         //        {
         //            sig.InitVerify(masterPk);
         //            if (!sig.VerifyCertification(attr, masterPk))

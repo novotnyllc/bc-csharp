@@ -461,7 +461,7 @@ namespace Org.BouncyCastle.Pkcs.Tests
 			store.Load(stream, passwd);
 
 			string pName = null;
-			foreach (string n in store.Aliases)
+			foreach (var n in store.Aliases)
 			{
 				if (store.IsKeyEntry(n))
 				{
@@ -601,7 +601,7 @@ namespace Org.BouncyCastle.Pkcs.Tests
 
 			pName = null;
 
-			foreach (string n in store.Aliases)
+			foreach (var n in store.Aliases)
 			{
 				if (store.IsKeyEntry(n))
 				{
@@ -641,7 +641,7 @@ namespace Org.BouncyCastle.Pkcs.Tests
 
 			pName = null;
 
-			foreach (string n in store.Aliases)
+			foreach (var n in store.Aliases)
 			{
 				if (store.IsKeyEntry(n))
 				{

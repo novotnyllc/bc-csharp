@@ -49,7 +49,7 @@ namespace Org.BouncyCastle.Cms
 		 *
 		 * @param parameters source parameters for table generation.
 		 *
-		 * @return a filled in Hashtable of attributes.
+		 * @return a filled in Dictionary of attributes.
 		 */
 		protected virtual IDictionary<DerObjectIdentifier, object> createStandardAttributeTable(
 			IDictionary<CmsAttributeTableParameter, object> parameters)

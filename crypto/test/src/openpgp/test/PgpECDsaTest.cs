@@ -132,11 +132,11 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
             // Read the public key
             //
             PgpPublicKeyRing pubKeyRing = new PgpPublicKeyRing(testPubKey);
-            foreach (PgpSignature certification in pubKeyRing.GetPublicKey().GetSignatures())
+            foreach (var certification in pubKeyRing.GetPublicKey().GetSignatures())
             {
                 certification.InitVerify(pubKeyRing.GetPublicKey());
 
-                if (!certification.VerifyCertification((string)First(pubKeyRing.GetPublicKey().GetUserIds()), pubKeyRing.GetPublicKey()))
+                if (!certification.VerifyCertification(First(pubKeyRing.GetPublicKey().GetUserIds()), pubKeyRing.GetPublicKey()))
                 {
                     Fail("self certification does not verify");
                 }

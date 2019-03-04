@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -123,9 +124,9 @@ namespace Org.BouncyCastle.Utilities.Test
 		{
 			string fullPrefix = GetFullName(prefix);
 
-			var result = new ArrayList();
+			var result = new List<string>();
 			string[] fullNames = typeof(SimpleTest).GetTypeInfo().Assembly.GetManifestResourceNames();
-			foreach (string fullName in fullNames)
+			foreach (var fullName in fullNames)
 			{
 				if (fullName.StartsWith(fullPrefix))
 				{
@@ -133,7 +134,7 @@ namespace Org.BouncyCastle.Utilities.Test
 					result.Add(name);
 				}
 			}
-			return (string[])result.ToArray(typeof(String));
+			return result.ToArray();
 		}
 
 		private static string GetFullName(

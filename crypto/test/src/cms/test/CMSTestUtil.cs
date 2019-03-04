@@ -456,7 +456,7 @@ namespace Org.BouncyCastle.Cms.Tests
         internal static IX509Store<IX509AttributeCertificate> MakeAttrCertStore(params IX509AttributeCertificate[] attrCerts)
         {
             var attrCertList = new List<IX509AttributeCertificate>();
-            foreach (IX509AttributeCertificate attrCert in attrCerts)
+            foreach (var attrCert in attrCerts)
             {
                 attrCertList.Add(attrCert);
             }
@@ -467,7 +467,7 @@ namespace Org.BouncyCastle.Cms.Tests
         internal static IX509Store<X509Certificate> MakeCertStore(params X509Certificate[] certs)
         {
             var certList = new List<X509Certificate>();
-            foreach (X509Certificate cert in certs)
+            foreach (var cert in certs)
             {
                 certList.Add(cert);
             }
@@ -478,7 +478,7 @@ namespace Org.BouncyCastle.Cms.Tests
         internal static IX509Store<X509Crl> MakeCrlStore(params X509Crl[] crls)
         {
             var crlList = new List<X509Crl>();
-            foreach (X509Crl crl in crls)
+            foreach (var crl in crls)
             {
                 crlList.Add(crl);
             }

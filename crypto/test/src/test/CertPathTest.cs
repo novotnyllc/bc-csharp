@@ -106,7 +106,7 @@ namespace Org.BouncyCastle.Tests
 
 		private void doTestExceptions()
 		{
-			byte[] enc = { (byte)0, (byte)2, (byte)3, (byte)4, (byte)5 };
+			byte[] enc = { 0, 2, 3, 4, 5 };
 //			MyCertPath mc = new MyCertPath(enc);
 			MemoryStream os = new MemoryStream();
 			MemoryStream ins;
@@ -143,7 +143,7 @@ namespace Org.BouncyCastle.Tests
 //			CertPathBuilder pathBuilder = CertPathBuilder.GetInstance("PKIX");
 			PkixCertPathBuilder pathBuilder = new PkixCertPathBuilder();
 			X509CertStoreSelector select = new X509CertStoreSelector();
-			select.Subject = ((X509Certificate)certCol[0]).SubjectDN;
+			select.Subject = certCol[0].SubjectDN;
 
 			var trustanchors = new HashSet<TrustAnchor>();
 			trustanchors.Add(new TrustAnchor(cf.ReadCertificate(rootCertBin), null));

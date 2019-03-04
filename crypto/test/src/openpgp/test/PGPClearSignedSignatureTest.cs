@@ -239,9 +239,9 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
 			//
 			// iterate through the key rings.
 			//
-			foreach (PgpSecretKeyRing kRing in pgpSec.GetKeyRings())
+			foreach (var kRing in pgpSec.GetKeyRings())
 			{
-				foreach (PgpSecretKey k in kRing.GetSecretKeys())
+				foreach (var k in kRing.GetSecretKeys())
 				{
 					if (k.IsSigningKey)
 					{
@@ -267,7 +267,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp.Tests
             var it = pgpSecKey.PublicKey.GetUserIds().GetEnumerator();
 			if (it.MoveNext())
 			{
-				spGen.SetSignerUserId(false, (string)it.Current);
+				spGen.SetSignerUserId(false, it.Current);
 				sGen.SetHashedSubpackets(spGen.Generate());
 			}
 

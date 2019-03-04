@@ -506,7 +506,7 @@ namespace Org.BouncyCastle.Math.EC.Tests
 
             var uniqNames = new HashSet<string>(names);
 
-            foreach (string name in uniqNames)
+            foreach (var name in uniqNames)
             {
                 X9ECParameters x9A = ECNamedCurveTable.GetByName(name);
                 X9ECParameters x9B = CustomNamedCurves.GetByName(name);

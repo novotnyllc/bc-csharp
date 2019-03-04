@@ -11,9 +11,9 @@ namespace Org.BouncyCastle.Asn1.Tests
 	public class InputStreamTest
 		: SimpleTest
 	{
-		private static readonly byte[] outOfBoundsLength = new byte[] { (byte)0x30, (byte)0xff, (byte)0xff, (byte)0xff, (byte)0xff, (byte)0xff };
-		private static readonly byte[] negativeLength = new byte[] { (byte)0x30, (byte)0x84, (byte)0xff, (byte)0xff, (byte)0xff, (byte)0xff };
-		private static readonly byte[] outsideLimitLength = new byte[] { (byte)0x30, (byte)0x83, (byte)0x0f, (byte)0xff, (byte)0xff };
+		private static readonly byte[] outOfBoundsLength = new byte[] { 0x30, 0xff, 0xff, 0xff, 0xff, 0xff };
+		private static readonly byte[] negativeLength = new byte[] { 0x30, 0x84, 0xff, 0xff, 0xff, 0xff };
+		private static readonly byte[] outsideLimitLength = new byte[] { 0x30, 0x83, 0x0f, 0xff, 0xff };
 
 		public override string Name
 		{

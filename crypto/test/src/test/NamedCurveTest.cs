@@ -347,32 +347,32 @@ namespace Org.BouncyCastle.Tests
             doTestCurve("P-521");
             doTestCurve("brainpoolp160r1");    // TeleTrusT
 
-            foreach (string name in X962NamedCurves.Names)
+            foreach (var name in X962NamedCurves.Names)
             {
                 doTestECDsa(name);
             }
 
-            foreach (string name in SecNamedCurves.Names)
+            foreach (var name in SecNamedCurves.Names)
             {
                 doTestECDsa(name);
             }
 
-            foreach (string name in TeleTrusTNamedCurves.Names)
+            foreach (var name in TeleTrusTNamedCurves.Names)
             {
                 doTestECDsa(name);
             }
 
-            foreach (string name in AnssiNamedCurves.Names)
+            foreach (var name in AnssiNamedCurves.Names)
             {
                 doTestECDsa(name);
             }
 
-            foreach (string name in GMNamedCurves.Names)
+            foreach (var name in GMNamedCurves.Names)
             {
                 doTestECDsa(name);
             }
 
-            foreach (string name in ECGost3410NamedCurves.Names)
+            foreach (var name in ECGost3410NamedCurves.Names)
             {
                 doTestECGost(name);
             }

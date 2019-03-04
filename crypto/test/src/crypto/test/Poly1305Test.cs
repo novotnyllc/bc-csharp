@@ -244,8 +244,8 @@ namespace Org.BouncyCastle.Crypto.Tests
 			}
 
 			// Check reset
-			poly.Update((byte)1);
-			poly.Update((byte)2);
+			poly.Update(1);
+			poly.Update(2);
 			poly.Reset();
 			poly.BlockUpdate(m, 0, m.Length);
 			poly.DoFinal(output, 0);
@@ -256,8 +256,8 @@ namespace Org.BouncyCastle.Crypto.Tests
 			}
 
 			// Check init resets
-			poly.Update((byte)1);
-			poly.Update((byte)2);
+			poly.Update(1);
+			poly.Update(2);
 			poly.Init(new ParametersWithIV(new KeyParameter(k), new byte[16]));
 			poly.BlockUpdate(m, 0, m.Length);
 			poly.DoFinal(output, 0);
