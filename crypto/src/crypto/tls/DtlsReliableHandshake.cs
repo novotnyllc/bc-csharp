@@ -242,7 +242,8 @@ namespace Org.BouncyCastle.Crypto.Tls
                 }
                 else if (message_seq >= mNextReceiveSeq)
                 {
-                    DtlsReassembler reassembler = mCurrentInboundFlight[message_seq];
+                    DtlsReassembler reassembler;
+                    mCurrentInboundFlight.TryGetValue(message_seq, out reassembler);
                     if (reassembler == null)
                     {
                         reassembler = new DtlsReassembler(msg_type, length);
@@ -259,7 +260,8 @@ namespace Org.BouncyCastle.Crypto.Tls
                      * retransmit our last flight
                      */
 
-                    DtlsReassembler reassembler = mPreviousInboundFlight[message_seq];
+                    DtlsReassembler reassembler;
+                    mPreviousInboundFlight.TryGetValue(message_seq, out reassembler);
                     if (reassembler != null)
                     {
                         reassembler.ContributeFragment(msg_type, length, buf, off + MessageHeaderLength, fragment_offset,

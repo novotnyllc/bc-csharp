@@ -259,7 +259,7 @@ namespace Org.BouncyCastle.Cms
 		public void AddDigests(
        		params string[] digestOids)
 		{
-       		AddDigests(digestOids);
+       		AddDigests(digestOids.AsEnumerable());
 		}
 
 		public void AddDigests(
