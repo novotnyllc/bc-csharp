@@ -57,12 +57,10 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public CertificateValues(
-			IEnumerable<Asn1Encodable> certificates)
+			IEnumerable<X509CertificateStructure> certificates)
 		{
 			if (certificates == null)
 				throw new ArgumentNullException("certificates");
-			if (!CollectionUtilities.CheckElementsAreOfType(certificates, typeof(X509CertificateStructure)))
-				throw new ArgumentException("Must contain only 'X509CertificateStructure' objects", "certificates");
 
 			this.certificates = new DerSequence(
 				Asn1EncodableVector.FromEnumerable(certificates));

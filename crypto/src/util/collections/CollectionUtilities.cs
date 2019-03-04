@@ -48,7 +48,7 @@ namespace Org.BouncyCastle.Utilities.Collections
             return e.Current;
         }
 
-        public static string ToString(IEnumerable<object> c)
+        public static string ToString<T>(IEnumerable<T> c)
         {
             StringBuilder sb = new StringBuilder("[");
 

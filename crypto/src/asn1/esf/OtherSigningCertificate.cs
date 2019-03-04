@@ -74,28 +74,23 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public OtherSigningCertificate(
-			IEnumerable<Asn1Encodable> certs)
+			IEnumerable<OtherCertID> certs)
 			: this(certs, null)
 		{
 		}
 
 		public OtherSigningCertificate(
-			IEnumerable<Asn1Encodable> certs,
-			IEnumerable<Asn1Encodable> policies)
+			IEnumerable<OtherCertID> certs,
+			IEnumerable<PolicyInformation> policies)
 		{
 			if (certs == null)
 				throw new ArgumentNullException("certs");
-			if (!CollectionUtilities.CheckElementsAreOfType(certs, typeof(OtherCertID)))
-				throw new ArgumentException("Must contain only 'OtherCertID' objects", "certs");
 
-			this.certs = new DerSequence(
+            this.certs = new DerSequence(
 				Asn1EncodableVector.FromEnumerable(certs));
 
 			if (policies != null)
 			{
-				if (!CollectionUtilities.CheckElementsAreOfType(policies, typeof(PolicyInformation)))
-					throw new ArgumentException("Must contain only 'PolicyInformation' objects", "policies");
-
 				this.policies = new DerSequence(
 					Asn1EncodableVector.FromEnumerable(policies));
 			}

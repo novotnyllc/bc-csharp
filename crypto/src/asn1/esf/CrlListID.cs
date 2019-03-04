@@ -61,12 +61,10 @@ namespace Org.BouncyCastle.Asn1.Esf
 		}
 
 		public CrlListID(
-			IEnumerable<Asn1Encodable> crls)
+			IEnumerable<CrlValidatedID> crls)
 		{
 			if (crls == null)
 				throw new ArgumentNullException("crls");
-			if (!CollectionUtilities.CheckElementsAreOfType(crls, typeof(CrlValidatedID)))
-				throw new ArgumentException("Must contain only 'CrlValidatedID' objects", "crls");
 
 			this.crls = new DerSequence(
 				Asn1EncodableVector.FromEnumerable(crls));
