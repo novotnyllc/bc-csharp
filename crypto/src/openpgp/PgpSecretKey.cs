@@ -488,7 +488,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 
         /// <summary>Allows enumeration of any user attribute vectors associated with the key.</summary>
         /// <returns>An <c>IEnumerable</c> of <c>string</c> objects.</returns>
-        public IEnumerable<object> UserAttributes
+        public IEnumerable<PgpUserAttributeSubpacketVector> UserAttributes
         {
             get { return pub.GetUserAttributes(); }
         }

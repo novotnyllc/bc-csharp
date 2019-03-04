@@ -200,7 +200,7 @@ namespace Org.BouncyCastle.Cms
 				PopulateCertCrlSets();
 
                 var signerInfos = Platform.CreateList<SignerInformation>();
-                var hashes = Platform.CreateDictionary<object, byte[]>();
+                var hashes = Platform.CreateDictionary<string, byte[]>();
 
 				foreach (var digestKey in _digests.Keys)
 				{

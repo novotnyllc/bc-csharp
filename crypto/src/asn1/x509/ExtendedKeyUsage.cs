@@ -15,7 +15,7 @@ namespace Org.BouncyCastle.Asn1.X509
     public class ExtendedKeyUsage
         : Asn1Encodable
     {
-        internal readonly IDictionary<object, object> usageTable = Platform.CreateDictionary<object, object>();
+        internal readonly IDictionary<Asn1Encodable, Asn1Encodable> usageTable = Platform.CreateDictionary<Asn1Encodable, Asn1Encodable>();
         internal readonly Asn1Sequence seq;
 
         public static ExtendedKeyUsage GetInstance(
@@ -98,7 +98,7 @@ namespace Org.BouncyCastle.Asn1.X509
          * The returned ArrayList contains DerObjectIdentifier instances.
          * @return An ArrayList with all key purposes.
          */
-        public IList<object> GetAllUsages()
+        public IList<Asn1Encodable> GetAllUsages()
         {
             return Platform.CreateList(usageTable.Values);
         }

@@ -21,9 +21,9 @@ namespace Org.BouncyCastle.Pkcs
 {
     public class Pkcs12Store
     {
-        private readonly IgnoresCaseHashtable	keys = new IgnoresCaseHashtable();
+        private readonly IgnoresCaseHashtable<AsymmetricKeyEntry>    keys = new IgnoresCaseHashtable<AsymmetricKeyEntry>();
         private readonly IDictionary<string, string> localIds = Platform.CreateDictionary<string, string>();
-        private readonly IgnoresCaseHashtable	certs = new IgnoresCaseHashtable();
+        private readonly IgnoresCaseHashtable<X509CertificateEntry>  certs = new IgnoresCaseHashtable<X509CertificateEntry>();
         private readonly IDictionary<CertId, X509CertificateEntry> chainCerts = Platform.CreateDictionary<CertId, X509CertificateEntry>();
         private readonly IDictionary<string, X509CertificateEntry> keyCerts = Platform.CreateDictionary<string, X509CertificateEntry>();
         private readonly DerObjectIdentifier	keyAlgorithm;
@@ -1035,10 +1035,10 @@ namespace Org.BouncyCastle.Pkcs
             return cipher.DoFinal(data);
         }
 
-        private class IgnoresCaseHashtable
-            : IEnumerable<KeyValuePair<string, object>>
+        private class IgnoresCaseHashtable<T>
+            : IEnumerable<KeyValuePair<string, T>>
         {
-            private readonly IDictionary<string, object> orig = Platform.CreateDictionary<string, object>();
+            private readonly IDictionary<string, T> orig = Platform.CreateDictionary<string, T>();
             private readonly IDictionary<string, string> keys = Platform.CreateDictionary<string, string>();
 
             public void Clear()
@@ -1047,7 +1047,7 @@ namespace Org.BouncyCastle.Pkcs
                 keys.Clear();
             }
 
-            public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
+            public IEnumerator<KeyValuePair<string, T>> GetEnumerator()
             {
                 return orig.GetEnumerator();
             }
@@ -1078,7 +1078,7 @@ namespace Org.BouncyCastle.Pkcs
                 return orig.GetEnumerator();
             }
 
-            public object this[
+            public T this[
                 string alias]
             {
                 get
@@ -1087,7 +1087,7 @@ namespace Org.BouncyCastle.Pkcs
                     string k;
                     keys.TryGetValue(upper, out k);
                     if (k == null)
-                        return null;
+                        return default(T);
 
                     return orig[k];
                 }
@@ -1105,7 +1105,7 @@ namespace Org.BouncyCastle.Pkcs
                 }
             }
 
-            public ICollection<object> Values
+            public ICollection<T> Values
             {
                 get { return orig.Values; }
             }

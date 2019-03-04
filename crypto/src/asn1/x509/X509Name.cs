@@ -999,7 +999,7 @@ namespace Org.BouncyCastle.Asn1.X509
             bool		reverse,
             IDictionary<DerObjectIdentifier, string> oidSymbols)
         {
-            List<object> components = new List<object>();
+            var components = new List<StringBuilder>();
 
             StringBuilder ava = null;
 

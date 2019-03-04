@@ -2,7 +2,7 @@ using System;
 
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Collections;
 
@@ -37,12 +37,12 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		/// <exception cref="PgpException">If an object is encountered which isn't a PgpPublicKeyRing.</exception>
 		public PgpPublicKeyRingBundle(
             Stream inputStream)
-			: this(new PgpObjectFactory(inputStream).AllPgpObjects())
+			: this(new PgpObjectFactory(inputStream).AllPgpObjects().Cast<PgpPublicKeyRing>())
 		{
         }
 
 		public PgpPublicKeyRingBundle(
-            IEnumerable<object> e)
+            IEnumerable<PgpPublicKeyRing> e)
         {
 			this.pubRings = Platform.CreateDictionary<long, PgpPublicKeyRing>();
 			this.order = Platform.CreateList<long>();

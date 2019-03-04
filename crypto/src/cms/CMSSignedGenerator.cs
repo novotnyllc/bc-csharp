@@ -30,9 +30,9 @@ namespace Org.BouncyCastle.Cms
     public class DefaultSignatureAlgorithmIdentifierFinder
     {
         private static readonly IDictionary<string, DerObjectIdentifier> algorithms = Platform.CreateDictionary<string, DerObjectIdentifier>();
-        private static readonly ISet<object> noParams = new HashSet<object>();
+        private static readonly ISet<DerObjectIdentifier> noParams = new HashSet<DerObjectIdentifier>();
         private static readonly IDictionary<string, RsassaPssParameters> _params = Platform.CreateDictionary<string, RsassaPssParameters>();
-        private static readonly ISet<object> pkcs15RsaEncryption = new HashSet<object>();
+        private static readonly ISet<DerObjectIdentifier> pkcs15RsaEncryption = new HashSet<DerObjectIdentifier>();
         private static readonly IDictionary<DerObjectIdentifier, DerObjectIdentifier> digestOids = Platform.CreateDictionary<DerObjectIdentifier, DerObjectIdentifier>();
 
         private static readonly DerObjectIdentifier ENCRYPTION_RSA = PkcsObjectIdentifiers.RsaEncryption;
