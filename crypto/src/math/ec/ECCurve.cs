@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using Org.BouncyCastle.Math.EC.Abc;
 using Org.BouncyCastle.Math.EC.Endo;

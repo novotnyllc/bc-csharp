@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.IO;
 
@@ -173,12 +173,12 @@ namespace Org.BouncyCastle.Crypto.Tls
         internal static readonly DHParameters draft_ffdhe8192 = FromSafeP(draft_ffdhe8192_p);
 
     
-        public static void AddNegotiatedDheGroupsClientExtension(IDictionary extensions, byte[] dheGroups)
+        public static void AddNegotiatedDheGroupsClientExtension(IDictionary<int, byte[]> extensions, byte[] dheGroups)
         {
             extensions[ExtensionType.negotiated_ff_dhe_groups] = CreateNegotiatedDheGroupsClientExtension(dheGroups);
         }
 
-        public static void AddNegotiatedDheGroupsServerExtension(IDictionary extensions, byte dheGroup)
+        public static void AddNegotiatedDheGroupsServerExtension(IDictionary<int, byte[]> extensions, byte dheGroup)
         {
             extensions[ExtensionType.negotiated_ff_dhe_groups] = CreateNegotiatedDheGroupsServerExtension(dheGroup);
         }

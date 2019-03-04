@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using Org.BouncyCastle.Asn1.Anssi;
 using Org.BouncyCastle.Asn1.CryptoPro;

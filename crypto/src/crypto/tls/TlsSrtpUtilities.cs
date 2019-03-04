@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,7 +10,7 @@ namespace Org.BouncyCastle.Crypto.Tls
      */
     public abstract class TlsSRTPUtils
     {
-        public static void AddUseSrtpExtension(IDictionary extensions, UseSrtpData useSRTPData)
+        public static void AddUseSrtpExtension(IDictionary<int, byte[]> extensions, UseSrtpData useSRTPData)
         {
             extensions[ExtensionType.use_srtp] = CreateUseSrtpExtension(useSRTPData);
         }

@@ -1,5 +1,6 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
+
 
 using Org.BouncyCastle.Utilities;
 
@@ -59,7 +60,7 @@ namespace Org.BouncyCastle.Asn1
 				{
 					if (!explicitly)
 					{
-						IEnumerable eObj;
+						IEnumerable<Asn1Encodable> eObj;
 						if (obj is Asn1OctetString)
 						{
 							if (obj is BerOctetString)

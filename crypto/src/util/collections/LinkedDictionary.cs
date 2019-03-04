@@ -5,17 +5,17 @@ using System.Linq;
 
 namespace Org.BouncyCastle.Utilities.Collections
 {
-	public class LinkedDictionary
-		: IDictionary
+	public class LinkedDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>
 	{
-		internal readonly IDictionary<object, object> hash = Platform.CreateDictionary<object, object>();
-		internal readonly IList<object> keys = Platform.CreateList<object>();
+		internal readonly IDictionary<TKey, TValue> hash = Platform.CreateDictionary<TKey, TValue>();
+		internal readonly IList<TKey> keys = Platform.CreateList<TKey>();
 
 		public LinkedDictionary()
 		{
 		}
 
-		public virtual void Add(object k, object v)
+		public virtual void Add(TKey k, TValue v)
 		{
 			hash.Add(k, v);
 			keys.Add(k);
@@ -27,12 +27,12 @@ namespace Org.BouncyCastle.Utilities.Collections
 			keys.Clear();
 		}
 
-		public virtual bool Contains(object k)
+		public virtual bool ContainsKey(TKey k)
 		{
 			return hash.ContainsKey(k);
 		}
 
-		public virtual void CopyTo(Array array, int index)
+		public virtual void CopyTo(KeyValuePair<TKey, TValue>[] array, int index)
 		{
 			foreach (var k in keys)
 			{
@@ -50,48 +50,56 @@ namespace Org.BouncyCastle.Utilities.Collections
 			return GetEnumerator();
 		}
 
-		public virtual IDictionaryEnumerator GetEnumerator()
+		public virtual IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
 		{
-			return new LinkedDictionaryEnumerator(this);
+			return new LinkedDictionaryEnumerator<TKey, TValue>(this);
 		}
 
-		public virtual void Remove(object k)
+		public virtual bool Remove(TKey k)
 		{
             hash.Remove(k);
-			keys.Remove(k);
+			return keys.Remove(k);
 		}
 
-		public virtual bool IsFixedSize
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            return hash.TryGetValue(key, out value);
+        }
+
+        public void Add(KeyValuePair<TKey, TValue> item)
+        {
+            hash.Add(item);
+            keys.Add(item.Key);
+        }
+
+        public bool Contains(KeyValuePair<TKey, TValue> item)
+        {
+            return hash.Contains(item);
+        }
+
+        public bool Remove(KeyValuePair<TKey, TValue> item)
+        {
+            hash.Remove(item);
+            return keys.Remove(item.Key);
+        }
+
+        public virtual bool IsReadOnly
 		{
 			get { return false; }
 		}
 
-		public virtual bool IsReadOnly
+
+		public virtual ICollection<TKey> Keys
 		{
-			get { return false; }
+            get { return keys.ToList(); }
 		}
 
-		public virtual bool IsSynchronized
-		{
-			get { return false; }
-		}
-
-		public virtual object SyncRoot
-		{
-			get { return false; }
-		}
-
-		public virtual ICollection Keys
-		{
-            get { return keys.Cast<object>().ToList(); }
-		}
-
-		public virtual ICollection Values
+		public virtual ICollection<TValue> Values
 		{
 			// NB: Order has to be the same as for Keys property
 			get
 			{
-                var values = Platform.CreateList<object>(keys.Count);
+                var values = Platform.CreateList<TValue>(keys.Count);
 				foreach (var k in keys)
 				{
 					values.Add(hash[k]);
@@ -100,7 +108,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 			}
 		}
 
-		public virtual object this[object k]
+		public virtual TValue this[TKey k]
 		{
 			get
 			{
@@ -115,31 +123,31 @@ namespace Org.BouncyCastle.Utilities.Collections
 		}
 	}
 
-	internal class LinkedDictionaryEnumerator : IDictionaryEnumerator
+	internal class LinkedDictionaryEnumerator<TKey, TValue> : IEnumerator<KeyValuePair<TKey, TValue>>
 	{
-		private readonly LinkedDictionary parent;
+		private readonly LinkedDictionary<TKey, TValue> parent;
 		private int pos = -1;
 
-		internal LinkedDictionaryEnumerator(LinkedDictionary parent)
+		internal LinkedDictionaryEnumerator(LinkedDictionary<TKey, TValue> parent)
 		{
 			this.parent = parent;
 		}
 
-		public virtual object Current
+		public virtual KeyValuePair<TKey, TValue> Current
 		{
 			get { return Entry; }
 		}
 
-		public virtual DictionaryEntry Entry
+		public virtual KeyValuePair<TKey, TValue> Entry
 		{
 			get
 			{
-				object k = CurrentKey;
-				return new DictionaryEntry(k, parent.hash[k]);
+				TKey k = CurrentKey;
+				return new KeyValuePair<TKey, TValue>(k, parent.hash[k]);
 			}
 		}
 
-		public virtual object Key
+		public virtual TKey Key
 		{
 			get
 			{
@@ -159,7 +167,11 @@ namespace Org.BouncyCastle.Utilities.Collections
 			this.pos = -1;
 		}
 
-		public virtual object Value
+        public void Dispose()
+        {
+        }
+
+        public virtual TValue Value
 		{
 			get
 			{
@@ -167,7 +179,7 @@ namespace Org.BouncyCastle.Utilities.Collections
 			}
 		}
 
-		private object CurrentKey
+		private TKey CurrentKey
 		{
 			get
 			{
@@ -176,5 +188,13 @@ namespace Org.BouncyCastle.Utilities.Collections
 				return parent.keys[pos];
 			}
 		}
-	}
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+    }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+
 using System.Linq;
 
 namespace Org.BouncyCastle.Asn1.Ocsp

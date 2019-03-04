@@ -1,5 +1,6 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
+
 using System.IO;
 
 using Org.BouncyCastle.Asn1;
@@ -46,7 +47,7 @@ namespace Org.BouncyCastle.Cms
 		private IX509Store<IX509AttributeCertificate>                attrCertStore;
 		private IX509Store<X509Certificate>				certificateStore;
 		private IX509Store<X509Crl> crlStore;
-		private IDictionary				hashes;
+		private IDictionary<string, byte[]>             hashes;
 
 		private CmsSignedData(
 			CmsSignedData c)
@@ -77,7 +78,7 @@ namespace Org.BouncyCastle.Cms
 		 * @param sigBlock the signature object.
 		 */
 		public CmsSignedData(
-			IDictionary	hashes,
+			IDictionary<string, byte[]> hashes,
 			byte[]		sigBlock)
 			: this(hashes, CmsUtilities.ReadContentInfo(sigBlock))
 		{
@@ -115,7 +116,7 @@ namespace Org.BouncyCastle.Cms
 		}
 
 		public CmsSignedData(
-			IDictionary	hashes,
+			IDictionary<string, byte[]> hashes,
 			ContentInfo	sigData)
 		{
 			this.hashes = hashes;

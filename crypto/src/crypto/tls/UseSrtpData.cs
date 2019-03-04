@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+
 using System.IO;
 
 namespace Org.BouncyCastle.Crypto.Tls

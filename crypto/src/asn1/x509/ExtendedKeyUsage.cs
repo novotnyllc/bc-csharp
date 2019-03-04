@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Linq;
 using Org.BouncyCastle.Utilities;
@@ -72,7 +72,7 @@ namespace Org.BouncyCastle.Asn1.X509
         }
 
         public ExtendedKeyUsage(
-            IEnumerable usages)
+            IEnumerable<object> usages)
         {
             Asn1EncodableVector v = new Asn1EncodableVector();
 

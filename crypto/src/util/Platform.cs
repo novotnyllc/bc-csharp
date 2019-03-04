@@ -5,7 +5,7 @@ using System.Text;
 
 
 using System.Collections.Generic;
-using System.Collections;
+
 using System.Linq;
 
 namespace Org.BouncyCastle.Utilities
@@ -104,7 +104,7 @@ namespace Org.BouncyCastle.Utilities
         {
             return new Dictionary<TKey, TValue>(capacity);
         }
-        internal static IDictionary<TKey, TValue> CreateDictionary<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
+        internal static IDictionary<TKey, TValue> CreateDictionary<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> dictionary)
         {
             return dictionary.ToDictionary(t => t.Key, t => t.Value);
         }
