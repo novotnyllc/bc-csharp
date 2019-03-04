@@ -39,8 +39,6 @@ namespace Org.BouncyCastle.Utilities.Collections
 			get { return d.Values; }
 		}
 
-        public override bool IsFixedSize => throw new NotImplementedException();
-
         protected override TValue GetValue(TKey k)
 		{
 			return d[k];

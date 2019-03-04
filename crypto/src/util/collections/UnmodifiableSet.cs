@@ -16,11 +16,6 @@ namespace Org.BouncyCastle.Utilities.Collections
 			throw new NotSupportedException();
 		}
 
-		public virtual void AddAll(IEnumerable<T> e)
-		{
-			throw new NotSupportedException();
-		}
-
 		public virtual void Clear()
 		{
 			throw new NotSupportedException();

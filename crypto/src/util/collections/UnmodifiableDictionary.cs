@@ -32,8 +32,6 @@ namespace Org.BouncyCastle.Utilities.Collections
 			throw new NotSupportedException();
 		}
 
-		public abstract bool IsFixedSize { get; }
-
 		public virtual bool IsReadOnly
 		{
 			get { return true; }
