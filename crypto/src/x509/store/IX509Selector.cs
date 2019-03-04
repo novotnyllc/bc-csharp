@@ -11,5 +11,5 @@ namespace Org.BouncyCastle.X509.Store
         object Clone();
 #endif
         bool Match(object obj);
-	}
+    }
 }

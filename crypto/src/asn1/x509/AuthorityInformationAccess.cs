@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Text;
 
 using Org.BouncyCastle.Asn1;
@@ -67,7 +68,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
         public AccessDescription[] GetAccessDescriptions()
         {
-            return (AccessDescription[])descriptions.Clone();
+            return descriptions.ToArray();
         }
 
         public override Asn1Object ToAsn1Object()

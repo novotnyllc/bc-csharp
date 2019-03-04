@@ -13,6 +13,7 @@ using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.Crypto.Operators;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Org.BouncyCastle.Cms
 {
@@ -133,7 +134,7 @@ namespace Org.BouncyCastle.Cms
                         content.Write(new DigestSink(dig));
                     }
                     hash = DigestUtilities.DoFinal(dig);
-                    outer._digests.Add(digestOID, (byte[])hash.Clone());
+                    outer._digests.Add(digestOID, hash.ToArray());
                 }
 
                 IStreamCalculator calculator = sigCalc.CreateCalculator();
@@ -182,7 +183,7 @@ namespace Org.BouncyCastle.Cms
 				if (unsAttr != null)
 				{
 				 var baseParameters = outer.GetBaseParameters(contentType, digAlgId, hash);
-					baseParameters[CmsAttributeTableParameter.Signature] = sigBytes.Clone();
+					baseParameters[CmsAttributeTableParameter.Signature] = sigBytes.ToArray();
 
 //					Asn1.Cms.AttributeTable unsigned = unsAttr.GetAttributes(Collections.unmodifiableMap(baseParameters));
 					Asn1.Cms.AttributeTable unsigned = unsAttr.GetAttributes(baseParameters);

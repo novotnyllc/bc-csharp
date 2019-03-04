@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Org.BouncyCastle.Asn1.Cms
 {
@@ -47,7 +48,7 @@ namespace Org.BouncyCastle.Asn1.Cms
 
 		public virtual TimeStampAndCrl[] ToTimeStampAndCrlArray()
 		{
-			return (TimeStampAndCrl[])timeStampAndCrls.Clone();
+			return timeStampAndCrls.ToArray();
 		}
 
 		/**

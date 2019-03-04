@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace Org.BouncyCastle.Asn1.X509
@@ -48,7 +49,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
         public virtual PolicyInformation[] GetPolicyInformation()
         {
-            return (PolicyInformation[])policyInformation.Clone();
+            return policyInformation.ToArray();
         }
 
         /**

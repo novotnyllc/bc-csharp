@@ -21,6 +21,7 @@ using Org.BouncyCastle.X509.Store;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Utilities.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Org.BouncyCastle.Cms
 {
@@ -162,7 +163,7 @@ namespace Org.BouncyCastle.Cms
 		{
 			string[] aliases = digestAliases[algName];
 
-			return aliases == null ? new string[0] : (string[]) aliases.Clone();
+			return aliases == null ? new string[0] : aliases.ToArray();
 		}
 
 		/**

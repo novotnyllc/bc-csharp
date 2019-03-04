@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 
 using Org.BouncyCastle.Math;
@@ -369,7 +370,7 @@ namespace Org.BouncyCastle.Utilities
         public static byte[] Clone(
             byte[] data)
         {
-            return data == null ? null : (byte[])data.Clone();
+            return data == null ? null : data.ToArray();
         }
 
         public static byte[] Clone(
@@ -391,24 +392,24 @@ namespace Org.BouncyCastle.Utilities
         public static int[] Clone(
             int[] data)
         {
-            return data == null ? null : (int[])data.Clone();
+            return data == null ? null : data.ToArray();
         }
 
         internal static uint[] Clone(uint[] data)
         {
-            return data == null ? null : (uint[])data.Clone();
+            return data == null ? null : data.ToArray();
         }
 
         public static long[] Clone(long[] data)
         {
-            return data == null ? null : (long[])data.Clone();
+            return data == null ? null : data.ToArray();
         }
 
         [CLSCompliantAttribute(false)]
         public static ulong[] Clone(
             ulong[] data)
         {
-            return data == null ? null : (ulong[]) data.Clone();
+            return data == null ? null : data.ToArray();
         }
 
         [CLSCompliantAttribute(false)]

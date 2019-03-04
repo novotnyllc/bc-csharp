@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities;
 
@@ -87,7 +87,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.Ocsp
 				throw new ArgumentNullException("certificateHash");
 
 			this.hashAlgorithm = hashAlgorithm;
-			this.certificateHash = (byte[]) certificateHash.Clone();
+			this.certificateHash = certificateHash.ToArray();
 		}
 
 		public AlgorithmIdentifier HashAlgorithm
@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Asn1.IsisMtt.Ocsp
 
 		public byte[] CertificateHash
 		{
-			get { return (byte[]) certificateHash.Clone(); }
+			get { return certificateHash.ToArray(); }
 		}
 
 		/**

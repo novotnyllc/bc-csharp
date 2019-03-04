@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Crypto.Utilities;
 using Org.BouncyCastle.Utilities;
 
@@ -29,7 +29,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
             M[0][128] = GcmUtilities.AsUints(H);
             for (int j = 64; j >= 1; j >>= 1)
             {
-                uint[] tmp = (uint[])M[0][j + j].Clone();
+                uint[] tmp = M[0][j + j].ToArray();
                 GcmUtilities.MultiplyP(tmp);
                 M[0][j] = tmp;
             }
@@ -39,7 +39,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
                 {
                     for (int k = 1; k < j; ++k)
                     {
-                        uint[] tmp = (uint[])M[i][j].Clone();
+                        uint[] tmp = M[i][j].ToArray();
                         GcmUtilities.Xor(tmp, M[i][k]);
                         M[i][j + k] = tmp;
                     }
@@ -51,7 +51,7 @@ namespace Org.BouncyCastle.Crypto.Modes.Gcm
                 M[i][0] = new uint[4];
                 for (int j = 128; j > 0; j >>= 1)
                 {
-                    uint[] tmp = (uint[])M[i - 1][j].Clone();
+                    uint[] tmp = M[i - 1][j].ToArray();
                     GcmUtilities.MultiplyP8(tmp);
                     M[i][j] = tmp;
                 }

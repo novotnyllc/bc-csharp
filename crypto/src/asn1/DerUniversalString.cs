@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 
 using Org.BouncyCastle.Utilities;
@@ -83,7 +84,7 @@ namespace Org.BouncyCastle.Asn1
 
 		public byte[] GetOctets()
         {
-            return (byte[]) str.Clone();
+            return str.ToArray();
         }
 
 		internal override void Encode(

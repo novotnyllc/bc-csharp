@@ -1,4 +1,5 @@
 using Org.BouncyCastle.Asn1;
+using System.Linq;
 
 namespace Org.BouncyCastle.Asn1.Pkcs
 {
@@ -21,12 +22,12 @@ namespace Org.BouncyCastle.Asn1.Pkcs
 		public AuthenticatedSafe(
             ContentInfo[] info)
         {
-            this.info = (ContentInfo[]) info.Clone();
+            this.info = info.ToArray();
         }
 
 		public ContentInfo[] GetContentInfo()
         {
-            return (ContentInfo[]) info.Clone();
+            return info.ToArray();
         }
 
 		public override Asn1Object ToAsn1Object()

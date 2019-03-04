@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.CryptoPro;
 using Org.BouncyCastle.Asn1.GM;
@@ -87,8 +87,8 @@ namespace Org.BouncyCastle.Tsp
 			Asn1.Cms.AttributeTable unsignedAttrs = signerInfo.UnsignedAttributes;
 			if (unsignedAttrs != null)
 			{
-				foreach (Asn1.Cms.Attribute tsAttr in unsignedAttrs.GetAll(
-					PkcsObjectIdentifiers.IdAASignatureTimeStampToken))
+				foreach (var tsAttr in unsignedAttrs.GetAll(
+					PkcsObjectIdentifiers.IdAASignatureTimeStampToken).Cast<Asn1.Cms.Attribute>())
 				{
 					foreach (var asn1 in tsAttr.AttrValues)
 					{

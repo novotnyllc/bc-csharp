@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Org.BouncyCastle.Bcpg
 {
@@ -25,12 +26,12 @@ namespace Org.BouncyCastle.Bcpg
 			if (digest == null)
 				throw new ArgumentNullException("digest");
 
-			this.digest = (byte[]) digest.Clone();
+			this.digest = digest.ToArray();
         }
 
 		public byte[] GetDigest()
         {
-			return (byte[]) digest.Clone();
+			return digest.ToArray();
         }
 
 		public override void Encode(

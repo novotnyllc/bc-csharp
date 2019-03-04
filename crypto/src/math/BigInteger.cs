@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 using Org.BouncyCastle.Security;
@@ -800,7 +801,7 @@ namespace Org.BouncyCastle.Math
             }
             else
             {
-                bigCopy = (int[]) big.Clone();
+                bigCopy = big.ToArray();
             }
 
             bigCopy = AddMagnitudes(bigCopy, small);
@@ -1200,7 +1201,7 @@ namespace Org.BouncyCastle.Math
                 return val.sign == this.sign ? result : result.Negate();
             }
 
-            int[] mag = (int[]) this.magnitude.Clone();
+            int[] mag = this.magnitude.ToArray();
 
             return new BigInteger(this.sign * val.sign, Divide(mag, val.magnitude), true);
         }
@@ -1229,7 +1230,7 @@ namespace Org.BouncyCastle.Math
             }
             else
             {
-                int[] remainder = (int[]) this.magnitude.Clone();
+                int[] remainder = this.magnitude.ToArray();
                 int[] quotient = Divide(remainder, val.magnitude);
 
                 biggies[0] = new BigInteger(this.sign * val.sign, quotient, true);
@@ -2743,7 +2744,7 @@ namespace Org.BouncyCastle.Math
             }
             else
             {
-                result = (int[]) this.magnitude.Clone();
+                result = this.magnitude.ToArray();
                 result = Remainder(result, n.magnitude);
             }
 
@@ -2958,7 +2959,7 @@ namespace Org.BouncyCastle.Math
             if (n >= BitLength)
                 return (this.sign < 0 ? One.Negate() : Zero);
 
-//			int[] res = (int[]) this.magnitude.Clone();
+//			int[] res = (int[]) this.magnitude.ToArray();
 //
 //			ShiftRightInPlace(0, res, n);
 //
@@ -3072,7 +3073,7 @@ namespace Org.BouncyCastle.Math
             int[]	bigMag,
             int[]	lilMag)
         {
-            int[] res = (int[]) bigMag.Clone();
+            int[] res = bigMag.ToArray();
 
             return Subtract(0, res, 0, lilMag);
         }
@@ -3592,7 +3593,7 @@ namespace Org.BouncyCastle.Math
             Debug.Assert(n >= 0);
             Debug.Assert(n < BitLength - 1);
 
-            int[] mag = (int[]) this.magnitude.Clone();
+            int[] mag = this.magnitude.ToArray();
             mag[mag.Length - 1 - (n >> 5)] ^= (1 << (n & 31)); // Flip bit
             //mag[mag.Length - 1 - (n / 32)] ^= (1 << (n % 32));
             return new BigInteger(this.sign, mag, false);

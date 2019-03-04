@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.BC;
 using Org.BouncyCastle.Asn1.Bsi;
@@ -505,7 +505,7 @@ namespace Org.BouncyCastle.Cms
             }
 
             param[CmsAttributeTableParameter.DigestAlgorithmIdentifier] = digAlgId;
-            param[CmsAttributeTableParameter.Digest] = hash.Clone();
+            param[CmsAttributeTableParameter.Digest] = hash.ToArray();
 
             return param;
         }

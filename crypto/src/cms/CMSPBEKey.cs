@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1.Pkcs;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
@@ -41,7 +41,7 @@ namespace Org.BouncyCastle.Cms
 			byte[]	salt,
 			int		iterationCount)
 		{
-			this.password = (char[])password.Clone();
+			this.password = password.ToArray();
 			this.salt = Arrays.Clone(salt);
 			this.iterationCount = iterationCount;
 		}
@@ -57,7 +57,7 @@ namespace Org.BouncyCastle.Cms
 			Pbkdf2Params kdfParams = Pbkdf2Params.GetInstance(
 				keyDerivationAlgorithm.Parameters.ToAsn1Object());
 
-			this.password = (char[])password.Clone();
+			this.password = password.ToArray();
 			this.salt = kdfParams.GetSalt();
 			this.iterationCount = kdfParams.IterationCount.IntValue;
 		}

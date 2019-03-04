@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Crypto.Parameters
@@ -29,7 +29,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 
         public byte[] GetIV()
         {
-            return (byte[])iv.Clone();
+            return iv.ToArray();
         }
 
         public ICipherParameters Parameters

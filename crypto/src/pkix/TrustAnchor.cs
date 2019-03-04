@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 using Org.BouncyCastle.Asn1;
@@ -217,7 +218,7 @@ namespace Org.BouncyCastle.Pkix
 			} 
 			else 
 			{
-				ncBytes = (byte[]) bytes.Clone();
+				ncBytes = bytes.ToArray();
 				// validate DER encoding
 				//nc = new NameConstraintsExtension(Boolean.FALSE, bytes);
 				nc = NameConstraints.GetInstance(Asn1Object.FromByteArray(bytes));

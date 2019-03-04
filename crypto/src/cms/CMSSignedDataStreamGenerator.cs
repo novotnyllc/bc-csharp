@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Cms;
 using Org.BouncyCastle.Asn1.X509;
@@ -152,7 +152,7 @@ namespace Org.BouncyCastle.Cms
 //					AlgorithmIdentifier digAlgId = DigestAlgorithmID;
 //
 //					byte[] hash = (byte[])outer._messageHashes[Helper.GetDigestAlgName(this._digestOID)];
-//					outer._digests[_digestOID] = hash.Clone();
+//					outer._digests[_digestOID] = hash.ToArray();
 
 					byte[] bytesToSign = calculatedDigest;
 
@@ -206,7 +206,7 @@ namespace Org.BouncyCastle.Cms
 					{
 						var parameters = outer.GetBaseParameters(
 							contentType, digestAlgorithm, calculatedDigest);
-						parameters[CmsAttributeTableParameter.Signature] = sigBytes.Clone();
+						parameters[CmsAttributeTableParameter.Signature] = sigBytes.ToArray();
 
 //						Asn1.Cms.AttributeTable unsigned = _unsAttr.getAttributes(Collections.unmodifiableMap(parameters));
 						Asn1.Cms.AttributeTable unsigned = _unsAttr.GetAttributes(parameters);
@@ -881,7 +881,7 @@ namespace Org.BouncyCastle.Cms
 
                         byte[] calculatedDigest = outer._messageHashes[
                             Helper.GetDigestAlgName(holder.digestOID)];
-                        outer._digests[holder.digestOID] = (byte[])calculatedDigest.Clone();
+                        outer._digests[holder.digestOID] = calculatedDigest.ToArray();
 
                         signerInfos.Add(holder.signerInf.Generate(_contentOID, digestAlgorithm, calculatedDigest));
                     }

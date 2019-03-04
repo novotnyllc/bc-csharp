@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Org.BouncyCastle.Crypto.Parameters
 {
@@ -25,7 +26,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 
 		public byte[] GetSeed()
         {
-            return (byte[]) seed.Clone();
+            return seed.ToArray();
         }
     }
 }

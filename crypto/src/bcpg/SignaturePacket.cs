@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Bcpg.Sig;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Utilities.Date;
@@ -351,7 +351,7 @@ namespace Org.BouncyCastle.Bcpg
 		{
 			if (signatureEncoding != null)
 			{
-				return (byte[]) signatureEncoding.Clone();
+				return signatureEncoding.ToArray();
 			}
 
 			MemoryStream bOut = new MemoryStream();

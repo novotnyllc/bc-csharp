@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 
 namespace Org.BouncyCastle.Bcpg
 {
@@ -40,7 +41,7 @@ namespace Org.BouncyCastle.Bcpg
         /// <summary>Return the generic data making up the packet.</summary>
         public byte[] GetData()
         {
-            return (byte[]) data.Clone();
+            return data.ToArray();
         }
 
 		public void Encode(

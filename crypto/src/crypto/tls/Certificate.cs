@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Utilities;
@@ -87,7 +87,7 @@ namespace Org.BouncyCastle.Crypto.Tls
             TlsUtilities.CheckUint24(totalLength);
             TlsUtilities.WriteUint24(totalLength, output);
 
-            foreach (byte[] derEncoding in derEncodings)
+            foreach (var derEncoding in derEncodings)
             {
                 TlsUtilities.WriteOpaque24(derEncoding, output);
             }
@@ -130,7 +130,7 @@ namespace Org.BouncyCastle.Crypto.Tls
 
         protected virtual X509CertificateStructure[] CloneCertificateList()
         {
-            return (X509CertificateStructure[])mCertificateList.Clone();
+            return mCertificateList.ToArray();
         }
     }
 }

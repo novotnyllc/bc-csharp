@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Cms;
 
@@ -45,7 +46,7 @@ namespace Org.BouncyCastle.Cms
         [Obsolete]
 		public virtual object GetContent()
 		{
-			return bytes.Clone();
+			return bytes.ToArray();
 		}
 	}
 }

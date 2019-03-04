@@ -313,7 +313,7 @@ namespace Org.BouncyCastle.X509.Store
 		private static bool[] CopyBoolArray(
 			bool[] b)
 		{
-			return b == null ? null : (bool[]) b.Clone();
+			return b == null ? null : b.ToArray();
 		}
 
 		private static ISet<T> CopySet<T>(

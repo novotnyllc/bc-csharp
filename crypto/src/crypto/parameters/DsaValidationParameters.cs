@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Crypto.Parameters
@@ -23,14 +23,14 @@ namespace Org.BouncyCastle.Crypto.Parameters
             if (seed == null)
                 throw new ArgumentNullException("seed");
 
-            this.seed = (byte[]) seed.Clone();
+            this.seed = seed.ToArray();
             this.counter = counter;
             this.usageIndex = usageIndex;
         }
 
         public virtual byte[] GetSeed()
         {
-            return (byte[]) seed.Clone();
+            return seed.ToArray();
         }
 
         public virtual int Counter

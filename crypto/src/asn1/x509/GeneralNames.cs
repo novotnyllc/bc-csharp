@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 
 using Org.BouncyCastle.Utilities;
@@ -44,7 +45,7 @@ namespace Org.BouncyCastle.Asn1.X509
         public GeneralNames(
             GeneralName[] names)
         {
-            this.names = (GeneralName[])names.Clone();
+            this.names = names.ToArray();
         }
 
 		private GeneralNames(
@@ -60,7 +61,7 @@ namespace Org.BouncyCastle.Asn1.X509
 
 		public GeneralName[] GetNames()
 		{
-			return (GeneralName[]) names.Clone();
+			return names.ToArray();
 		}
 
 		/**

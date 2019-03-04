@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-
+using System.Linq;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -106,7 +106,7 @@ namespace Org.BouncyCastle.Crypto.Generators
 
 				for (int i = 0; i < N; ++i)
 				{
-					V[i] = (uint[])X.Clone();
+					V[i] = X.ToArray();
 					BlockMix(X, blockX1, blockX2, blockY, r);
 				}
 

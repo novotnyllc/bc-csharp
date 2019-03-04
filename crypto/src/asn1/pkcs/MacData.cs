@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Utilities;
@@ -51,7 +51,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
             int			iterationCount)
         {
             this.digInfo = digInfo;
-            this.salt = (byte[]) salt.Clone();
+            this.salt = salt.ToArray();
             this.iterationCount = BigInteger.ValueOf(iterationCount);
         }
 
@@ -62,7 +62,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
 
 		public byte[] GetSalt()
         {
-            return (byte[]) salt.Clone();
+            return salt.ToArray();
         }
 
 		public BigInteger IterationCount

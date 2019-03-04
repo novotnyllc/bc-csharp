@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Org.BouncyCastle.Bcpg
 {
@@ -26,7 +27,7 @@ namespace Org.BouncyCastle.Bcpg
 
 		public byte[] GetContents()
         {
-			return (byte[]) contents.Clone();
+			return contents.ToArray();
         }
 
 		public override void Encode(

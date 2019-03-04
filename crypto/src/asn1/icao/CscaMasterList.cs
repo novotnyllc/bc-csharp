@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1.X509;
 
 namespace Org.BouncyCastle.Asn1.Icao
@@ -72,7 +72,7 @@ namespace Org.BouncyCastle.Asn1.Icao
 
 		private static X509CertificateStructure[] CopyCertList(X509CertificateStructure[] orig)
 		{
-			return (X509CertificateStructure[])orig.Clone();
+			return orig.ToArray();
 		}
 
 		public override Asn1Object ToAsn1Object() 

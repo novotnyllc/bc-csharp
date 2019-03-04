@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Org.BouncyCastle.Bcpg.OpenPgp
 {
@@ -11,7 +12,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
 		public PgpSignatureList(
             PgpSignature[] sigs)
         {
-            this.sigs = (PgpSignature[]) sigs.Clone();
+            this.sigs = sigs.ToArray();
         }
 
 		public PgpSignatureList(

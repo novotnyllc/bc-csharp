@@ -107,7 +107,7 @@ namespace Org.BouncyCastle.Crypto.Tls
                 TlsUtilities.CheckUint16(totalLength);
                 TlsUtilities.WriteUint16(totalLength, output);
 
-                foreach (byte[] derEncoding in derEncodings)
+                foreach (var derEncoding in derEncodings)
                 {
                     TlsUtilities.WriteOpaque16(derEncoding, output);
                 }

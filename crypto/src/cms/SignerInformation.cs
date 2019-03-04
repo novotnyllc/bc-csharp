@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Cms;
 using Org.BouncyCastle.Asn1.X509;
@@ -168,7 +168,7 @@ namespace Org.BouncyCastle.Cms
 				throw new InvalidOperationException("method can only be called after verify.");
 			}
 
-			return (byte[])resultDigest.Clone();
+			return resultDigest.ToArray();
 		}
 
 		public AlgorithmIdentifier EncryptionAlgorithmID
@@ -235,7 +235,7 @@ namespace Org.BouncyCastle.Cms
 		*/
 		public byte[] GetSignature()
 		{
-			return (byte[]) signature.Clone();
+			return signature.ToArray();
 		}
 
 		/**
@@ -266,7 +266,7 @@ namespace Org.BouncyCastle.Cms
 			*/
 			Asn1EncodableVector allCSAttrs = unsignedAttributeTable.GetAll(CmsAttributes.CounterSignature);
 
-			foreach (Asn1.Cms.Attribute counterSignatureAttribute in allCSAttrs)
+			foreach (var counterSignatureAttribute in allCSAttrs.Cast<Asn1.Cms.Attribute>())
 			{
 				/*
 				A countersignature attribute can have multiple attribute values.  The
@@ -463,7 +463,7 @@ namespace Org.BouncyCastle.Cms
             	Asn1.Cms.AttributeTable unsignedAttrTable = this.UnsignedAttributes;
             	if (unsignedAttrTable != null)
             	{
-					foreach (Asn1.Cms.Attribute csAttr in unsignedAttrTable.GetAll(CmsAttributes.CounterSignature))
+					foreach (var csAttr in unsignedAttrTable.GetAll(CmsAttributes.CounterSignature).Cast<Asn1.Cms.Attribute>())
 	                {
                     	if (csAttr.AttrValues.Count < 1)
 	                        throw new CmsException("A countersignature attribute MUST contain at least one AttributeValue");

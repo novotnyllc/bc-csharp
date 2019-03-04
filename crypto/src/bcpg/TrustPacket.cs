@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Org.BouncyCastle.Bcpg
 {
@@ -31,7 +32,7 @@ namespace Org.BouncyCastle.Bcpg
 
 		public byte[] GetLevelAndTrustAmount()
 		{
-			return (byte[]) levelAndTrustAmount.Clone();
+			return levelAndTrustAmount.ToArray();
 		}
 
 		public override void Encode(

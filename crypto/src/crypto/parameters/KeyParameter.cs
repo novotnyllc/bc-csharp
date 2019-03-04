@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Org.BouncyCastle.Crypto;
 
 namespace Org.BouncyCastle.Crypto.Parameters
@@ -15,7 +15,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 			if (key == null)
 				throw new ArgumentNullException("key");
 
-			this.key = (byte[]) key.Clone();
+			this.key = key.ToArray();
 		}
 
 		public KeyParameter(
@@ -36,7 +36,7 @@ namespace Org.BouncyCastle.Crypto.Parameters
 
 		public byte[] GetKey()
         {
-			return (byte[]) key.Clone();
+			return key.ToArray();
         }
     }
 

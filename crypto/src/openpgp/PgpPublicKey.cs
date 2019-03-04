@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using Org.BouncyCastle.Asn1.Sec;
 using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto;
@@ -417,7 +417,7 @@ namespace Org.BouncyCastle.Bcpg.OpenPgp
         /// <summary>The fingerprint of the key</summary>
         public byte[] GetFingerprint()
         {
-            return (byte[]) fingerprint.Clone();
+            return fingerprint.ToArray();
         }
 
         /// <summary>
