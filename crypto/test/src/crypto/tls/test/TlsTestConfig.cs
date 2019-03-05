@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+
 using System.Collections.Generic;
 
 namespace Org.BouncyCastle.Crypto.Tls.Tests

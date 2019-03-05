@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections;
-
+using System.Linq;
 using NUnit.Framework;
 
 using Org.BouncyCastle.Asn1;
@@ -156,10 +155,10 @@ namespace Org.BouncyCastle.Crmf.Tests
             IsTrue(archiveControl.EnvelopedData);
             RecipientInformationStore recips = archiveControl.GetEnvelopedData().GetRecipientInfos();
 
-            var collection =  (IList)recips.GetRecipients();
+            var collection =  recips.GetRecipients();
 
             IsTrue(collection.Count == 1);
-            KeyTransRecipientInformation info = (KeyTransRecipientInformation)collection[0];
+            var info = collection.First();
 
             EncKeyWithID encKeyWithId = EncKeyWithID.GetInstance(info.GetContent(kp.Private));
 
