@@ -235,13 +235,14 @@ namespace Org.BouncyCastle.Crypto.Parameters
 				try
 				{
 					MemoryStream bout = new MemoryStream();
-					StreamWriter outBytes = new StreamWriter(bout, System.Text.Encoding.UTF8);
-					outBytes.Write(date.ToString("YYYYMMDD", CultureInfo.InvariantCulture));
-					outBytes.Write(" ");
-					outBytes.Write(emailAddress);
-					outBytes.Write(" ");
-					outBytes.Write(distinguisher);
-                    Platform.Dispose(outBytes);
+                    using (StreamWriter outBytes = new StreamWriter(bout, System.Text.Encoding.UTF8))
+                    {
+                        outBytes.Write(date.ToString("YYYYMMDD", CultureInfo.InvariantCulture));
+                        outBytes.Write(" ");
+                        outBytes.Write(emailAddress);
+                        outBytes.Write(" ");
+                        outBytes.Write(distinguisher);
+                    }
 					return Set(PARAM_TYPE_PERSONALISATION, bout.ToArray());
 				}
 				catch (IOException e)

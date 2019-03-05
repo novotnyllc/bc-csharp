@@ -7,7 +7,7 @@ namespace Org.BouncyCastle.Crypto
     /// Base interface for cryptographic operations such as Hashes, MACs, and Signatures which reduce a stream of data
     /// to a single value.
     /// </summary>
-    public interface IStreamCalculator
+    public interface IStreamCalculator : IDisposable
     {
         /// <summary>Return a "sink" stream which only exists to update the implementing object.</summary>
         /// <returns>A stream to write to in order to update the implementing object.</returns>
