@@ -108,9 +108,9 @@ namespace Org.BouncyCastle.Security
         static CipherUtilities()
         {
             // Signal to obfuscation tools not to change enum constants
-            Enums.GetArbitraryValue<CipherAlgorithm>().ToString();
-            Enums.GetArbitraryValue<CipherMode>().ToString();
-            Enums.GetArbitraryValue<CipherPadding>().ToString();
+            ((CipherAlgorithm)Enums.GetArbitraryValue(typeof(CipherAlgorithm))).ToString();
+            ((CipherMode)Enums.GetArbitraryValue(typeof(CipherMode))).ToString();
+            ((CipherPadding)Enums.GetArbitraryValue(typeof(CipherPadding))).ToString();
 
             // TODO Flesh out the list of aliases
 
@@ -352,7 +352,7 @@ namespace Org.BouncyCastle.Security
             CipherAlgorithm cipherAlgorithm;
             try
             {
-                cipherAlgorithm = Enums.GetEnumValue<CipherAlgorithm>(algorithmName);
+                cipherAlgorithm = (CipherAlgorithm)Enums.GetEnumValue(typeof(CipherAlgorithm), algorithmName);
             }
             catch (ArgumentException)
             {
@@ -505,7 +505,7 @@ namespace Org.BouncyCastle.Security
                 {
                     try
                     {
-                        cipherPadding = Enums.GetEnumValue<CipherPadding>(paddingName);
+                        cipherPadding = (CipherPadding)Enums.GetEnumValue(typeof(CipherPadding), paddingName);
                     }
                     catch (ArgumentException)
                     {
@@ -599,7 +599,7 @@ namespace Org.BouncyCastle.Security
                 {
                     CipherMode cipherMode = modeName == ""
                         ? CipherMode.NONE
-                        : Enums.GetEnumValue<CipherMode>(modeName);
+                        : (CipherMode)Enums.GetEnumValue(typeof(CipherMode), modeName);
 
                     switch (cipherMode)
                     {

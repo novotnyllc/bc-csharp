@@ -393,15 +393,16 @@ namespace Org.BouncyCastle.Pkix
             else if (Platform.EqualsIgnoreCase(encoding, "PEM"))
 			{
 				MemoryStream bOut = new MemoryStream();
+				PemWriter pWrt = new PemWriter(new StreamWriter(bOut));
 
-                try
-                {
-                    using (PemWriter pWrt = new PemWriter(new StreamWriter(bOut))) { 
-                        for (int i = 0; i != certificates.Count; i++)
-                        {
-                            pWrt.WriteObject(certificates[i]);
-                        }
-                    }
+				try
+				{
+					for (int i = 0; i != certificates.Count; i++)
+					{
+						pWrt.WriteObject(certificates[i]);
+					}
+
+                    Platform.Dispose(pWrt.Writer);
 				}
 				catch (Exception)
 				{

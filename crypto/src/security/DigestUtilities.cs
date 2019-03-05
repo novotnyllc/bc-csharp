@@ -53,7 +53,7 @@ namespace Org.BouncyCastle.Security
         static DigestUtilities()
         {
             // Signal to obfuscation tools not to change enum constants
-            Enums.GetArbitraryValue<DigestAlgorithm>().ToString();
+            ((DigestAlgorithm)Enums.GetArbitraryValue(typeof(DigestAlgorithm))).ToString();
 
             algorithms[PkcsObjectIdentifiers.MD2.Id] = "MD2";
             algorithms[PkcsObjectIdentifiers.MD4.Id] = "MD4";
@@ -198,8 +198,8 @@ namespace Org.BouncyCastle.Security
 
             try
             {
-                DigestAlgorithm digestAlgorithm = Enums.GetEnumValue<DigestAlgorithm>(
-                    mechanism);
+                DigestAlgorithm digestAlgorithm = (DigestAlgorithm)Enums.GetEnumValue(
+                    typeof(DigestAlgorithm), mechanism);
 
                 switch (digestAlgorithm)
                 {

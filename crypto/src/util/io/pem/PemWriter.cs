@@ -9,7 +9,7 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 	/**
 	* A generic PEM writer, based on RFC 1421
 	*/
-	public class PemWriter : IDisposable
+	public class PemWriter
 	{
 		private const int LineLength = 64;
 
@@ -116,29 +116,5 @@ namespace Org.BouncyCastle.Utilities.IO.Pem
 		{
 			writer.WriteLine("-----END " + type + "-----");
 		}
-
-        #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    writer.Dispose();
-                }
-
-                disposedValue = true;
-            }
-        }
-
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-        }
-        #endregion
-    }
+	}
 }
