@@ -36,7 +36,7 @@
   <ItemGroup>
     <Compile Include="..\bzip2\src\**\*.cs" LinkBase="bzip2" />
     <None Include="..\..\BouncyCastle.snk" />
-    <PackageReference Include="NerdBank.GitVersioning" Version="3.0.50" PrivateAssets="All" />
+    <PackageReference Include="NerdBank.GitVersioning" Version="3.1.71" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
   
